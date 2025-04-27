@@ -6,6 +6,8 @@ __all__ = [
 ]
 
 
+from typing import Any
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from template.settings.app import AppSettings
@@ -28,6 +30,42 @@ class Settings(BaseSettings):
     app: AppSettings
     cors: CORSSettings
     swagger: SwaggerSettings
+
+    logging: dict[str, Any] = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "basic": {
+                "class": "uvicorn.logging.ColourizedFormatter",
+                "format": "%(levelprefix)s %(message)s",
+            },
+            "verbose": {
+                "format": "%(asctime)s %(pathname)s:%(lineno)d %(levelname)s %(message)s",
+                "datefmt": "%d.%m.%Y %H:%M:%S",
+            },
+        },
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "basic",
+                "stream": "ext://sys.stdout",
+            },
+        },
+        "loggers": {
+            "root": {
+                "level": "INFO",
+                "handlers": ["console"],
+            },
+            "app": {
+                "level": "DEBUG",
+                "handlers": ["console"],
+            },
+            "sqlalchemy.engine": {
+                "level": "WARNING",
+                "handlers": ["console"],
+            },
+        },
+    }
 
 
 settings = Settings()  # type: ignore
