@@ -1,10 +1,5 @@
-init:
-	@uv run --locked --group dev pre-commit install
-
 start:
-	@uv run --locked --module template
-
-style: lint check format
+	@uv run --locked --module src
 
 lint:
 	@uv run --locked --group style mypy

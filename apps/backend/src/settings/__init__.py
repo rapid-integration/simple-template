@@ -10,9 +10,9 @@ from typing import Any
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from template.settings.app import AppSettings
-from template.settings.cors import CORSSettings
-from template.settings.swagger import SwaggerSettings
+from src.settings.app import AppSettings
+from src.settings.cors import CORSSettings
+from src.settings.swagger import SwaggerSettings
 
 
 class Settings(BaseSettings):

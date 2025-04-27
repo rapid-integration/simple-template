@@ -6,8 +6,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from prometheus_fastapi_instrumentator import Instrumentator
 
-from template.routers import router
-from template.settings import settings
+from src.routers import router
+from src.settings import settings
 
 app = FastAPI(
     debug=settings.app.debug,

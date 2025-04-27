@@ -14,9 +14,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = [
-    "pre-commit==4.2.0",
-]
+dev = []
 style = [
     "mypy==1.15.0",
     "ruff==0.11.7",
@@ -27,7 +25,7 @@ default-groups = []
 
 [tool.mypy]
 files = [
-    "template",
+    "src",
 ]
 strict = true
 

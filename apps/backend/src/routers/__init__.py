@@ -10,14 +10,13 @@ router = APIRouter()
 
 
 @router.get(
-    path="/",
-    summary="Health Check",
+    path="/health",
     responses={
         status.HTTP_200_OK: {"description": "The API is healthy"},
     },
 )
-def root() -> JSONResponse:
-    """Check if the API is healthy."""
+def health() -> JSONResponse:
+    """Endpoint that checks if the API is healthy."""
     return JSONResponse(
         content={"detail": "Healthy"},
         status_code=status.HTTP_200_OK,
