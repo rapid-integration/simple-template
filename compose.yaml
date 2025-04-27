@@ -1,0 +1,91 @@
+services:
+  backend:
+    container_name: template-backend
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./.env:/.env
+    networks:
+      - template-network
+
+  node_exporter:
+    container_name: template-node-exporter
+    image: quay.io/prometheus/node-exporter:v1.9.1
+    volumes:
+      - node-exporter-data:/host:ro,rslave
+    networks:
+      - template-network
+    command:
+      - --path.rootfs=/host
+
+  prometheus:
+    container_name: template-prometheus
+    image: prom/prometheus:v3.3.0
+    volumes:
+      - ./etc/prometheus:/etc/prometheus
+    networks:
+      - template-network
+    command:
+      - --config.file=/etc/prometheus/prometheus.yaml
+
+  alertmanager:
+    container_name: template-alertmanager
+    build:
+      context: ./etc/alertmanager
+      dockerfile: Dockerfile
+    environment:
+      - ALERTMANAGER_TELEGRAM_CHAT_ID=${ALERTMANAGER_TELEGRAM_CHAT_ID}
+      - ALERTMANAGER_TELEGRAM_BOT_TOKEN=${ALERTMANAGER_TELEGRAM_BOT_TOKEN}
+    networks:
+      - template-network
+    depends_on:
+      prometheus:
+        condition: service_started
+      backend:
+        condition: service_started
+
+  grafana:
+    container_name: template-grafana
+    image: grafana/grafana:11.6.1
+    environment:
+      - GF_LOG_LEVEL=${GF_LOG_LEVEL}
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./etc/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./etc/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./etc/grafana/grafana.ini:/etc/grafana/grafana.ini
+    networks:
+      - template-network
+    depends_on:
+      prometheus:
+        condition: service_started
+
+  nginx:
+    container_name: template-nginx
+    image: nginx:1.28.0
+    depends_on:
+      backend:
+        condition: service_started
+      grafana:
+        condition: service_started
+    volumes:
+      - ./etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - template-network
+
+volumes:
+  node-exporter-data:
+    name: node-exporter-data
+  grafana-data:
+    name: grafana-data
+
+networks:
+  template-network:
+    name: template-network
+    driver: bridge

@@ -1,0 +1,47 @@
+[project]
+name = "template"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]==0.115.12",
+    "prometheus-client==0.21.1",
+    "prometheus-fastapi-instrumentator==7.1.0",
+    "pydantic==2.11.3",
+    "pydantic-settings==2.9.1",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit==4.2.0",
+]
+style = [
+    "mypy==1.15.0",
+    "ruff==0.11.7",
+]
+
+[tool.uv]
+default-groups = []
+
+[tool.mypy]
+files = [
+    "src",
+]
+strict = true
+
+[tool.ruff]
+indent-width = 4
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "F",
+    "I",
+]
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "lf"
+quote-style = "double"
