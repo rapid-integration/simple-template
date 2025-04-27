@@ -10,6 +10,7 @@ from template.routers import router
 from template.settings import settings
 
 app = FastAPI(
+    debug=settings.app.debug,
     title=settings.app.title,
     version=settings.app.version,
     root_path=settings.app.root_path,

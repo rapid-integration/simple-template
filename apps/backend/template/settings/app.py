@@ -6,8 +6,7 @@ from pydantic import BaseModel
 
 
 class AppSettings(BaseModel):
-    host: str
-    port: int
+    debug: bool
     title: str
     version: str
     root_path: str

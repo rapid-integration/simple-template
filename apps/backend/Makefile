@@ -1,13 +1,8 @@
-include ../../.env
-
 init:
 	@uv run --locked --group dev pre-commit install
 
-dev:
-	@uv run --locked fastapi dev src/template/app.py --host ${BACKEND_APP_HOST} --port ${BACKEND_APP_PORT}
-
-run:
-	@uv run --locked fastapi run src/template/app.py --host ${BACKEND_APP_HOST} --port ${BACKEND_APP_PORT}
+start:
+	@uv run --locked --module template
 
 style: lint check format
 
