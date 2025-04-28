@@ -1,42 +1,42 @@
 services:
-  backend-dev:
-    container_name: template-backend-dev
-    build:
-      context: ./apps/backend
-      dockerfile: Dockerfile
-    env_file: .env
-    volumes:
-      - ./apps/backend/src:/app/src
-    networks:
-      - template-network-dev
-    command: >
-      uv run uvicorn src.app:app --reload --host 0.0.0.0 --port 8000
-    profiles:
-      - dev
-
   backend:
     container_name: template-backend
     build:
       context: ./apps/backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     env_file: .env
+    environment:
+      - BACKEND_APP_DEBUG=false
     networks:
       - template-network
-    command: >
-      uv run --locked --compile-bytecode uvicorn src.app:app --host 0.0.0.0 --port 8000
     profiles:
       - prod
+
+  backend-dev:
+    container_name: template-backend-dev
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile.dev
+    env_file: .env
+    environment:
+      - BACKEND_APP_DEBUG=true
+    volumes:
+      - ./apps/backend/src:/backend/src
+    networks:
+      - template-network
+    profiles:
+      - dev
 
   backend-test-e2e:
     container_name: template-backend-test-e2e
     build:
       context: ./apps/backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.test.e2e
     env_file: .env
-    # networks:
-    #   - template-network
-    command: >
-      uv run --group test pytest tests/e2e
+    environment:
+      - BACKEND_APP_DEBUG=true
+    networks:
+      - template-network
     profiles:
       - test
       - test-e2e
@@ -45,21 +45,22 @@ services:
     container_name: template-backend-test-unit
     build:
       context: ./apps/backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.test.unit
     env_file: .env
-    # networks:
-    #   - template-network
-    command: >
-      uv run --group test pytest tests/unit
+    environment:
+      - BACKEND_APP_DEBUG=true
+    networks:
+      - template-network
     profiles:
       - test
       - test-unit
 
-  node_exporter:
+  node-exporter:
     container_name: template-node-exporter
     image: quay.io/prometheus/node-exporter:v1.9.1
+    env_file: .env
     volumes:
-      - node-exporter-data:/host:ro,rslave
+      - template-node-exporter-data:/host:ro,rslave
     networks:
       - template-network
     command:
@@ -70,6 +71,7 @@ services:
   prometheus:
     container_name: template-prometheus
     image: prom/prometheus:v3.3.0
+    env_file: .env
     volumes:
       - ./etc/prometheus:/etc/prometheus
     networks:
@@ -88,9 +90,9 @@ services:
     networks:
       - template-network
     depends_on:
-      prometheus:
-        condition: service_started
       backend:
+        condition: service_started
+      prometheus:
         condition: service_started
     profiles:
       - prod
@@ -100,7 +102,7 @@ services:
     image: grafana/grafana:11.6.1
     env_file: .env
     volumes:
-      - grafana-data:/var/lib/grafana
+      - template-grafana-data:/var/lib/grafana
       - ./etc/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./etc/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - ./etc/grafana/grafana.ini:/etc/grafana/grafana.ini
@@ -112,24 +114,8 @@ services:
     profiles:
       - prod
 
-  nginx-dev:
-    container_name: template-nginx-dev
-    image: nginx:1.28.0
-    depends_on:
-      backend-dev:
-        condition: service_started
-    volumes:
-      - ./etc/nginx/conf.d/default.dev.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - 443:443
-      - 80:80
-    networks:
-      - template-network-dev
-    profiles:
-      - dev
-
-  nginx-prod:
-    container_name: template-nginx-prod
+  nginx:
+    container_name: template-nginx
     image: nginx:1.28.0
     depends_on:
       backend:
@@ -146,16 +132,29 @@ services:
     profiles:
       - prod
 
+  nginx-dev:
+    container_name: template-nginx-dev
+    image: nginx:1.28.0
+    depends_on:
+      backend-dev:
+        condition: service_started
+    volumes:
+      - ./etc/nginx/conf.d/default.dev.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 443:443
+      - 80:80
+    networks:
+      - template-network
+    profiles:
+      - dev
+
 volumes:
-  node-exporter-data:
-    name: node-exporter-data
-  grafana-data:
-    name: grafana-data
+  template-node-exporter-data:
+    name: template-node-exporter-data
+  template-grafana-data:
+    name: template-grafana-data
 
 networks:
   template-network:
     name: template-network
-    driver: bridge
-  template-network-dev:
-    name: template-network-dev
     driver: bridge

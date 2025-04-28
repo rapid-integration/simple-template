@@ -1,0 +1,13 @@
+FROM python:3.13
+
+WORKDIR /backend
+
+COPY requirements/common.txt requirements/common.txt
+COPY requirements/prod.txt requirements/prod.txt
+
+RUN pip install -r requirements/prod.txt
+
+COPY src src
+COPY pyproject.toml pyproject.toml
+
+CMD sh -c "uvicorn src.app:app --host 0.0.0.0 --port 8000"
