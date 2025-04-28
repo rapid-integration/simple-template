@@ -1,5 +1,5 @@
 global:
-  resolve_timeout: 5s
+  resolve_timeout: 5m
 
 route:
   receiver: "telegram"
