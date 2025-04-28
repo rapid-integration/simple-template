@@ -17,7 +17,6 @@ from src.settings.swagger import SwaggerSettings
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file="../../.env",
         env_nested_delimiter="_",
         env_nested_max_split=1,
         env_prefix="BACKEND_",
