@@ -14,8 +14,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = []
-style = [
+dev = [
     "mypy==1.15.0",
     "ruff==0.11.7",
 ]

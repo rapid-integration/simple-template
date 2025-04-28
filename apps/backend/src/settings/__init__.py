@@ -23,9 +23,6 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    host: str
-    port: int
-
     app: AppSettings
     cors: CORSSettings
     swagger: SwaggerSettings

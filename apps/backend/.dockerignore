@@ -5,5 +5,3 @@ __pycache__
 
 .coverage
 .coverage.*
-
-.pre-commit-config.yaml
