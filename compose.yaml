@@ -27,6 +27,34 @@ services:
     profiles:
       - prod
 
+  backend-test-e2e:
+    container_name: template-backend-test-e2e
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    env_file: .env
+    # networks:
+    #   - template-network
+    command: >
+      uv run --group test pytest tests/e2e
+    profiles:
+      - test
+      - test-e2e
+
+  backend-test-unit:
+    container_name: template-backend-test-unit
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
+    env_file: .env
+    # networks:
+    #   - template-network
+    command: >
+      uv run --group test pytest tests/unit
+    profiles:
+      - test
+      - test-unit
+
   node_exporter:
     container_name: template-node-exporter
     image: quay.io/prometheus/node-exporter:v1.9.1
