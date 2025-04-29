@@ -1,3 +1,4 @@
+name: template
 services:
   backend:
     container_name: template-backend
