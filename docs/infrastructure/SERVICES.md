@@ -1,0 +1,14 @@
+- dev
+- prod
+- test
+
+- backend
+- backend-dev
+- backend-test-e2e
+- backend-test-unit
+- node-exporter
+- prometheus
+- alertmanager
+- grafana
+- nginx
+- nginx-dev
