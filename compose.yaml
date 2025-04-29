@@ -116,7 +116,7 @@ services:
 
   nginx:
     container_name: template-nginx
-    image: nginx:1.28.0
+    image: nginx:1.28.0-alpine
     depends_on:
       backend:
         condition: service_started
@@ -134,7 +134,7 @@ services:
 
   nginx-dev:
     container_name: template-nginx-dev
-    image: nginx:1.28.0
+    image: nginx:1.28.0-alpine
     depends_on:
       backend-dev:
         condition: service_started
