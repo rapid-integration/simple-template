@@ -10,8 +10,8 @@ receivers:
       - chat_id: ${ALERTMANAGER_TELEGRAM_CHAT_ID}
         bot_token: ${ALERTMANAGER_TELEGRAM_BOT_TOKEN}
         message: |
-          {{ if .CommonAnnotations.title -}}
-            <b>{{ .CommonAnnotations.title | safeHtml }}</b>
+          {{ if .CommonAnnotations.summary -}}
+            <b>{{ .CommonAnnotations.summary | safeHtml }}</b>
           {{- end }}
 
           {{ if .CommonAnnotations.description -}}
