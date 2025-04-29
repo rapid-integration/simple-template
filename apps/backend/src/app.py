@@ -12,14 +12,14 @@ from src.settings import settings
 app = FastAPI(
     debug=settings.app.debug,
     title=settings.app.title,
+    summary=settings.app.summary,
+    description=settings.app.description,
     version=settings.app.version,
-    root_path=settings.app.root_path,
+    openapi_url=settings.app.openapi_url,
     docs_url=settings.app.docs_url,
     redoc_url=settings.app.redoc_url,
-    openapi_url=settings.app.openapi_url,
-    swagger_ui_parameters={
-        "persistAuthorization": settings.swagger.persist_authorization,
-    },
+    root_path=settings.app.root_path,
+    swagger_ui_parameters=settings.swagger.parameters,
 )
 
 app.add_middleware(

@@ -8,8 +8,10 @@ from pydantic import BaseModel
 class AppSettings(BaseModel):
     debug: bool
     title: str
+    summary: str
+    description: str
     version: str
-    root_path: str
+    openapi_url: str | None
     docs_url: str | None
     redoc_url: str | None
-    openapi_url: str | None
+    root_path: str
