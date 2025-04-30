@@ -6,6 +6,6 @@ RUN apk add --no-cache gettext
 
 COPY --from=builder /bin/alertmanager /bin/alertmanager
 
-COPY alertmanager.template.yaml /etc/alertmanager/alertmanager.template.yaml
+COPY alertmanager.template.yml /etc/alertmanager/alertmanager.template.yml
 
-CMD ["sh", "-c", "envsubst < /etc/alertmanager/alertmanager.template.yaml > /etc/alertmanager/alertmanager.yaml && alertmanager --config.file=/etc/alertmanager/alertmanager.yaml"]
+CMD ["sh", "-c", "envsubst < /etc/alertmanager/alertmanager.template.yml > /etc/alertmanager/alertmanager.yml && alertmanager --config.file=/etc/alertmanager/alertmanager.yml"]
