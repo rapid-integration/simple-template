@@ -37,12 +37,14 @@ services:
     profiles:
       - dev
 
-  backend-test-e2e:
-    container_name: template-backend-test-e2e
+  backend-test:
+    container_name: template-backend-test
     build:
       context: ./apps/backend
-      dockerfile: Dockerfile.test.e2e
+      dockerfile: Dockerfile.test
     restart: no
+    command: |
+      pytest tests
     env_file:
       - path: .env
         required: true
@@ -52,14 +54,33 @@ services:
       - template-network
     profiles:
       - test
+
+  backend-test-e2e:
+    container_name: template-backend-test-e2e
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile.test
+    restart: no
+    command: |
+      pytest tests/e2e
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      - BACKEND_APP_DEBUG=true
+    networks:
+      - template-network
+    profiles:
       - test-e2e
 
   backend-test-unit:
     container_name: template-backend-test-unit
     build:
       context: ./apps/backend
-      dockerfile: Dockerfile.test.unit
+      dockerfile: Dockerfile.test
     restart: no
+    command: |
+      pytest tests/unit
     env_file:
       - path: .env
         required: true
@@ -68,7 +89,6 @@ services:
     networks:
       - template-network
     profiles:
-      - test
       - test-unit
 
   node-exporter:
