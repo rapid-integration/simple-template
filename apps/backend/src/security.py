@@ -1,3 +1,9 @@
+__all__ = [
+    "create_access_token",
+    "is_valid_password",
+    "get_password_hash",
+]
+
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -25,10 +31,3 @@ def is_valid_password(plain_password: str, hashed_password: str) -> bool:
 
 def get_password_hash(password: str) -> str:
     return crypt_context.hash(password)
-
-
-__all__ = [
-    "create_access_token",
-    "is_valid_password",
-    "get_password_hash",
-]

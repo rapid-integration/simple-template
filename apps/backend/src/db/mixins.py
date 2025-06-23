@@ -4,14 +4,14 @@ from typing import Any, Callable
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.text import truncate
+from textwrap import shorten
 
 
 class ReprMixin:
     __repr_attrs__: tuple[str, ...] = ()
 
     __repr__formatters__: dict[type, Callable[[Any], str]] = {
-        str: lambda value: f"'{truncate(value)}'",
+        str: lambda value: f"'{shorten(value, width=32, placeholder='...')}'",
     }
 
     def __repr__(self) -> str:

@@ -1,3 +1,8 @@
+__all__ = [
+    "get_session",
+    "SessionDepends",
+]
+
 from typing import Annotated, Iterator
 
 from fastapi import Depends
@@ -19,8 +24,3 @@ def get_session() -> Iterator[Session]:
 
 
 SessionDepends = Annotated[Session, Depends(get_session)]
-
-__all__ = [
-    "get_session",
-    "SessionDepends",
-]
