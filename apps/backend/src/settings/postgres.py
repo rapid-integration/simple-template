@@ -13,7 +13,7 @@ class PostgresSettings(BaseModel):
     host: str
     path: str
 
-    @computed_field # type: ignore
+    @computed_field
     @property
     def uri(self) -> PostgresDsn:
         return PostgresDsn.build(
