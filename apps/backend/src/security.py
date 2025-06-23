@@ -10,10 +10,12 @@ from src.settings import settings
 crypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def create_access_token(subject: Any, minutes: int = settings.security.JWT_EXPIRE_MINUTES) -> AccessTokenResponse:
+def create_access_token(subject: Any, minutes: int = settings.security.jwt_expire_minutes) -> AccessTokenResponse:
     expires_at = datetime.now(timezone.utc) + timedelta(minutes=minutes)
     to_encode = JWT(exp=expires_at, sub=str(subject))
-    access_token = jwt.encode(to_encode.model_dump(), settings.security.JWT_SECRET, algorithm=settings.security.JWT_ALGORITHM)
+    access_token = jwt.encode(
+        to_encode.model_dump(), settings.security.jwt_secret, algorithm=settings.security.jwt_algorithm
+    )
     return AccessTokenResponse(access_token=str(access_token), expires_at=expires_at)
 
 
