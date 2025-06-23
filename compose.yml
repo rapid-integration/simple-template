@@ -12,6 +12,8 @@ services:
         required: true
     environment:
       - BACKEND_APP_DEBUG=false
+    depends_on:
+      - postgres
     networks:
       - template-network
     profiles:
@@ -28,6 +30,8 @@ services:
         required: true
     environment:
       - BACKEND_APP_DEBUG=true
+    depends_on:
+      - postgres
     volumes:
       - type: bind
         source: ./apps/backend/src
@@ -90,6 +94,28 @@ services:
       - template-network
     profiles:
       - test-unit
+
+  postgres:
+    container_name: template-postgres
+    image: postgres:17.5
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      - PGUSER=${BACKEND_POSTGRES_USERNAME}
+      - POSTGRES_DB=${BACKEND_POSTGRES_PATH}
+      - POSTGRES_USER=${BACKEND_POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${BACKEND_POSTGRES_PASSWORD}
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data
+    networks:
+      - template-network
+    profiles:
+      - dev
+      - prod
 
   node-exporter:
     container_name: template-node-exporter
@@ -248,6 +274,8 @@ volumes:
     name: template-node-exporter-data
   grafana-data:
     name: template-grafana-data
+  postgres-data:
+    name: template-postgres-data
 
 networks:
   template-network:
