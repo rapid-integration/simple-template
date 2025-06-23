@@ -20,3 +20,20 @@ select = [
 indent-style = "space"
 line-ending = "lf"
 quote-style = "double"
+
+[tool.alembic]
+script_location = "%(here)s/src/db/migrations"
+prepend_sys_path = ["."]
+version_path_separator = "os"
+
+[[tool.alembic.post_write_hooks]]
+name = "check"
+type = "exec"
+executable = "%(here)s/.venv/bin/ruff"
+options = "check --fix REVISION_SCRIPT_FILENAME"
+
+[[tool.alembic.post_write_hooks]]
+name = "format"
+type = "exec"
+executable = "%(here)s/.venv/bin/ruff"
+options = "format REVISION_SCRIPT_FILENAME"

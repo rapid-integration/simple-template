@@ -1,10 +1,11 @@
 __all__ = [
     "settings",
     "AppSettings",
+    "PostgresSettings",
+    "SecuritySettings",
     "CORSSettings",
     "SwaggerSettings",
 ]
-
 
 from typing import Any
 
@@ -12,6 +13,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src.settings.app import AppSettings
 from src.settings.cors import CORSSettings
+from src.settings.postgres import PostgresSettings
+from src.settings.security import SecuritySettings
 from src.settings.swagger import SwaggerSettings
 
 
@@ -25,7 +28,9 @@ class Settings(BaseSettings):
 
     app: AppSettings
     cors: CORSSettings
+    postgres: PostgresSettings
     swagger: SwaggerSettings
+    security: SecuritySettings
 
     logging: dict[str, Any] = {
         "version": 1,
