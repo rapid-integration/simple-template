@@ -10,7 +10,7 @@ class ReprMixin:
     __repr_attrs__: tuple[str, ...] = ()
 
     __repr__formatters__: dict[type, Callable[[Any], str]] = {
-        str: lambda value: f"'{shorten(value, width=32, placeholder='...')}'",
+        str: lambda value: f"'{shorten(value, width=32, placeholder='…')}'",
     }
 
     def __repr__(self) -> str:
