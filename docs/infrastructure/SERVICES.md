@@ -6,6 +6,7 @@
 - backend-dev
 - backend-test-e2e
 - backend-test-unit
+- postgres
 - node-exporter
 - prometheus
 - alertmanager
