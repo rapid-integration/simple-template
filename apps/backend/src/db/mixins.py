@@ -1,10 +1,9 @@
 from datetime import datetime
+from textwrap import shorten
 from typing import Any, Callable
 
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, mapped_column
-
-from textwrap import shorten
 
 
 class ReprMixin:
