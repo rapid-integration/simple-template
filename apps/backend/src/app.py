@@ -4,7 +4,6 @@ __all__ = [
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from prometheus_fastapi_instrumentator import Instrumentator
 
 from src.api import router
 from src.settings import settings
@@ -32,6 +31,9 @@ app.add_middleware(
 
 app.include_router(router)
 
-instrumentator = Instrumentator()
+if not settings.app.debug:
+    from prometheus_fastapi_instrumentator import Instrumentator
 
-instrumentator.instrument(app).expose(app)
+    instrumentator = Instrumentator()
+
+    instrumentator.instrument(app).expose(app)
