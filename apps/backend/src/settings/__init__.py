@@ -1,9 +1,9 @@
 __all__ = [
     "settings",
     "AppSettings",
+    "CORSSettings",
     "PostgresSettings",
     "SecuritySettings",
-    "CORSSettings",
     "SwaggerSettings",
 ]
 
