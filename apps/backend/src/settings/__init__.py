@@ -4,6 +4,8 @@ __all__ = [
     "PostgresSettings",
     "SecuritySettings",
     "CORSSettings",
+    "PostgresSettings",
+    "SecuritySettings",
     "SwaggerSettings",
 ]
 
@@ -29,6 +31,7 @@ class Settings(BaseSettings):
     app: AppSettings
     cors: CORSSettings
     postgres: PostgresSettings
+    security: SecuritySettings
     swagger: SwaggerSettings
     security: SecuritySettings
 
@@ -69,4 +72,4 @@ class Settings(BaseSettings):
     }
 
 
-settings = Settings()  # type: ignore
+settings = Settings()  # type: ignore[call-arg]

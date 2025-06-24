@@ -127,7 +127,10 @@ services:
     volumes:
       - type: volume
         source: node-exporter-data
-        target: /host:ro,rslave
+        target: /host
+        read_only: true
+        volume:
+          nocopy: true
     networks:
       - template-network
     command:
@@ -139,6 +142,8 @@ services:
     container_name: template-prometheus
     image: prom/prometheus:v3.3.0
     restart: unless-stopped
+    # ports:
+    #   - 9090:9090
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:9090/-/healthy"]
       interval: 1m30s
