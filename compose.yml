@@ -127,7 +127,10 @@ services:
     volumes:
       - type: volume
         source: node-exporter-data
-        target: /host:ro,rslave
+        target: /host
+        read_only: true
+        volume:
+          nocopy: true
     networks:
       - template-network
     command:
