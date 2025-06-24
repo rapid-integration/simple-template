@@ -29,8 +29,8 @@ class Settings(BaseSettings):
     app: AppSettings
     cors: CORSSettings
     postgres: PostgresSettings
-    swagger: SwaggerSettings
     security: SecuritySettings
+    swagger: SwaggerSettings
 
     logging: dict[str, Any] = {
         "version": 1,
