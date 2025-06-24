@@ -1,6 +1,8 @@
 __all__ = [
     "settings",
     "AppSettings",
+    "PostgresSettings",
+    "SecuritySettings",
     "CORSSettings",
     "PostgresSettings",
     "SecuritySettings",
@@ -31,6 +33,7 @@ class Settings(BaseSettings):
     postgres: PostgresSettings
     security: SecuritySettings
     swagger: SwaggerSettings
+    security: SecuritySettings
 
     logging: dict[str, Any] = {
         "version": 1,
