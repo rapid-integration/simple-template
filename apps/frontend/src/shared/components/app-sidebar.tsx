@@ -1,0 +1,65 @@
+"use client";
+
+import { HomeIcon } from "lucide-react";
+
+import { user } from "@/entities/user";
+import { NavMain } from "@/shared/components/nav-main";
+import { NavProjects } from "@/shared/components/nav-projects";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarRail,
+  useSidebar,
+} from "@/shared/ui/sidebar";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { NavUser } from "./nav-user-2";
+
+const data = {
+  navMain: [
+    {
+      title: "Home",
+      url: "/",
+      icon: HomeIcon,
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "/projects/1",
+    },
+    {
+      name: "Sales & Marketing",
+      url: "/projects/2",
+    },
+    {
+      name: "Travel",
+      url: "/projects/3",
+    },
+  ],
+};
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter();
+  const sidebar = useSidebar();
+
+  useEffect(() => {
+    if (sidebar.open && sidebar.isMobile) {
+      sidebar.setOpenMobile(false);
+    }
+  }, [router.asPath]);
+
+  return (
+    <Sidebar {...props}>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  );
+}
