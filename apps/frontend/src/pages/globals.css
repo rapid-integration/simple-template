@@ -140,4 +140,8 @@
     text-rendering: optimizeLegibility;
     @apply bg-background text-foreground antialiased;
   }
+
+  main {
+    @apply isolate overflow-clip;
+  }
 }

@@ -9,7 +9,9 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarHeader,
   SidebarRail,
+  SidebarTrigger,
   useSidebar,
 } from "@/shared/ui/sidebar";
 import { useRouter } from "next/router";
@@ -51,7 +53,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }, [router.asPath]);
 
   return (
-    <Sidebar {...props}>
+    <Sidebar variant="inset" {...props}>
+      <SidebarHeader>
+        <SidebarTrigger />
+      </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />

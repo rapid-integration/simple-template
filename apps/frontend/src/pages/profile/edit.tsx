@@ -35,7 +35,7 @@ export default function ProfileEdit() {
       <div className="flex flex-col relative grow items-center">
         <div
           className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors",
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
             scrolled && "border-border"
           )}
         >
@@ -78,7 +78,7 @@ export default function ProfileEdit() {
               </Link>
             </Button>
           )}
-          <h1 className="mx-auto text-sm font-medium">Edit Profile</h1>
+          <h1 className="mx-auto font-medium">Edit Profile</h1>
         </div>
         <div className="flex grow flex-col gap-8 p-4 w-full items-center md:max-w-xl">
           <div className="space-y-3">
@@ -104,7 +104,7 @@ export default function ProfileEdit() {
                   <FormItem className="flex flex-col gap-2">
                     <FormLabel>Name</FormLabel>
                     <FormControl {...field}>
-                      <Input placeholder="Name" />
+                      <Input placeholder="Enter your name…" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -117,7 +117,7 @@ export default function ProfileEdit() {
                   <FormItem className="flex flex-col gap-2">
                     <FormLabel>Email</FormLabel>
                     <FormControl {...field}>
-                      <Input placeholder="Email" />
+                      <Input placeholder="Enter your email…" />
                     </FormControl>
                   </FormItem>
                 )}
@@ -130,7 +130,10 @@ export default function ProfileEdit() {
                   <FormItem className="flex flex-col gap-2">
                     <FormLabel>About</FormLabel>
                     <FormControl {...field}>
-                      <Textarea rows={3} placeholder="About" />
+                      <Textarea
+                        rows={3}
+                        placeholder="Write a few lines about yourself…"
+                      />
                     </FormControl>
                     <FormDescription>
                       You can add a few lines about yourself.
@@ -141,7 +144,7 @@ export default function ProfileEdit() {
 
               <Button
                 type="submit"
-                className="md:self-end max-md:mt-auto"
+                className="sm:self-end max-sm:mt-auto"
                 disabled={!form.formState.isDirty}
               >
                 Save

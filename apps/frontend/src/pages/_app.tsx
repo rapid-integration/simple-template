@@ -23,12 +23,8 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <SiteHeader /> */}
         {/* <div className="flex flex-1"> */}
         <AppSidebar />
-        <SidebarInset>
-          <main
-            className={`${geistSans.variable} ${geistMono.variable} flex flex-col grow`}
-          >
-            <Component {...pageProps} />
-          </main>
+        <SidebarInset className={`${geistSans.variable} ${geistMono.variable}`}>
+          <Component {...pageProps} />
         </SidebarInset>
         {/* </div> */}
       </SidebarProvider>

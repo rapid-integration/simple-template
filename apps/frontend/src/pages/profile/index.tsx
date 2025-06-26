@@ -23,7 +23,7 @@ export default function Profile() {
       <div className="flex flex-col relative grow items-center">
         <div
           className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors",
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
             scrolled && "border-border"
           )}
         >
@@ -37,7 +37,14 @@ export default function Profile() {
               <span>Back</span>
             </Link>
           </Button>
-          <h1 className="mx-auto text-sm font-medium">Profile</h1>
+          <h1
+            className={cn(
+              "mx-auto font-medium opacity-0 transition-opacity",
+              scrolled && "opacity-100"
+            )}
+          >
+            Profile
+          </h1>
           <div className="justify-self-end flex gap-1">
             <Button asChild variant="ghost" className="justify-self-end">
               <Link href="/profile/edit">Edit</Link>

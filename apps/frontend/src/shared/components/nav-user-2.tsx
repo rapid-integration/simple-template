@@ -25,7 +25,6 @@ import {
 } from "@/shared/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { name, version } from "package.json";
 import { ThemeRadioGroup } from "./theme-radio-group";
 
 export function NavUser({
@@ -47,13 +46,18 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size="lg"
               isActive={pathname.includes("/profile")}
             >
-              <Avatar className="size-4">
+              <Avatar className="size-8">
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback>NG</AvatarFallback>
               </Avatar>
-              <span className="truncate">{user.name}</span>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate text-xs text-muted-foreground">{user.email}</span>
+              </div>
+              {/* <span className="truncate">{user.name}</span> */}
               <ChevronsUpDownIcon className="ml-auto size-4 me-0.5" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -102,10 +106,6 @@ export function NavUser({
               <LogOut />
               <span>Logout</span>
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
-              {`${name}@${version}`}
-            </DropdownMenuLabel>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

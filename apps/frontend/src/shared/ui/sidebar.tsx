@@ -24,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/ui/tooltip";
+import Shortcut from "./shortcut";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -257,37 +258,57 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, open, openMobile, isMobile } = useSidebar();
 
   return (
-    <Button
-      data-sidebar="trigger"
-      data-slot="sidebar-trigger"
-      variant="ghost"
-      size="icon"
-      onClick={(event) => {
-        onClick?.(event);
-        toggleSidebar();
-      }}
-      {...props}
-    >
-      <PanelLeftIcon />
-      <span className="sr-only">Toggle Sidebar</span>
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          data-sidebar="trigger"
+          data-slot="sidebar-trigger"
+          variant="ghost"
+          size="icon"
+          onClick={(event) => {
+            onClick?.(event);
+            toggleSidebar();
+          }}
+          {...props}
+        >
+          <PanelLeftIcon />
+          <span className="sr-only">
+            {(isMobile ? openMobile : open) ? "Collapse" : "Expand"} Sidebar (⌘
+            {SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})
+          </span>
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent side="right">
+        <span>
+          {(isMobile ? openMobile : open) ? "Collapse" : "Expand"} Sidebar
+        </span>
+        <Shortcut
+          sequence={["⌘", SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()]}
+          className="ms-1"
+        />
+      </TooltipContent>
+    </Tooltip>
   );
 }
 
 function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
-  const { toggleSidebar } = useSidebar();
+  const { toggleSidebar, isMobile, open, openMobile } = useSidebar();
 
   return (
     <button
       data-sidebar="rail"
       data-slot="sidebar-rail"
-      aria-label="Toggle Sidebar"
+      aria-label={`${
+        (isMobile ? openMobile : open) ? "Collapse" : "Expand"
+      } Sidebar (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
       tabIndex={-1}
       onClick={toggleSidebar}
-      title="Toggle Sidebar"
+      title={`${
+        (isMobile ? openMobile : open) ? "Collapse" : "Expand"
+      } Sidebar (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
       className={cn(
         "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
