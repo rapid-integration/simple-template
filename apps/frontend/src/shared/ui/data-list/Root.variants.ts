@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const dataListRootVariants = cva(
-  "w-full bg-card text-card-foreground flex flex-col rounded-xl border",
+  "w-full bg-card text-card-foreground flex flex-col rounded-md border",
   {
     variants: {
       size: {
