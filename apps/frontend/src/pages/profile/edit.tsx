@@ -1,4 +1,6 @@
 import { user } from "@/entities/user";
+import { useScrolled } from "@/shared/hooks/use-scrolled";
+import { cn } from "@/shared/lib/utils";
 import AlertDialog from "@/shared/ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
@@ -12,13 +14,13 @@ import {
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { Textarea } from "@/shared/ui/textarea";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { ArrowLeftIcon, LogOutIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 export default function ProfileEdit() {
+  const scrolled = useScrolled();
   const form = useForm<{ name: string; email: string; about: string }>({
     defaultValues: user,
   });
@@ -31,7 +33,12 @@ export default function ProfileEdit() {
         <title>Profile</title>
       </Head>
       <div className="flex flex-col relative grow items-center">
-        <div className="sticky top-0 w-full grid grid-cols-3 items-center p-2 h-13 border-b border-border bg-background z-10">
+        <div
+          className={cn(
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors",
+            scrolled && "border-border"
+          )}
+        >
           {form.formState.isDirty ? (
             <AlertDialog>
               <AlertDialog.Trigger asChild>
@@ -72,21 +79,6 @@ export default function ProfileEdit() {
             </Button>
           )}
           <h1 className="mx-auto text-sm font-medium">Edit Profile</h1>
-          <div className="justify-self-end flex gap-1">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className="text-destructive justify-self-end"
-                >
-                  <LogOutIcon />
-                  <span className="sr-only">Logout</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">Logout</TooltipContent>
-            </Tooltip>
-          </div>
         </div>
         <div className="flex grow flex-col gap-8 p-4 w-full items-center md:max-w-xl">
           <div className="space-y-3">

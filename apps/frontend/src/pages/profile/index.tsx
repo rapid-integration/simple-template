@@ -1,4 +1,6 @@
 import { user } from "@/entities/user";
+import { useScrolled } from "@/shared/hooks/use-scrolled";
+import { cn } from "@/shared/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
@@ -11,6 +13,7 @@ import { useState } from "react";
 
 export default function Profile() {
   const [showMoreAbout, setShowMoreAbout] = useState(false);
+  const scrolled = useScrolled();
 
   return (
     <>
@@ -18,7 +21,12 @@ export default function Profile() {
         <title>Profile</title>
       </Head>
       <div className="flex flex-col relative grow items-center">
-        <div className="sticky top-0 w-full grid grid-cols-3 items-center p-2 h-13 border-b border-border bg-background z-10">
+        <div
+          className={cn(
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors",
+            scrolled && "border-border"
+          )}
+        >
           <Button
             asChild
             variant="ghost"
@@ -31,11 +39,7 @@ export default function Profile() {
           </Button>
           <h1 className="mx-auto text-sm font-medium">Profile</h1>
           <div className="justify-self-end flex gap-1">
-            <Button
-              asChild
-              variant="ghost"
-              className="justify-self-end"
-            >
+            <Button asChild variant="ghost" className="justify-self-end">
               <Link href="/profile/edit">Edit</Link>
             </Button>
           </div>
