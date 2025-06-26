@@ -47,7 +47,7 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-              isActive={pathname === "/profile"}
+              isActive={pathname.includes("/profile")}
             >
               <Avatar className="size-4">
                 <AvatarImage src={user.avatar} alt={user.name} />
@@ -82,7 +82,7 @@ export function NavUser({
               <DropdownMenuItem asChild>
                 <Link href="/profile">
                   <UserIcon />
-                  Profile
+                  <span>Profile</span>
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
@@ -93,14 +93,14 @@ export function NavUser({
               </DropdownMenuLabel>
               <div className="flex items-center gap-2 rounded-sm px-2 py-px text-sm select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground">
                 <PaletteIcon />
-                Theme
+                <span>Theme</span>
                 <ThemeRadioGroup className="ms-auto" />
               </div>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem variant="destructive">
               <LogOut />
-              Logout
+              <span>Logout</span>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">

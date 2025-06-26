@@ -1,6 +1,6 @@
 import { AppSidebar } from "@/shared/components/app-sidebar";
-import { SiteHeader } from "@/shared/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar";
+import { Toaster } from "@/shared/ui/sonner";
 import { ThemeProvider } from "next-themes";
 import { AppProps } from "next/app";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -22,14 +22,17 @@ export default function App({ Component, pageProps }: AppProps) {
       <SidebarProvider>
         {/* <SiteHeader /> */}
         {/* <div className="flex flex-1"> */}
-          <AppSidebar />
-          <SidebarInset>
-            <main className={`${geistSans.variable} ${geistMono.variable}`}>
-              <Component {...pageProps} />
-            </main>
-          </SidebarInset>
+        <AppSidebar />
+        <SidebarInset>
+          <main
+            className={`${geistSans.variable} ${geistMono.variable} flex flex-col grow`}
+          >
+            <Component {...pageProps} />
+          </main>
+        </SidebarInset>
         {/* </div> */}
       </SidebarProvider>
+      <Toaster />
     </ThemeProvider>
   );
 }
