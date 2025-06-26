@@ -3,14 +3,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { Button } from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import { toast } from "@/shared/ui/sonner";
-import { ArrowLeftIcon } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import { ArrowLeftIcon, CopyIcon } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import useClippy from "use-clippy";
 
 export default function Profile() {
-  const [, setClipboard] = useClippy();
   const [showMoreAbout, setShowMoreAbout] = useState(false);
 
   return (
@@ -35,7 +34,7 @@ export default function Profile() {
             <Button
               asChild
               variant="ghost"
-              className="text-accent-foreground justify-self-end"
+              className="justify-self-end"
             >
               <Link href="/profile/edit">Edit</Link>
             </Button>
@@ -48,7 +47,9 @@ export default function Profile() {
               <AvatarFallback>NG</AvatarFallback>
             </Avatar>
             <hgroup className="text-center">
-              <h2 className="text-3xl font-semibold md:text-2xl">{user.name}</h2>
+              <h2 className="text-3xl font-semibold md:text-2xl">
+                {user.name}
+              </h2>
               <p className="text-lg text-muted-foreground">{user.email}</p>
             </hgroup>
           </div>
@@ -58,16 +59,66 @@ export default function Profile() {
                 <DataList.ItemLabel>Registration date</DataList.ItemLabel>
                 <DataList.ItemValue>{user.registrationDate}</DataList.ItemValue>
               </DataList.ItemGroup>
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setClipboard(user.registrationDate);
-                  toast.success("Registration date copied to the clipboard!");
-                }}
-              >
-                Copy
-              </Button>
+              <Tooltip disableHoverableContent>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    onClick={() => {
+                      if (window.isSecureContext) {
+                        navigator.clipboard.writeText(user.registrationDate);
+                        toast.success(
+                          "Registration date copied to the clipboard!"
+                        );
+                      } else {
+                        toast.error(
+                          "Failed to copy registration date to clipboard: window is not in a secure context."
+                        );
+                      }
+                    }}
+                  >
+                    <CopyIcon />
+                    <span className="sr-only">Copy</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="left">
+                  Copy registration date to clipboard
+                </TooltipContent>
+              </Tooltip>
             </DataList.Item>
+            <DataList.Item>
+              <DataList.ItemGroup className="overflow-hidden">
+                <DataList.ItemLabel>ID</DataList.ItemLabel>
+                <DataList.ItemValue className="font-mono truncate">
+                  {user.id}
+                </DataList.ItemValue>
+              </DataList.ItemGroup>
+              <Tooltip disableHoverableContent>
+                <TooltipTrigger asChild>
+                  <Button
+                    size="icon"
+                    variant="outline"
+                    onClick={() => {
+                      if (window.isSecureContext) {
+                        navigator.clipboard.writeText(user.id);
+                        toast.success("ID copied to the clipboard!");
+                      } else {
+                        toast.error(
+                          "Failed to copy ID to clipboard: window is not in a secure context."
+                        );
+                      }
+                    }}
+                  >
+                    <CopyIcon />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="left">
+                  Copy ID to clipboard
+                </TooltipContent>
+              </Tooltip>
+            </DataList.Item>
+          </DataList>
+          <DataList orientation="horizontal">
             <DataList.Item>
               <DataList.ItemGroup>
                 <DataList.ItemLabel>About</DataList.ItemLabel>
