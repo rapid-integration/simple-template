@@ -40,12 +40,21 @@ const UserUpdatePasswordForm: FunctionComponent<
     onSubmit?.(values);
 
     const result = await updateCurrentUserPassword({
-      password: values.newPassword1,
+      old_password: values.oldPassword,
+      new_password: values.newPassword1,
     });
 
     if (result.ok) {
       onSuccess?.();
       toast.success("Username has been successfully updated!");
+    } else {
+      const messages = {
+        403: "Old password is wrong.",
+      } as const;
+
+      form.setError("root", {
+        message: messages[result.status as keyof typeof messages],
+      });
     }
   };
 
@@ -112,6 +121,12 @@ const UserUpdatePasswordForm: FunctionComponent<
             </Form.Item>
           )}
         />
+
+        {form.formState.errors.root && (
+          <p className="text-sm text-destructive">
+            {form.formState.errors.root.message}
+          </p>
+        )}
 
         <Button
           type="submit"
