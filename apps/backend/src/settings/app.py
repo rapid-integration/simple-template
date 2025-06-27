@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 
 class AppSettings(BaseModel):
-    debug: bool
+    debug: bool = True
     title: str
     summary: str
     description: str
