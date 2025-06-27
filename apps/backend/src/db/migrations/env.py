@@ -1,8 +1,17 @@
+import os
+
 from alembic import context
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-from src.db.models import Base
-from src.settings import settings
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", ".."))
+
+dotenv_path = os.path.join(BASE_DIR, ".env")
+
+load_dotenv(dotenv_path)
+
+from src.db.models import Base  # noqa: E402
+from src.settings import settings  # noqa: E402
 
 
 def run_migrations_offline() -> None:

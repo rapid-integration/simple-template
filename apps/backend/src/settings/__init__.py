@@ -1,10 +1,10 @@
 __all__ = [
     "settings",
     "AppSettings",
+    "ApiSettings",
     "PostgresSettings",
     "SecuritySettings",
     "CORSSettings",
-    "PostgresSettings",
     "SecuritySettings",
     "SwaggerSettings",
 ]
@@ -13,6 +13,7 @@ from typing import Any
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from src.settings.api import ApiSettings
 from src.settings.app import AppSettings
 from src.settings.cors import CORSSettings
 from src.settings.postgres import PostgresSettings
@@ -29,6 +30,7 @@ class Settings(BaseSettings):
     )
 
     app: AppSettings
+    api: ApiSettings
     cors: CORSSettings
     postgres: PostgresSettings
     security: SecuritySettings
