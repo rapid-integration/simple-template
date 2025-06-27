@@ -5,8 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { user } from "@/entities/user";
-import { NavMain } from "@/shared/components/nav-main";
-import { NavProjects } from "@/shared/components/nav-projects";
 import {
   Sidebar,
   SidebarContent,
@@ -17,7 +15,9 @@ import {
   useSidebar,
 } from "@/shared/ui/sidebar";
 
-import { NavUser } from "./nav-user-2";
+import { NavMain } from "./nav-main";
+import { NavProjects } from "./nav-projects";
+import { NavUser } from "./nav-user";
 
 const data = {
   navMain: [

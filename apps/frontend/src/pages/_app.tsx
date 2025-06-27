@@ -2,9 +2,9 @@ import { AppProps } from "next/app";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
-import { AppSidebar } from "@/shared/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar";
 import { Toaster } from "@/shared/ui/sonner";
+import { AppSidebar } from "@/widgets/sidebar";
 
 import "./globals.css";
 
@@ -22,8 +22,6 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider disableTransitionOnChange>
       <SidebarProvider>
-        {/* <SiteHeader /> */}
-        {/* <div className="flex flex-1"> */}
         <AppSidebar />
         <SidebarInset
           data-vaul-drawer-wrapper
@@ -31,7 +29,6 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <Component {...pageProps} />
         </SidebarInset>
-        {/* </div> */}
       </SidebarProvider>
       <Toaster />
     </ThemeProvider>
