@@ -6,6 +6,8 @@
 - backend-dev
 - backend-test-e2e
 - backend-test-unit
+- frontend
+- frontend-dev
 - postgres
 - node-exporter
 - prometheus

@@ -95,6 +95,48 @@ services:
     profiles:
       - test-unit
 
+  frontend:
+    container_name: template-frontend
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    depends_on:
+      backend:
+        restart: false
+        required: true
+        condition: service_started
+    networks:
+      - template-network
+    profiles:
+      - prod
+
+  frontend-dev:
+    container_name: template-frontend-dev
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    depends_on:
+      backend-dev:
+        restart: false
+        required: true
+        condition: service_started
+    volumes:
+      - type: bind
+        source: ./apps/frontend/src
+        target: /app/src
+    networks:
+      - template-network
+    profiles:
+      - dev
+
   postgres:
     container_name: template-postgres
     image: postgres:17.5
