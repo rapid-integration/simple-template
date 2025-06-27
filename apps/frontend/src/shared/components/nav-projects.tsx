@@ -7,7 +7,13 @@ import {
   Share,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/shared/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,12 +30,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/shared/ui/sidebar";
-import Link from "next/link";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "../ui/collapsible";
 
 export function NavProjects({
   projects,

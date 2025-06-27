@@ -1,8 +1,9 @@
 "use client";
 
-import { useIsMobile } from "@/shared/hooks/use-mobile";
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, toast, ToasterProps } from "sonner";
+
+import { useIsMobile } from "@/shared/hooks/use-mobile";
 
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();

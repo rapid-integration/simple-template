@@ -1,6 +1,7 @@
 import { FC } from "react";
-import variants from "./ItemGroup.variants";
+
 import useDataListContext from "./context";
+import variants from "./ItemGroup.variants";
 
 export type DataListItemGroupProps = React.ComponentProps<"div">;
 

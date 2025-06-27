@@ -1,6 +1,7 @@
 import { FC } from "react";
-import variants from "./ItemLabel.variants";
+
 import useDataListContext from "./context";
+import variants from "./ItemLabel.variants";
 
 export type DataListItemLabelProps = React.ComponentProps<"dt">;
 

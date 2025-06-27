@@ -6,6 +6,8 @@ import {
   PaletteIcon,
   UserIcon,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
@@ -23,8 +25,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/shared/ui/sidebar";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+
 import { ThemeRadioGroup } from "./theme-radio-group";
 
 export function NavUser({
@@ -55,7 +56,7 @@ export function NavUser({
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
-                <span className="text-muted-foreground truncate text-xs">
+                <span className="truncate text-xs text-muted-foreground">
                   {user.email}
                 </span>
               </div>
@@ -77,7 +78,7 @@ export function NavUser({
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="text-muted-foreground truncate text-xs">
+                  <span className="truncate text-xs text-muted-foreground">
                     {user.email}
                   </span>
                 </div>
@@ -94,10 +95,10 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuLabel className="text-muted-foreground text-xs font-medium">
+              <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
                 Preferences
               </DropdownMenuLabel>
-              <div className="[&_svg:not([class*='text-'])]:text-muted-foreground flex select-none items-center gap-2 rounded-sm px-2 py-px text-sm data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0">
+              <div className="flex items-center gap-2 rounded-sm px-2 py-px text-sm select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground">
                 <PaletteIcon />
                 <span>Theme</span>
                 <ThemeRadioGroup className="ms-auto" />

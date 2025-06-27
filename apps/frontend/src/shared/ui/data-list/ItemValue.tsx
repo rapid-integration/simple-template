@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import variants from "./ItemValue.variants";
 
 export type DataListItemValueProps = React.ComponentProps<"dd">;

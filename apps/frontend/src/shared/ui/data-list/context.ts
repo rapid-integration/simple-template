@@ -4,14 +4,12 @@ export type DataListContextValue = {
   orientation: "horizontal" | "vertical";
 };
 
-export const DataListContext = createContext<DataListContextValue>(
-  {} as DataListContextValue,
-);
+export const DataListContext = createContext<DataListContextValue | null>(null);
 
 export const useDataListContext = (): DataListContextValue => {
   const context = useContext(DataListContext);
 
-  if (context === undefined) {
+  if (context === null) {
     throw new Error(
       "The 'useDataListContext' hook must be used within a <DataList.Root> component.",
     );

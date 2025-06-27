@@ -1,3 +1,8 @@
+import { ArrowLeftIcon, CopyIcon } from "lucide-react";
+import Head from "next/head";
+import Link from "next/link";
+import { useState } from "react";
+
 import { user } from "@/entities/user";
 import { useScrolled } from "@/shared/hooks/use-scrolled";
 import { cn } from "@/shared/lib/utils";
@@ -6,10 +11,6 @@ import { Button } from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import { toast } from "@/shared/ui/sonner";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { ArrowLeftIcon, CopyIcon } from "lucide-react";
-import Head from "next/head";
-import Link from "next/link";
-import { useState } from "react";
 
 export default function Profile() {
   const [showMoreAbout, setShowMoreAbout] = useState(false);
@@ -23,14 +24,14 @@ export default function Profile() {
       <div className="relative flex grow flex-col items-center">
         <div
           className={cn(
-            "h-13 bg-background/75 sticky top-0 z-10 grid w-full grid-cols-3 items-center border-b border-transparent p-2 backdrop-blur-xl transition-colors md:text-sm",
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
             scrolled && "border-border",
           )}
         >
           <Button
             asChild
             variant="ghost"
-            className="text-muted-foreground justify-self-start"
+            className="justify-self-start text-muted-foreground"
           >
             <Link href="/">
               <ArrowLeftIcon />
@@ -61,7 +62,7 @@ export default function Profile() {
               <h2 className="text-3xl font-semibold md:text-2xl">
                 {user.name}
               </h2>
-              <p className="text-muted-foreground text-lg">{user.email}</p>
+              <p className="text-lg text-muted-foreground">{user.email}</p>
             </hgroup>
           </div>
           <DataList orientation="horizontal">
@@ -140,7 +141,7 @@ export default function Profile() {
                   {!showMoreAbout && (
                     <button
                       onClick={() => setShowMoreAbout(true)}
-                      className="text-secondary-foreground hover:text-foreground ms-1 cursor-pointer font-medium transition"
+                      className="ms-1 cursor-pointer font-medium text-secondary-foreground transition hover:text-foreground"
                     >
                       Show more
                     </button>

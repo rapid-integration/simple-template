@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -9,6 +7,9 @@ import {
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ComponentProps } from "react";
+
+import { cn } from "@/shared/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 
 const icons = {
   light: SunIcon,
@@ -23,7 +24,7 @@ export function ThemeRadioGroupItem({ value }: { value: string }) {
     <Tooltip>
       <TooltipTrigger
         asChild
-        className="text-muted-foreground outline-hidden aria-checked:bg-accent aria-checked:text-foreground data-highlighted:bg-accent flex items-center justify-center rounded-sm p-1"
+        className="flex items-center justify-center rounded-sm p-1 text-muted-foreground outline-hidden aria-checked:bg-accent aria-checked:text-foreground data-highlighted:bg-accent"
       >
         <DropdownMenuRadioItem value={value}>
           <Icon className="size-4 text-inherit" />
@@ -46,7 +47,7 @@ export function ThemeRadioGroup({
       value={theme}
       onValueChange={setTheme}
       className={cn(
-        "border-input bg-background flex size-fit items-center justify-center gap-0.5 self-start rounded-md border p-0.5",
+        "flex size-fit items-center justify-center gap-0.5 self-start rounded-md border border-input bg-background p-0.5",
         className,
       )}
       {...otherProps}

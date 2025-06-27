@@ -1,7 +1,8 @@
+import Head from "next/head";
+
 import { useScrolled } from "@/shared/hooks/use-scrolled";
 import { cn } from "@/shared/lib/utils";
 import { SidebarTrigger, useSidebar } from "@/shared/ui/sidebar";
-import Head from "next/head";
 
 export default function Home() {
   const { isMobile } = useSidebar();
@@ -15,7 +16,7 @@ export default function Home() {
       {isMobile && (
         <div
           className={cn(
-            "h-13 bg-background/75 sticky top-0 z-10 grid w-full grid-cols-3 items-center border-b border-transparent p-2 backdrop-blur-xl transition-colors md:text-sm",
+            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
             scrolled && "border-border",
           )}
         >
@@ -35,11 +36,11 @@ export default function Home() {
 
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="bg-muted/50 aspect-video w-full rounded-xl" />
-          <div className="bg-muted/50 aspect-video w-full rounded-xl" />
-          <div className="bg-muted/50 aspect-video w-full rounded-xl" />
+          <div className="aspect-video w-full rounded-xl bg-muted/50" />
+          <div className="aspect-video w-full rounded-xl bg-muted/50" />
+          <div className="aspect-video w-full rounded-xl bg-muted/50" />
         </div>
-        <div className="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min" />
+        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
       </div>
     </>
   );

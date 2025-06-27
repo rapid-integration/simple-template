@@ -1,5 +1,6 @@
 import { VariantProps } from "class-variance-authority";
 import { ComponentProps, FC } from "react";
+
 import { DataListContext } from "./context";
 import variants from "./Root.variants";
 

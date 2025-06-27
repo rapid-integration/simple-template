@@ -2,6 +2,7 @@
 
 import { user } from "@/entities/user";
 import { SidebarTrigger } from "@/shared/ui/sidebar";
+
 import { NavUser } from "./nav-user";
 
 export function SiteHeader() {

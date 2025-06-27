@@ -1,6 +1,8 @@
 "use client";
 
 import { HomeIcon } from "lucide-react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { user } from "@/entities/user";
 import { NavMain } from "@/shared/components/nav-main";
@@ -14,8 +16,7 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/shared/ui/sidebar";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+
 import { NavUser } from "./nav-user-2";
 
 const data = {

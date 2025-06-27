@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import * as React from "react";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -42,7 +42,7 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        "bg-muted ring-primary/10 flex size-full items-center justify-center rounded-full ring ring-inset",
+        "flex size-full items-center justify-center rounded-full bg-muted ring ring-primary/10 ring-inset",
         className,
       )}
       {...props}

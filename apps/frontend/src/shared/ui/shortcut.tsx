@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
-import { cn } from "../lib/utils";
+
+import { cn } from "@/shared/lib/utils";
 
 const Shortcut = ({
   className,
@@ -11,7 +12,7 @@ const Shortcut = ({
       {sequence.map((key) => (
         <kbd
           key={key}
-          className="bg-accent/25 inline-flex size-4 items-center justify-center rounded leading-none"
+          className="inline-flex size-4 items-center justify-center rounded bg-accent/25 leading-none"
         >
           {key}
         </kbd>

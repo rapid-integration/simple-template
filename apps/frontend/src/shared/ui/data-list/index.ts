@@ -1,3 +1,6 @@
+import useContext, {
+  type DataListContextValue as ContextValue,
+} from "./context";
 import Item, { type DataListItemProps as ItemProps } from "./Item";
 import itemVariants from "./Item.variants";
 import ItemDescription, {
@@ -21,9 +24,6 @@ import Root, {
   type DataListRootVariantProps as RootVariantProps,
 } from "./Root";
 import rootVariants from "./Root.variants";
-import useContext, {
-  type DataListContextValue as ContextValue,
-} from "./context";
 
 export type {
   ContextValue,

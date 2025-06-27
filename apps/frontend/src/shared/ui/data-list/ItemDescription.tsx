@@ -1,4 +1,5 @@
 import { FC } from "react";
+
 import variants from "./ItemDescription.variants";
 
 export type DataListItemDescriptionProps = React.ComponentProps<"p">;
