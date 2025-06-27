@@ -2,16 +2,14 @@ from fastapi import APIRouter, HTTPException, Request, status
 
 from src.api.deps import SearchParamsDepends
 from src.api.tags import Tag
+from src.api.users import me
 from src.api.users.deps import UserServiceDepends
 from src.api.users.fields import Username
+from src.api.users.models import User
 from src.api.users.schemas import UserResponse
-from src.limiter import limiter
-from src.settings import settings
 
 router = APIRouter(prefix="/users", tags=[Tag.USERS])
-
-
-# router.include_router(me.router)
+router.include_router(me.router)
 
 
 @router.get(
@@ -24,8 +22,7 @@ router = APIRouter(prefix="/users", tags=[Tag.USERS])
         },
     },
 )
-@limiter.limit(settings.api.rate_limit)
-def get_users(request: Request, search_params: SearchParamsDepends, service: UserServiceDepends):  # type: ignore
+def get_users(request: Request, search_params: SearchParamsDepends, service: UserServiceDepends) -> list[User]:
     users = service.get_users(search_params)
 
     if not users:
@@ -44,8 +41,7 @@ def get_users(request: Request, search_params: SearchParamsDepends, service: Use
         },
     },
 )
-@limiter.limit(settings.api.rate_limit)
-def get_user(request: Request, username: Username, service: UserServiceDepends):  # type: ignore
+def get_user(request: Request, username: Username, service: UserServiceDepends) -> User:
     user = service.get_user_by_username(username)
 
     if not user:

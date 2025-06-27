@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 
 class ApiSettings(BaseModel):
-    rate_limit: str
     username_min_length: int
     username_max_length: int
     username_pattern: str

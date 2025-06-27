@@ -1,4 +1,5 @@
 alembic==1.16.2
+bcrypt==4.3.0
 fastapi==0.115.12
 passlib==1.7.4
 prometheus-client==0.21.1
@@ -7,8 +8,8 @@ psycopg[binary]==3.2.9
 pydantic-settings==2.9.1
 pydantic==2.11.3
 PyJWT==2.10.1
+python-multipart==0.0.20
 SQLAlchemy==2.0.41
-slowapi==0.1.9
 textcase==0.4.3
 uvicorn==0.34.2
 passlib==1.7.4
