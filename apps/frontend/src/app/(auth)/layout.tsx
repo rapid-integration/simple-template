@@ -1,16 +1,16 @@
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
-import { getSession } from "@/shared/api/auth";
+import { getCurrentUser } from "@/entities/user";
 
 export default async function AuthLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const session = await getSession();
+  const currentUser = await getCurrentUser();
 
-  if (session?.access_token) {
+  if (currentUser.response.status !== 404 && currentUser.response.ok) {
     return redirect("/");
   }
 
