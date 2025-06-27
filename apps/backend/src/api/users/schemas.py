@@ -11,10 +11,11 @@ class UserUsernameRequest(BaseModel):
     username: Username
 
 
-class UserPasswordRequest(BaseModel):
+class UserUpdatePasswordRequest(BaseModel):
     """Represents the user password request details."""
 
-    password: Password
+    old_password: Password
+    new_password: Password
 
 
 class UserRegistrationRequest(BaseModel):

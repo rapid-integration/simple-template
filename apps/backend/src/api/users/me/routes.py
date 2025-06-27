@@ -4,7 +4,7 @@ from src.api.users.deps import UserServiceDepends
 from src.api.users.me.deps import CurrentUserDepends
 from src.api.users.me.schemas import CurrentUserResponse
 from src.api.users.models import User
-from src.api.users.schemas import UserPasswordRequest, UserUsernameRequest
+from src.api.users.schemas import UserUpdatePasswordRequest, UserUsernameRequest
 from src.security import is_valid_password
 
 router = APIRouter(prefix="/me")
@@ -78,13 +78,13 @@ def update_current_user_username(
 )
 def update_current_user_password(
     request: Request,
-    args: UserPasswordRequest,
+    args: UserUpdatePasswordRequest,
     service: UserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
-    if not is_valid_password(args.password, current_user.password):
+    if not is_valid_password(args.old_password, current_user.password):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Incorrect password.")
 
-    service.update_password(current_user, args.password)
+    service.update_password(current_user, args.new_password)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
