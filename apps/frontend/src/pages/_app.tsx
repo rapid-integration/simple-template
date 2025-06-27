@@ -25,7 +25,10 @@ export default function App({ Component, pageProps }: AppProps) {
         {/* <SiteHeader /> */}
         {/* <div className="flex flex-1"> */}
         <AppSidebar />
-        <SidebarInset className={`${geistSans.variable} ${geistMono.variable}`}>
+        <SidebarInset
+          data-vaul-drawer-wrapper
+          className={`${geistSans.variable} ${geistMono.variable}`}
+        >
           <Component {...pageProps} />
         </SidebarInset>
         {/* </div> */}

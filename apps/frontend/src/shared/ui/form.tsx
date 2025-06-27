@@ -16,7 +16,7 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { Label } from "@/shared/ui/label";
 
-const Form = FormProvider;
+const FormRoot = FormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -48,6 +48,11 @@ const useFormField = () => {
   const { getFieldState } = useFormContext();
   const formState = useFormState({ name: fieldContext.name });
   const fieldState = getFieldState(fieldContext.name, formState);
+
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (!fieldContext) {
+    throw new Error("useFormField should be used within <FormField>");
+  }
 
   const { id } = itemContext;
 
@@ -134,7 +139,8 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error.message ?? "") : props.children;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const body = error ? String(error?.message ?? "") : props.children;
 
   if (!body) {
     return null;
@@ -153,12 +159,24 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
 }
 
 export {
-  Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormRoot,
   useFormField,
 };
+
+const Form = Object.assign(FormRoot, {
+  Control: FormControl,
+  Description: FormDescription,
+  Field: FormField,
+  Item: FormItem,
+  Label: FormLabel,
+  Message: FormMessage,
+  useField: useFormField,
+});
+
+export default Form;

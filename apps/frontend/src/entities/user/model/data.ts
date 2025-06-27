@@ -1,6 +1,7 @@
 export const user = {
   id: "081cd80a-4ce4-41ab-ac2b-7c6e0ec200a9",
   name: "Nikita Gaziev",
+  username: "zobweyt",
   email: "zobweyt@gmail.com",
   avatar: "https://avatar.vercel.sh/nikita-gaziev",
   about:
