@@ -5,6 +5,7 @@ from src.api.users.me.deps import CurrentUserDepends
 from src.api.users.me.schemas import CurrentUserResponse
 from src.api.users.models import User
 from src.api.users.schemas import UserPasswordRequest, UserUsernameRequest
+from src.security import is_valid_password
 
 router = APIRouter(prefix="/me")
 
@@ -68,7 +69,7 @@ def update_current_user_username(
             "description": "Password successfully updated",
         },
         status.HTTP_403_FORBIDDEN: {
-            "description": "Failed to verify credentials",
+            "description": "Failed to verify credentials or incorrect password",
         },
         status.HTTP_404_NOT_FOUND: {
             "description": "User not found",
@@ -81,6 +82,9 @@ def update_current_user_password(
     service: UserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
+    if not is_valid_password(args.password, current_user.password):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Incorrect password.")
+
     service.update_password(current_user, args.password)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
