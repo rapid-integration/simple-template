@@ -26,7 +26,9 @@ export async function setSession(sessionData: AccessTokenResponse) {
 
   store.set("session", JSON.stringify(sessionData), {
     path: "/",
-    secure: process.env.NODE_ENV === "production",
+    secure: false,
+    // TODO: Enable only when have HTTPS
+    // secure: process.env.NODE_ENV === "production",
     expires: new Date(sessionData.expires_at),
     httpOnly: true,
     sameSite: "lax",
