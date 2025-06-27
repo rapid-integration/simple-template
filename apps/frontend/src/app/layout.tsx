@@ -19,9 +19,7 @@ const geistMono = Geist_Mono({
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable}`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider disableTransitionOnChange>
           {children}
 

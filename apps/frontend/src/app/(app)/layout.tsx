@@ -5,7 +5,11 @@ import { getCurrentUser } from "@/entities/user";
 import { SidebarInset, SidebarProvider } from "@/shared/ui/sidebar";
 import { AppSidebar } from "@/widgets/sidebar";
 
-export default async function AppAppLayout({ children }: { children: ReactNode }) {
+export default async function AppAppLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser.data) {
