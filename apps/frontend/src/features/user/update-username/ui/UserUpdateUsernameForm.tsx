@@ -46,7 +46,7 @@ const UserUpdateUsernameForm: FunctionComponent<
       toast.success("Username has been successfully updated!");
     } else {
       const messages = {
-        409: "This username is already taken",
+        409: "This username is already taken.",
       } as const;
 
       form.setError("root", {

@@ -46,7 +46,7 @@ const UserUpdatePasswordForm: FunctionComponent<
 
     if (result.ok) {
       onSuccess?.();
-      toast.success("Username has been successfully updated!");
+      toast.success("Password has been successfully updated!");
     } else {
       const messages = {
         403: "Old password is wrong.",

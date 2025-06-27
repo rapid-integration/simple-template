@@ -49,8 +49,8 @@ export function LoginForm({
                 });
 
                 const messages = {
-                  401: "Wrong password",
-                  404: "There is no user with such username",
+                  401: "Wrong password.",
+                  404: "There is no user with such username.",
                 } as const;
 
                 form.setError("root", {
