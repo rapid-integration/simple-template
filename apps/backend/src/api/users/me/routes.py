@@ -45,10 +45,10 @@ def get_current_user(request: Request, current_user: CurrentUserDepends) -> User
     },
 )
 def update_current_user_username(
-        request: Request,
-        args: UserUsernameRequest,
-        service: UserServiceDepends,
-        current_user: CurrentUserDepends,
+    request: Request,
+    args: UserUsernameRequest,
+    service: UserServiceDepends,
+    current_user: CurrentUserDepends,
 ) -> Response:
     user = service.get_user_by_username(args.username)
 
@@ -76,10 +76,10 @@ def update_current_user_username(
     },
 )
 def update_current_user_password(
-        request: Request,
-        args: UserPasswordRequest,
-        service: UserServiceDepends,
-        current_user: CurrentUserDepends,
+    request: Request,
+    args: UserPasswordRequest,
+    service: UserServiceDepends,
+    current_user: CurrentUserDepends,
 ) -> Response:
     service.update_password(current_user, args.password)
 
