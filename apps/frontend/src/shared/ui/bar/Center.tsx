@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps, FunctionComponent } from "react";
 
 import { useScrolled } from "@/shared/hooks/use-scrolled";

@@ -1,3 +1,5 @@
+"use client"
+
 import { CopyIcon } from "lucide-react";
 import { FunctionComponent } from "react";
 import { toast } from "sonner";

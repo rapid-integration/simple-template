@@ -7,7 +7,7 @@ export {
   USER_USERNAME_PATTERN,
 } from "./config";
 export { user } from "./model/data";
-export { UserUsernameSchema } from "./model/schema";
+export { UserPasswordSchema, UserUsernameSchema } from "./model/schema";
 export { default as UserProfile } from "./ui/UserProfile";
 export { default as UserProfileAbout } from "./ui/UserProfileAbout";
 export { default as UserProfileInfo } from "./ui/UserProfileInfo";

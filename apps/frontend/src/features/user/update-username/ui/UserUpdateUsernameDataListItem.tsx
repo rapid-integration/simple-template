@@ -1,3 +1,5 @@
+"use client"
+
 import { ComponentProps, FunctionComponent, useState } from "react";
 
 import { useIsMobile } from "@/shared/hooks/use-mobile";

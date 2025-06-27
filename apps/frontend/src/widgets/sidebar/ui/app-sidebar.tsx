@@ -1,7 +1,7 @@
 "use client";
 
 import { HomeIcon } from "lucide-react";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { user } from "@/entities/user";
@@ -26,6 +26,16 @@ const data = {
       url: "/",
       icon: HomeIcon,
     },
+    {
+      title: "Login",
+      url: "/login",
+      icon: HomeIcon,
+    },
+    {
+      title: "Register",
+      url: "/register",
+      icon: HomeIcon,
+    },
   ],
   projects: [
     {
@@ -44,14 +54,14 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const router = useRouter();
+  const pathname = usePathname();
   const sidebar = useSidebar();
 
   useEffect(() => {
     if (sidebar.open && sidebar.isMobile) {
       sidebar.setOpenMobile(false);
     }
-  }, [router.asPath]);
+  }, [pathname]);
 
   return (
     <Sidebar variant="inset" {...props}>

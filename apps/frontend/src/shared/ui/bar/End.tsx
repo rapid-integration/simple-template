@@ -1,3 +1,5 @@
+"use client";
+
 import { ComponentProps, FunctionComponent } from "react";
 
 import { cn } from "@/shared/lib/utils";

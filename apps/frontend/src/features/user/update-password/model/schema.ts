@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { UserPasswordSchema } from "@/entities/user/model/schema";
+import { UserPasswordSchema } from "@/entities/user";
 
 export const UserUpdatePasswordFormSchema = z
   .object({

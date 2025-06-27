@@ -30,7 +30,7 @@
       "clsx",
       "tv"
     ],
-    "tailwindStylesheet": "./src/pages/globals.css",
+    "tailwindStylesheet": "./src/app/globals.css",
     "trailingComma": "all",
     "useTabs": false
   },
