@@ -3,11 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-import { user } from "@/entities/user";
-import { useScrolled } from "@/shared/hooks/use-scrolled";
-import { cn } from "@/shared/lib/utils";
+import { user, UserProfileSection } from "@/entities/user";
 import AlertDialog from "@/shared/ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
+import Bar from "@/shared/ui/bar";
 import { Button } from "@/shared/ui/button";
 import {
   Form,
@@ -18,10 +16,10 @@ import {
   FormLabel,
 } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
+import Page from "@/shared/ui/page";
 import { Textarea } from "@/shared/ui/textarea";
 
 export default function ProfileEdit() {
-  const scrolled = useScrolled();
   const form = useForm<{ name: string; email: string; about: string }>({
     defaultValues: user,
   });
@@ -31,67 +29,57 @@ export default function ProfileEdit() {
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>Edit Profile</title>
       </Head>
-      <div className="relative flex grow flex-col items-center">
-        <div
-          className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
-            scrolled && "border-border",
-          )}
-        >
-          {form.formState.isDirty ? (
-            <AlertDialog>
-              <AlertDialog.Trigger asChild>
-                <Button
-                  variant="ghost"
-                  className="justify-self-start text-destructive"
-                >
-                  <span>Cancel</span>
-                </Button>
-              </AlertDialog.Trigger>
-              <AlertDialog.Content>
-                <AlertDialog.Header>
-                  <AlertDialog.Title>
-                    Do you really want to cancel?
-                  </AlertDialog.Title>
-                  <AlertDialog.Description>
-                    Canceling editing profile would reset your changes.
-                  </AlertDialog.Description>
-                </AlertDialog.Header>
-                <AlertDialog.Footer>
-                  <AlertDialog.Cancel>Close</AlertDialog.Cancel>
-                  <AlertDialog.Action variant="destructive" asChild>
-                    <Link href="/profile">Cancel</Link>
-                  </AlertDialog.Action>
-                </AlertDialog.Footer>
-              </AlertDialog.Content>
-            </AlertDialog>
-          ) : (
-            <Button
-              asChild
-              variant="ghost"
-              className="justify-self-start text-muted-foreground"
-            >
-              <Link href="/profile">
-                <ArrowLeftIcon />
-                <span>Back</span>
-              </Link>
-            </Button>
-          )}
-          <h1 className="mx-auto font-medium">Edit Profile</h1>
-        </div>
-        <div className="flex w-full grow flex-col items-center gap-8 p-4 md:max-w-xl">
-          <div className="space-y-3">
-            <Avatar className="mx-auto size-24 text-4xl">
-              <AvatarImage src={user.avatar} alt={form.getValues("name")} />
-              <AvatarFallback>NG</AvatarFallback>
-            </Avatar>
-            <hgroup className="text-center">
-              <h2 className="text-3xl font-semibold md:text-2xl">{name}</h2>
-              <p className="text-lg text-muted-foreground">{email}</p>
-            </hgroup>
-          </div>
+
+      <Page>
+        <Bar>
+          <Bar.Start>
+            {form.formState.isDirty ? (
+              <AlertDialog>
+                <AlertDialog.Trigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="justify-self-start text-destructive"
+                  >
+                    <span>Cancel</span>
+                  </Button>
+                </AlertDialog.Trigger>
+                <AlertDialog.Content>
+                  <AlertDialog.Header>
+                    <AlertDialog.Title>
+                      Do you really want to cancel?
+                    </AlertDialog.Title>
+                    <AlertDialog.Description>
+                      Canceling editing profile would reset your changes.
+                    </AlertDialog.Description>
+                  </AlertDialog.Header>
+                  <AlertDialog.Footer>
+                    <AlertDialog.Cancel>Close</AlertDialog.Cancel>
+                    <AlertDialog.Action variant="destructive" asChild>
+                      <Link href="/profile">Cancel</Link>
+                    </AlertDialog.Action>
+                  </AlertDialog.Footer>
+                </AlertDialog.Content>
+              </AlertDialog>
+            ) : (
+              <Button
+                asChild
+                variant="ghost"
+                className="justify-self-start text-muted-foreground"
+              >
+                <Link href="/profile">
+                  <ArrowLeftIcon />
+                  <span>Back</span>
+                </Link>
+              </Button>
+            )}
+          </Bar.Start>
+          <Bar.Center>Edit Profile</Bar.Center>
+        </Bar>
+
+        <Page.Content size="xl">
+          <UserProfileSection avatar={user.avatar} name={name} email={email} />
 
           <Form {...form}>
             <form
@@ -152,8 +140,8 @@ export default function ProfileEdit() {
               </Button>
             </form>
           </Form>
-        </div>
-      </div>
+        </Page.Content>
+      </Page>
     </>
   );
 }
