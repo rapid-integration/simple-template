@@ -9,6 +9,9 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { parseInitials } from "@/entities/user";
+import { logout } from "@/features/auth/logout";
+import { CurrentUserResponse } from "@/shared/api/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import {
   DropdownMenu,
@@ -28,15 +31,7 @@ import {
 
 import { ThemeRadioGroup } from "./theme-radio-group";
 
-export function NavUser({
-  user,
-}: {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}) {
+export function NavUser({ user }: { user: CurrentUserResponse }) {
   const { isMobile } = useSidebar();
   const pathname = usePathname();
 
@@ -47,20 +42,22 @@ export function NavUser({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-              size="lg"
               isActive={pathname.includes("/profile")}
             >
-              <Avatar className="size-8">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback>NG</AvatarFallback>
+              <Avatar className="size-4 text-xs">
+                <AvatarImage
+                  src={`https://avatar.vercel.sh/${user.username}`}
+                  alt={user.username}
+                />
+                <AvatarFallback>{parseInitials(user.username)}</AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
+              {/* <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 <span className="truncate text-xs text-muted-foreground">
                   {user.email}
                 </span>
-              </div>
-              {/* <span className="truncate">{user.name}</span> */}
+              </div> */}
+              <span className="truncate">{user.username}</span>
               <ChevronsUpDownIcon className="me-0.5 ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -73,13 +70,16 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="size-8">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage
+                    src={`https://avatar.vercel.sh/${user.username}`}
+                    alt={user.username}
+                  />
                   <AvatarFallback>NG</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs text-muted-foreground">
-                    {user.email}
+                  <span className="truncate font-medium">{user.username}</span>
+                  <span className="truncate font-mono text-xs text-muted-foreground">
+                    {user.id}
                   </span>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export function NavUser({
               </div>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem variant="destructive" onSelect={logout}>
               <LogOut />
               <span>Logout</span>
             </DropdownMenuItem>

@@ -8,7 +8,9 @@ import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
+import { toast } from "@/shared/ui/sonner";
 
+import { updateCurrentUserUsername } from "../api/actions";
 import { UserUpdateUsernameFormSchema } from "../model/schema";
 import { UserUpdateUsernameFormFieldValues } from "../model/types";
 
@@ -16,6 +18,7 @@ interface UserUpdateUsernameFormProps
   extends Omit<ComponentProps<"form">, "onSubmit"> {
   defaultValues?: UserUpdateUsernameFormFieldValues;
   onSubmit?: (values: UserUpdateUsernameFormFieldValues) => void;
+  onSuccess?: VoidFunction;
 }
 
 const UserUpdateUsernameForm: FunctionComponent<
@@ -23,6 +26,7 @@ const UserUpdateUsernameForm: FunctionComponent<
 > = ({
   defaultValues = { username: "" },
   onSubmit,
+  onSuccess,
   className,
   ...otherProps
 }) => {
@@ -32,9 +36,23 @@ const UserUpdateUsernameForm: FunctionComponent<
     defaultValues,
   });
 
-  const handleSubmit = (values: UserUpdateUsernameFormFieldValues) => {
-    console.log(values);
+  const handleSubmit = async (values: UserUpdateUsernameFormFieldValues) => {
     onSubmit?.(values);
+
+    const result = await updateCurrentUserUsername(values);
+
+    if (result.ok) {
+      onSuccess?.();
+      toast.success("Username has been successfully updated!");
+    } else {
+      const messages = {
+        409: "This username is already taken",
+      } as const;
+
+      form.setError("root", {
+        message: messages[result.status as keyof typeof messages],
+      });
+    }
   };
 
   return (
@@ -64,9 +82,19 @@ const UserUpdateUsernameForm: FunctionComponent<
           )}
         />
 
+        {form.formState.errors.root && (
+          <p className="text-sm text-destructive">
+            {form.formState.errors.root.message}
+          </p>
+        )}
+
         <Button
           type="submit"
-          disabled={!form.formState.isDirty || !form.formState.isValid}
+          disabled={
+            !form.formState.isDirty ||
+            !form.formState.isValid ||
+            form.formState.isSubmitting
+          }
         >
           Save
         </Button>

@@ -41,7 +41,7 @@ const UserUpdatePasswordDataListItem: FunctionComponent<
                 </Drawer.Description>
               </Drawer.Header>
               <UserUpdatePasswordForm
-                onSubmit={() => setOpen(false)}
+                onSuccess={() => setOpen(false)}
                 className="px-4"
               />
               <Drawer.Footer className="pt-2">
@@ -64,7 +64,7 @@ const UserUpdatePasswordDataListItem: FunctionComponent<
                   reset sessions on other devices.
                 </Dialog.Description>
               </Dialog.Header>
-              <UserUpdatePasswordForm onSubmit={() => setOpen(false)} />
+              <UserUpdatePasswordForm onSuccess={() => setOpen(false)} />
             </Dialog.Content>
           </Dialog>
         )}

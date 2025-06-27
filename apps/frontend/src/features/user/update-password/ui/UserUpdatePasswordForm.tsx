@@ -3,12 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ComponentProps, FunctionComponent } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
+import { updateCurrentUserPassword } from "../api/actions";
 import { UserUpdatePasswordFormSchema } from "../model/schema";
 import { UserUpdatePasswordFormFieldValues } from "../model/types";
 
@@ -16,6 +18,7 @@ interface UserUpdatePasswordFormProps
   extends Omit<ComponentProps<"form">, "onSubmit"> {
   defaultValues?: UserUpdatePasswordFormFieldValues;
   onSubmit?: (values: UserUpdatePasswordFormFieldValues) => void;
+  onSuccess?: VoidFunction;
 }
 
 const UserUpdatePasswordForm: FunctionComponent<
@@ -23,6 +26,7 @@ const UserUpdatePasswordForm: FunctionComponent<
 > = ({
   defaultValues = { newPassword1: "", newPassword2: "", oldPassword: "" },
   onSubmit,
+  onSuccess,
   className,
   ...otherProps
 }) => {
@@ -32,9 +36,17 @@ const UserUpdatePasswordForm: FunctionComponent<
     defaultValues,
   });
 
-  const handleSubmit = (values: UserUpdatePasswordFormFieldValues) => {
-    console.log(values);
+  const handleSubmit = async (values: UserUpdatePasswordFormFieldValues) => {
     onSubmit?.(values);
+
+    const result = await updateCurrentUserPassword({
+      password: values.newPassword1,
+    });
+
+    if (result.ok) {
+      onSuccess?.();
+      toast.success("Username has been successfully updated!");
+    }
   };
 
   return (
@@ -103,7 +115,11 @@ const UserUpdatePasswordForm: FunctionComponent<
 
         <Button
           type="submit"
-          disabled={!form.formState.isDirty || !form.formState.isValid}
+          disabled={
+            !form.formState.isDirty ||
+            !form.formState.isValid ||
+            form.formState.isSubmitting
+          }
         >
           Save
         </Button>

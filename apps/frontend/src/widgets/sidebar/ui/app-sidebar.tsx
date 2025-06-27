@@ -4,7 +4,7 @@ import { HomeIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-import { user } from "@/entities/user";
+import { CurrentUserResponse } from "@/shared/api/types";
 import {
   Sidebar,
   SidebarContent,
@@ -26,16 +26,6 @@ const data = {
       url: "/",
       icon: HomeIcon,
     },
-    {
-      title: "Login",
-      url: "/login",
-      icon: HomeIcon,
-    },
-    {
-      title: "Register",
-      url: "/register",
-      icon: HomeIcon,
-    },
   ],
   projects: [
     {
@@ -53,7 +43,10 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  user,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { user: CurrentUserResponse }) {
   const pathname = usePathname();
   const sidebar = useSidebar();
 

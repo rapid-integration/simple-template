@@ -43,7 +43,7 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
               </Drawer.Header>
               <UserUpdateUsernameForm
                 defaultValues={{ username }}
-                onSubmit={() => setOpen(false)}
+                onSuccess={() => setOpen(false)}
                 className="px-4"
               />
               <Drawer.Footer className="pt-2">
@@ -67,7 +67,7 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
               </Dialog.Header>
               <UserUpdateUsernameForm
                 defaultValues={{ username }}
-                onSubmit={() => setOpen(false)}
+                onSuccess={() => setOpen(false)}
               />
             </Dialog.Content>
           </Dialog>

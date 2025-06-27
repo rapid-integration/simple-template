@@ -16,6 +16,7 @@ import {
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
+import { register } from "../api/actions";
 import { RegisterFormSchema } from "../model/schema";
 
 export function RegisterForm({
@@ -40,7 +41,20 @@ export function RegisterForm({
         <CardContent>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit((v) => console.log(v))}
+              onSubmit={form.handleSubmit(async (values) => {
+                const result = await register({
+                  username: values.username,
+                  password: values.password1,
+                });
+
+                const messages = {
+                  409: "A user with such username already exists.",
+                } as const;
+
+                form.setError("root", {
+                  message: messages[result.status as keyof typeof messages],
+                });
+              })}
               className="flex flex-col gap-6"
             >
               <Form.Field
@@ -103,10 +117,20 @@ export function RegisterForm({
                 )}
               />
 
+              {form.formState.errors.root && (
+                <p className="text-sm text-destructive">
+                  {form.formState.errors.root.message}
+                </p>
+              )}
+
               <div className="flex flex-col gap-2">
                 <Button
                   type="submit"
-                  disabled={!form.formState.isDirty || !form.formState.isValid}
+                  disabled={
+                    !form.formState.isDirty ||
+                    !form.formState.isValid ||
+                    form.formState.isSubmitting
+                  }
                   stretched
                 >
                   Register
