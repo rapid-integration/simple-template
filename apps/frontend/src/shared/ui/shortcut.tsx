@@ -11,7 +11,7 @@ const Shortcut = ({
       {sequence.map((key) => (
         <kbd
           key={key}
-          className="rounded bg-accent/25 size-4 inline-flex leading-none items-center justify-center"
+          className="bg-accent/25 inline-flex size-4 items-center justify-center rounded leading-none"
         >
           {key}
         </kbd>

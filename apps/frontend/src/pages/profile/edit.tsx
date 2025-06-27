@@ -32,11 +32,11 @@ export default function ProfileEdit() {
       <Head>
         <title>Profile</title>
       </Head>
-      <div className="flex flex-col relative grow items-center">
+      <div className="relative flex grow flex-col items-center">
         <div
           className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
-            scrolled && "border-border"
+            "h-13 bg-background/75 sticky top-0 z-10 grid w-full grid-cols-3 items-center border-b border-transparent p-2 backdrop-blur-xl transition-colors md:text-sm",
+            scrolled && "border-border",
           )}
         >
           {form.formState.isDirty ? (
@@ -80,22 +80,22 @@ export default function ProfileEdit() {
           )}
           <h1 className="mx-auto font-medium">Edit Profile</h1>
         </div>
-        <div className="flex grow flex-col gap-8 p-4 w-full items-center md:max-w-xl">
+        <div className="flex w-full grow flex-col items-center gap-8 p-4 md:max-w-xl">
           <div className="space-y-3">
-            <Avatar className="size-24 text-4xl mx-auto">
+            <Avatar className="mx-auto size-24 text-4xl">
               <AvatarImage src={user.avatar} alt={form.getValues("name")} />
               <AvatarFallback>NG</AvatarFallback>
             </Avatar>
             <hgroup className="text-center">
               <h2 className="text-3xl font-semibold md:text-2xl">{name}</h2>
-              <p className="text-lg text-muted-foreground">{email}</p>
+              <p className="text-muted-foreground text-lg">{email}</p>
             </hgroup>
           </div>
 
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit((v) => console.log(v))}
-              className="flex flex-col gap-4 w-full grow"
+              className="flex w-full grow flex-col gap-4"
             >
               <FormField
                 name="name"
@@ -144,7 +144,7 @@ export default function ProfileEdit() {
 
               <Button
                 type="submit"
-                className="sm:self-end max-sm:mt-auto"
+                className="max-sm:mt-auto sm:self-end"
                 disabled={!form.formState.isDirty}
               >
                 Save

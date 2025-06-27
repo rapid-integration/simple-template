@@ -5,7 +5,7 @@ export type DataListContextValue = {
 };
 
 export const DataListContext = createContext<DataListContextValue>(
-  {} as DataListContextValue
+  {} as DataListContextValue,
 );
 
 export const useDataListContext = (): DataListContextValue => {
@@ -13,7 +13,7 @@ export const useDataListContext = (): DataListContextValue => {
 
   if (context === undefined) {
     throw new Error(
-      "The 'useDataListContext' hook must be used within a <DataList.Root> component."
+      "The 'useDataListContext' hook must be used within a <DataList.Root> component.",
     );
   }
 

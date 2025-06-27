@@ -23,7 +23,7 @@ export function ThemeRadioGroupItem({ value }: { value: string }) {
     <Tooltip>
       <TooltipTrigger
         asChild
-        className="flex items-center justify-center rounded-sm p-1 text-muted-foreground outline-hidden aria-checked:bg-accent aria-checked:text-foreground data-highlighted:bg-accent"
+        className="text-muted-foreground outline-hidden aria-checked:bg-accent aria-checked:text-foreground data-highlighted:bg-accent flex items-center justify-center rounded-sm p-1"
       >
         <DropdownMenuRadioItem value={value}>
           <Icon className="size-4 text-inherit" />
@@ -46,8 +46,8 @@ export function ThemeRadioGroup({
       value={theme}
       onValueChange={setTheme}
       className={cn(
-        "flex size-fit items-center justify-center gap-0.5 self-start rounded-md border border-input bg-background p-0.5",
-        className
+        "border-input bg-background flex size-fit items-center justify-center gap-0.5 self-start rounded-md border p-0.5",
+        className,
       )}
       {...otherProps}
     >

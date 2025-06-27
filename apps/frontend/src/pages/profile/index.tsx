@@ -20,11 +20,11 @@ export default function Profile() {
       <Head>
         <title>Profile</title>
       </Head>
-      <div className="flex flex-col relative grow items-center">
+      <div className="relative flex grow flex-col items-center">
         <div
           className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
-            scrolled && "border-border"
+            "h-13 bg-background/75 sticky top-0 z-10 grid w-full grid-cols-3 items-center border-b border-transparent p-2 backdrop-blur-xl transition-colors md:text-sm",
+            scrolled && "border-border",
           )}
         >
           <Button
@@ -40,20 +40,20 @@ export default function Profile() {
           <h1
             className={cn(
               "mx-auto font-medium opacity-0 transition-opacity",
-              scrolled && "opacity-100"
+              scrolled && "opacity-100",
             )}
           >
             Profile
           </h1>
-          <div className="justify-self-end flex gap-1">
+          <div className="flex gap-1 justify-self-end">
             <Button asChild variant="ghost" className="justify-self-end">
               <Link href="/profile/edit">Edit</Link>
             </Button>
           </div>
         </div>
-        <div className="flex grow flex-col gap-8 p-4 w-full items-center md:max-w-xl">
+        <div className="flex w-full grow flex-col items-center gap-8 p-4 md:max-w-xl">
           <div className="space-y-3">
-            <Avatar className="size-24 text-4xl mx-auto">
+            <Avatar className="mx-auto size-24 text-4xl">
               <AvatarImage src={user.avatar} alt={user.name} />
               <AvatarFallback>NG</AvatarFallback>
             </Avatar>
@@ -61,7 +61,7 @@ export default function Profile() {
               <h2 className="text-3xl font-semibold md:text-2xl">
                 {user.name}
               </h2>
-              <p className="text-lg text-muted-foreground">{user.email}</p>
+              <p className="text-muted-foreground text-lg">{user.email}</p>
             </hgroup>
           </div>
           <DataList orientation="horizontal">
@@ -79,11 +79,11 @@ export default function Profile() {
                       if (window.isSecureContext) {
                         navigator.clipboard.writeText(user.registrationDate);
                         toast.success(
-                          "Registration date copied to the clipboard!"
+                          "Registration date copied to the clipboard!",
                         );
                       } else {
                         toast.error(
-                          "Failed to copy registration date to clipboard: window is not in a secure context."
+                          "Failed to copy registration date to clipboard: window is not in a secure context.",
                         );
                       }
                     }}
@@ -100,7 +100,7 @@ export default function Profile() {
             <DataList.Item>
               <DataList.ItemGroup className="overflow-hidden">
                 <DataList.ItemLabel>ID</DataList.ItemLabel>
-                <DataList.ItemValue className="font-mono truncate">
+                <DataList.ItemValue className="truncate font-mono">
                   {user.id}
                 </DataList.ItemValue>
               </DataList.ItemGroup>
@@ -115,7 +115,7 @@ export default function Profile() {
                         toast.success("ID copied to the clipboard!");
                       } else {
                         toast.error(
-                          "Failed to copy ID to clipboard: window is not in a secure context."
+                          "Failed to copy ID to clipboard: window is not in a secure context.",
                         );
                       }
                     }}
@@ -134,13 +134,13 @@ export default function Profile() {
               <DataList.ItemGroup>
                 <DataList.ItemLabel>About</DataList.ItemLabel>
                 <span className="inline">
-                  <DataList.ItemValue className="text-pretty inline">
+                  <DataList.ItemValue className="inline text-pretty">
                     {showMoreAbout ? user.about : `${user.about.slice(0, 96)}…`}
                   </DataList.ItemValue>
                   {!showMoreAbout && (
                     <button
                       onClick={() => setShowMoreAbout(true)}
-                      className="ms-1 cursor-pointer font-medium text-secondary-foreground transition hover:text-foreground"
+                      className="text-secondary-foreground hover:text-foreground ms-1 cursor-pointer font-medium transition"
                     >
                       Show more
                     </button>

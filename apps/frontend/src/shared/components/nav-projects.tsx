@@ -5,7 +5,7 @@ import {
   Folder,
   MoreHorizontal,
   Share,
-  Trash2
+  Trash2,
 } from "lucide-react";
 
 import {

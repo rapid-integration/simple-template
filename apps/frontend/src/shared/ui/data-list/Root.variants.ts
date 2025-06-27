@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const dataListRootVariants = cva(
-  "w-full bg-card text-card-foreground flex flex-col rounded-md shadow-xs border",
+  "bg-card text-card-foreground shadow-xs flex w-full flex-col rounded-md border",
   {
     variants: {
       size: {
@@ -22,7 +22,7 @@ const dataListRootVariants = cva(
       divide: true,
       orientation: "horizontal",
     },
-  }
+  },
 );
 
 export default dataListRootVariants;

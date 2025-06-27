@@ -28,7 +28,7 @@ export function NavUser({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="ms-auto data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground text-sm size-8">
+        <Avatar className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground ms-auto size-8 text-sm">
           <AvatarImage src={user.avatar} alt={user.name} draggable={false} />
           <AvatarFallback>NG</AvatarFallback>
         </Avatar>
@@ -42,7 +42,7 @@ export function NavUser({
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{user.name}</span>
-              <span className="truncate text-xs text-muted-foreground">
+              <span className="text-muted-foreground truncate text-xs">
                 {user.email}
               </span>
             </div>
@@ -62,7 +62,7 @@ export function NavUser({
           <DropdownMenuLabel className="text-muted-foreground text-xs font-medium">
             Preferences
           </DropdownMenuLabel>
-          <div className="flex items-center gap-2 rounded-sm px-2 py-px text-sm select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground">
+          <div className="[&_svg:not([class*='text-'])]:text-muted-foreground flex select-none items-center gap-2 rounded-sm px-2 py-px text-sm data-[disabled]:pointer-events-none data-[inset]:pl-8 data-[disabled]:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0">
             <PaletteIcon />
             Theme
             <ThemeRadioGroup className="ms-auto" />
@@ -74,7 +74,7 @@ export function NavUser({
           Log out
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
+        <DropdownMenuLabel className="text-muted-foreground text-xs font-medium">
           {`${name}@${version}`}
         </DropdownMenuLabel>
       </DropdownMenuContent>

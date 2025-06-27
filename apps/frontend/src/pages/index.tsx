@@ -15,15 +15,15 @@ export default function Home() {
       {isMobile && (
         <div
           className={cn(
-            "sticky top-0 z-10 grid h-13 w-full grid-cols-3 items-center border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
-            scrolled && "border-border"
+            "h-13 bg-background/75 sticky top-0 z-10 grid w-full grid-cols-3 items-center border-b border-transparent p-2 backdrop-blur-xl transition-colors md:text-sm",
+            scrolled && "border-border",
           )}
         >
           <SidebarTrigger />
           <h1
             className={cn(
               "mx-auto font-medium opacity-0 transition-opacity",
-              scrolled && "opacity-100"
+              scrolled && "opacity-100",
             )}
           >
             Home
@@ -31,7 +31,7 @@ export default function Home() {
         </div>
       )}
 
-      <h1 className="font-semibold text-3xl md:text-2xl m-4">Home</h1>
+      <h1 className="m-4 text-3xl font-semibold md:text-2xl">Home</h1>
 
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
