@@ -20,6 +20,14 @@ export default function Home() {
           )}
         >
           <SidebarTrigger />
+          <h1
+            className={cn(
+              "mx-auto font-medium opacity-0 transition-opacity",
+              scrolled && "opacity-100"
+            )}
+          >
+            Home
+          </h1>
         </div>
       )}
 
