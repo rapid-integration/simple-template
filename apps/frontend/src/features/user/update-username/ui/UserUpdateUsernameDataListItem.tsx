@@ -35,7 +35,9 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
             <Drawer.Content>
               <Drawer.Header>
                 <Drawer.Title>Edit Username</Drawer.Title>
-                <Drawer.Description>You can set public username.</Drawer.Description>
+                <Drawer.Description>
+                  You can set public username.
+                </Drawer.Description>
               </Drawer.Header>
               <UserUpdateUsernameForm
                 defaultValues={{ username }}
@@ -57,7 +59,9 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
             <Dialog.Content>
               <Dialog.Header>
                 <Dialog.Title>Edit Username</Dialog.Title>
-                <Dialog.Description>You can set public username.</Dialog.Description>
+                <Dialog.Description>
+                  You can set public username.
+                </Dialog.Description>
               </Dialog.Header>
               <UserUpdateUsernameForm
                 defaultValues={{ username }}

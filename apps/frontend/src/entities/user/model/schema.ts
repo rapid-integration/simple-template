@@ -21,7 +21,6 @@ export const UserUsernameSchema = z
     message: "Username must contain only a-z, A-Z, 0-9 and _.",
   });
 
-
 export const UserPasswordSchema = z
   .string()
   .min(USER_PASSWORD_MIN_LENGTH, {

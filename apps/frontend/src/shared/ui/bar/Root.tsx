@@ -5,10 +5,7 @@ import { cn } from "@/shared/lib/utils";
 
 export interface BarRoot extends ComponentProps<"div"> {}
 
-const BarRoot: FunctionComponent<BarRoot> = ({
-  className,
-  ...otherProps
-}) => {
+const BarRoot: FunctionComponent<BarRoot> = ({ className, ...otherProps }) => {
   const scrolled = useScrolled();
 
   return (

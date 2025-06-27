@@ -136,8 +136,10 @@ export {
   DialogFooter,
   DialogHeader,
   DialogOverlay,
-  DialogPortal, DialogRoot, DialogTitle,
-  DialogTrigger
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
 };
 
 const Dialog = Object.assign(DialogRoot, {
