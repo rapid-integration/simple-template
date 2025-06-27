@@ -105,7 +105,10 @@ services:
       - path: .env
         required: true
     depends_on:
-      - backend
+      backend:
+        restart: false
+        required: true
+        condition: service_started
     networks:
       - template-network
     profiles:
@@ -121,7 +124,10 @@ services:
       - path: .env
         required: true
     depends_on:
-      - backend-dev
+      backend-dev:
+        restart: false
+        required: true
+        condition: service_started
     volumes:
       - type: bind
         source: ./apps/frontend/src
