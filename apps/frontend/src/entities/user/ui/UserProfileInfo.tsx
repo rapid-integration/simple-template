@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CopyIcon } from "lucide-react";
 import { FunctionComponent } from "react";

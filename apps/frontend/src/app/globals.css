@@ -134,7 +134,7 @@
   body {
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
-    @apply bg-background text-foreground antialiased flex flex-col grow min-h-dvh;
+    @apply flex min-h-dvh grow flex-col bg-background text-foreground antialiased;
   }
 
   main {

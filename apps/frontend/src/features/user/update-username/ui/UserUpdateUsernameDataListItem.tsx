@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ComponentProps, FunctionComponent, useState } from "react";
 

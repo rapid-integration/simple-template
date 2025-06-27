@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ComponentProps, FunctionComponent } from "react";
@@ -72,6 +72,7 @@ const UserUpdatePasswordForm: FunctionComponent<
                 <Input
                   placeholder="Enter your new password…"
                   type="password"
+                  autoComplete="new-password"
                   {...field}
                 />
               </Form.Control>
@@ -90,6 +91,7 @@ const UserUpdatePasswordForm: FunctionComponent<
                 <Input
                   placeholder="Enter your new password again…"
                   type="password"
+                  autoComplete="new-password"
                   {...field}
                 />
               </Form.Control>

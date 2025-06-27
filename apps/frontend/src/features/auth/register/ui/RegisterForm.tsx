@@ -75,6 +75,7 @@ export function RegisterForm({
                       <Input
                         placeholder="Enter your new password…"
                         type="password"
+                        autoComplete="new-password"
                         {...field}
                       />
                     </Form.Control>
@@ -93,6 +94,7 @@ export function RegisterForm({
                       <Input
                         placeholder="Enter your new password again…"
                         type="password"
+                        autoComplete="new-password"
                         {...field}
                       />
                     </Form.Control>
