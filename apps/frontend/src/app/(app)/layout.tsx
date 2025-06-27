@@ -7,7 +7,7 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset data-vaul-drawer-wrapper>{children}</SidebarInset>
     </SidebarProvider>
   );
 }

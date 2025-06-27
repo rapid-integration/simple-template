@@ -20,7 +20,6 @@ export default function App({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        data-vaul-drawer-wrapper
         className={`${geistSans.variable} ${geistMono.variable}`}
       >
         <ThemeProvider disableTransitionOnChange>
