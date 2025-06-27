@@ -72,6 +72,7 @@ export function LoginForm({
                       <Input
                         placeholder="Enter your password…"
                         type="password"
+                        autoComplete="password"
                         {...field}
                       />
                     </Form.Control>

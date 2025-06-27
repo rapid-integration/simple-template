@@ -54,6 +54,7 @@ const UserUpdatePasswordForm: FunctionComponent<
                 <Input
                   placeholder="Enter your old password…"
                   type="password"
+                  autoComplete="password"
                   {...field}
                 />
               </Form.Control>
