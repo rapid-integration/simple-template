@@ -5,7 +5,6 @@ __all__ = [
     "PostgresSettings",
     "SecuritySettings",
     "CORSSettings",
-    "PostgresSettings",
     "SecuritySettings",
     "SwaggerSettings",
 ]
