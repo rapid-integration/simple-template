@@ -96,7 +96,7 @@ export default function ProfileEdit() {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit((v) => console.log(v))}
-              className="flex w-full grow flex-col gap-4"
+              className="flex w-full grow flex-col gap-6"
             >
               <FormField
                 name="name"
