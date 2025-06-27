@@ -30,7 +30,7 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
         </DataList.ItemGroup>
 
         {isMobile ? (
-          <Drawer open={open} onOpenChange={setOpen}>
+          <Drawer open={open} onOpenChange={setOpen} autoFocus>
             <Drawer.Trigger asChild>
               <Button variant="outline">Edit</Button>
             </Drawer.Trigger>
