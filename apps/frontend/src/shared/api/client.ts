@@ -4,9 +4,10 @@ import { AUTH_MIDDLEWARE } from "./middleware";
 import { paths } from "./types";
 
 const client = createClient<paths>({
-  baseUrl: "http://host.docker.internal:80/api/",
+  baseUrl: process.env.FRONTEND_API_URL,
 });
 
 client.use(AUTH_MIDDLEWARE);
 
 export default client;
+  

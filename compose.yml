@@ -104,6 +104,8 @@ services:
     env_file:
       - path: .env
         required: true
+    environment:
+      - FRONTEND_API_URL=http://backend:8000/api/
     depends_on:
       backend:
         restart: false
@@ -123,6 +125,8 @@ services:
     env_file:
       - path: .env
         required: true
+    environment:
+      - FRONTEND_API_URL=http://backend-dev:8000/api/
     depends_on:
       backend-dev:
         restart: false
