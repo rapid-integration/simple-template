@@ -13,8 +13,8 @@ const BarRoot: FunctionComponent<BarRoot> = ({ className, ...otherProps }) => {
   return (
     <div
       className={cn(
-        "sticky top-0 z-10 flex h-13 w-full items-center justify-between border-b border-transparent bg-background/75 p-2 backdrop-blur-xl transition-colors md:text-sm",
-        scrolled && "border-border",
+        "sticky top-0 z-10 flex h-13 w-full items-center justify-between border-b border-transparent bg-background/0 p-2 backdrop-blur-xl transition-colors md:text-sm",
+        scrolled && "border-border bg-background/75",
         className,
       )}
       {...otherProps}
