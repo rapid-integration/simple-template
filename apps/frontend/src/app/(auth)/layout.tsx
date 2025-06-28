@@ -10,7 +10,7 @@ export default async function AuthLayout({
 }) {
   const currentUser = await getCurrentUser();
 
-  if (currentUser.response.status !== 404 && currentUser.response.ok) {
+  if (currentUser.response.ok) {
     return redirect("/");
   }
 
