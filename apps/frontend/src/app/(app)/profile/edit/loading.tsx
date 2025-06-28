@@ -1,12 +1,17 @@
 "use client";
 
 import { ArrowLeftIcon } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 
 import Bar from "@/shared/ui/bar";
 import { Button } from "@/shared/ui/button";
 import Page from "@/shared/ui/page";
 import { Skeleton } from "@/shared/ui/skeleton";
+
+export const metadata: Metadata = {
+  title: "Edit Profile",
+};
 
 export default function Loading() {
   return (
