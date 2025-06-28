@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 
+import { cn } from "@/shared/lib/utils";
 import { Toaster } from "@/shared/ui/sonner";
 
 import "./globals.css";
@@ -18,8 +19,12 @@ const geistMono = Geist_Mono({
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={cn(geistSans.variable, geistMono.variable)}
+      suppressHydrationWarning
+    >
+      <body>
         <ThemeProvider disableTransitionOnChange>
           {children}
 
