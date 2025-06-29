@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
@@ -16,6 +17,13 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  title: "Template",
+  other: {
+    google: "notranslate",
+  },
+};
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   return (
