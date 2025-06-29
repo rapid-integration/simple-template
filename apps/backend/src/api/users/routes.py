@@ -22,7 +22,7 @@ router.include_router(me.router)
         },
     },
 )
-def get_users(request: Request, search_params: SearchParamsDepends, service: UserServiceDepends) -> list[User]:
+async def get_users(request: Request, search_params: SearchParamsDepends, service: UserServiceDepends) -> list[User]:
     users = service.get_users(search_params)
 
     if not users:
@@ -41,7 +41,7 @@ def get_users(request: Request, search_params: SearchParamsDepends, service: Use
         },
     },
 )
-def get_user(request: Request, username: Username, service: UserServiceDepends) -> User:
+async def get_user(request: Request, username: Username, service: UserServiceDepends) -> User:
     user = service.get_user_by_username(username)
 
     if not user:

@@ -23,7 +23,7 @@ router = APIRouter(prefix="/me")
         },
     },
 )
-def get_current_user(request: Request, current_user: CurrentUserDepends) -> User:
+async def get_current_user(request: Request, current_user: CurrentUserDepends) -> User:
     return current_user
 
 
@@ -45,7 +45,7 @@ def get_current_user(request: Request, current_user: CurrentUserDepends) -> User
         },
     },
 )
-def update_current_user_username(
+async def update_current_user_username(
     request: Request,
     args: UserUsernameRequest,
     service: UserServiceDepends,
@@ -76,7 +76,7 @@ def update_current_user_username(
         },
     },
 )
-def update_current_user_password(
+async def update_current_user_password(
     request: Request,
     args: UserUpdatePasswordRequest,
     service: UserServiceDepends,

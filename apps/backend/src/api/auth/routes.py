@@ -22,7 +22,7 @@ router = APIRouter(prefix="/auth", tags=[Tag.AUTH])
         },
     },
 )
-def register(request: Request, args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
+async def register(request: Request, args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
     if service.get_user_by_username(args.username):
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
@@ -46,7 +46,7 @@ def register(request: Request, args: UserRegistrationRequest, service: UserServi
         },
     },
 )
-def login(request: Request, form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
+async def login(request: Request, form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
     user = service.get_user_by_username(form.username)
 
     if not user:
