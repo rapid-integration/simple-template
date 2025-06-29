@@ -100,12 +100,18 @@ services:
     build:
       context: ./apps/frontend
       dockerfile: Dockerfile.prod
+      args:
+        - API_URL=http://backend:8000/api/
     restart: unless-stopped
     env_file:
       - path: .env
         required: true
     environment:
-      - FRONTEND_API_URL=http://backend:8000/api/
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - API_URL=http://backend:8000/api/
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
     depends_on:
       backend:
         restart: false
@@ -126,7 +132,11 @@ services:
       - path: .env
         required: true
     environment:
-      - FRONTEND_API_URL=http://backend-dev:8000/api/
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - API_URL=http://backend-dev:8000/api/
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
     depends_on:
       backend-dev:
         restart: false
