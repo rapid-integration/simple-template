@@ -1,8 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon } from "lucide-react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
@@ -13,21 +12,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import Form from "@/shared/ui/form";
+import Form, { FormResponse } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
-import { login } from "../api/actions";
-import { LoginFormSchema } from "../model/schema";
+import { useLoginForm } from "../model/form";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const form = useForm({
-    mode: "onChange",
-    resolver: zodResolver(LoginFormSchema),
-    defaultValues: { username: "", password: "" },
-  });
+  const [form, submit, pending] = useLoginForm();
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -40,25 +34,7 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(async (values) => {
-                const result = await login({
-                  scope: "",
-                  username: values.username,
-                  password: values.password,
-                });
-
-                const messages = {
-                  401: "Wrong password.",
-                  404: "There is no user with such username.",
-                } as const;
-
-                form.setError("root", {
-                  message: messages[result.status as keyof typeof messages],
-                });
-              })}
-              className="flex flex-col gap-6"
-            >
+            <form onSubmit={submit} className="flex flex-col gap-6">
               <Form.Field
                 control={form.control}
                 name="username"
@@ -86,8 +62,8 @@ export function LoginForm({
                     <Form.Label>Password</Form.Label>
                     <Form.Control>
                       <Input
-                        placeholder="Enter your password…"
                         type="password"
+                        placeholder="Enter your password…"
                         autoComplete="password"
                         {...field}
                       />
@@ -97,11 +73,7 @@ export function LoginForm({
                 )}
               />
 
-              {form.formState.errors.root && (
-                <p className="text-sm text-destructive">
-                  {form.formState.errors.root.message}
-                </p>
-              )}
+              <FormResponse />
 
               <div className="flex flex-col gap-2">
                 <Button
@@ -109,13 +81,19 @@ export function LoginForm({
                   disabled={
                     !form.formState.isDirty ||
                     !form.formState.isValid ||
-                    form.formState.isSubmitting
+                    pending
                   }
-                  stretched
                 >
-                  Login
+                  {pending ? (
+                    <>
+                      <LoaderIcon className="animate-spin" />
+                      <span>Logging in…</span>
+                    </>
+                  ) : (
+                    <>Login</>
+                  )}
                 </Button>
-                <Button asChild variant="outline" stretched>
+                <Button asChild variant="outline">
                   <Link href="/register">Go to register form</Link>
                 </Button>
               </div>

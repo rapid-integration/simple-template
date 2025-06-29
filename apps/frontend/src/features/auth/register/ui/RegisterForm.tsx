@@ -1,8 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon } from "lucide-react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
@@ -16,18 +15,13 @@ import {
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
-import { register } from "../api/actions";
-import { RegisterFormSchema } from "../model/schema";
+import { useRegisterForm } from "../model/form";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const form = useForm({
-    mode: "onChange",
-    resolver: zodResolver(RegisterFormSchema),
-    defaultValues: { username: "", password1: "", password2: "" },
-  });
+  const [form, submit, pending] = useRegisterForm();
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -40,23 +34,7 @@ export function RegisterForm({
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(async (values) => {
-                const result = await register({
-                  username: values.username,
-                  password: values.password1,
-                });
-
-                const messages = {
-                  409: "A user with such username already exists.",
-                } as const;
-
-                form.setError("root", {
-                  message: messages[result.status as keyof typeof messages],
-                });
-              })}
-              className="flex flex-col gap-6"
-            >
+            <form onSubmit={submit} className="flex flex-col gap-6">
               <Form.Field
                 control={form.control}
                 name="username"
@@ -87,8 +65,8 @@ export function RegisterForm({
                     <Form.Label>New Password</Form.Label>
                     <Form.Control>
                       <Input
-                        placeholder="Enter your new password…"
                         type="password"
+                        placeholder="Enter your new password…"
                         autoComplete="new-password"
                         {...field}
                       />
@@ -106,8 +84,8 @@ export function RegisterForm({
                     <Form.Label>Confirm New Password</Form.Label>
                     <Form.Control>
                       <Input
-                        placeholder="Enter your new password again…"
                         type="password"
+                        placeholder="Enter your new password again…"
                         autoComplete="new-password"
                         {...field}
                       />
@@ -117,11 +95,7 @@ export function RegisterForm({
                 )}
               />
 
-              {form.formState.errors.root && (
-                <p className="text-sm text-destructive">
-                  {form.formState.errors.root.message}
-                </p>
-              )}
+              <Form.Response />
 
               <div className="flex flex-col gap-2">
                 <Button
@@ -129,13 +103,19 @@ export function RegisterForm({
                   disabled={
                     !form.formState.isDirty ||
                     !form.formState.isValid ||
-                    form.formState.isSubmitting
+                    pending
                   }
-                  stretched
                 >
-                  Register
+                  {pending ? (
+                    <>
+                      <LoaderIcon className="animate-spin" />
+                      <span>Registering…</span>
+                    </>
+                  ) : (
+                    <>Register</>
+                  )}
                 </Button>
-                <Button asChild variant="outline" stretched>
+                <Button asChild variant="outline">
                   <Link href="/login">Go to login form</Link>
                 </Button>
               </div>

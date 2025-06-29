@@ -1,8 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon } from "lucide-react";
 import { ComponentProps, FunctionComponent } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { cn } from "@/shared/lib/utils";
@@ -10,58 +9,30 @@ import { Button } from "@/shared/ui/button";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
-import { updateCurrentUserPassword } from "../api/actions";
-import { UserUpdatePasswordFormSchema } from "../model/schema";
+import { useUserUpdatePasswordForm } from "../model/form";
 import { UserUpdatePasswordFormFieldValues } from "../model/types";
 
 interface UserUpdatePasswordFormProps
   extends Omit<ComponentProps<"form">, "onSubmit"> {
   defaultValues?: UserUpdatePasswordFormFieldValues;
-  onSubmit?: (values: UserUpdatePasswordFormFieldValues) => void;
   onSuccess?: VoidFunction;
 }
 
 const UserUpdatePasswordForm: FunctionComponent<
   UserUpdatePasswordFormProps
-> = ({
-  defaultValues = { newPassword1: "", newPassword2: "", oldPassword: "" },
-  onSubmit,
-  onSuccess,
-  className,
-  ...otherProps
-}) => {
-  const form = useForm<UserUpdatePasswordFormFieldValues>({
-    mode: "onChange",
-    resolver: zodResolver(UserUpdatePasswordFormSchema),
+> = ({ defaultValues, onSuccess, className, ...otherProps }) => {
+  const [form, submit, pending] = useUserUpdatePasswordForm({
     defaultValues,
-  });
-
-  const handleSubmit = async (values: UserUpdatePasswordFormFieldValues) => {
-    onSubmit?.(values);
-
-    const result = await updateCurrentUserPassword({
-      old_password: values.oldPassword,
-      new_password: values.newPassword1,
-    });
-
-    if (result.ok) {
+    onSuccess: () => {
       onSuccess?.();
       toast.success("Password has been successfully updated!");
-    } else {
-      const messages = {
-        403: "Old password is wrong.",
-      } as const;
-
-      form.setError("root", {
-        message: messages[result.status as keyof typeof messages],
-      });
-    }
-  };
+    },
+  });
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
+        onSubmit={submit}
         className={cn("flex w-full grow flex-col gap-6", className)}
         {...otherProps}
       >
@@ -131,12 +102,17 @@ const UserUpdatePasswordForm: FunctionComponent<
         <Button
           type="submit"
           disabled={
-            !form.formState.isDirty ||
-            !form.formState.isValid ||
-            form.formState.isSubmitting
+            !form.formState.isDirty || !form.formState.isValid || pending
           }
         >
-          Save
+          {pending ? (
+            <>
+              <LoaderIcon className="animate-spin" />
+              <span>Saving…</span>
+            </>
+          ) : (
+            <>Save</>
+          )}
         </Button>
       </form>
     </Form>

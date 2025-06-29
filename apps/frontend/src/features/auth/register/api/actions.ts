@@ -1,7 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
 import { setSession } from "@/shared/api/auth";
 import client from "@/shared/api/client";
 import { UserRegistrationRequest } from "@/shared/api/types";
@@ -11,8 +9,12 @@ export async function register(body: UserRegistrationRequest) {
 
   if (result.response.ok && result.data) {
     await setSession(result.data);
-    return redirect("/");
+    return { ok: result.response.ok };
   } else {
-    return { error: result.error, status: result.response.status };
+    return {
+      error: result.error,
+      status: result.response.status,
+      ok: result.response.ok,
+    };
   }
 }

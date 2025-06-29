@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { startTransition, useActionState } from "react";
 
 import { parseInitials } from "@/entities/user";
 import { logout } from "@/features/auth/logout";
@@ -34,6 +35,7 @@ import { ThemeRadioGroup } from "./theme-radio-group";
 export function NavUser({ user }: { user: CurrentUserResponse }) {
   const { isMobile } = useSidebar();
   const pathname = usePathname();
+  const [, action, pending] = useActionState(logout, undefined);
 
   return (
     <SidebarMenu>
@@ -105,9 +107,13 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               </div>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive" onSelect={logout}>
+            <DropdownMenuItem
+              variant="destructive"
+              onSelect={() => startTransition(action)}
+              disabled={pending}
+            >
               <LogOut />
-              <span>Logout</span>
+              <span>{pending ? "Logging out…" : "Logout"}</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

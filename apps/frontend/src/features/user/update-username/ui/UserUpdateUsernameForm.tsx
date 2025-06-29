@@ -1,8 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import { LoaderIcon } from "lucide-react";
 import { ComponentProps, FunctionComponent } from "react";
-import { useForm } from "react-hook-form";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
@@ -10,14 +9,12 @@ import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 import { toast } from "@/shared/ui/sonner";
 
-import { updateCurrentUserUsername } from "../api/actions";
-import { UserUpdateUsernameFormSchema } from "../model/schema";
+import { useUserUpdateUsernameForm } from "../model/form";
 import { UserUpdateUsernameFormFieldValues } from "../model/types";
 
 interface UserUpdateUsernameFormProps
   extends Omit<ComponentProps<"form">, "onSubmit"> {
   defaultValues?: UserUpdateUsernameFormFieldValues;
-  onSubmit?: (values: UserUpdateUsernameFormFieldValues) => void;
   onSuccess?: VoidFunction;
 }
 
@@ -25,40 +22,22 @@ const UserUpdateUsernameForm: FunctionComponent<
   UserUpdateUsernameFormProps
 > = ({
   defaultValues = { username: "" },
-  onSubmit,
   onSuccess,
   className,
   ...otherProps
 }) => {
-  const form = useForm<UserUpdateUsernameFormFieldValues>({
-    mode: "onChange",
-    resolver: zodResolver(UserUpdateUsernameFormSchema),
+  const [form, submit, pending] = useUserUpdateUsernameForm({
     defaultValues,
-  });
-
-  const handleSubmit = async (values: UserUpdateUsernameFormFieldValues) => {
-    onSubmit?.(values);
-
-    const result = await updateCurrentUserUsername(values);
-
-    if (result.ok) {
+    onSuccess: () => {
       onSuccess?.();
       toast.success("Username has been successfully updated!");
-    } else {
-      const messages = {
-        409: "This username is already taken.",
-      } as const;
-
-      form.setError("root", {
-        message: messages[result.status as keyof typeof messages],
-      });
-    }
-  };
+    },
+  });
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(handleSubmit)}
+        onSubmit={submit}
         className={cn("flex w-full grow flex-col gap-6", className)}
         {...otherProps}
       >
@@ -91,12 +70,17 @@ const UserUpdateUsernameForm: FunctionComponent<
         <Button
           type="submit"
           disabled={
-            !form.formState.isDirty ||
-            !form.formState.isValid ||
-            form.formState.isSubmitting
+            pending || !form.formState.isValid || !form.formState.isDirty
           }
         >
-          Save
+          {pending ? (
+            <>
+              <LoaderIcon className="animate-spin" />
+              <span>Saving…</span>
+            </>
+          ) : (
+            <>Save</>
+          )}
         </Button>
       </form>
     </Form>

@@ -158,9 +158,29 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
   );
 }
 
+function FormResponse({ className, ...props }: React.ComponentProps<"p">) {
+  const form = useFormContext();
+  const error = form.formState.errors.root;
+
+  if (!error) {
+    return null;
+  }
+
+  return (
+    <p
+      data-slot="form-message"
+      className={cn("text-sm text-destructive", className)}
+      {...props}
+    >
+      {error.message}
+    </p>
+  );
+}
+
 export {
   FormControl,
   FormDescription,
+  FormResponse,
   FormField,
   FormItem,
   FormLabel,
@@ -172,6 +192,7 @@ export {
 const Form = Object.assign(FormRoot, {
   Control: FormControl,
   Description: FormDescription,
+  Response: FormResponse,
   Field: FormField,
   Item: FormItem,
   Label: FormLabel,

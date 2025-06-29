@@ -15,8 +15,12 @@ export async function login(body: BodyLoginAuthLoginPost) {
 
   if (result.response.ok && result.data) {
     await setSession(result.data);
-    return redirect("/");
+    redirect("/");
   } else {
-    return { error: result.error, status: result.response.status };
+    return {
+      error: result.error,
+      status: result.response.status,
+      // ok: result.response.ok,
+    };
   }
 }

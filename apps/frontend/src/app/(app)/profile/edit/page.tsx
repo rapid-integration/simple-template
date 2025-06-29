@@ -1,10 +1,10 @@
-import { ArrowLeftIcon, LogOutIcon } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { getCurrentUser, UserProfileSection } from "@/entities/user";
-import { logout } from "@/features/auth/logout";
+import { UserProfileLogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordDataListItem } from "@/features/user/update-password";
 import { UserUpdateUsernameDataListItem } from "@/features/user/update-username";
 import Bar from "@/shared/ui/bar";
@@ -50,14 +50,7 @@ export default async function ProfileEditPage() {
           <UserUpdatePasswordDataListItem />
         </DataList>
 
-        <Button
-          className="text-destructive max-md:mt-auto"
-          variant="outline"
-          onClick={logout}
-        >
-          <LogOutIcon />
-          <span>Logout</span>
-        </Button>
+        <UserProfileLogoutButton />
       </Page.Content>
     </Page>
   );

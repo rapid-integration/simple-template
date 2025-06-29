@@ -1,9 +1,7 @@
 "use server";
 
 import client from "@/shared/api/client";
-import {
-  UserUpdatePasswordRequest
-} from "@/shared/api/types";
+import { UserUpdatePasswordRequest } from "@/shared/api/types";
 
 export async function updateCurrentUserPassword(
   body: UserUpdatePasswordRequest,
