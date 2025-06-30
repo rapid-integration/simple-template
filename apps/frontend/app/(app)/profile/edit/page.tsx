@@ -4,9 +4,9 @@ import { UserProfileSection, withCurrentUser } from "@/entities/user";
 import { UserProfileLogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordDataListItem } from "@/features/user/update-password";
 import { UserUpdateUsernameDataListItem } from "@/features/user/update-username";
+import { ProfileEditPageBar } from "@/pages/profile";
 import DataList from "@/shared/ui/data-list";
 import Page from "@/shared/ui/page";
-import { ProfileEditPageBar } from "@/views/profile";
 
 export const metadata: Metadata = {
   title: "Edit Profile",

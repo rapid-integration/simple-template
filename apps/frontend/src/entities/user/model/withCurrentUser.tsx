@@ -1,4 +1,3 @@
-import { redirect, RedirectType } from "next/navigation";
 import { ComponentType } from "react";
 
 import { CurrentUserResponse } from "@/shared/api/types";
@@ -17,11 +16,9 @@ export default function withCurrentUser<T extends WithCurrentUserProps>(
   ) => {
     const { response, data: currentUser } = await getCurrentUser();
 
-    if (!response.ok) {
-      redirect("/login", RedirectType.replace);
+    if (response.ok) {
+      return <Component {...({ ...props, currentUser } as T)} />;
     }
-
-    return <Component {...({ ...props, currentUser } as T)} />;
   };
 
   const componentDisplayName = Component.displayName || Component.name;

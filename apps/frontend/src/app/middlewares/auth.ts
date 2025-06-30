@@ -1,16 +1,15 @@
-import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/entities/user";
 import { decodeNextUrl } from "@/shared/lib/redirect";
 
-const protectedRoutes = ["/", "/profile", "/profile/edit"];
-const authRoutes = ["/login", "/register"];
+import { AUTH_ROUTES, PROTECTED_ROUTES } from "../config/routes";
 
-export async function middleware(request: NextRequest) {
+export const createAuthMiddleware = () => async (request: NextRequest) => {
   const { pathname, search, searchParams } = request.nextUrl;
 
-  const isProtectedRoute = protectedRoutes.includes(pathname);
-  const isAuthRoute = authRoutes.includes(pathname);
+  const isProtectedRoute = PROTECTED_ROUTES.includes(pathname);
+  const isAuthRoute = AUTH_ROUTES.includes(pathname);
 
   const { response } = await getCurrentUser();
 
@@ -27,8 +26,4 @@ export async function middleware(request: NextRequest) {
   }
 
   return NextResponse.next();
-}
-
-export const config: MiddlewareConfig = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

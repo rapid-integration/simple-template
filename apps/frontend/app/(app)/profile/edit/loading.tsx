@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
+import { ProfileEditPageBar } from "@/pages/profile";
 import Page from "@/shared/ui/page";
 import { Skeleton } from "@/shared/ui/skeleton";
-import { ProfileEditPageBar } from "@/views/profile";
 
 export const metadata: Metadata = {
   title: "Edit Profile",

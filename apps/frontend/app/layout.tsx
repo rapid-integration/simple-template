@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 import { cn } from "@/shared/lib/utils";
 import { Toaster } from "@/shared/ui/sonner";
 
-import "./globals.css";
+import "@/app/styles";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
