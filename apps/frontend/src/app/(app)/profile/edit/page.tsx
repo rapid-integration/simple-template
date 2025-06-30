@@ -1,52 +1,27 @@
-import { ArrowLeftIcon } from "lucide-react";
 import { Metadata } from "next";
-import Link from "next/link";
-import { redirect } from "next/navigation";
 
-import { getCurrentUser, UserProfileSection } from "@/entities/user";
+import { UserProfileSection, withCurrentUser } from "@/entities/user";
 import { UserProfileLogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordDataListItem } from "@/features/user/update-password";
 import { UserUpdateUsernameDataListItem } from "@/features/user/update-username";
-import Bar from "@/shared/ui/bar";
-import { Button } from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import Page from "@/shared/ui/page";
+import { ProfileEditPageBar } from "@/views/profile";
 
 export const metadata: Metadata = {
   title: "Edit Profile",
 };
 
-export default async function ProfileEditPage() {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser.data) {
-    return redirect("/login");
-  }
-
+export const ProfileEditPage = withCurrentUser(({ currentUser }) => {
   return (
     <Page>
-      <Bar>
-        <Bar.Start>
-          <Button asChild variant="ghost" className="text-muted-foreground">
-            <Link href="/profile">
-              <ArrowLeftIcon />
-              <span>Back</span>
-            </Link>
-          </Button>
-        </Bar.Start>
-        <Bar.Center>Edit Profile</Bar.Center>
-      </Bar>
+      <ProfileEditPageBar />
 
       <Page.Content size="xl" className="gap-8">
-        <UserProfileSection
-          avatar={`https://avatar.vercel.sh/${currentUser.data.username}`}
-          name={currentUser.data.username}
-        />
+        <UserProfileSection name={currentUser.username} />
 
         <DataList>
-          <UserUpdateUsernameDataListItem
-            username={currentUser.data.username}
-          />
+          <UserUpdateUsernameDataListItem username={currentUser.username} />
           <UserUpdatePasswordDataListItem />
         </DataList>
 
@@ -54,4 +29,6 @@ export default async function ProfileEditPage() {
       </Page.Content>
     </Page>
   );
-}
+});
+
+export default ProfileEditPage;

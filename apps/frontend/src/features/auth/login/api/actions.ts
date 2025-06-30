@@ -1,26 +1,24 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
 import { setSession } from "@/shared/api/auth";
 import client from "@/shared/api/client";
 import { serializeFormData } from "@/shared/api/serializers";
 import { BodyLoginAuthLoginPost } from "@/shared/api/types";
+import { redirectNext } from "@/shared/lib/redirect";
 
 export async function login(body: BodyLoginAuthLoginPost) {
-  const result = await client.POST("/auth/login", {
+  const { response, data, error } = await client.POST("/auth/login", {
     body,
     bodySerializer: serializeFormData,
   });
 
-  if (result.response.ok && result.data) {
-    await setSession(result.data);
-    redirect("/");
-  } else {
+  if (!response.ok || !data) {
     return {
-      error: result.error,
-      status: result.response.status,
-      // ok: result.response.ok,
+      error,
+      status: response.status,
     };
   }
+
+  await setSession(data);
+  await redirectNext();
 }

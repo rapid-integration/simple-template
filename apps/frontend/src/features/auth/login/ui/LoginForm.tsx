@@ -2,6 +2,7 @@
 
 import { LoaderIcon } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
@@ -22,6 +23,8 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [form, submit, pending] = useLoginForm();
+  const searchParams = useSearchParams();
+  const next = searchParams.get("next");
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -94,7 +97,15 @@ export function LoginForm({
                   )}
                 </Button>
                 <Button asChild variant="outline">
-                  <Link href="/register">Go to register form</Link>
+                  <Link
+                    href={
+                      next
+                        ? `/register?next=${encodeURIComponent(next)}`
+                        : "/register"
+                    }
+                  >
+                    Go to register form
+                  </Link>
                 </Button>
               </div>
             </form>

@@ -46,7 +46,7 @@ const data = {
 export function AppSidebar({
   user,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { user: CurrentUserResponse }) {
+}: React.ComponentProps<typeof Sidebar> & { user?: CurrentUserResponse }) {
   const pathname = usePathname();
   const sidebar = useSidebar();
 
@@ -65,9 +65,7 @@ export function AppSidebar({
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={user} />
-      </SidebarFooter>
+      <SidebarFooter>{user && <NavUser user={user} />}</SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );

@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
 import { parseInitials } from "../model/utils";
 
 interface UserProfileSectionProps {
-  avatar: string;
   name: string;
 }
 

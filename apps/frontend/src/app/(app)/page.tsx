@@ -1,17 +1,20 @@
 "use client";
 
-import { useIsMobile } from "@/shared/hooks/use-mobile";
 import Bar from "@/shared/ui/bar";
 import Page from "@/shared/ui/page";
-import { SidebarTrigger } from "@/shared/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/shared/ui/sidebar";
 
 export default function Home() {
-  const isMobile = useIsMobile();
+  const { isMobile, open } = useSidebar();
 
   return (
     <Page>
       <Bar>
-        <Bar.Start>{isMobile && <SidebarTrigger />}</Bar.Start>
+        {(isMobile || !open) && (
+          <Bar.Start>
+            <SidebarTrigger />
+          </Bar.Start>
+        )}
         <Bar.Center showAfterScrolled>Home</Bar.Center>
       </Bar>
 

@@ -1,23 +1,23 @@
+import { format } from "date-fns";
 import { FunctionComponent } from "react";
+
+import { UserResponse } from "@/shared/api/types";
 
 import UserProfileInfo from "./UserProfileInfo";
 import UserProfileSection from "./UserProfileSection";
 
 interface UserProfileProps {
-  avatar: string;
-  name: string;
-  registrationDate: string;
-  id: string;
+  user: UserResponse;
 }
 
-const UserProfile: FunctionComponent<UserProfileProps> = (props) => {
+const UserProfile: FunctionComponent<UserProfileProps> = ({ user }) => {
   return (
     <div className="flex flex-col gap-8">
-      <UserProfileSection avatar={props.avatar} name={props.name} />
+      <UserProfileSection name={user.username} />
 
       <UserProfileInfo
-        registrationDate={props.registrationDate}
-        id={props.id}
+        registrationDate={format(user.created_at, "dd.MM.yyyy")}
+        id={user.id}
       />
     </div>
   );
