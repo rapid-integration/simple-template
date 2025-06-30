@@ -1,15 +1,15 @@
 import { Middleware } from "openapi-fetch";
 
-import { getSession } from "./auth";
+import { getSession } from "./session";
 
 export const AUTH_MIDDLEWARE: Middleware = {
   onRequest: async ({ request }) => {
-    const token = await getSession();
+    const session = await getSession();
 
-    if (token && Date.parse(token.expires_at) > Date.now()) {
+    if (session && Date.parse(session.expires_at) > Date.now()) {
       request.headers.set(
         "Authorization",
-        `${token.token_type} ${token.access_token}`,
+        `${session.token_type} ${session.access_token}`,
       );
     }
 

@@ -1,9 +1,12 @@
 "use server";
 
-import { setSession } from "@/shared/api/auth";
+import { revalidateTag } from "next/cache";
+
+import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
 import client from "@/shared/api/client";
+import { setSession } from "@/shared/api/session";
 import { UserRegistrationRequest } from "@/shared/api/types";
-import { redirectNext } from "@/shared/lib/redirect";
+import { redirectToNextUrl } from "@/shared/lib/server/redirect";
 
 export async function register(body: UserRegistrationRequest) {
   const { response, data, error } = await client.POST("/auth/register", {
@@ -17,6 +20,8 @@ export async function register(body: UserRegistrationRequest) {
     };
   }
 
+  revalidateTag(USER_CACHE_USERS_ME_TAG);
+
   await setSession(data);
-  await redirectNext();
+  await redirectToNextUrl();
 }

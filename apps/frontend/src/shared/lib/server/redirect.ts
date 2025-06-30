@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function redirectNext(fallback: string = "/") {
+export async function redirectToNextUrl(fallback: string = "/") {
   "use server";
 
   const safeNextUrl = await getNextUrl(fallback);

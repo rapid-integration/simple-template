@@ -1,10 +1,13 @@
 "use server";
 
-import { setSession } from "@/shared/api/auth";
+import { revalidateTag } from "next/cache";
+
+import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
 import client from "@/shared/api/client";
 import { serializeFormData } from "@/shared/api/serializers";
+import { setSession } from "@/shared/api/session";
 import { BodyLoginAuthLoginPost } from "@/shared/api/types";
-import { redirectNext } from "@/shared/lib/redirect";
+import { redirectToNextUrl } from "@/shared/lib/server/redirect";
 
 export async function login(body: BodyLoginAuthLoginPost) {
   const { response, data, error } = await client.POST("/auth/login", {
@@ -19,6 +22,8 @@ export async function login(body: BodyLoginAuthLoginPost) {
     };
   }
 
+  revalidateTag(USER_CACHE_USERS_ME_TAG);
+
   await setSession(data);
-  await redirectNext();
+  await redirectToNextUrl();
 }

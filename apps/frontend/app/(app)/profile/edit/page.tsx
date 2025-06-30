@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { UserProfileSection, withCurrentUser } from "@/entities/user";
+import { getCurrentUser, UserProfileSection } from "@/entities/user";
 import { UserProfileLogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordDataListItem } from "@/features/user/update-password";
 import { UserUpdateUsernameDataListItem } from "@/features/user/update-username";
@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: "Edit Profile",
 };
 
-const ProfileEditPage = withCurrentUser(({ currentUser }) => {
+export default async function ProfileEditPage() {
+  const currentUser = await getCurrentUser();
+
   return (
     <Page>
       <ProfileEditPageBar />
@@ -29,6 +31,4 @@ const ProfileEditPage = withCurrentUser(({ currentUser }) => {
       </Page.Content>
     </Page>
   );
-});
-
-export default ProfileEditPage;
+}

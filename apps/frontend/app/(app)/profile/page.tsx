@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import { UserProfile, withCurrentUser } from "@/entities/user";
+import { getCurrentUser, UserProfile } from "@/entities/user";
 import { ProfilePageBar } from "@/pages/profile";
 import Page from "@/shared/ui/page";
 
@@ -8,7 +8,9 @@ export const metadata: Metadata = {
   title: "Profile",
 };
 
-const ProfilePage = withCurrentUser(({ currentUser }) => {
+export default async function ProfilePage() {
+  const currentUser = await getCurrentUser();
+
   return (
     <Page>
       <ProfilePageBar />
@@ -17,6 +19,4 @@ const ProfilePage = withCurrentUser(({ currentUser }) => {
       </Page.Content>
     </Page>
   );
-});
-
-export default ProfilePage;
+}

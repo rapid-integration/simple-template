@@ -1,10 +1,15 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { clearSession } from "@/shared/api/auth";
+import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
+import { clearSession } from "@/shared/api/session";
 
 export async function logout() {
   await clearSession();
+
+  revalidateTag(USER_CACHE_USERS_ME_TAG);
+  
   redirect(`/login`);
 }

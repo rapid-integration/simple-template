@@ -158,6 +158,9 @@ services:
       - type: bind
         source: ./apps/frontend/src
         target: /app/src
+      - type: bind
+        source: ./apps/frontend/middleware.ts
+        target: /app/middleware.ts
     networks:
       - template-network
     profiles:
