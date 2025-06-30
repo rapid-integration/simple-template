@@ -44,7 +44,7 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-              isActive={pathname.includes("/profile")}
+              isActive={pathname?.includes("/profile")}
             >
               <Avatar className="size-4 text-xs">
                 <AvatarImage
