@@ -24,7 +24,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const [form, submit, pending] = useLoginForm();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next");
+  const next = searchParams?.get("next");
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
