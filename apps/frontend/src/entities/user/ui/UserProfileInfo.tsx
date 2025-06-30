@@ -4,22 +4,31 @@ import { CopyIcon } from "lucide-react";
 import { FunctionComponent } from "react";
 import { toast } from "sonner";
 
+import useDateTimeFormat from "@/shared/hooks/use-date-time-format";
 import { Button } from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 
 interface UserProfileInfoProps {
-  registrationDate: string;
+  created_at: string;
   id: string;
 }
 
 const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
+  const displayDate = useDateTimeFormat({
+    date: props.created_at,
+    format: "dd MMMM yyyy HH:mm",
+  });
+
   return (
     <DataList orientation="horizontal">
       <DataList.Item>
         <DataList.ItemGroup>
           <DataList.ItemLabel>Registration date</DataList.ItemLabel>
-          <DataList.ItemValue>{props.registrationDate}</DataList.ItemValue>
+          <DataList.ItemValue>
+            {displayDate || <Skeleton className="h-6" />}
+          </DataList.ItemValue>
         </DataList.ItemGroup>
         <Tooltip disableHoverableContent>
           <TooltipTrigger asChild>
@@ -27,8 +36,8 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
               size="icon"
               variant="outline"
               onClick={() => {
-                if (window.isSecureContext) {
-                  navigator.clipboard.writeText(props.registrationDate);
+                if (window.isSecureContext && displayDate) {
+                  navigator.clipboard.writeText(displayDate);
                   toast.success("Registration date copied to the clipboard!");
                 } else {
                   toast.error(

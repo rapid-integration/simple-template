@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import { FunctionComponent } from "react";
 
 import { UserResponse } from "@/shared/api/types";
@@ -14,11 +13,7 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ user }) => {
   return (
     <div className="flex flex-col gap-8">
       <UserProfileSection name={user.username} />
-
-      <UserProfileInfo
-        registrationDate={format(user.created_at, "dd.MM.yyyy")}
-        id={user.id}
-      />
+      <UserProfileInfo created_at={user.created_at} id={user.id} />
     </div>
   );
 };
