@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import { RegisterForm } from "@/features/auth/register";
 import Bar from "@/shared/ui/bar";
@@ -15,7 +16,9 @@ export default function LoginPage() {
         <Bar.Center showAfterScrolled>Register</Bar.Center>
       </Bar>
       <Page.Content size="md" className="justify-center">
-        <RegisterForm />
+        <Suspense>
+          <RegisterForm />
+        </Suspense>
       </Page.Content>
     </Page>
   );

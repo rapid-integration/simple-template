@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Profile",
 };
 
-export const ProfilePage = withCurrentUser(({ currentUser }) => {
+const ProfilePage = withCurrentUser(({ currentUser }) => {
   return (
     <Page>
       <ProfilePageBar />

@@ -11,8 +11,8 @@ import { ProfileEditPageBar } from "@/views/profile";
 export const metadata: Metadata = {
   title: "Edit Profile",
 };
-
-export const ProfileEditPage = withCurrentUser(({ currentUser }) => {
+ 
+const ProfileEditPage = withCurrentUser(({ currentUser }) => {
   return (
     <Page>
       <ProfileEditPageBar />

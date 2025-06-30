@@ -1,6 +1,6 @@
 import { MiddlewareConfig, NextRequest, NextResponse } from "next/server";
 
-import { getSession } from "@/shared/api/auth";
+import { getCurrentUser } from "@/entities/user";
 import { decodeNextUrl } from "@/shared/lib/redirect";
 
 const protectedRoutes = ["/", "/profile", "/profile/edit"];
@@ -12,16 +12,16 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(pathname);
   const isAuthRoute = authRoutes.includes(pathname);
 
-  const session = await getSession();
+  const { response } = await getCurrentUser();
 
-  if (isProtectedRoute && !session) {
+  if (isProtectedRoute && !response.ok) {
     const encodedNextUrl = encodeURIComponent(`${pathname}${search}`);
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", encodedNextUrl);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isAuthRoute && session) {
+  if (isAuthRoute && response.ok) {
     const decodedNextUrl = decodeNextUrl(searchParams);
     return NextResponse.redirect(new URL(decodedNextUrl, request.url));
   }
@@ -29,6 +29,6 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-export const config = {
+export const config: MiddlewareConfig = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-} as const satisfies MiddlewareConfig;
+};

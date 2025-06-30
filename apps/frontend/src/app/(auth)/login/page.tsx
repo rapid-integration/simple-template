@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import { LoginForm } from "@/features/auth/login";
 import Bar from "@/shared/ui/bar";
@@ -15,7 +16,9 @@ export default function LoginPage() {
         <Bar.Center showAfterScrolled>Login</Bar.Center>
       </Bar>
       <Page.Content size="md" className="justify-center">
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </Page.Content>
     </Page>
   );
