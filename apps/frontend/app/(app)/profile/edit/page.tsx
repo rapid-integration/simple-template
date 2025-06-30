@@ -11,7 +11,7 @@ import Page from "@/shared/ui/page";
 export const metadata: Metadata = {
   title: "Edit Profile",
 };
- 
+
 const ProfileEditPage = withCurrentUser(({ currentUser }) => {
   return (
     <Page>

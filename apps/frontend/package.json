@@ -11,30 +11,6 @@
     "lint": "next lint",
     "start": "next start"
   },
-  "prettier": {
-    "endOfLine": "lf",
-    "jsxSingleQuote": false,
-    "plugins": [
-      "prettier-plugin-tailwindcss"
-    ],
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": false,
-    "tabWidth": 2,
-    "tailwindAttributes": [
-      "class",
-      "className"
-    ],
-    "tailwindFunctions": [
-      "cn",
-      "cva",
-      "clsx",
-      "tv"
-    ],
-    "tailwindStylesheet": "./src/app/globals.css",
-    "trailingComma": "all",
-    "useTabs": false
-  },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@radix-ui/react-alert-dialog": "^1.1.14",
