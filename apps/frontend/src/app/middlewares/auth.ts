@@ -5,6 +5,9 @@ import { decodeNextUrl } from "@/shared/lib/redirect";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES } from "../config/routes";
 
+/**
+ * @see https://nextjs.org/docs/app/guides/authentication#layouts-and-auth-checks
+ */
 export const createAuthMiddleware = () => async (request: NextRequest) => {
   const { pathname, search, searchParams } = request.nextUrl;
 
