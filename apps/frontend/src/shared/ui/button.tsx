@@ -63,6 +63,8 @@ function ButtonRoot({
 
 export { ButtonRoot, buttonVariants };
 
-export default Object.assign(ButtonRoot, {
+const Button = Object.assign(ButtonRoot, {
   rootVariants: buttonVariants,
 });
+
+export default Button;

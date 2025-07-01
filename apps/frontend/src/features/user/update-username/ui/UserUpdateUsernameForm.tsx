@@ -6,7 +6,7 @@ import { ComponentProps, FunctionComponent } from "react";
 import { cn } from "@/shared/lib/utils";
 import Button from "@/shared/ui/button";
 import Form from "@/shared/ui/form";
-import { Input } from "@/shared/ui/input";
+import Input from "@/shared/ui/input";
 import { toast } from "@/shared/ui/sonner";
 
 import { useUserUpdateUsernameForm } from "../model/form";

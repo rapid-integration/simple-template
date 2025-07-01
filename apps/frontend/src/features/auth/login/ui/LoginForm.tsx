@@ -8,7 +8,7 @@ import { cn } from "@/shared/lib/utils";
 import Button from "@/shared/ui/button";
 import Card from "@/shared/ui/card";
 import Form from "@/shared/ui/form";
-import { Input } from "@/shared/ui/input";
+import Input from "@/shared/ui/input";
 
 import { useLoginForm } from "../model/form";
 
