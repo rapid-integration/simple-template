@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FunctionComponent } from "react";
 
 import Bar from "@/shared/ui/bar";
-import { Button } from "@/shared/ui/button";
+import Button from "@/shared/ui/button";
 import { SidebarTrigger, useSidebar } from "@/shared/ui/sidebar";
 
 const ProfileEditPageBar: FunctionComponent = () => {

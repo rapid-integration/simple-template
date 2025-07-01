@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
-import { Button } from "@/shared/ui/button";
+import Button from "@/shared/ui/button";
 import Card from "@/shared/ui/card";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";

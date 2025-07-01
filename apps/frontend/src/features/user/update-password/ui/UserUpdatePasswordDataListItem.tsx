@@ -3,7 +3,7 @@
 import { ComponentProps, FunctionComponent, useState } from "react";
 
 import { useIsMobile } from "@/shared/hooks/use-mobile";
-import { Button } from "@/shared/ui/button";
+import Button from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import Dialog from "@/shared/ui/dialog";
 import Drawer from "@/shared/ui/drawer";

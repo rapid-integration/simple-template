@@ -39,7 +39,7 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
+function ButtonRoot({
   className,
   variant,
   size,
@@ -61,4 +61,8 @@ function Button({
   );
 }
 
-export { Button, buttonVariants };
+export { ButtonRoot, buttonVariants };
+
+export default Object.assign(ButtonRoot, {
+  rootVariants: buttonVariants,
+});

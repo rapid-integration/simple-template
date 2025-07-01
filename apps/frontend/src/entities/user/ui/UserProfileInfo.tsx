@@ -5,7 +5,7 @@ import { FunctionComponent } from "react";
 import { toast } from "sonner";
 
 import useDateTimeFormat from "@/shared/hooks/use-date-time-format";
-import { Button } from "@/shared/ui/button";
+import Button from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";

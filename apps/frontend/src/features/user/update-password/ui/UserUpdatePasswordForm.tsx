@@ -5,7 +5,7 @@ import { ComponentProps, FunctionComponent } from "react";
 import { toast } from "sonner";
 
 import { cn } from "@/shared/lib/utils";
-import { Button } from "@/shared/ui/button";
+import Button from "@/shared/ui/button";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
