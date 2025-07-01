@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is([data-theme="dark"] *));
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -54,9 +54,6 @@
   --chart-3: var(--color-blue-600);
   --chart-4: var(--color-blue-700);
   --chart-5: var(--color-blue-800);
-}
-
-[data-theme="light"] {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -89,7 +86,7 @@
   --selection-foreground: oklch(1 0 0);
 }
 
-[data-theme="dark"] {
+.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -131,9 +128,12 @@
     @apply bg-selection text-selection-foreground;
   }
 
-  body {
+  html {
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+  }
+
+  body {
     @apply flex min-h-dvh grow flex-col bg-background text-foreground antialiased;
   }
 

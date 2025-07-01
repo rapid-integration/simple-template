@@ -33,9 +33,12 @@ export default function AppLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body>
-        <ThemeProvider disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+        >
           {children}
-
           <Toaster />
         </ThemeProvider>
       </body>
