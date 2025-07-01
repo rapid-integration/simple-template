@@ -15,26 +15,21 @@ import { logout } from "@/features/auth/logout";
 import { CurrentUserResponse } from "@/shared/api/types";
 import Avatar from "@/shared/ui/avatar";
 import DropdownMenu from "@/shared/ui/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 import { ThemeRadioGroup } from "./theme-radio-group";
 
 export function NavUser({ user }: { user: CurrentUserResponse }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = Sidebar.useContext();
   const pathname = usePathname();
   const [, action, pending] = useActionState(logout, undefined);
 
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
+    <Sidebar.Menu>
+      <Sidebar.MenuItem>
         <DropdownMenu>
           <DropdownMenu.Trigger asChild>
-            <SidebarMenuButton
+            <Sidebar.MenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               isActive={pathname?.includes("/profile")}
             >
@@ -55,7 +50,7 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               </div> */}
               <span className="truncate">{user.username}</span>
               <ChevronsUpDownIcon className="me-0.5 ml-auto size-4" />
-            </SidebarMenuButton>
+            </Sidebar.MenuButton>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
@@ -111,7 +106,7 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu>
-      </SidebarMenuItem>
-    </SidebarMenu>
+      </Sidebar.MenuItem>
+    </Sidebar.Menu>
   );
 }
