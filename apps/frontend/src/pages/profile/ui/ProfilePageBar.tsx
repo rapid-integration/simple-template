@@ -6,15 +6,15 @@ import { FunctionComponent } from "react";
 
 import Bar from "@/shared/ui/bar";
 import Button from "@/shared/ui/button";
-import { SidebarTrigger, useSidebar } from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 const ProfilePageBar: FunctionComponent = () => {
-  const { isMobile, open } = useSidebar();
+  const { isMobile, open } = Sidebar.useContext();
 
   return (
     <Bar>
       <Bar.Start>
-        {!isMobile && !open && <SidebarTrigger />}
+        {!isMobile && !open && <Sidebar.Trigger />}
         <Button asChild variant="ghost" className="text-muted-foreground">
           <Link href="/">
             <ArrowLeftIcon />

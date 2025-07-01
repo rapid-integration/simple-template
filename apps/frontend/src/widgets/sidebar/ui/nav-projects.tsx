@@ -11,15 +11,7 @@ import Link from "next/link";
 
 import Collapsible from "@/shared/ui/collapsible";
 import DropdownMenu from "@/shared/ui/dropdown-menu";
-import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuAction,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 export function NavProjects({
   projects,
@@ -29,30 +21,30 @@ export function NavProjects({
     url: string;
   }[];
 }) {
-  const { isMobile } = useSidebar();
+  const { isMobile } = Sidebar.useContext();
 
   return (
     <Collapsible defaultOpen className="group/collapsible">
-      <SidebarGroup>
-        <SidebarGroupLabel asChild>
+      <Sidebar.Group>
+        <Sidebar.GroupLabel asChild>
           <Collapsible.Trigger>
             <span>Projects</span>
             <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </Collapsible.Trigger>
-        </SidebarGroupLabel>
+        </Sidebar.GroupLabel>
         <Collapsible.Content>
-          <SidebarMenu>
+          <Sidebar.Menu>
             {projects.map((item) => (
-              <SidebarMenuItem key={item.name}>
-                <SidebarMenuButton asChild>
+              <Sidebar.MenuItem key={item.name}>
+                <Sidebar.MenuButton asChild>
                   <Link href={item.url}>{item.name}</Link>
-                </SidebarMenuButton>
+                </Sidebar.MenuButton>
                 <DropdownMenu>
                   <DropdownMenu.Trigger asChild>
-                    <SidebarMenuAction showOnHover>
+                    <Sidebar.MenuAction showOnHover>
                       <MoreHorizontal />
                       <span className="sr-only">More</span>
-                    </SidebarMenuAction>
+                    </Sidebar.MenuAction>
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Content
                     className="w-48"
@@ -74,7 +66,7 @@ export function NavProjects({
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu>
-              </SidebarMenuItem>
+              </Sidebar.MenuItem>
             ))}
             {/* <SidebarMenuItem>
               <SidebarMenuButton>
@@ -82,9 +74,9 @@ export function NavProjects({
                 <span>More</span>
               </SidebarMenuButton>
             </SidebarMenuItem> */}
-          </SidebarMenu>
+          </Sidebar.Menu>
         </Collapsible.Content>
-      </SidebarGroup>
+      </Sidebar.Group>
     </Collapsible>
   );
 }

@@ -5,17 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import Collapsible from "@/shared/ui/collapsible";
-import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuAction,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 export function NavMain({
   items,
@@ -33,13 +23,13 @@ export function NavMain({
 }) {
   const pathname = usePathname();
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>App</SidebarGroupLabel>
-      <SidebarMenu>
+    <Sidebar.Group>
+      <Sidebar.GroupLabel>App</Sidebar.GroupLabel>
+      <Sidebar.Menu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
-            <SidebarMenuItem>
-              <SidebarMenuButton
+            <Sidebar.MenuItem>
+              <Sidebar.MenuButton
                 asChild
                 tooltip={item.title}
                 isActive={item.url === pathname}
@@ -48,34 +38,34 @@ export function NavMain({
                   <item.icon />
                   <span>{item.title}</span>
                 </Link>
-              </SidebarMenuButton>
+              </Sidebar.MenuButton>
               {item.items?.length ? (
                 <>
                   <Collapsible.Trigger asChild>
-                    <SidebarMenuAction className="data-[state=open]:rotate-90">
+                    <Sidebar.MenuAction className="data-[state=open]:rotate-90">
                       <ChevronRight />
                       <span className="sr-only">Toggle</span>
-                    </SidebarMenuAction>
+                    </Sidebar.MenuAction>
                   </Collapsible.Trigger>
                   <Collapsible.Content>
-                    <SidebarMenuSub>
+                    <Sidebar.MenuSub>
                       {item.items.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild>
+                        <Sidebar.MenuSubItem key={subItem.title}>
+                          <Sidebar.MenuSubButton asChild>
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
                             </a>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
+                          </Sidebar.MenuSubButton>
+                        </Sidebar.MenuSubItem>
                       ))}
-                    </SidebarMenuSub>
+                    </Sidebar.MenuSub>
                   </Collapsible.Content>
                 </>
               ) : null}
-            </SidebarMenuItem>
+            </Sidebar.MenuItem>
           </Collapsible>
         ))}
-      </SidebarMenu>
-    </SidebarGroup>
+      </Sidebar.Menu>
+    </Sidebar.Group>
   );
 }

@@ -141,7 +141,7 @@ function SidebarProvider({
   );
 }
 
-function Sidebar({
+function SidebarRoot({
   side = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
@@ -707,7 +707,6 @@ function SidebarMenuSubButton({
 }
 
 export {
-  Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
@@ -728,7 +727,36 @@ export {
   SidebarMenuSubItem,
   SidebarProvider,
   SidebarRail,
+  SidebarRoot,
   SidebarSeparator,
   SidebarTrigger,
   useSidebar,
 };
+
+const Sidebar = Object.assign(SidebarRoot, {
+  Content: SidebarContent,
+  Footer: SidebarFooter,
+  Group: SidebarGroup,
+  GroupAction: SidebarGroupAction,
+  GroupContent: SidebarGroupContent,
+  GroupLabel: SidebarGroupLabel,
+  Header: SidebarHeader,
+  Input: SidebarInput,
+  Inset: SidebarInset,
+  Menu: SidebarMenu,
+  MenuAction: SidebarMenuAction,
+  MenuBadge: SidebarMenuBadge,
+  MenuButton: SidebarMenuButton,
+  MenuItem: SidebarMenuItem,
+  MenuSkeleton: SidebarMenuSkeleton,
+  MenuSub: SidebarMenuSub,
+  MenuSubButton: SidebarMenuSubButton,
+  MenuSubItem: SidebarMenuSubItem,
+  Provider: SidebarProvider,
+  Rail: SidebarRail,
+  Separator: SidebarSeparator,
+  Trigger: SidebarTrigger,
+  useContext: useSidebar,
+});
+
+export default Sidebar;

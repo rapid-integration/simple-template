@@ -5,15 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { CurrentUserResponse } from "@/shared/api/types";
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
-  SidebarTrigger,
-  useSidebar,
-} from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 import { NavMain } from "./nav-main";
 import { NavProjects } from "./nav-projects";
@@ -48,7 +40,7 @@ export function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar> & { user?: CurrentUserResponse }) {
   const pathname = usePathname();
-  const sidebar = useSidebar();
+  const sidebar = Sidebar.useContext();
 
   useEffect(() => {
     if (sidebar.open && sidebar.isMobile) {
@@ -58,15 +50,15 @@ export function AppSidebar({
 
   return (
     <Sidebar variant="inset" {...props}>
-      <SidebarHeader>
-        <SidebarTrigger />
-      </SidebarHeader>
-      <SidebarContent>
+      <Sidebar.Header>
+        <Sidebar.Trigger />
+      </Sidebar.Header>
+      <Sidebar.Content>
         <NavMain items={data.navMain} />
         <NavProjects projects={data.projects} />
-      </SidebarContent>
-      <SidebarFooter>{user && <NavUser user={user} />}</SidebarFooter>
-      <SidebarRail />
+      </Sidebar.Content>
+      <Sidebar.Footer>{user && <NavUser user={user} />}</Sidebar.Footer>
+      <Sidebar.Rail />
     </Sidebar>
   );
 }

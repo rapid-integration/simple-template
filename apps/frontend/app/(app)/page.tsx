@@ -2,17 +2,17 @@
 
 import Bar from "@/shared/ui/bar";
 import Page from "@/shared/ui/page";
-import { SidebarTrigger, useSidebar } from "@/shared/ui/sidebar";
+import Sidebar from "@/shared/ui/sidebar";
 
 export default function Home() {
-  const { isMobile, open } = useSidebar();
+  const { isMobile, open } = Sidebar.useContext();
 
   return (
     <Page>
       <Bar>
         {(isMobile || !open) && (
           <Bar.Start>
-            <SidebarTrigger />
+            <Sidebar.Trigger />
           </Bar.Start>
         )}
         <Bar.Center showAfterScrolled>Home</Bar.Center>
