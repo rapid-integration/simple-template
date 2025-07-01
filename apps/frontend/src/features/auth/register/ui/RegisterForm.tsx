@@ -6,13 +6,7 @@ import { useSearchParams } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/shared/ui/card";
+import Card from "@/shared/ui/card";
 import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
@@ -29,13 +23,13 @@ export function RegisterForm({
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
-        <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>
+        <Card.Header>
+          <Card.Title>Register</Card.Title>
+          <Card.Description>
             Create a new account if you do not have one.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+          </Card.Description>
+        </Card.Header>
+        <Card.Content>
           <Form {...form}>
             <form onSubmit={submit} className="flex flex-col gap-6">
               <Form.Field
@@ -132,7 +126,7 @@ export function RegisterForm({
               </div>
             </form>
           </Form>
-        </CardContent>
+        </Card.Content>
       </Card>
     </div>
   );
