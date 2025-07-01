@@ -1,13 +1,13 @@
 "use client";
 
-import { FC } from "react";
+import { FunctionComponent } from "react";
 
 import useDataListContext from "./context";
 import variants from "./ItemGroup.variants";
 
 export type DataListItemGroupProps = React.ComponentProps<"div">;
 
-const DataListItemGroup: FC<DataListItemGroupProps> = ({
+const DataListItemGroup: FunctionComponent<DataListItemGroupProps> = ({
   className,
   ...otherProps
 }) => {

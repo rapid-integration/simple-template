@@ -1,7 +1,7 @@
 "use client";
 
 import { VariantProps } from "class-variance-authority";
-import { ComponentProps, FC } from "react";
+import { ComponentProps, FunctionComponent } from "react";
 
 import { DataListContext } from "./context";
 import variants from "./Root.variants";
@@ -10,7 +10,7 @@ export type DataListRootVariantProps = VariantProps<typeof variants>;
 
 export type DataListRootProps = DataListRootVariantProps & ComponentProps<"dl">;
 
-const DataListRoot: FC<DataListRootProps> = ({
+const DataListRoot: FunctionComponent<DataListRootProps> = ({
   className,
   size,
   divide,

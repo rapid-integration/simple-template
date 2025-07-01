@@ -1,12 +1,12 @@
 "use client";
 
-import { FC } from "react";
+import { FunctionComponent } from "react";
 
 import variants from "./ItemValue.variants";
 
 export type DataListItemValueProps = React.ComponentProps<"dd">;
 
-const DataListItemValue: FC<DataListItemValueProps> = ({
+const DataListItemValue: FunctionComponent<DataListItemValueProps> = ({
   className,
   ...props
 }) => {

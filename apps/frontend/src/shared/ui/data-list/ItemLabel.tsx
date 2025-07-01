@@ -1,13 +1,13 @@
 "use client";
 
-import { FC } from "react";
+import { FunctionComponent } from "react";
 
 import useDataListContext from "./context";
 import variants from "./ItemLabel.variants";
 
 export type DataListItemLabelProps = React.ComponentProps<"dt">;
 
-const DataListItemLabel: FC<DataListItemLabelProps> = ({
+const DataListItemLabel: FunctionComponent<DataListItemLabelProps> = ({
   className,
   ...otherProps
 }) => {

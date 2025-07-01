@@ -1,15 +1,14 @@
 "use client";
 
-import { FC } from "react";
+import { FunctionComponent } from "react";
 
 import variants from "./ItemDescription.variants";
 
 export type DataListItemDescriptionProps = React.ComponentProps<"p">;
 
-const DataListItemDescription: FC<DataListItemDescriptionProps> = ({
-  className,
-  ...props
-}) => {
+const DataListItemDescription: FunctionComponent<
+  DataListItemDescriptionProps
+> = ({ className, ...props }) => {
   return <p className={variants({ className })} {...props} />;
 };
 
