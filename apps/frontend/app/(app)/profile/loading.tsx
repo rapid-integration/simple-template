@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import { ProfilePageBar } from "@/pages/profile";
 import Page from "@/shared/ui/page";
-import { Skeleton } from "@/shared/ui/skeleton";
+import Skeleton from "@/shared/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "Profile",

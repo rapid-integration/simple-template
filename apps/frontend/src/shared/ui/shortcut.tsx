@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 import { cn } from "@/shared/lib/utils";
 
-const Shortcut = ({
+const ShortcutRoot = ({
   className,
   sequence,
   ...otherProps
@@ -20,5 +20,9 @@ const Shortcut = ({
     </div>
   );
 };
+
+export { ShortcutRoot };
+
+const Shortcut = ShortcutRoot;
 
 export default Shortcut;

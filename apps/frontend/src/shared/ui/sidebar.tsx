@@ -12,7 +12,7 @@ import Input from "@/shared/ui/input";
 import Separator from "@/shared/ui/separator";
 import Sheet from "@/shared/ui/sheet";
 import Shortcut from "@/shared/ui/shortcut";
-import { Skeleton } from "@/shared/ui/skeleton";
+import Skeleton from "@/shared/ui/skeleton";
 import Tooltip from "@/shared/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
