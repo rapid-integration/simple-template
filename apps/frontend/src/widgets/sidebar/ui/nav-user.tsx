@@ -13,7 +13,7 @@ import { startTransition, useActionState } from "react";
 import { parseInitials } from "@/entities/user";
 import { logout } from "@/features/auth/logout";
 import { CurrentUserResponse } from "@/shared/api/types";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/avatar";
+import Avatar from "@/shared/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,11 +47,13 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               isActive={pathname?.includes("/profile")}
             >
               <Avatar className="size-4 text-xs">
-                <AvatarImage
+                <Avatar.Image
                   src={`https://avatar.vercel.sh/${user.username}`}
                   alt={user.username}
                 />
-                <AvatarFallback>{parseInitials(user.username)}</AvatarFallback>
+                <Avatar.Fallback>
+                  {parseInitials(user.username)}
+                </Avatar.Fallback>
               </Avatar>
               {/* <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
@@ -72,11 +74,11 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="size-8">
-                  <AvatarImage
+                  <Avatar.Image
                     src={`https://avatar.vercel.sh/${user.username}`}
                     alt={user.username}
                   />
-                  <AvatarFallback>NG</AvatarFallback>
+                  <Avatar.Fallback>NG</Avatar.Fallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.username}</span>

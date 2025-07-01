@@ -5,7 +5,7 @@ import * as React from "react";
 
 import { cn } from "@/shared/lib/utils";
 
-function Avatar({
+function AvatarRoot({
   className,
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Root>) {
@@ -50,4 +50,11 @@ function AvatarFallback({
   );
 }
 
-export { Avatar, AvatarImage, AvatarFallback };
+export { AvatarFallback, AvatarImage, AvatarRoot };
+
+const Avatar = Object.assign(AvatarRoot, {
+  Image: AvatarImage,
+  Fallback: AvatarFallback,
+});
+
+export default Avatar;
