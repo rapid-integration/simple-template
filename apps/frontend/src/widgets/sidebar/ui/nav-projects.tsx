@@ -9,11 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/shared/ui/collapsible";
+import Collapsible from "@/shared/ui/collapsible";
 import DropdownMenu from "@/shared/ui/dropdown-menu";
 import {
   SidebarGroup,
@@ -39,12 +35,12 @@ export function NavProjects({
     <Collapsible defaultOpen className="group/collapsible">
       <SidebarGroup>
         <SidebarGroupLabel asChild>
-          <CollapsibleTrigger>
-            Projects
+          <Collapsible.Trigger>
+            <span>Projects</span>
             <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-          </CollapsibleTrigger>
+          </Collapsible.Trigger>
         </SidebarGroupLabel>
-        <CollapsibleContent>
+        <Collapsible.Content>
           <SidebarMenu>
             {projects.map((item) => (
               <SidebarMenuItem key={item.name}>
@@ -87,7 +83,7 @@ export function NavProjects({
               </SidebarMenuButton>
             </SidebarMenuItem> */}
           </SidebarMenu>
-        </CollapsibleContent>
+        </Collapsible.Content>
       </SidebarGroup>
     </Collapsible>
   );
