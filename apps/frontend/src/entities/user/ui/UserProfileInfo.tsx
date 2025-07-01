@@ -8,7 +8,7 @@ import useDateTimeFormat from "@/shared/hooks/use-date-time-format";
 import Button from "@/shared/ui/button";
 import DataList from "@/shared/ui/data-list";
 import { Skeleton } from "@/shared/ui/skeleton";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import Tooltip from "@/shared/ui/tooltip";
 
 interface UserProfileInfoProps {
   created_at: string;
@@ -31,7 +31,7 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
           </DataList.ItemValue>
         </DataList.ItemGroup>
         <Tooltip disableHoverableContent>
-          <TooltipTrigger asChild>
+          <Tooltip.Trigger asChild>
             <Button
               size="icon"
               variant="outline"
@@ -49,10 +49,10 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
               <CopyIcon />
               <span className="sr-only">Copy</span>
             </Button>
-          </TooltipTrigger>
-          <TooltipContent side="left">
+          </Tooltip.Trigger>
+          <Tooltip.Content side="left">
             Copy registration date to clipboard
-          </TooltipContent>
+          </Tooltip.Content>
         </Tooltip>
       </DataList.Item>
       <DataList.Item>
@@ -63,7 +63,7 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
           </DataList.ItemValue>
         </DataList.ItemGroup>
         <Tooltip disableHoverableContent>
-          <TooltipTrigger asChild>
+          <Tooltip.Trigger asChild>
             <Button
               size="icon"
               variant="outline"
@@ -80,8 +80,8 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
             >
               <CopyIcon />
             </Button>
-          </TooltipTrigger>
-          <TooltipContent side="left">Copy ID to clipboard</TooltipContent>
+          </Tooltip.Trigger>
+          <Tooltip.Content side="left">Copy ID to clipboard</Tooltip.Content>
         </Tooltip>
       </DataList.Item>
     </DataList>

@@ -13,12 +13,7 @@ import Separator from "@/shared/ui/separator";
 import Sheet from "@/shared/ui/sheet";
 import Shortcut from "@/shared/ui/shortcut";
 import { Skeleton } from "@/shared/ui/skeleton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/shared/ui/tooltip";
+import Tooltip from "@/shared/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -123,7 +118,7 @@ function SidebarProvider({
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <TooltipProvider delayDuration={0}>
+      <Tooltip.Provider delayDuration={0}>
         <div
           data-slot="sidebar-wrapper"
           style={
@@ -141,7 +136,7 @@ function SidebarProvider({
         >
           {children}
         </div>
-      </TooltipProvider>
+      </Tooltip.Provider>
     </SidebarContext.Provider>
   );
 }
@@ -256,7 +251,7 @@ function SidebarTrigger({
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>
+      <Tooltip.Trigger asChild>
         <Button
           data-sidebar="trigger"
           data-slot="sidebar-trigger"
@@ -274,8 +269,8 @@ function SidebarTrigger({
             {SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})
           </span>
         </Button>
-      </TooltipTrigger>
-      <TooltipContent side="right">
+      </Tooltip.Trigger>
+      <Tooltip.Content side="right">
         <span>
           {(isMobile ? openMobile : open) ? "Collapse" : "Expand"} Sidebar
         </span>
@@ -283,7 +278,7 @@ function SidebarTrigger({
           sequence={["⌘", SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()]}
           className="ms-1"
         />
-      </TooltipContent>
+      </Tooltip.Content>
     </Tooltip>
   );
 }
@@ -519,7 +514,7 @@ function SidebarMenuButton({
 }: React.ComponentProps<"button"> & {
   asChild?: boolean;
   isActive?: boolean;
-  tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+  tooltip?: string | React.ComponentProps<typeof Tooltip.Content>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : "button";
   const { isMobile, state } = useSidebar();
@@ -547,8 +542,8 @@ function SidebarMenuButton({
 
   return (
     <Tooltip>
-      <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent
+      <Tooltip.Trigger asChild>{button}</Tooltip.Trigger>
+      <Tooltip.Content
         side="right"
         align="center"
         hidden={state !== "collapsed" || isMobile}
