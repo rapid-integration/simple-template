@@ -9,11 +9,7 @@ import { useTheme } from "next-themes";
 import { ComponentProps } from "react";
 
 import { cn } from "@/shared/lib/utils";
-import {
-  TooltipRoot,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/shared/ui/tooltip";
+import Tooltip from "@/shared/ui/tooltip";
 
 const icons = {
   light: SunIcon,
@@ -25,8 +21,8 @@ export function ThemeRadioGroupItem({ value }: { value: string }) {
   const Icon = icons[value as keyof typeof icons];
 
   return (
-    <TooltipRoot>
-      <TooltipTrigger
+    <Tooltip>
+      <Tooltip.Trigger
         asChild
         className="flex items-center justify-center rounded-sm p-1 text-muted-foreground outline-hidden aria-checked:bg-accent aria-checked:text-foreground data-highlighted:bg-accent"
       >
@@ -34,9 +30,9 @@ export function ThemeRadioGroupItem({ value }: { value: string }) {
           <Icon className="size-4 text-inherit" />
           <span className="sr-only capitalize">{value}</span>
         </DropdownMenuRadioItem>
-      </TooltipTrigger>
-      <TooltipContent className="capitalize">{value}</TooltipContent>
-    </TooltipRoot>
+      </Tooltip.Trigger>
+      <Tooltip.Content className="capitalize">{value}</Tooltip.Content>
+    </Tooltip>
   );
 }
 
@@ -56,9 +52,11 @@ export function ThemeRadioGroup({
       )}
       {...otherProps}
     >
-      {themes.toReversed().map((theme) => (
-        <ThemeRadioGroupItem key={theme} value={theme} />
-      ))}
+      <Tooltip.Provider skipDelayDuration={0}>
+        {themes.toReversed().map((theme) => (
+          <ThemeRadioGroupItem key={theme} value={theme} />
+        ))}
+      </Tooltip.Provider>
     </DropdownMenuRadioGroup>
   );
 }
