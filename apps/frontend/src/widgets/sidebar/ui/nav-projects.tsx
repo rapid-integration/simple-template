@@ -14,13 +14,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/shared/ui/collapsible";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
+import DropdownMenu from "@/shared/ui/dropdown-menu";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -58,31 +52,31 @@ export function NavProjects({
                   <Link href={item.url}>{item.name}</Link>
                 </SidebarMenuButton>
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                  <DropdownMenu.Trigger asChild>
                     <SidebarMenuAction showOnHover>
                       <MoreHorizontal />
                       <span className="sr-only">More</span>
                     </SidebarMenuAction>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
+                  </DropdownMenu.Trigger>
+                  <DropdownMenu.Content
                     className="w-48"
                     side={isMobile ? "bottom" : "right"}
                     align={isMobile ? "end" : "start"}
                   >
-                    <DropdownMenuItem>
+                    <DropdownMenu.Item>
                       <Folder className="text-muted-foreground" />
                       <span>View Project</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item>
                       <Share className="text-muted-foreground" />
                       <span>Share Project</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Separator />
+                    <DropdownMenu.Item>
                       <Trash2 className="text-muted-foreground" />
                       <span>Delete Project</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
+                    </DropdownMenu.Item>
+                  </DropdownMenu.Content>
                 </DropdownMenu>
               </SidebarMenuItem>
             ))}

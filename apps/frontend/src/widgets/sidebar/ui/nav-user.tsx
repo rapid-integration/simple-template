@@ -14,15 +14,7 @@ import { parseInitials } from "@/entities/user";
 import { logout } from "@/features/auth/logout";
 import { CurrentUserResponse } from "@/shared/api/types";
 import Avatar from "@/shared/ui/avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
+import DropdownMenu from "@/shared/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
@@ -41,7 +33,7 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenu.Trigger asChild>
             <SidebarMenuButton
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               isActive={pathname?.includes("/profile")}
@@ -64,14 +56,14 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               <span className="truncate">{user.username}</span>
               <ChevronsUpDownIcon className="me-0.5 ml-auto size-4" />
             </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56"
             side={isMobile ? "bottom" : "right"}
             align={isMobile ? "center" : "end"}
             sideOffset={4}
           >
-            <DropdownMenuLabel className="p-0 font-normal">
+            <DropdownMenu.Label className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="size-8">
                   <Avatar.Image
@@ -87,37 +79,37 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
                   </span>
                 </div>
               </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
+            </DropdownMenu.Label>
+            <DropdownMenu.Separator />
+            <DropdownMenu.Group>
+              <DropdownMenu.Item asChild>
                 <Link href="/profile">
                   <UserIcon />
                   <span>Profile</span>
                 </Link>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
+              </DropdownMenu.Item>
+            </DropdownMenu.Group>
+            <DropdownMenu.Separator />
+            <DropdownMenu.Group>
+              <DropdownMenu.Label className="text-xs font-medium text-muted-foreground">
                 Preferences
-              </DropdownMenuLabel>
+              </DropdownMenu.Label>
               <div className="flex items-center gap-2 rounded-sm px-2 py-px text-sm select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground">
                 <PaletteIcon />
                 <span>Theme</span>
                 <ThemeRadioGroup className="ms-auto" />
               </div>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
+            </DropdownMenu.Group>
+            <DropdownMenu.Separator />
+            <DropdownMenu.Item
               variant="destructive"
               onSelect={() => startTransition(action)}
               disabled={pending}
             >
               <LogOut />
               <span>{pending ? "Logging out…" : "Logout"}</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
