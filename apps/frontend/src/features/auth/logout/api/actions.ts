@@ -10,6 +10,6 @@ export async function logout() {
   await clearSession();
 
   revalidateTag(USER_CACHE_USERS_ME_TAG);
-  
+
   redirect(`/login`);
 }
