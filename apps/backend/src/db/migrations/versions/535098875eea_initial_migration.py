@@ -6,13 +6,15 @@ Create Date: 2025-06-27 12:26:33.001941
 
 """
 
+from typing import Sequence
+
 import sqlalchemy as sa
 from alembic import op
 
-revision = "535098875eea"
-down_revision = None
-branch_labels = None
-depends_on = None
+revision: str = "535098875eea"
+down_revision: str | Sequence[str] | None = None
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
