@@ -6,7 +6,9 @@ import * as React from "react";
 
 import { cn } from "@/shared/lib/utils";
 
-function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
+function SheetRoot({
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
 }
 
@@ -128,7 +130,7 @@ function SheetDescription({
 }
 
 export {
-  Sheet,
+  SheetRoot,
   SheetTrigger,
   SheetClose,
   SheetContent,
@@ -137,3 +139,15 @@ export {
   SheetTitle,
   SheetDescription,
 };
+
+const Sheet = Object.assign(SheetRoot, {
+  Trigger: SheetTrigger,
+  Close: SheetClose,
+  Content: SheetContent,
+  Header: SheetHeader,
+  Footer: SheetFooter,
+  Title: SheetTitle,
+  Description: SheetDescription,
+});
+
+export default Sheet;
