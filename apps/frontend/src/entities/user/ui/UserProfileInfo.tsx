@@ -18,7 +18,7 @@ interface UserProfileInfoProps {
 const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
   const displayDate = useDateTimeFormat({
     date: props.created_at,
-    format: "dd MMMM yyyy HH:mm",
+    format: "d MMMM yyyy HH:mm",
   });
 
   return (
