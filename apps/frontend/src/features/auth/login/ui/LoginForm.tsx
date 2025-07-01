@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import Form, { FormResponse } from "@/shared/ui/form";
+import Form from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
 import { useLoginForm } from "../model/form";
@@ -76,7 +76,7 @@ export function LoginForm({
                 )}
               />
 
-              <FormResponse />
+              <Form.Response />
 
               <div className="flex flex-col gap-2">
                 <Button
