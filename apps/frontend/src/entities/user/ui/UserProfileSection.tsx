@@ -1,3 +1,5 @@
+"use client";
+
 import { FunctionComponent } from "react";
 
 import Avatar from "@/shared/ui/avatar";
