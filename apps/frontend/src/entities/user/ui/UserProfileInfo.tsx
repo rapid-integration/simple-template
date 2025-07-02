@@ -82,7 +82,9 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
               <span className="sr-only">Скопировать идентификатор</span>
             </Button>
           </Tooltip.Trigger>
-          <Tooltip.Content side="left">Скопировать идентификатор</Tooltip.Content>
+          <Tooltip.Content side="left">
+            Скопировать идентификатор
+          </Tooltip.Content>
         </Tooltip>
       </DataList.Item>
     </DataList>

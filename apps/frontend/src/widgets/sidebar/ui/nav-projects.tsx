@@ -5,7 +5,7 @@ import {
   FolderIcon,
   MoreHorizontal,
   ShareIcon,
-  Trash2Icon
+  Trash2Icon,
 } from "lucide-react";
 import Link from "next/link";
 
