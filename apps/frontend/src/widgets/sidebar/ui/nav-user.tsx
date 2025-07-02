@@ -42,12 +42,6 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
                   {parseInitials(user.username)}
                 </Avatar.Fallback>
               </Avatar>
-              {/* <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs text-muted-foreground">
-                  {user.email}
-                </span>
-              </div> */}
               <span className="truncate">{user.username}</span>
               <ChevronsUpDownIcon className="me-0.5 ml-auto size-4" />
             </Sidebar.MenuButton>
@@ -80,18 +74,18 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               <DropdownMenu.Item asChild>
                 <Link href="/profile">
                   <UserIcon />
-                  <span>Profile</span>
+                  <span>Профиль</span>
                 </Link>
               </DropdownMenu.Item>
             </DropdownMenu.Group>
             <DropdownMenu.Separator />
             <DropdownMenu.Group>
               <DropdownMenu.Label className="text-xs font-medium text-muted-foreground">
-                Preferences
+                Настройки
               </DropdownMenu.Label>
               <div className="flex items-center gap-2 rounded-sm px-2 py-px text-sm select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&_svg:not([class*='text-'])]:text-muted-foreground">
                 <PaletteIcon />
-                <span>Theme</span>
+                <span>Тема</span>
                 <ThemeRadioGroup className="ms-auto" />
               </div>
             </DropdownMenu.Group>
@@ -102,7 +96,7 @@ export function NavUser({ user }: { user: CurrentUserResponse }) {
               disabled={pending}
             >
               <LogOut />
-              <span>{pending ? "Logging out…" : "Logout"}</span>
+              <span>{pending ? "Выполняется выход…" : "Выйти"}</span>
             </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu>

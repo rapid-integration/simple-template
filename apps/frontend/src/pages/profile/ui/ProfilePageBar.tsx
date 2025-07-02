@@ -24,14 +24,14 @@ const ProfilePageBar: FunctionComponent = () => {
         <Button asChild variant="ghost" className="text-muted-foreground">
           <Link href="/">
             <ArrowLeftIcon />
-            <span>Back</span>
+            <span>Назад</span>
           </Link>
         </Button>
       </Bar.Start>
-      <Bar.Center showAfterScrolled>Profile</Bar.Center>
+      <Bar.Center showAfterScrolled>Профиль</Bar.Center>
       <Bar.End>
         <Button asChild variant="ghost" className="justify-self-end">
-          <Link href="/profile/edit">Edit</Link>
+          <Link href="/profile/edit">Изм.</Link>
         </Button>
       </Bar.End>
     </Bar>

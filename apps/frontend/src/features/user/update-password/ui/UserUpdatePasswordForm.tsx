@@ -25,7 +25,7 @@ const UserUpdatePasswordForm: FunctionComponent<
     defaultValues,
     onSuccess: () => {
       onSuccess?.();
-      toast.success("Password has been successfully updated!");
+      toast.success("Пароль был успешно обновлён!");
     },
   });
 
@@ -41,10 +41,10 @@ const UserUpdatePasswordForm: FunctionComponent<
           name="oldPassword"
           render={({ field }) => (
             <Form.Item className="flex flex-col gap-2">
-              <Form.Label>Old Password</Form.Label>
+              <Form.Label>Старый пароль</Form.Label>
               <Form.Control>
                 <Input
-                  placeholder="Enter your old password…"
+                  placeholder="Введите ваш старый пароль…"
                   type="password"
                   autoComplete="password"
                   {...field}
@@ -60,10 +60,10 @@ const UserUpdatePasswordForm: FunctionComponent<
           name="newPassword1"
           render={({ field }) => (
             <Form.Item className="flex flex-col gap-2">
-              <Form.Label>New Password</Form.Label>
+              <Form.Label>Новый пароль</Form.Label>
               <Form.Control>
                 <Input
-                  placeholder="Enter your new password…"
+                  placeholder="Введите новый пароль…"
                   type="password"
                   autoComplete="new-password"
                   {...field}
@@ -79,10 +79,10 @@ const UserUpdatePasswordForm: FunctionComponent<
           name="newPassword2"
           render={({ field }) => (
             <Form.Item className="flex flex-col gap-2">
-              <Form.Label>Confirm New Password</Form.Label>
+              <Form.Label>Подтвердите новый пароль</Form.Label>
               <Form.Control>
                 <Input
-                  placeholder="Enter your new password again…"
+                  placeholder="Введите новый пароль ещё раз…"
                   type="password"
                   autoComplete="new-password"
                   {...field}
@@ -108,10 +108,10 @@ const UserUpdatePasswordForm: FunctionComponent<
           {pending ? (
             <>
               <LoaderIcon className="animate-spin" />
-              <span>Saving…</span>
+              <span>Сохранение…</span>
             </>
           ) : (
-            <>Save</>
+            <>Сохранить</>
           )}
         </Button>
       </form>

@@ -24,7 +24,7 @@ export function NavMain({
   const pathname = usePathname();
   return (
     <Sidebar.Group>
-      <Sidebar.GroupLabel>App</Sidebar.GroupLabel>
+      <Sidebar.GroupLabel>Приложение</Sidebar.GroupLabel>
       <Sidebar.Menu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
@@ -44,7 +44,7 @@ export function NavMain({
                   <Collapsible.Trigger asChild>
                     <Sidebar.MenuAction className="data-[state=open]:rotate-90">
                       <ChevronRight />
-                      <span className="sr-only">Toggle</span>
+                      <span className="sr-only">Переключить</span>
                     </Sidebar.MenuAction>
                   </Collapsible.Trigger>
                   <Collapsible.Content>

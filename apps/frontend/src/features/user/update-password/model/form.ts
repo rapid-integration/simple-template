@@ -7,7 +7,7 @@ import { UserUpdatePasswordFormFieldValues } from "./types";
 import { updateCurrentUserPassword } from "../api/actions";
 
 const errors = {
-  403: "Old password is wrong.",
+  403: "Старый пароль введён неверно.",
 } as const;
 
 export const useUserUpdatePasswordForm = ({

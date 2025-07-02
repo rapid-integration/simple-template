@@ -7,7 +7,7 @@ import { RegisterFormFieldValues } from "./types";
 import { register } from "../api/actions";
 
 const errors = {
-  409: "A user with such username already exists.",
+  409: "Это имя пользователя уже занято.",
 } as const;
 
 export const useRegisterForm = (

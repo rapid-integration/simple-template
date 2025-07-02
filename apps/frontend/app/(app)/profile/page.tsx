@@ -5,7 +5,7 @@ import { ProfilePageBar } from "@/pages/profile";
 import Page from "@/shared/ui/page";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "Профиль",
 };
 
 export default async function ProfilePage() {

@@ -25,20 +25,20 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
     <>
       <DataList.Item {...otherProps}>
         <DataList.ItemGroup>
-          <DataList.ItemLabel>Username</DataList.ItemLabel>
+          <DataList.ItemLabel>Имя пользователя</DataList.ItemLabel>
           <DataList.ItemValue>{username}</DataList.ItemValue>
         </DataList.ItemGroup>
 
         {isMobile ? (
           <Drawer open={open} onOpenChange={setOpen} autoFocus>
             <Drawer.Trigger asChild>
-              <Button variant="outline">Edit</Button>
+              <Button variant="outline">Изм.</Button>
             </Drawer.Trigger>
             <Drawer.Content>
               <Drawer.Header>
-                <Drawer.Title>Edit Username</Drawer.Title>
+                <Drawer.Title>Редактирование имени пользователя</Drawer.Title>
                 <Drawer.Description>
-                  You can set public username.
+                  Вы можете установить публичное имя пользователя.
                 </Drawer.Description>
               </Drawer.Header>
               <UserUpdateUsernameForm
@@ -48,7 +48,7 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
               />
               <Drawer.Footer className="pt-2">
                 <Drawer.Close asChild>
-                  <Button variant="outline">Close</Button>
+                  <Button variant="outline">Закрыть</Button>
                 </Drawer.Close>
               </Drawer.Footer>
             </Drawer.Content>
@@ -56,13 +56,13 @@ const UserUpdateUsernameDataListItem: FunctionComponent<
         ) : (
           <Dialog open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-              <Button variant="outline">Edit</Button>
+              <Button variant="outline">Изм.</Button>
             </Dialog.Trigger>
             <Dialog.Content>
               <Dialog.Header>
-                <Dialog.Title>Edit Username</Dialog.Title>
+                <Dialog.Title>Редактирование имени пользователя</Dialog.Title>
                 <Dialog.Description>
-                  You can set public username.
+                  Вы можете установить публичное имя пользователя.
                 </Dialog.Description>
               </Dialog.Header>
               <UserUpdateUsernameForm

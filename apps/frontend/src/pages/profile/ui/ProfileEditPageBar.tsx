@@ -24,11 +24,11 @@ const ProfileEditPageBar: FunctionComponent = () => {
         <Button asChild variant="ghost" className="text-muted-foreground">
           <Link href="/profile">
             <ArrowLeftIcon />
-            <span>Back</span>
+            <span>Назад</span>
           </Link>
         </Button>
       </Bar.Start>
-      <Bar.Center>Edit Profile</Bar.Center>
+      <Bar.Center>Редактирование</Bar.Center>
     </Bar>
   );
 };

@@ -2,10 +2,10 @@
 
 import {
   ChevronDownIcon,
-  Folder,
+  FolderIcon,
   MoreHorizontal,
-  Share,
-  Trash2,
+  ShareIcon,
+  Trash2Icon
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +28,7 @@ export function NavProjects({
       <Sidebar.Group>
         <Sidebar.GroupLabel asChild>
           <Collapsible.Trigger>
-            <span>Projects</span>
+            <span>Проекты</span>
             <ChevronDownIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </Collapsible.Trigger>
         </Sidebar.GroupLabel>
@@ -43,37 +43,37 @@ export function NavProjects({
                   <DropdownMenu.Trigger asChild>
                     <Sidebar.MenuAction showOnHover>
                       <MoreHorizontal />
-                      <span className="sr-only">More</span>
+                      <span className="sr-only">Ещё</span>
                     </Sidebar.MenuAction>
                   </DropdownMenu.Trigger>
                   <DropdownMenu.Content
-                    className="w-48"
+                    className="w-52"
                     side={isMobile ? "bottom" : "right"}
                     align={isMobile ? "end" : "start"}
                   >
                     <DropdownMenu.Item>
-                      <Folder className="text-muted-foreground" />
-                      <span>View Project</span>
+                      <FolderIcon />
+                      <span>Открыть проект</span>
                     </DropdownMenu.Item>
                     <DropdownMenu.Item>
-                      <Share className="text-muted-foreground" />
-                      <span>Share Project</span>
+                      <ShareIcon />
+                      <span>Поделиться проектом</span>
                     </DropdownMenu.Item>
                     <DropdownMenu.Separator />
-                    <DropdownMenu.Item>
-                      <Trash2 className="text-muted-foreground" />
-                      <span>Delete Project</span>
+                    <DropdownMenu.Item variant="destructive">
+                      <Trash2Icon />
+                      <span>Удалить проект</span>
                     </DropdownMenu.Item>
                   </DropdownMenu.Content>
                 </DropdownMenu>
               </Sidebar.MenuItem>
             ))}
-            {/* <SidebarMenuItem>
-              <SidebarMenuButton>
-                <MoreHorizontal />
-                <span>More</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem> */}
+            {/* <Sidebar.MenuItem>
+              <Sidebar.MenuButton>
+                <MoreHorizontalIcon />
+                <span>Ещё</span>
+              </Sidebar.MenuButton>
+            </Sidebar.MenuItem> */}
           </Sidebar.Menu>
         </Collapsible.Content>
       </Sidebar.Group>

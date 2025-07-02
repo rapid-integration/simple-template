@@ -19,7 +19,7 @@ const BarCenter: FunctionComponent<BarCenterProps> = ({
   return (
     <div
       className={cn(
-        "absolute left-1/2 -translate-x-1/2",
+        "absolute left-1/2 -translate-x-1/2 font-semibold",
         showAfterScrolled && "opacity-0 transition-opacity",
         showAfterScrolled && scrolled && "opacity-100",
         className,

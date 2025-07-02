@@ -25,7 +25,7 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
     <DataList orientation="horizontal">
       <DataList.Item>
         <DataList.ItemGroup>
-          <DataList.ItemLabel>Registration date</DataList.ItemLabel>
+          <DataList.ItemLabel>Дата регистрации</DataList.ItemLabel>
           <DataList.ItemValue>
             {displayDate || <Skeleton className="h-6" />}
           </DataList.ItemValue>
@@ -38,26 +38,26 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
               onClick={() => {
                 if (window.isSecureContext && displayDate) {
                   navigator.clipboard.writeText(displayDate);
-                  toast.success("Registration date copied to the clipboard!");
+                  toast.success("Дата регистрации скопироана!");
                 } else {
                   toast.error(
-                    "Failed to copy registration date to clipboard: window is not in a secure context.",
+                    "Не удалось скопировать дату регистрации: окно браузера используется в небезопасном контексте.",
                   );
                 }
               }}
             >
               <CopyIcon />
-              <span className="sr-only">Copy</span>
+              <span className="sr-only">Скопировать дату регистрации</span>
             </Button>
           </Tooltip.Trigger>
           <Tooltip.Content side="left">
-            Copy registration date to clipboard
+            Скопировать дату регистрации
           </Tooltip.Content>
         </Tooltip>
       </DataList.Item>
       <DataList.Item>
         <DataList.ItemGroup className="overflow-hidden">
-          <DataList.ItemLabel>ID</DataList.ItemLabel>
+          <DataList.ItemLabel>Идентификатор</DataList.ItemLabel>
           <DataList.ItemValue className="truncate font-mono">
             {props.id}
           </DataList.ItemValue>
@@ -70,18 +70,19 @@ const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
               onClick={() => {
                 if (window.isSecureContext) {
                   navigator.clipboard.writeText(props.id);
-                  toast.success("ID copied to the clipboard!");
+                  toast.success("Идентификатор скопирован!");
                 } else {
                   toast.error(
-                    "Failed to copy ID to clipboard: window is not in a secure context.",
+                    "Не удалось скопировать идентификатор: окно браузера используется в небезопасном контексте.",
                   );
                 }
               }}
             >
               <CopyIcon />
+              <span className="sr-only">Скопировать идентификатор</span>
             </Button>
           </Tooltip.Trigger>
-          <Tooltip.Content side="left">Copy ID to clipboard</Tooltip.Content>
+          <Tooltip.Content side="left">Скопировать идентификатор</Tooltip.Content>
         </Tooltip>
       </DataList.Item>
     </DataList>

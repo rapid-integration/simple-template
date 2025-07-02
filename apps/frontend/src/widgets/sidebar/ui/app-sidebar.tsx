@@ -14,22 +14,22 @@ import { NavUser } from "./nav-user";
 const data = {
   navMain: [
     {
-      title: "Home",
+      title: "Главная",
       url: "/",
       icon: HomeIcon,
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Дизайн",
       url: "/projects/1",
     },
     {
-      name: "Sales & Marketing",
+      name: "Маркетинг",
       url: "/projects/2",
     },
     {
-      name: "Travel",
+      name: "Путешествия",
       url: "/projects/3",
     },
   ],

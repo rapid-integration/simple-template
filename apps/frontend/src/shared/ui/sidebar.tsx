@@ -186,8 +186,10 @@ function SidebarRoot({
           side={side}
         >
           <Sheet.Header className="sr-only">
-            <Sheet.Title>Sidebar</Sheet.Title>
-            <Sheet.Description>Displays the mobile sidebar.</Sheet.Description>
+            <Sheet.Title>Боковое меню</Sheet.Title>
+            <Sheet.Description>
+              Показывает мобильное боковое меню.
+            </Sheet.Description>
           </Sheet.Header>
           <div className="flex h-full w-full flex-col">{children}</div>
         </Sheet.Content>
@@ -265,14 +267,16 @@ function SidebarTrigger({
         >
           <PanelLeftIcon />
           <span className="sr-only">
-            {(isMobile ? openMobile : open) ? "Collapse" : "Expand"} Sidebar (⌘
+            {(isMobile ? openMobile : open) ? "Закрыть" : "Открыть"} боковую
+            панель (⌘
             {SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})
           </span>
         </Button>
       </Tooltip.Trigger>
       <Tooltip.Content side="right">
         <span>
-          {(isMobile ? openMobile : open) ? "Collapse" : "Expand"} Sidebar
+          {(isMobile ? openMobile : open) ? "Закрыть" : "Открыть"} боковую
+          панель
         </span>
         <Shortcut
           sequence={["⌘", SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()]}
@@ -291,13 +295,13 @@ function SidebarRail({ className, ...props }: React.ComponentProps<"button">) {
       data-sidebar="rail"
       data-slot="sidebar-rail"
       aria-label={`${
-        (isMobile ? openMobile : open) ? "Collapse" : "Expand"
-      } Sidebar (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
+        (isMobile ? openMobile : open) ? "Закрыть" : "Открыть"
+      } боковую панель (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
       tabIndex={-1}
       onClick={toggleSidebar}
       title={`${
-        (isMobile ? openMobile : open) ? "Collapse" : "Expand"
-      } Sidebar (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
+        (isMobile ? openMobile : open) ? "Закрыть" : "Открыть"
+      } боковую панель (⌘ ${SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})`}
       className={cn(
         "absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] hover:after:bg-sidebar-border sm:flex",
         "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",

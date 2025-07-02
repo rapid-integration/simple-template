@@ -7,7 +7,7 @@ import { UserUpdateUsernameFormFieldValues } from "./types";
 import { updateCurrentUserUsername } from "../api/actions";
 
 const errors = {
-  409: "This username is already taken.",
+  409: "Это имя пользователя уже занято.",
 } as const;
 
 export const useUserUpdateUsernameForm = ({

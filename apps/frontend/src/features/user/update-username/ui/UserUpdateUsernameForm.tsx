@@ -30,7 +30,7 @@ const UserUpdateUsernameForm: FunctionComponent<
     defaultValues,
     onSuccess: () => {
       onSuccess?.();
-      toast.success("Username has been successfully updated!");
+      toast.success("Имя пользователя было успешно обновлено!");
     },
   });
 
@@ -46,16 +46,18 @@ const UserUpdateUsernameForm: FunctionComponent<
           name="username"
           render={({ field }) => (
             <Form.Item className="flex flex-col gap-2">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Новое имя пользователя</Form.Label>
               <Form.Control>
                 <Input
-                  placeholder="Enter your username…"
+                  placeholder="Введите новое имя пользователя…"
                   autoComplete="username"
                   spellCheck={false}
                   {...field}
                 />
               </Form.Control>
-              <Form.Description>The username must be unique.</Form.Description>
+              <Form.Description>
+                Это имя пользователя должно быть уникальным.
+              </Form.Description>
               <Form.Message />
             </Form.Item>
           )}
@@ -76,10 +78,10 @@ const UserUpdateUsernameForm: FunctionComponent<
           {pending ? (
             <>
               <LoaderIcon className="animate-spin" />
-              <span>Saving…</span>
+              <span>Сохранение…</span>
             </>
           ) : (
-            <>Save</>
+            <>Сохранить</>
           )}
         </Button>
       </form>

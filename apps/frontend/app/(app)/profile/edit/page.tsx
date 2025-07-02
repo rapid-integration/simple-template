@@ -9,7 +9,7 @@ import DataList from "@/shared/ui/data-list";
 import Page from "@/shared/ui/page";
 
 export const metadata: Metadata = {
-  title: "Edit Profile",
+  title: "Редактирование профиля",
 };
 
 export default async function ProfileEditPage() {

@@ -27,7 +27,7 @@ const UserProfileLogoutButton: FunctionComponent<
       onClick={() => startTransition(action)}
     >
       {pending ? <LoaderIcon className="animate-spin" /> : <LogOutIcon />}
-      <span>{pending ? "Logging out…" : "Logout"}</span>
+      <span>{pending ? "Выполняется выход…" : "Выйти"}</span>
     </Button>
   );
 };

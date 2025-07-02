@@ -6,7 +6,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 
 import { cn } from "@/shared/lib/utils";
 import Tooltip from "@/shared/ui/tooltip";
@@ -17,8 +17,15 @@ const icons = {
   system: MonitorIcon,
 } as const;
 
+const labels = {
+  light: "Светлая",
+  dark: "Тёмная",
+  system: "Как в системе",
+} as const;
+
 export function ThemeRadioGroupItem({ value }: { value: string }) {
   const Icon = icons[value as keyof typeof icons];
+  const label = useMemo(() => labels[value as keyof typeof labels], [value]);
 
   return (
     <Tooltip>
@@ -28,10 +35,10 @@ export function ThemeRadioGroupItem({ value }: { value: string }) {
       >
         <DropdownMenuRadioItem value={value}>
           <Icon className="size-4 text-inherit" />
-          <span className="sr-only capitalize">{value}</span>
+          <span className="sr-only">{label}</span>
         </DropdownMenuRadioItem>
       </Tooltip.Trigger>
-      <Tooltip.Content className="capitalize">{value}</Tooltip.Content>
+      <Tooltip.Content>{label}</Tooltip.Content>
     </Tooltip>
   );
 }

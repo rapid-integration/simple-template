@@ -23,21 +23,21 @@ const UserUpdatePasswordDataListItem: FunctionComponent<
     <>
       <DataList.Item {...props}>
         <DataList.ItemGroup>
-          <DataList.ItemLabel>Password</DataList.ItemLabel>
+          <DataList.ItemLabel>Пароль</DataList.ItemLabel>
           <DataList.ItemValue>********</DataList.ItemValue>
         </DataList.ItemGroup>
 
         {isMobile ? (
           <Drawer open={open} onOpenChange={setOpen} autoFocus>
             <Drawer.Trigger asChild>
-              <Button variant="outline">Edit</Button>
+              <Button variant="outline">Изм.</Button>
             </Drawer.Trigger>
             <Drawer.Content>
               <Drawer.Header>
-                <Drawer.Title>Edit Password</Drawer.Title>
+                <Drawer.Title>Редактирование пароля</Drawer.Title>
                 <Drawer.Description>
-                  You can edit password for you account. This action would not
-                  reset sessions on other devices.
+                  Вы можете изменить пароль для своей учётной записи. Это
+                  действие не сбросит сеансы на других устройствах.
                 </Drawer.Description>
               </Drawer.Header>
               <UserUpdatePasswordForm
@@ -46,7 +46,7 @@ const UserUpdatePasswordDataListItem: FunctionComponent<
               />
               <Drawer.Footer className="pt-2">
                 <Drawer.Close asChild>
-                  <Button variant="outline">Close</Button>
+                  <Button variant="outline">Закрыть</Button>
                 </Drawer.Close>
               </Drawer.Footer>
             </Drawer.Content>
@@ -54,14 +54,14 @@ const UserUpdatePasswordDataListItem: FunctionComponent<
         ) : (
           <Dialog open={open} onOpenChange={setOpen}>
             <Dialog.Trigger asChild>
-              <Button variant="outline">Edit</Button>
+              <Button variant="outline">Изм.</Button>
             </Dialog.Trigger>
             <Dialog.Content>
               <Dialog.Header>
-                <Dialog.Title>Edit Password</Dialog.Title>
+                <Dialog.Title>Редактирование пароля</Dialog.Title>
                 <Dialog.Description>
-                  You can edit password for you account. This action would not
-                  reset sessions on other devices.
+                  Вы можете изменить пароль для своей учётной записи. Это
+                  действие не сбросит сеансы на других устройствах.
                 </Dialog.Description>
               </Dialog.Header>
               <UserUpdatePasswordForm onSuccess={() => setOpen(false)} />

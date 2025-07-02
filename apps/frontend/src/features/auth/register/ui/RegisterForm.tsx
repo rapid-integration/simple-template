@@ -24,9 +24,9 @@ export function RegisterForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <Card.Header>
-          <Card.Title>Register</Card.Title>
+          <Card.Title>Регистрация</Card.Title>
           <Card.Description>
-            Create a new account if you do not have one.
+            Создайте новый аккаунт, если у вас его ещё нет.
           </Card.Description>
         </Card.Header>
         <Card.Content>
@@ -37,17 +37,17 @@ export function RegisterForm({
                 name="username"
                 render={({ field }) => (
                   <Form.Item className="flex flex-col gap-2">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control>
                       <Input
-                        placeholder="Enter your username…"
+                        placeholder="Введите новое имя пользователя…"
                         autoComplete="username"
                         spellCheck={false}
                         {...field}
                       />
                     </Form.Control>
                     <Form.Description>
-                      The username must be unique.
+                      Это имя пользователя должно быть уникально.
                     </Form.Description>
                     <Form.Message />
                   </Form.Item>
@@ -59,11 +59,11 @@ export function RegisterForm({
                 name="password1"
                 render={({ field }) => (
                   <Form.Item className="flex flex-col gap-2">
-                    <Form.Label>New Password</Form.Label>
+                    <Form.Label>Новый пароль</Form.Label>
                     <Form.Control>
                       <Input
                         type="password"
-                        placeholder="Enter your new password…"
+                        placeholder="Введите новый пароль…"
                         autoComplete="new-password"
                         {...field}
                       />
@@ -78,11 +78,11 @@ export function RegisterForm({
                 name="password2"
                 render={({ field }) => (
                   <Form.Item className="flex flex-col gap-2">
-                    <Form.Label>Confirm New Password</Form.Label>
+                    <Form.Label>Подтверждение нового пароля</Form.Label>
                     <Form.Control>
                       <Input
                         type="password"
-                        placeholder="Enter your new password again…"
+                        placeholder="Введите новый пароль ещё раз…"
                         autoComplete="new-password"
                         {...field}
                       />
@@ -106,10 +106,10 @@ export function RegisterForm({
                   {pending ? (
                     <>
                       <LoaderIcon className="animate-spin" />
-                      <span>Registering…</span>
+                      <span>Выполняется регистрация…</span>
                     </>
                   ) : (
-                    <>Register</>
+                    <>Зарегистрироваться</>
                   )}
                 </Button>
                 <Button asChild variant="outline">
@@ -120,7 +120,7 @@ export function RegisterForm({
                         : "/login"
                     }
                   >
-                    Go to login form
+                    К форме входа
                   </Link>
                 </Button>
               </div>

@@ -12,23 +12,23 @@ import {
 export const UserUsernameSchema = z
   .string()
   .min(USER_USERNAME_MIN_LENGTH, {
-    message: `Username must be at least ${USER_USERNAME_MIN_LENGTH} characters.`,
+    message: `Имя пользователя должно быть минимум ${USER_USERNAME_MIN_LENGTH} символов.`,
   })
   .max(USER_USERNAME_MAX_LENGTH, {
-    message: `Username must be at least ${USER_USERNAME_MAX_LENGTH} characters.`,
+    message: `Имя пользователя должно быть максимум ${USER_USERNAME_MAX_LENGTH} символов.`,
   })
   .regex(new RegExp(USER_USERNAME_PATTERN), {
-    message: "Username must contain only a-z, A-Z, 0-9 and _.",
+    message: "Имя пользователя должно содержать только a-z, A-Z, 0-9 и _.",
   });
 
 export const UserPasswordSchema = z
   .string()
   .min(USER_PASSWORD_MIN_LENGTH, {
-    message: `Password must be at least ${USER_PASSWORD_MIN_LENGTH} characters.`,
+    message: `Пароль должен быть минимум ${USER_PASSWORD_MIN_LENGTH} символов.`,
   })
   .max(USER_PASSWORD_MAX_LENGTH, {
-    message: `Password must be at least ${USER_PASSWORD_MAX_LENGTH} characters.`,
+    message: `Пароль должен быть максимум ${USER_PASSWORD_MAX_LENGTH} символов.`,
   })
   .regex(new RegExp(USER_PASSWORD_PATTERN), {
-    message: "Password must contain only a-z, A-Z, 0-9 and !@#$%^&*.",
+    message: "Пароль должен содержать только a-z, A-Z, 0-9 и !@#$%^&*.",
   });

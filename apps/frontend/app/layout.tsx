@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Fira_Code } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 
@@ -8,13 +8,13 @@ import { Toaster } from "@/shared/ui/sonner";
 
 import "@/app/styles";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const firaCode = Fira_Code({
+  variable: "--font-fira-code",
   subsets: ["latin"],
 });
 
@@ -29,7 +29,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={cn(geistSans.variable, geistMono.variable)}
+      className={cn(inter.variable, firaCode.variable)}
       suppressHydrationWarning
     >
       <body>

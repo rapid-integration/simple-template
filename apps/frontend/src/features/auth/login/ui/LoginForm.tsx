@@ -24,9 +24,9 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <Card.Header>
-          <Card.Title>Login</Card.Title>
+          <Card.Title>Вход</Card.Title>
           <Card.Description>
-            Login if you already have an account.
+            Войдите, если у вас уже есть аккаунт.
           </Card.Description>
         </Card.Header>
         <Card.Content>
@@ -37,10 +37,10 @@ export function LoginForm({
                 name="username"
                 render={({ field }) => (
                   <Form.Item className="flex flex-col gap-2">
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control>
                       <Input
-                        placeholder="Enter your username…"
+                        placeholder="Введите ваше имя пользователя…"
                         autoComplete="username"
                         spellCheck={false}
                         {...field}
@@ -56,11 +56,11 @@ export function LoginForm({
                 name="password"
                 render={({ field }) => (
                   <Form.Item className="flex flex-col gap-2">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Пароль</Form.Label>
                     <Form.Control>
                       <Input
                         type="password"
-                        placeholder="Enter your password…"
+                        placeholder="Введите ваш пароль…"
                         autoComplete="password"
                         {...field}
                       />
@@ -84,10 +84,10 @@ export function LoginForm({
                   {pending ? (
                     <>
                       <LoaderIcon className="animate-spin" />
-                      <span>Logging in…</span>
+                      <span>Выполняется вход…</span>
                     </>
                   ) : (
-                    <>Login</>
+                    <>Войти</>
                   )}
                 </Button>
                 <Button asChild variant="outline">
@@ -98,7 +98,7 @@ export function LoginForm({
                         : "/register"
                     }
                   >
-                    Go to register form
+                    К форме регистрации
                   </Link>
                 </Button>
               </div>

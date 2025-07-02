@@ -5,7 +5,7 @@ import Link from "next/link";
 import Button from "@/shared/ui/button";
 
 export const metadata: Metadata = {
-  title: "Page not found",
+  title: "Страница не найдена",
 };
 
 export default function NotFound() {
@@ -13,15 +13,15 @@ export default function NotFound() {
     <main className="flex grow flex-col items-center justify-center gap-4">
       <TrafficConeIcon className="size-24" />
       <hgroup className="space-y-1.5 text-center">
-        <h1 className="text-3xl font-semibold">Page not found</h1>
+        <h1 className="text-3xl font-semibold">Страница не найдена</h1>
         <p className="text-lg text-muted-foreground">
-          This page does not exist
+          Этой страницы не существует
         </p>
       </hgroup>
       <Button asChild size="lg">
         <Link href="/">
           <ArrowLeftIcon />
-          <span>Go to home</span>
+          <span>На главную</span>
         </Link>
       </Button>
     </main>

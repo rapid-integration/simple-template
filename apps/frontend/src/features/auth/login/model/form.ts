@@ -7,8 +7,8 @@ import { LoginFormFieldValues } from "./types";
 import { login } from "../api/actions";
 
 const errors = {
-  401: "Wrong password.",
-  404: "There is no user with such username.",
+  401: "Введён неверный пароль.",
+  404: "Пользователя с таким именем пользователя не существует.",
 } as const;
 
 export const useLoginForm = (

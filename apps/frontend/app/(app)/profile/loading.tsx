@@ -5,7 +5,7 @@ import Page from "@/shared/ui/page";
 import Skeleton from "@/shared/ui/skeleton";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "Профиль",
 };
 
 export default function Loading() {
