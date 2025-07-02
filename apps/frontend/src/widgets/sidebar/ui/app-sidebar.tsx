@@ -4,7 +4,7 @@ import { HomeIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-import { CurrentUserResponse } from "@/shared/api/types";
+import { CurrentUserResponse } from "@/shared/api";
 import Sidebar from "@/shared/ui/sidebar";
 
 import { NavMain } from "./nav-main";

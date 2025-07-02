@@ -12,7 +12,7 @@ import { startTransition, useActionState } from "react";
 
 import { parseInitials } from "@/entities/user";
 import { logout } from "@/features/auth/logout";
-import { CurrentUserResponse } from "@/shared/api/types";
+import { CurrentUserResponse } from "@/shared/api";
 import Avatar from "@/shared/ui/avatar";
 import DropdownMenu from "@/shared/ui/dropdown-menu";
 import Sidebar from "@/shared/ui/sidebar";

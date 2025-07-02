@@ -2,7 +2,7 @@
 
 import { cache } from "react";
 
-import client from "@/shared/api/client";
+import { client } from "@/shared/api";
 
 import { USER_CACHE_USERS_ME_TAG } from "./tags";
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 
-import { UserResponse } from "@/shared/api/types";
+import { UserResponse } from "@/shared/api";
 
 import UserProfileInfo from "./UserProfileInfo";
 import UserProfileSection from "./UserProfileSection";

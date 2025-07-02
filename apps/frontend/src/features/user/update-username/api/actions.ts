@@ -3,8 +3,7 @@
 import { revalidateTag } from "next/cache";
 
 import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
-import client from "@/shared/api/client";
-import { UserUsernameRequest } from "@/shared/api/types";
+import { client, UserUsernameRequest } from "@/shared/api";
 
 export async function updateCurrentUserUsername(body: UserUsernameRequest) {
   const result = await client.PATCH("/users/me/username", { body });

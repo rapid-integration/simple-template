@@ -3,9 +3,7 @@
 import { revalidateTag } from "next/cache";
 
 import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
-import client from "@/shared/api/client";
-import { setSession } from "@/shared/api/session";
-import { UserRegistrationRequest } from "@/shared/api/types";
+import { client, setSession, UserRegistrationRequest } from "@/shared/api";
 import { redirectToNextUrl } from "@/shared/lib/server/redirect";
 
 export async function register(body: UserRegistrationRequest) {

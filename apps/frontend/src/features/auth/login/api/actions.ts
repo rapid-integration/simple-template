@@ -3,10 +3,12 @@
 import { revalidateTag } from "next/cache";
 
 import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
-import client from "@/shared/api/client";
-import { serializeFormData } from "@/shared/api/serializers";
-import { setSession } from "@/shared/api/session";
-import { BodyLoginAuthLoginPost } from "@/shared/api/types";
+import {
+  BodyLoginAuthLoginPost,
+  client,
+  serializeFormData,
+  setSession,
+} from "@/shared/api";
 import { redirectToNextUrl } from "@/shared/lib/server/redirect";
 
 export async function login(body: BodyLoginAuthLoginPost) {
