@@ -10,7 +10,7 @@ export {
 } from "./config";
 export { parseInitials } from "./lib/parseInitials";
 export { UserPasswordSchema, UserUsernameSchema } from "./model/schema";
-export { default as UserProfile } from "./ui/UserProfile";
-export { default as UserProfileAbout } from "./ui/UserProfileAbout";
-export { default as UserProfileInfo } from "./ui/UserProfileInfo";
-export { default as UserProfileSection } from "./ui/UserProfileSection";
+export { default as UserCreatedAtDataListItem } from "./ui/UserCreatedAtDataListItem";
+export { default as UserIdDataListItem } from "./ui/UserIdDataListItem";
+export { default as UserPasswordDataListItem } from "./ui/UserPasswordDataListItem";
+export { default as UserUsernameDataListItem } from "./ui/UserUsernameDataListItem";

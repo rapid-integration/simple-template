@@ -1,79 +1,73 @@
 "use client";
 
+import { EditIcon } from "lucide-react";
 import { ComponentProps, FunctionComponent, useState } from "react";
 
+import { UserUsernameDataListItem } from "@/entities/user";
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import Button from "@/shared/ui/button";
-import DataList from "@/shared/ui/data-list";
 import Dialog from "@/shared/ui/dialog";
 import Drawer from "@/shared/ui/drawer";
+import Tooltip from "@/shared/ui/tooltip";
 
 import UserUpdateUsernameForm from "./UserUpdateUsernameForm";
 
 interface UserUpdateUsernameDataListItemProps
-  extends ComponentProps<typeof DataList.Item> {
-  username: string;
-}
+  extends Omit<ComponentProps<typeof UserUsernameDataListItem>, "action"> {}
 
 const UserUpdateUsernameDataListItem: FunctionComponent<
   UserUpdateUsernameDataListItemProps
-> = ({ username, ...otherProps }) => {
+> = ({ value: username, ...otherProps }) => {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
-  return (
-    <>
-      <DataList.Item {...otherProps}>
-        <DataList.ItemGroup>
-          <DataList.ItemLabel>Имя пользователя</DataList.ItemLabel>
-          <DataList.ItemValue>{username}</DataList.ItemValue>
-        </DataList.ItemGroup>
+  const Root = isMobile ? Drawer : Dialog;
 
-        {isMobile ? (
-          <Drawer open={open} onOpenChange={setOpen} autoFocus>
-            <Drawer.Trigger asChild>
-              <Button variant="outline">Изм.</Button>
-            </Drawer.Trigger>
-            <Drawer.Content>
-              <Drawer.Header>
-                <Drawer.Title>Редактирование имени пользователя</Drawer.Title>
-                <Drawer.Description>
-                  Вы можете установить публичное имя пользователя.
-                </Drawer.Description>
-              </Drawer.Header>
-              <UserUpdateUsernameForm
-                defaultValues={{ username }}
-                onSuccess={() => setOpen(false)}
-                className="px-4"
-              />
-              <Drawer.Footer className="pt-2">
-                <Drawer.Close asChild>
+  return (
+    <UserUsernameDataListItem
+      value={username}
+      action={
+        <Root open={open} onOpenChange={setOpen} autoFocus={isMobile}>
+          <Tooltip disableHoverableContent>
+            <Tooltip.Trigger asChild>
+              <Root.Trigger asChild>
+                <Button variant="outline" size="icon">
+                  <EditIcon />
+                  <span className="sr-only">
+                    Редактировать имя пользователя
+                  </span>
+                </Button>
+              </Root.Trigger>
+            </Tooltip.Trigger>
+            <Tooltip.Content side="left">
+              Редактировать имя пользователя
+            </Tooltip.Content>
+          </Tooltip>
+
+          <Root.Content>
+            <Root.Header>
+              <Root.Title>Редактирование имени пользователя</Root.Title>
+              <Root.Description>
+                Вы можете установить публичное имя пользователя.
+              </Root.Description>
+            </Root.Header>
+            <UserUpdateUsernameForm
+              defaultValues={{ username }}
+              onSuccess={() => setOpen(false)}
+              className={isMobile ? "px-4" : undefined}
+            />
+            {isMobile && (
+              <Root.Footer className="pt-2">
+                <Root.Close asChild>
                   <Button variant="outline">Закрыть</Button>
-                </Drawer.Close>
-              </Drawer.Footer>
-            </Drawer.Content>
-          </Drawer>
-        ) : (
-          <Dialog open={open} onOpenChange={setOpen}>
-            <Dialog.Trigger asChild>
-              <Button variant="outline">Изм.</Button>
-            </Dialog.Trigger>
-            <Dialog.Content>
-              <Dialog.Header>
-                <Dialog.Title>Редактирование имени пользователя</Dialog.Title>
-                <Dialog.Description>
-                  Вы можете установить публичное имя пользователя.
-                </Dialog.Description>
-              </Dialog.Header>
-              <UserUpdateUsernameForm
-                defaultValues={{ username }}
-                onSuccess={() => setOpen(false)}
-              />
-            </Dialog.Content>
-          </Dialog>
-        )}
-      </DataList.Item>
-    </>
+                </Root.Close>
+              </Root.Footer>
+            )}
+          </Root.Content>
+        </Root>
+      }
+      {...otherProps}
+    />
   );
 };
 

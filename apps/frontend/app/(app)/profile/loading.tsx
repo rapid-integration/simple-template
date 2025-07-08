@@ -18,7 +18,10 @@ export default function Loading() {
           <Skeleton className="mx-auto size-24 rounded-full" />
           <Skeleton className="mx-auto h-8 w-1/2" />
         </div>
-        <Skeleton className="h-34.75 w-full" />
+        <div className="flex flex-col gap-4">
+          <Skeleton className="h-17.5 w-full" />
+          <Skeleton className="h-34.75 w-full" />
+        </div>
       </Page.Content>
     </Page>
   );

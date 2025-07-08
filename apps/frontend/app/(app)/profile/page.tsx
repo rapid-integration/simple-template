@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
-import { getCurrentUser, UserProfile } from "@/entities/user";
+import { getCurrentUser } from "@/entities/user";
 import { ProfilePageBar } from "@/pages/profile";
 import Page from "@/shared/ui/page";
+import { UserProfile } from "@/widgets/profile";
 
 export const metadata: Metadata = {
   title: "Профиль",

@@ -2,9 +2,8 @@
 
 import { FunctionComponent } from "react";
 
+import { parseInitials } from "@/entities/user";
 import Avatar from "@/shared/ui/avatar";
-
-import { parseInitials } from "../lib/parseInitials";
 
 interface UserProfileSectionProps {
   name: string;

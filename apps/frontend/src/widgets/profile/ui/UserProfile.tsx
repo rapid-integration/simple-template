@@ -13,7 +13,11 @@ const UserProfile: FunctionComponent<UserProfileProps> = ({ user }) => {
   return (
     <div className="flex flex-col gap-8">
       <UserProfileSection name={user.username} />
-      <UserProfileInfo created_at={user.created_at} id={user.id} />
+      <UserProfileInfo
+        username={user.username}
+        created_at={user.created_at}
+        id={user.id}
+      />
     </div>
   );
 };
