@@ -161,6 +161,9 @@ services:
       - type: bind
         source: ./apps/frontend/middleware.ts
         target: /app/middleware.ts
+      - type: bind
+        source: ./apps/frontend/next.config.ts
+        target: /app/next.config.ts
     networks:
       - template-network
     profiles:
