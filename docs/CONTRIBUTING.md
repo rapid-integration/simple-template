@@ -18,9 +18,9 @@
 
 1. Скопируйте пример конфигурации окружения:
 
-```sh
-cp .env.example .env
-```
+   ```sh
+   cp .env.example .env
+   ```
 
 2. Заполните и настройте ваш `.env`.
 
@@ -39,7 +39,7 @@ cp .env.example .env
 docker compose --profile dev up --build
 ```
 
-#### Остановка с удалением volumes
+#### Очистка с удалением volumes
 
 ```sh
 docker compose --profile dev down -v
