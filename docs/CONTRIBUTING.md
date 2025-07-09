@@ -27,7 +27,7 @@ cp .env.example .env
    Вот несколько полезных ссылок, которые вам могут пригодиться в этом процессе:
 
    - **Telegram [@BotFather](https://t.me/BotFather)**: используется для получения `ALERTMANAGER_TELEGRAM_BOT_TOKEN`.
-   - **Telegram [@getmyid_bot](https://t.me/BotFather)**: используется для получения `ALERTMANAGER_TELEGRAM_CHAT_ID`.
+   - **Telegram [@getmyid_bot](https://t.me/getmyid_bot)**: используется для получения `ALERTMANAGER_TELEGRAM_CHAT_ID`.
 
 ## Управление сервисами и общие команды
 
