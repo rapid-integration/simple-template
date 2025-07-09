@@ -2,8 +2,7 @@
 
 ## Создание миграций и взаимодействие с alembic
 
-0. Убедитесь, что вы находитесь в директории `apps/backend` и виртуальное окружение Python,
-   которое располагается в директории `apps/backend/.venv` ([имя директории с окружением важно](#почему-виртуальное-окружение-python-должно-располагаться-именно-в-appsbackendvenv-а-не-где-то-ещё)), активно.
+0. Для начала убедитесь, что вы находитесь в директории `apps/backend` и ваше виртуальное окружение активно.
 
 ```sh
 cd apps/backend
@@ -42,11 +41,3 @@ BACKEND_POSTGRES_HOST="localhost" alembic revision --autogenerate -m "message"
 ```sh
 docker compose down postgres -v --remove-orphans
 ```
-
-## FAQ
-
-### Почему виртуальное окружение Python должно располагаться именно в `apps/backend/.venv`, а не где-то ещё?
-
-Когда вы устанавливаете зависимости [dev](../requirements/dev.txt), то помимо скаченных библиотек создаётся
-бинарник ruff, который используется в качестве `executable` в хуках `alembic` для соблюдения код-стайла:
-`%(here)s/.venv/bin/ruff` (подробнее смотрите в файле [`pyproject.toml`](../pyproject.toml)).
