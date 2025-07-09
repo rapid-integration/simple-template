@@ -1,20 +1,60 @@
-- dev
-- dev-backend
-- prod
-- test
-- test-e2e
-- test-unit
+# Описание compose профилей и сервисов
 
-- backend
-- backend-dev
-- backend-test-e2e
-- backend-test-unit
-- frontend
-- frontend-dev
-- postgres
-- node-exporter
-- prometheus
-- alertmanager
-- grafana
-- nginx
-- nginx-dev
+Этот файл описывает для чего нужен тот или иной сервис.
+
+Чтобы посмотреть типовые сценарии использования, прочитайте общее [руководство по разработке](../CONTRIBUTING.md) или [руководство по развёртыванию](../DEPLOYMENT.md).
+
+## Профили
+
+- `dev` — основной профиль для разработки, включает:
+
+  - `backend-dev` (с автоматической перезагрузкой при изменениях)
+  - `frontend-dev` (с HMR)
+  - `postgres`
+  - `nginx-dev` (80/443)
+
+- `dev-backend` — профиль только для разработки бэкенда, включает:
+
+  - `backend-dev` (с автоматической перезагрузкой при изменениях)
+  - `postgres`
+
+- `prod` — продуктовое окружение, включает:
+
+  - `backend`
+  - `frontend`
+  - `postgres`
+  - `nginx` (80/443)
+  - `node-exporter`
+  - `prometheus`
+  - `alertmanager`
+  - `grafana`
+
+- `test` — полный набор тестов, включает:
+
+  - `backend-test-e2e`
+  - `backend-test-unit`
+
+- `test-e2e` — профиль для end-to-end тестирования, включает:
+
+  - `backend-test-e2e`
+
+- `test-unit` — профиль для юнит-тестов, включает:
+
+  - `backend-test-unit`
+
+## Сервисы
+
+- `backend` — продакшен версия бэкенда.
+- `backend-dev` — версия бэкенда для разработки с автоматической перезагрузкой при изменениях, доступная на http://127.0.0.1:8000.
+- `backend-test` — запуск всех тестов бэкенда.
+- `backend-test-e2e` — запуск только e2e тестов бэкенда.
+- `backend-test-unit` — запуск только unit тестов бэкенда.
+- `frontend` — продакшен версия фронтенда.
+- `frontend-dev` — версия фронтенда для разработки с HMR.
+- `postgres` — база данных (общая для `dev`, `test` и `prod`)
+- `node-exporter` — cбор метрик для prometheus'а.
+- `prometheus` — мониторинг и алерты, доступный на http://127.0.0.1:9090.
+- `alertmanager` — обработка алертов.
+- `grafana` — визуализация метрик.
+- `nginx` — продакшен прокси (80/443).
+- `nginx-dev` — прокси для локальной разработки (80/443).
