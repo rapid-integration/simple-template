@@ -45,12 +45,12 @@ class AuditMixin:
     """Provides automatic create and update timestamping."""
 
     created_at: Mapped[datetime] = mapped_column(
-        type_=DateTime(timezone=True),
+        DateTime(timezone=True),
         server_default=func.now(),
     )
 
     updated_at: Mapped[datetime] = mapped_column(
-        type_=DateTime(timezone=True),
+        DateTime(timezone=True),
         server_default=func.now(),
         onupdate=func.now(),
     )
