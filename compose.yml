@@ -176,6 +176,8 @@ services:
     env_file:
       - path: .env
         required: true
+    ports:
+      - 127.0.0.1:${BACKEND_POSTGRES_PORT}:${BACKEND_POSTGRES_PORT}
     environment:
       - PGUSER=${BACKEND_POSTGRES_USERNAME}
       - POSTGRES_DB=${BACKEND_POSTGRES_PATH}
@@ -216,8 +218,8 @@ services:
     container_name: template-prometheus
     image: prom/prometheus:v3.3.0
     restart: unless-stopped
-    # ports:
-    #   - 9090:9090
+    ports:
+      - 127.0.0.1:9090:9090
     healthcheck:
       test: ["CMD", "wget", "-O", "-", "http://localhost:9090/-/healthy"]
       interval: 1m30s
