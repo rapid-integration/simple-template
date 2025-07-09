@@ -21,24 +21,28 @@
    source .venv/bin/activate
    ```
 
-3. Установите необходимую из групп зависимостей исходя от того, что вы хотите делать:
+3. Установите необходимые зависимости для разработки:
 
-   - Для разработки:
+   ```sh
+   pip install -r requirements/dev.txt
+   ```
 
-     ```sh
-     pip install -r requirements/dev.txt
-     ```
+   Если вы тестировщик, то вам потребуется дополнительно установить зависимости для тестирования:
 
-   - Для тестирования:
-
-     ```sh
-     pip install -r requirements/test.txt
-     ```
+   ```sh
+   pip install -r requirements/test.txt
+   ```
 
 4. Установите [pre-commit](https://pre-commit.com/) git хуки для соблюдения код-стайла:
 
    ```sh
    pre-commit install
+   ```
+
+   Вы также можете проверить код-стайл без `git commit`, используя следующую команду:
+
+   ```sh
+   pre-commit
    ```
 
 > [!NOTE]
