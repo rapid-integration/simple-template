@@ -1,6 +1,8 @@
 - dev
 - prod
 - test
+- test-e2e
+- test-unit
 
 - backend
 - backend-dev
