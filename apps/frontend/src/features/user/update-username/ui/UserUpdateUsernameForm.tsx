@@ -63,11 +63,7 @@ const UserUpdateUsernameForm: FunctionComponent<
           )}
         />
 
-        {form.formState.errors.root && (
-          <p className="text-sm text-destructive">
-            {form.formState.errors.root.message}
-          </p>
-        )}
+        <Form.Response />
 
         <Button
           type="submit"
