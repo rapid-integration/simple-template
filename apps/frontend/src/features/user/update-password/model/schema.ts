@@ -9,6 +9,6 @@ export const UserUpdatePasswordFormSchema = z
     newPassword2: UserPasswordSchema,
   })
   .refine((data) => data.newPassword1 === data.newPassword2, {
-    message: "New passwords do not match",
+    message: "Подтверждение нового пароля не совпадает с новым паролем.",
     path: ["newPassword2"],
   });
