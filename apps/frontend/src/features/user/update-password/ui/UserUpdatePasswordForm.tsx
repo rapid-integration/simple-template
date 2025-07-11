@@ -79,7 +79,7 @@ const UserUpdatePasswordForm: FunctionComponent<
           name="newPassword2"
           render={({ field }) => (
             <Form.Item>
-              <Form.Label>Подтвердите новый пароль</Form.Label>
+              <Form.Label>Подтверждение нового пароля</Form.Label>
               <Form.Control>
                 <Input
                   placeholder="Введите новый пароль ещё раз…"
