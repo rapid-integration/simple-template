@@ -2,6 +2,7 @@
 
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
+import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
 import {
   Controller,
@@ -73,16 +74,12 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 
-function FormItem({ className, ...props }: React.ComponentProps<"div">) {
+function FormItem(props: React.ComponentProps<"div">) {
   const id = React.useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div
-        data-slot="form-item"
-        className={cn("grid gap-2", className)}
-        {...props}
-      />
+      <div data-slot="form-item" {...props} />
     </FormItemContext.Provider>
   );
 }
@@ -97,7 +94,10 @@ function FormLabel({
     <Label
       data-slot="form-label"
       data-error={!!error}
-      className={cn("data-[error=true]:text-destructive", className)}
+      className={cn(
+        "mb-2 transition-colors data-[error=true]:text-destructive",
+        className,
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -130,59 +130,105 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
     <p
       data-slot="form-description"
       id={formDescriptionId}
-      className={cn("text-sm text-muted-foreground", className)}
+      className={cn("mt-2 text-sm text-muted-foreground", className)}
       {...props}
     />
   );
 }
 
-function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
+function FormMessage({
+  className,
+  ...props
+}: React.ComponentProps<typeof motion.p>) {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message ?? "") : props.children;
 
-  if (!body) {
-    return null;
-  }
-
   return (
-    <p
-      data-slot="form-message"
-      id={formMessageId}
-      className={cn("text-sm text-destructive", className)}
-      {...props}
-    >
-      {body}
-    </p>
+    <AnimatePresence>
+      {body && (
+        <motion.p
+          data-slot="form-message"
+          id={formMessageId}
+          initial={{
+            height: 0,
+            opacity: 0,
+            y: -20,
+          }}
+          animate={{
+            height: "auto",
+            opacity: 1,
+            y: 0,
+          }}
+          exit={{
+            height: 0,
+            opacity: 0,
+            y: -20,
+          }}
+          transition={{
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.15,
+          }}
+          className={cn("overflow-hidden text-sm text-destructive", className)}
+          {...props}
+        >
+          <span className="mt-2 block">{body as React.ReactNode}</span>
+        </motion.p>
+      )}
+    </AnimatePresence>
   );
 }
 
-function FormResponse({ className, ...props }: React.ComponentProps<"p">) {
+function FormResponse({
+  className,
+  ...props
+}: React.ComponentProps<typeof motion.p>) {
   const form = useFormContext();
   const error = form.formState.errors.root;
 
-  if (!error) {
-    return null;
-  }
-
   return (
-    <p
-      data-slot="form-message"
-      className={cn("text-sm text-destructive", className)}
-      {...props}
-    >
-      {error.message}
-    </p>
+    <AnimatePresence>
+      {error?.message && (
+        <motion.p
+          data-slot="form-message"
+          initial={{
+            height: 0,
+            opacity: 0,
+            y: -20,
+          }}
+          animate={{
+            height: "auto",
+            opacity: 1,
+            y: 0,
+          }}
+          exit={{
+            height: 0,
+            opacity: 0,
+            y: -20,
+          }}
+          transition={{
+            type: "tween",
+            ease: "easeInOut",
+            duration: 0.15,
+          }}
+          className={cn("overflow-hidden text-sm text-destructive", className)}
+          {...props}
+        >
+          <span className="mt-2 block">{error.message as React.ReactNode}</span>
+        </motion.p>
+      )}
+    </AnimatePresence>
   );
 }
 
 export {
   FormControl,
   FormDescription,
-  FormResponse,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormResponse,
   FormRoot,
   useFormField,
 };

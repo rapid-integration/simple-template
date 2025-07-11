@@ -36,7 +36,7 @@ export function RegisterForm({
                 control={form.control}
                 name="username"
                 render={({ field }) => (
-                  <Form.Item className="flex flex-col gap-2">
+                  <Form.Item>
                     <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control>
                       <Input
@@ -58,7 +58,7 @@ export function RegisterForm({
                 control={form.control}
                 name="password1"
                 render={({ field }) => (
-                  <Form.Item className="flex flex-col gap-2">
+                  <Form.Item>
                     <Form.Label>Новый пароль</Form.Label>
                     <Form.Control>
                       <Input
@@ -77,7 +77,7 @@ export function RegisterForm({
                 control={form.control}
                 name="password2"
                 render={({ field }) => (
-                  <Form.Item className="flex flex-col gap-2">
+                  <Form.Item>
                     <Form.Label>Подтверждение нового пароля</Form.Label>
                     <Form.Control>
                       <Input

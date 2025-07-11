@@ -36,7 +36,7 @@ export function LoginForm({
                 control={form.control}
                 name="username"
                 render={({ field }) => (
-                  <Form.Item className="flex flex-col gap-2">
+                  <Form.Item>
                     <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control>
                       <Input
@@ -55,7 +55,7 @@ export function LoginForm({
                 control={form.control}
                 name="password"
                 render={({ field }) => (
-                  <Form.Item className="flex flex-col gap-2">
+                  <Form.Item>
                     <Form.Label>Пароль</Form.Label>
                     <Form.Control>
                       <Input

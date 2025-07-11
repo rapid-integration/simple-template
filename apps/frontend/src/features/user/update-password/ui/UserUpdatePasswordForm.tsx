@@ -40,7 +40,7 @@ const UserUpdatePasswordForm: FunctionComponent<
           control={form.control}
           name="oldPassword"
           render={({ field }) => (
-            <Form.Item className="flex flex-col gap-2">
+            <Form.Item>
               <Form.Label>Старый пароль</Form.Label>
               <Form.Control>
                 <Input
@@ -59,7 +59,7 @@ const UserUpdatePasswordForm: FunctionComponent<
           control={form.control}
           name="newPassword1"
           render={({ field }) => (
-            <Form.Item className="flex flex-col gap-2">
+            <Form.Item>
               <Form.Label>Новый пароль</Form.Label>
               <Form.Control>
                 <Input
@@ -78,7 +78,7 @@ const UserUpdatePasswordForm: FunctionComponent<
           control={form.control}
           name="newPassword2"
           render={({ field }) => (
-            <Form.Item className="flex flex-col gap-2">
+            <Form.Item>
               <Form.Label>Подтвердите новый пароль</Form.Label>
               <Form.Control>
                 <Input

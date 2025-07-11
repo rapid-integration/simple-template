@@ -45,7 +45,7 @@ const UserUpdateUsernameForm: FunctionComponent<
           control={form.control}
           name="username"
           render={({ field }) => (
-            <Form.Item className="flex flex-col gap-2">
+            <Form.Item>
               <Form.Label>Новое имя пользователя</Form.Label>
               <Form.Control>
                 <Input
