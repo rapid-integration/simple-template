@@ -9,6 +9,6 @@ export const RegisterFormSchema = z
     password2: UserPasswordSchema,
   })
   .refine((data) => data.password1 === data.password2, {
-    message: "New passwords do not match",
+    message: "Подтверждение нового пароля не совпадает с новым паролем.",
     path: ["password2"],
   });
