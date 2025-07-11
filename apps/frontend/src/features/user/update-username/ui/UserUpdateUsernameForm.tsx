@@ -38,7 +38,7 @@ const UserUpdateUsernameForm: FunctionComponent<
     <Form {...form}>
       <form
         onSubmit={submit}
-        className={cn("flex w-full grow flex-col gap-6", className)}
+        className={cn("flex w-full grow flex-col", className)}
         {...otherProps}
       >
         <Form.Field
@@ -67,6 +67,7 @@ const UserUpdateUsernameForm: FunctionComponent<
 
         <Button
           type="submit"
+          className="mt-6"
           disabled={
             pending || !form.formState.isValid || !form.formState.isDirty
           }

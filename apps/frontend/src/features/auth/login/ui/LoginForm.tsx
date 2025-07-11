@@ -31,12 +31,12 @@ export function LoginForm({
         </Card.Header>
         <Card.Content>
           <Form {...form}>
-            <form onSubmit={submit} className="flex flex-col gap-6">
+            <form onSubmit={submit} className="flex flex-col">
               <Form.Field
                 control={form.control}
                 name="username"
                 render={({ field }) => (
-                  <Form.Item>
+                  <Form.Item className="mb-6">
                     <Form.Label>Имя пользователя</Form.Label>
                     <Form.Control>
                       <Input
@@ -72,7 +72,7 @@ export function LoginForm({
 
               <Form.Response />
 
-              <div className="flex flex-col gap-2">
+              <div className="mt-6 flex flex-col gap-2">
                 <Button
                   type="submit"
                   disabled={

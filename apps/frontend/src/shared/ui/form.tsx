@@ -214,7 +214,7 @@ function FormResponse({
           className={cn("overflow-hidden text-sm text-destructive", className)}
           {...props}
         >
-          <span className="mt-2 block">{error.message as React.ReactNode}</span>
+          <span className="mt-4 block">{error.message as React.ReactNode}</span>
         </motion.p>
       )}
     </AnimatePresence>

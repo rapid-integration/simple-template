@@ -33,14 +33,14 @@ const UserUpdatePasswordForm: FunctionComponent<
     <Form {...form}>
       <form
         onSubmit={submit}
-        className={cn("flex w-full grow flex-col gap-6", className)}
+        className={cn("flex w-full grow flex-col", className)}
         {...otherProps}
       >
         <Form.Field
           control={form.control}
           name="oldPassword"
           render={({ field }) => (
-            <Form.Item>
+            <Form.Item className="mb-6">
               <Form.Label>Старый пароль</Form.Label>
               <Form.Control>
                 <Input
@@ -59,7 +59,7 @@ const UserUpdatePasswordForm: FunctionComponent<
           control={form.control}
           name="newPassword1"
           render={({ field }) => (
-            <Form.Item>
+            <Form.Item className="mb-6">
               <Form.Label>Новый пароль</Form.Label>
               <Form.Control>
                 <Input
@@ -97,6 +97,7 @@ const UserUpdatePasswordForm: FunctionComponent<
 
         <Button
           type="submit"
+          className="mt-6"
           disabled={
             !form.formState.isDirty || !form.formState.isValid || pending
           }
