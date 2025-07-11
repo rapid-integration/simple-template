@@ -23,12 +23,12 @@ export const useLoginForm = (
   const username = form.watch("username");
   const password = form.watch("password");
 
-  const [response, action, pending] = useActionState(
+  const [response, dispatch, pending] = useActionState(
     login.bind(null, { username, password, scope: "" }),
     undefined,
   );
 
-  const submit = form.handleSubmit(() => startTransition(action));
+  const submit = form.handleSubmit(() => startTransition(dispatch));
 
   useEffect(() => {
     if (response) {

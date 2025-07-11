@@ -27,12 +27,12 @@ export const useUserUpdatePasswordForm = ({
   const old_password = form.watch("oldPassword");
   const new_password = form.watch("newPassword1");
 
-  const [response, action, pending] = useActionState(
+  const [response, dispatch, pending] = useActionState(
     updateCurrentUserPassword.bind(null, { old_password, new_password }),
     undefined,
   );
 
-  const submit = form.handleSubmit(() => startTransition(action));
+  const submit = form.handleSubmit(() => startTransition(dispatch));
 
   useEffect(() => {
     if (!response) {

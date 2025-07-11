@@ -26,12 +26,12 @@ export const useRegisterForm = (
   const username = form.watch("username");
   const password = form.watch("password1");
 
-  const [response, action, pending] = useActionState(
+  const [response, dispatch, pending] = useActionState(
     register.bind(null, { username, password }),
     undefined,
   );
 
-  const submit = form.handleSubmit(() => startTransition(action));
+  const submit = form.handleSubmit(() => startTransition(dispatch));
 
   useEffect(() => {
     if (response) {

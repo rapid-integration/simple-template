@@ -25,7 +25,7 @@ export const useUserUpdateUsernameForm = ({
 
   const username = form.watch("username");
 
-  const [response, action, pending] = useActionState(
+  const [response, dispatch, pending] = useActionState(
     updateCurrentUserUsername.bind(null, { username }),
     undefined,
   );
@@ -44,7 +44,7 @@ export const useUserUpdateUsernameForm = ({
     }
   }, [response]);
 
-  const submit = form.handleSubmit(() => startTransition(action));
+  const submit = form.handleSubmit(() => startTransition(dispatch));
 
   return [form, submit, pending] as const;
 };
