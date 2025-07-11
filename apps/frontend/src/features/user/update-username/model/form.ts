@@ -30,6 +30,8 @@ export const useUserUpdateUsernameForm = ({
     undefined,
   );
 
+  const submit = form.handleSubmit(() => startTransition(dispatch));
+
   useEffect(() => {
     if (!response) {
       return;
@@ -43,8 +45,6 @@ export const useUserUpdateUsernameForm = ({
       });
     }
   }, [response]);
-
-  const submit = form.handleSubmit(() => startTransition(dispatch));
 
   return [form, submit, pending] as const;
 };
