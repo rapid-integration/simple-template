@@ -6,10 +6,6 @@ import { UserUpdatePasswordFormSchema } from "./schema";
 import { UserUpdatePasswordFormFieldValues } from "./types";
 import { updateCurrentUserPassword } from "../api/actions";
 
-const errors = {
-  403: "Старый пароль введён неверно.",
-} as const;
-
 export const useUserUpdatePasswordForm = ({
   defaultValues = { oldPassword: "", newPassword1: "", newPassword2: "" },
   onSuccess,
@@ -38,13 +34,15 @@ export const useUserUpdatePasswordForm = ({
     if (!response) {
       return;
     }
-
     if (response.ok) {
-      onSuccess?.();
-    } else {
-      form.setError("root", {
-        message: errors[response.status as keyof typeof errors],
-      });
+      return onSuccess?.();
+    }
+
+    switch (response.status) {
+      case 403:
+        return form.setError("oldPassword", {
+          message: "Старый пароль введён неверно.",
+        });
     }
   }, [response]);
 

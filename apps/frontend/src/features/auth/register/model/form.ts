@@ -6,10 +6,6 @@ import { RegisterFormSchema } from "./schema";
 import { RegisterFormFieldValues } from "./types";
 import { register } from "../api/actions";
 
-const errors = {
-  409: "Это имя пользователя уже занято.",
-} as const;
-
 export const useRegisterForm = (
   defaultValues: RegisterFormFieldValues = {
     username: "",
@@ -34,10 +30,11 @@ export const useRegisterForm = (
   const submit = form.handleSubmit(() => startTransition(dispatch));
 
   useEffect(() => {
-    if (response) {
-      form.setError("root", {
-        message: errors[response.status as keyof typeof errors],
-      });
+    switch (response?.status) {
+      case 409:
+        return form.setError("username", {
+          message: "Это имя пользователя уже занято.",
+        });
     }
   }, [response]);
 

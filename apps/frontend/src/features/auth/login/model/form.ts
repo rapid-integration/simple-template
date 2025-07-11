@@ -6,11 +6,6 @@ import { LoginFormSchema } from "./schema";
 import { LoginFormFieldValues } from "./types";
 import { login } from "../api/actions";
 
-const errors = {
-  401: "Введён неверный пароль.",
-  404: "Пользователя с таким именем пользователя не существует.",
-} as const;
-
 export const useLoginForm = (
   defaultValues: LoginFormFieldValues = { username: "", password: "" },
 ) => {
@@ -31,10 +26,15 @@ export const useLoginForm = (
   const submit = form.handleSubmit(() => startTransition(dispatch));
 
   useEffect(() => {
-    if (response) {
-      form.setError("root", {
-        message: errors[response.status as keyof typeof errors],
-      });
+    switch (response?.status) {
+      case 401:
+        return form.setError("password", {
+          message: "Введён неверный пароль.",
+        });
+      case 404:
+        return form.setError("username", {
+          message: "Пользователя с таким именем пользователя не существует.",
+        });
     }
   }, [response]);
 

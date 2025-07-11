@@ -6,10 +6,6 @@ import { UserUpdateUsernameFormSchema } from "./schema";
 import { UserUpdateUsernameFormFieldValues } from "./types";
 import { updateCurrentUserUsername } from "../api/actions";
 
-const errors = {
-  409: "Это имя пользователя уже занято.",
-} as const;
-
 export const useUserUpdateUsernameForm = ({
   defaultValues = { username: "" },
   onSuccess,
@@ -36,13 +32,15 @@ export const useUserUpdateUsernameForm = ({
     if (!response) {
       return;
     }
-
     if (response.ok) {
-      onSuccess?.();
-    } else {
-      form.setError("root", {
-        message: errors[response.status as keyof typeof errors],
-      });
+      return onSuccess?.();
+    }
+
+    switch (response.status) {
+      case 409:
+        return form.setError("username", {
+          message: "Это имя пользователя уже занято.",
+        });
     }
   }, [response]);
 
