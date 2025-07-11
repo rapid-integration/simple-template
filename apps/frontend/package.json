@@ -8,7 +8,7 @@
     "format": "prettier !pnpm-lock.yaml --check --write --ignore-path .gitignore .",
     "format:package": "sort-package-json",
     "generate:api-types": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
-    "lint": "next lint",
+    "lint": "next lint . --max-warnings=0",
     "lint:steiger": "steiger ./src",
     "prepare": "cd ./../.. && husky ./apps/frontend/.husky",
     "start": "next start"
