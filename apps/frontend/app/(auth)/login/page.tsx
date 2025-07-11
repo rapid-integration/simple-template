@@ -6,14 +6,14 @@ import Bar from "@/shared/ui/bar";
 import Page from "@/shared/ui/page";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Вход",
 };
 
 export default function LoginPage() {
   return (
     <Page>
       <Bar>
-        <Bar.Center showAfterScrolled>Login</Bar.Center>
+        <Bar.Center showAfterScrolled>Вход</Bar.Center>
       </Bar>
       <Page.Content size="md" className="justify-center">
         <Suspense>
