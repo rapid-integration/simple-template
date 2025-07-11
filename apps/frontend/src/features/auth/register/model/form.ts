@@ -32,9 +32,13 @@ export const useRegisterForm = (
   useEffect(() => {
     switch (response?.status) {
       case 409:
-        return form.setError("username", {
-          message: "Это имя пользователя уже занято.",
-        });
+        return form.setError(
+          "username",
+          {
+            message: "Это имя пользователя уже занято.",
+          },
+          { shouldFocus: true },
+        );
     }
   }, [response]);
 

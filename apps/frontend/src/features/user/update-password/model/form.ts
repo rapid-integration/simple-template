@@ -40,9 +40,13 @@ export const useUserUpdatePasswordForm = ({
 
     switch (response.status) {
       case 403:
-        return form.setError("oldPassword", {
-          message: "Старый пароль введён неверно.",
-        });
+        return form.setError(
+          "oldPassword",
+          {
+            message: "Старый пароль введён неверно.",
+          },
+          { shouldFocus: true },
+        );
     }
   }, [response]);
 
