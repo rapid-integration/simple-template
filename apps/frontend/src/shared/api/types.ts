@@ -334,15 +334,8 @@ export interface operations {
           "application/json": components["schemas"]["AccessTokenResponse"];
         };
       };
-      /** @description Incorrect password */
+      /** @description Incorrect username or password */
       401: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description User not found */
-      404: {
         headers: {
           [name: string]: unknown;
         };

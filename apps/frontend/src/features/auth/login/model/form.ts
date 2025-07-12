@@ -28,21 +28,9 @@ export const useLoginForm = (
   useEffect(() => {
     switch (response?.status) {
       case 401:
-        return form.setError(
-          "password",
-          {
-            message: "Введён неверный пароль.",
-          },
-          { shouldFocus: true },
-        );
-      case 404:
-        return form.setError(
-          "username",
-          {
-            message: "Пользователя с таким именем пользователя не существует.",
-          },
-          { shouldFocus: true },
-        );
+        return form.setError("root", {
+          message: "Введено неверное имя пользователя или пароль.",
+        });
     }
   }, [response]);
 
