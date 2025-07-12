@@ -26,7 +26,7 @@ async def register(request: Request, args: UserRegistrationRequest, service: Use
     if await service.get_user_by_username(args.username):
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
-    user = await service.register_user(args)
+    user = await service.create_user(args)
 
     return create_access_token(user.id)
 

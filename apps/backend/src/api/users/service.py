@@ -21,20 +21,11 @@ class UserService:
     async def get_users(self, search_params: SearchParams) -> Sequence[User]:
         return await self.repository.get_all(search_params)
 
-    async def register_user(self, args: UserRegistrationRequest) -> User:
+    async def create_user(self, args: UserRegistrationRequest) -> User:
+        hashed_password = await get_password_hash(args.password)
         user = User(
             username=args.username,
-            password=await get_password_hash(args.password),
+            password=hashed_password,
         )
+
         return await self.repository.create(user)
-
-    async def update_username(self, user: User, new_username: str) -> None:
-        user.username = new_username
-
-        await self.repository.update(user)
-
-    async def update_password(self, user: User, new_password: str) -> None:
-        hashed_password = await get_password_hash(password=new_password)
-        user.password = hashed_password
-
-        await self.repository.update(user)
