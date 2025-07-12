@@ -13,8 +13,7 @@ class UserService:
         self.repository = repository
 
     async def get_user_by_username(self, username: str) -> User | None:
-        user = await self.repository.get_by_username(username)
-        return user
+        return await self.repository.get_by_username(username)
 
     async def get_user_by_id(self, id: UUID) -> User | None:
         user = await self.repository.get_by_id(id)
