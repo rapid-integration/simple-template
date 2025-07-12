@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, Response, status
 
 from src.api.users.deps import UserServiceDepends
-from src.api.users.me.deps import CurrentUserDepends, UserMeServiceDepends
+from src.api.users.me.deps import CurrentUserDepends, CurrentUserServiceDepends
 from src.api.users.me.schemas import CurrentUserResponse
 from src.api.users.models import User
 from src.api.users.schemas import UserUpdatePasswordRequest, UserUsernameRequest
@@ -49,7 +49,7 @@ async def update_current_user_username(
     request: Request,
     args: UserUsernameRequest,
     user_service: UserServiceDepends,
-    me_service: UserMeServiceDepends,
+    me_service: CurrentUserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
     user = await user_service.get_user_by_username(args.username)
@@ -80,7 +80,7 @@ async def update_current_user_username(
 async def update_current_user_password(
     request: Request,
     args: UserUpdatePasswordRequest,
-    service: UserMeServiceDepends,
+    service: CurrentUserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
     if not is_valid_password(args.old_password, current_user.password):

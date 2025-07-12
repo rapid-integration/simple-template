@@ -5,7 +5,7 @@ from fastapi import Depends, HTTPException, status
 
 from src.api.auth.deps import OptionalPasswordBearerDepends, PasswordBearerDepends
 from src.api.auth.schemas import JWT
-from src.api.users.me.service import UserMeService
+from src.api.users.me.service import CurrentUserService
 from src.api.users.models import User
 from src.db.deps import SessionDepends
 from src.settings import settings
@@ -29,4 +29,4 @@ async def get_current_user_or_none(session: SessionDepends, raw: OptionalPasswor
 
 CurrentUserDepends = Annotated[User, Depends(get_current_user)]
 CurrentUserOrNoneDepends = Annotated[User | None, Depends(get_current_user_or_none)]
-UserMeServiceDepends = Annotated[UserMeService, Depends(UserMeService)]
+CurrentUserServiceDepends = Annotated[CurrentUserService, Depends(CurrentUserService)]

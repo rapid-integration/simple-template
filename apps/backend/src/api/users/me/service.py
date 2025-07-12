@@ -3,7 +3,7 @@ from src.api.users.repository import UserRepositoryDepends
 from src.security import get_password_hash
 
 
-class UserMeService:
+class CurrentUserService:
     def __init__(self, repository: UserRepositoryDepends) -> None:
         self.repository = repository
 
