@@ -51,12 +51,12 @@ async def update_current_user_username(
     service: UserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
-    user = service.get_user_by_username(args.username)
+    user = await service.get_user_by_username(args.username)
 
     if user:
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
-    service.update_username(current_user, args.username)
+    await service.update_username(current_user, args.username)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
@@ -85,6 +85,6 @@ async def update_current_user_password(
     if not is_valid_password(args.old_password, current_user.password):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Incorrect password.")
 
-    service.update_password(current_user, args.new_password)
+    await service.update_password(current_user, args.new_password)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)

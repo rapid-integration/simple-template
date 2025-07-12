@@ -10,20 +10,20 @@ from src.db.deps import SessionDepends
 from src.settings import settings
 
 
-def get_current_user(session: SessionDepends, raw: PasswordBearerDepends) -> User:
+async def get_current_user(session: SessionDepends, raw: PasswordBearerDepends) -> User:
     try:
         data = JWT(**jwt.decode(raw, settings.security.jwt_secret, algorithms=[settings.security.jwt_algorithm]))
     except Exception:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Failed to verify credentials") from None
 
-    user = session.get(User, data.sub)
+    user = await session.get(User, data.sub)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
     return user
 
 
-def get_current_user_or_none(session: SessionDepends, raw: OptionalPasswordBearerDepends) -> User | None:
-    return get_current_user(session, raw) if raw else None
+async def get_current_user_or_none(session: SessionDepends, raw: OptionalPasswordBearerDepends) -> User | None:
+    return await get_current_user(session, raw) if raw else None
 
 
 CurrentUserDepends = Annotated[User, Depends(get_current_user)]

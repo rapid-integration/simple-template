@@ -12,6 +12,8 @@ class PostgresSettings(BaseModel):
     port: int
     host: str
     path: str
+    pool_size: int
+    max_overflow: int
 
     @computed_field  # type: ignore[prop-decorator]
     @property
