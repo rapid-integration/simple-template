@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, status
 
 from src.api.auth.deps import PasswordRequestFormDepends
 from src.api.auth.schemas import AccessTokenResponse
@@ -22,7 +22,7 @@ router = APIRouter(prefix="/auth", tags=[Tag.AUTH])
         },
     },
 )
-async def register(request: Request, args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
+async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
     if await service.get_user_by_username(args.username):
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
@@ -43,7 +43,7 @@ async def register(request: Request, args: UserRegistrationRequest, service: Use
         },
     },
 )
-async def login(request: Request, form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
+async def login(form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
     user = await service.get_user_by_username(form.username)
 
     if not user or not is_valid_password(form.password, user.password):

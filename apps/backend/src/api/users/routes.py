@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, HTTPException, status
 
 from src.api.deps import SearchParamsDepends
 from src.api.tags import Tag
@@ -24,9 +24,7 @@ router.include_router(me.router)
         },
     },
 )
-async def get_users(
-    request: Request, search_params: SearchParamsDepends, service: UserServiceDepends
-) -> Sequence[User]:
+async def get_users(search_params: SearchParamsDepends, service: UserServiceDepends) -> Sequence[User]:
     users = await service.get_users(search_params)
 
     if not users:
@@ -45,7 +43,7 @@ async def get_users(
         },
     },
 )
-async def get_user(request: Request, username: Username, service: UserServiceDepends) -> User:
+async def get_user(username: Username, service: UserServiceDepends) -> User:
     user = await service.get_user_by_username(username)
 
     if not user:

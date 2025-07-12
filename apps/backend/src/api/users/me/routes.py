@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Request, Response, status
+from fastapi import APIRouter, HTTPException, Response, status
 
 from src.api.users.deps import UserServiceDepends
 from src.api.users.me.deps import CurrentUserDepends, CurrentUserServiceDepends
@@ -23,7 +23,7 @@ router = APIRouter(prefix="/me")
         },
     },
 )
-async def get_current_user(request: Request, current_user: CurrentUserDepends) -> User:
+async def get_current_user(current_user: CurrentUserDepends) -> User:
     return current_user
 
 
@@ -46,7 +46,6 @@ async def get_current_user(request: Request, current_user: CurrentUserDepends) -
     },
 )
 async def update_current_user_username(
-    request: Request,
     args: UserUsernameRequest,
     user_service: UserServiceDepends,
     me_service: CurrentUserServiceDepends,
@@ -78,7 +77,6 @@ async def update_current_user_username(
     },
 )
 async def update_current_user_password(
-    request: Request,
     args: UserUpdatePasswordRequest,
     service: CurrentUserServiceDepends,
     current_user: CurrentUserDepends,
