@@ -3,24 +3,22 @@ __all__ = [
     "SessionDepends",
 ]
 
-from typing import Annotated, Iterator
+from collections.abc import AsyncGenerator
+from typing import Annotated
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.db import ENGINE
-
-
-def get_session() -> Iterator[Session]:
-    session = Session(ENGINE)
-
-    try:
-        yield session
-    except Exception:
-        session.rollback()
-        raise
-    finally:
-        session.close()
+from src.db import SessionLocal
 
 
-SessionDepends = Annotated[Session, Depends(get_session)]
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
+    async with SessionLocal() as session:
+        try:
+            yield session
+        except Exception:
+            await session.rollback()
+            raise
+
+
+SessionDepends = Annotated[AsyncSession, Depends(get_session)]

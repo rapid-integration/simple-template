@@ -23,10 +23,10 @@ router = APIRouter(prefix="/auth", tags=[Tag.AUTH])
     },
 )
 async def register(request: Request, args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
-    if service.get_user_by_username(args.username):
+    if await service.get_user_by_username(args.username):
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
-    user = service.register_user(args)
+    user = await service.create_user(args)
 
     return create_access_token(user.id)
 
@@ -38,20 +38,15 @@ async def register(request: Request, args: UserRegistrationRequest, service: Use
         status.HTTP_200_OK: {
             "description": "Login was successful",
         },
-        status.HTTP_404_NOT_FOUND: {
-            "description": "User not found",
-        },
         status.HTTP_401_UNAUTHORIZED: {
-            "description": "Incorrect password",
+            "description": "Incorrect username or password",
         },
     },
 )
 async def login(request: Request, form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
-    user = service.get_user_by_username(form.username)
+    user = await service.get_user_by_username(form.username)
 
-    if not user:
-        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found.")
-    if not is_valid_password(form.password, user.password):
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Incorrect password.")
+    if not user or not is_valid_password(form.password, user.password):
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Incorrect username or password.")
 
     return create_access_token(user.id)

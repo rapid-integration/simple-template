@@ -4,6 +4,7 @@ __all__ = [
     "get_password_hash",
 ]
 
+import asyncio
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -29,5 +30,5 @@ def is_valid_password(plain_password: str, hashed_password: str) -> bool:
     return crypt_context.verify(plain_password, hashed_password)
 
 
-def get_password_hash(password: str) -> str:
-    return crypt_context.hash(password)
+async def get_password_hash(password: str) -> str:
+    return await asyncio.to_thread(crypt_context.hash, password)
