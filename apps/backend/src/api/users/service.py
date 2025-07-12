@@ -16,8 +16,7 @@ class UserService:
         return await self.repository.get_by_username(username)
 
     async def get_user_by_id(self, id: UUID) -> User | None:
-        user = await self.repository.get_by_id(id)
-        return user
+        return await self.repository.get_by_id(id)
 
     async def get_users(self, search_params: SearchParams) -> Sequence[User]:
         return await self.repository.get_all(search_params)
