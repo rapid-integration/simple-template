@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from fastapi import APIRouter, HTTPException, Request, status
 
 from src.api.deps import SearchParamsDepends
@@ -22,8 +24,10 @@ router.include_router(me.router)
         },
     },
 )
-async def get_users(request: Request, search_params: SearchParamsDepends, service: UserServiceDepends) -> list[User]:
-    users = service.get_users(search_params)
+async def get_users(
+    request: Request, search_params: SearchParamsDepends, service: UserServiceDepends
+) -> Sequence[User]:
+    users = await service.get_users(search_params)
 
     if not users:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No users found matching the provided search parameters.")
@@ -42,7 +46,7 @@ async def get_users(request: Request, search_params: SearchParamsDepends, servic
     },
 )
 async def get_user(request: Request, username: Username, service: UserServiceDepends) -> User:
-    user = service.get_user_by_username(username)
+    user = await service.get_user_by_username(username)
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, f"No user found with the username '{username}'.")
