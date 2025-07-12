@@ -49,7 +49,7 @@ async def update_current_user_username(
     request: Request,
     args: UserUsernameRequest,
     user_service: UserServiceDepends,
-    me_service: CurrentUserServiceDepends,
+    current_user_service: CurrentUserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
     user = await user_service.get_user_by_username(args.username)
@@ -57,7 +57,7 @@ async def update_current_user_username(
     if user:
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
-    await me_service.update_username(current_user, args.username)
+    await current_user_service.update_username(current_user, args.username)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
