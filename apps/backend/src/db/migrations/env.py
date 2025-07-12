@@ -26,8 +26,8 @@ async def run_migrations_online() -> None:
 
     async with engine.begin() as connection:
         await connection.run_sync(
-            lambda sync_conn: context.configure(
-                connection=sync_conn,
+            lambda sync_connection: context.configure(
+                connection=sync_connection,
                 target_metadata=Base.metadata,
                 compare_type=True,
             )
