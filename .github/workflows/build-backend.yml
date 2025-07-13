@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build backend image
-        run: docker build -t ${{ secrets.IMAGE_NAME }}-backend:${{ github.sha }} ./apps/backend
+        run: docker build -f Dockerfile.prod -t ${{ secrets.IMAGE_NAME }}-backend:${{ github.sha }} ./apps/backend
 
       - name: Tag backend image
         run: |

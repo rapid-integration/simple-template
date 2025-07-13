@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build frontend image
-        run: docker build -t ${{ secrets.IMAGE_NAME }}-frontend:${{ github.sha }} ./apps/frontend
+        run: docker build -f Dockerfile.prod -t ${{ secrets.IMAGE_NAME }}-frontend:${{ github.sha }} ./apps/frontend
 
       - name: Tag frontend image
         run: |
