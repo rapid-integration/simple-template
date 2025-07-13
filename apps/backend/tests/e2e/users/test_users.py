@@ -92,7 +92,6 @@ class TestGetUsers:
         params: dict[str, Any],
         expected_slice: slice,
     ):
-        
         users = [generate_user(username=f"user{i}") for i in range(10)]
 
         for user in users:

@@ -1,0 +1,34 @@
+name: Lint Frontend
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+  workflow_call:
+
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: apps/frontend
+        run: npm ci
+
+      - name: Run Next.js lint
+        working-directory: apps/frontend
+        run: npm run lint
+
+      - name: Run Steiger lint
+        working-directory: apps/frontend
+        run: npm run lint:steiger
