@@ -1,8 +1,6 @@
 name: Lint Frontend
 
 on:
-  push: {}
-  pull_request: {}
   workflow_call:
 
 
