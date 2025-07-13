@@ -21,8 +21,6 @@ class TestCurrentUserService:
 
         await current_user_service.update_username(user, new_username)
 
-        await sleep(0.1)
-
         refreshed_user = await user_service.get_user_by_id(user.id)
 
         assert refreshed_user is not None
@@ -40,7 +38,6 @@ class TestCurrentUserService:
 
         await current_user_service.update_password(user, new_password)
 
-        await sleep(0.1)
 
         refreshed_user = await user_service.get_user_by_id(user.id)
 
