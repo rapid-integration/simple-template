@@ -24,7 +24,11 @@ jobs:
 
       - name: Build frontend image
         working-directory: apps/frontend
-        run: docker build -f Dockerfile.prod -t ${{ secrets.IMAGE_NAME }}-frontend:${{ github.sha }} .
+        run: |
+          docker build \
+            -f Dockerfile.prod \
+            --build-arg API_URL=http://backend:8000/api/ \
+            -t ${{ secrets.IMAGE_NAME }}-frontend:${{ github.sha }} .
 
       - name: Tag frontend image
         run: |

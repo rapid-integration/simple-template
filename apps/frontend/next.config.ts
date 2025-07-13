@@ -12,5 +12,6 @@ export default {
     staleTimes: {
       dynamic: 30,
     },
+    runtime: 'nodejs'
   },
 } as const satisfies NextConfig;
