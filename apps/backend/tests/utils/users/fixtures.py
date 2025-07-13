@@ -1,14 +1,11 @@
 import pytest
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.api.users.me.service import CurrentUserService
 from src.api.users.models import User
 from src.api.users.repository import UserRepository
-from tests.utils.users.factory import UserFactory
-
-
-@pytest.fixture(scope="function")
-async def user_factory() -> UserFactory:
-    return UserFactory()
+from src.api.users.service import UserService
+from tests.utils.users.generator import generate_user
 
 
 @pytest.fixture(scope="function")
@@ -17,10 +14,15 @@ async def user_repository(session: AsyncSession) -> UserRepository:
 
 
 @pytest.fixture(scope="function")
-async def user_fake_raw(user_factory: UserFactory) -> User:
-    return user_factory.create()
+async def user_service(user_repository: UserRepository) -> UserService:
+    return UserService(repository=user_repository)
 
 
 @pytest.fixture(scope="function")
-async def user_fake(user_fake_raw: User, user_repository: UserRepository) -> User:
-    return await user_repository.create(user_fake_raw)
+async def current_user_service(user_repository: UserRepository) -> CurrentUserService:
+    return CurrentUserService(repository=user_repository)
+
+
+@pytest.fixture(scope="function")
+async def user(user_repository: UserRepository) -> User:
+    return await user_repository.create(generate_user())

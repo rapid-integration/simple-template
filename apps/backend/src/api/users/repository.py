@@ -33,7 +33,7 @@ class UserRepository:
         res = await self.session.execute(stmt)
         return res.scalar_one_or_none()
 
-    async def get_all(self, search_params: SearchParams) -> Sequence[User]:
+    async def get_all(self, search_params: SearchParams = SearchParams()) -> Sequence[User]:
         stmt = select(User)
 
         if search_params.q:

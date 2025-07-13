@@ -1,8 +1,8 @@
 __all__ = [
-    "user_factory",
-    "user_fake_raw",
-    "user_fake",
+    "current_user_service",
     "user_repository",
+    "user_service",
+    "user",
 ]
 
 import asyncio
@@ -17,7 +17,7 @@ from src.app import app
 from src.db.deps import get_session
 from src.db.models import Base
 from src.settings import settings
-from tests.utils.users import user_factory, user_fake, user_fake_raw, user_repository
+from tests.utils.users import current_user_service, user, user_repository, user_service
 
 
 @pytest.fixture(scope="session")
