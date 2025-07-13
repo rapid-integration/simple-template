@@ -6,10 +6,10 @@ on:
 
 jobs:
   lint-backend:
-    uses: ./lint-backend.yml@v1
+    uses: lint-backend.yml@v1
 
   lint-frontend:
-    uses: ./lint-frontend.yml@v1
+    uses: lint-frontend.yml@v1
 
 #  unit-tests:
 #    needs: [ lint-backend ]
@@ -21,8 +21,8 @@ jobs:
 #
   build-backend:
     needs: [ lint-backend ]
-    uses: ./build-backend.yml@v1
+    uses: build-backend.yml@v1
 
   build-frontend:
     needs: [ lint-frontend ]
-    uses: ./build-frontend.yml@v1
+    uses: build-frontend.yml@v1
