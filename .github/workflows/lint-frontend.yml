@@ -14,15 +14,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         working-directory: apps/frontend
-        run: npm ci
+        run: pnpm install
 
       - name: Run Next.js lint
         working-directory: apps/frontend
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Run Steiger lint
         working-directory: apps/frontend
-        run: npm run lint:steiger
+        run: pnpm run lint:steiger
