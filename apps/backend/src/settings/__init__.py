@@ -33,6 +33,7 @@ class Settings(BaseSettings):
     api: ApiSettings
     cors: CORSSettings
     postgres: PostgresSettings
+    postgres_test: PostgresSettings
     security: SecuritySettings
     swagger: SwaggerSettings
 

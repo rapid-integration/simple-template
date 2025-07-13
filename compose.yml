@@ -33,7 +33,10 @@ services:
     environment:
       - BACKEND_APP_DEBUG=true
     depends_on:
-      - postgres
+      postgres:
+        restart: false
+        required: true
+        condition: service_started
     volumes:
       - type: bind
         source: ./apps/backend/src
@@ -57,6 +60,11 @@ services:
         required: true
     environment:
       - BACKEND_APP_DEBUG=true
+    depends_on:
+      postgres-test:
+        restart: false
+        required: true
+        condition: service_started
     networks:
       - template-network
     profiles:
@@ -75,6 +83,11 @@ services:
         required: true
     environment:
       - BACKEND_APP_DEBUG=true
+    depends_on:
+      postgres-test:
+        restart: false
+        required: true
+        condition: service_started
     networks:
       - template-network
     profiles:
@@ -93,6 +106,11 @@ services:
         required: true
     environment:
       - BACKEND_APP_DEBUG=true
+    depends_on:
+      postgres-test:
+        restart: false
+        required: true
+        condition: service_started
     networks:
       - template-network
     profiles:
@@ -196,6 +214,31 @@ services:
       - dev
       - dev-backend
       - prod
+
+  postgres-test:
+    container_name: template-postgres-test
+    image: postgres:17.5
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: true
+    ports:
+      - 127.0.0.1:${BACKEND_POSTGRES_TEST_PORT}:${BACKEND_POSTGRES_TEST_PORT}
+    environment:
+      - PGUSER=${BACKEND_POSTGRES_TEST_USERNAME}
+      - POSTGRES_DB=${BACKEND_POSTGRES_TEST_PATH}
+      - POSTGRES_USER=${BACKEND_POSTGRES_TEST_USERNAME}
+      - POSTGRES_PASSWORD=${BACKEND_POSTGRES_TEST_PASSWORD}
+    volumes:
+      - type: volume
+        source: postgres-test-data
+        target: /var/lib/postgresql/data
+    networks:
+      - template-network
+    profiles:
+      - test
+      - test-e2e
+      - test-unit
 
   node-exporter:
     container_name: template-node-exporter
@@ -361,6 +404,8 @@ volumes:
     name: template-grafana-data
   postgres-data:
     name: template-postgres-data
+  postgres-test-data:
+    name: template-postgres-test-data
 
 networks:
   template-network:
