@@ -1,12 +1,8 @@
 name: CI Pipeline
 
 on:
-  push:
-    branches:
-      - '*'
-  pull_request:
-    branches:
-      - '*'
+  push: {}
+  pull_request: {}
 
 jobs:
   lint-backend:
