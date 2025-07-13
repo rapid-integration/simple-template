@@ -1,5 +1,3 @@
-from asyncio import sleep
-
 import pytest
 
 from src.api.users.me.service import CurrentUserService

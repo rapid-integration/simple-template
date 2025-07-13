@@ -12,5 +12,6 @@ export default {
     staleTimes: {
       dynamic: 30,
     },
+    nodeMiddleware: true,
   },
 } as const satisfies NextConfig;

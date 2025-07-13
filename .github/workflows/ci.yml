@@ -1,0 +1,36 @@
+name: CI Pipeline
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  lint-backend:
+    uses: ./.github/workflows/lint-backend.yml
+
+  lint-frontend:
+    uses: ./.github/workflows/lint-frontend.yml
+
+  unit-tests:
+    needs: [ lint-backend ]
+    uses: ./.github/workflows/unit-tests.yml
+
+  e2e-tests:
+    needs: [ unit-tests ]
+    uses: ./.github/workflows/e2e-tests.yml
+
+  build-backend:
+    needs: [ e2e-tests ]
+    uses: ./.github/workflows/build-backend.yml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+
+  build-frontend:
+    needs: [ lint-frontend ]
+    uses: ./.github/workflows/build-frontend.yml
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME }}

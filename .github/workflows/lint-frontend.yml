@@ -1,0 +1,31 @@
+name: Lint Frontend
+
+on:
+  workflow_call:
+
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        working-directory: apps/frontend
+        run: pnpm install
+
+      - name: Run Next.js lint
+        working-directory: apps/frontend
+        run: pnpm run lint
+
+      - name: Run Steiger lint
+        working-directory: apps/frontend
+        run: pnpm run lint:steiger

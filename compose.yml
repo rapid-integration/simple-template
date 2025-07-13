@@ -3,9 +3,7 @@ name: template
 services:
   backend:
     container_name: template-backend
-    build:
-      context: ./apps/backend
-      dockerfile: Dockerfile.prod
+    image: ${DOCKER_USERNAME}/${IMAGE_NAME}-backend:${TAG:-latest}
     restart: unless-stopped
     env_file:
       - path: .env
@@ -118,11 +116,7 @@ services:
 
   frontend:
     container_name: template-frontend
-    build:
-      context: ./apps/frontend
-      dockerfile: Dockerfile.prod
-      args:
-        - API_URL=http://backend:8000/api/
+    image: ${DOCKER_USERNAME}/${IMAGE_NAME}-frontend:${TAG:-latest}
     restart: unless-stopped
     env_file:
       - path: .env
