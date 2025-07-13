@@ -1,5 +1,13 @@
+__all__ = [
+    "user_factory",
+    "user_fake_raw",
+    "user_fake",
+    "user_repository",
+]
+
 import asyncio
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Iterator
+from typing import Literal
 
 import pytest
 from httpx import ASGITransport, AsyncClient
@@ -9,15 +17,16 @@ from src.app import app
 from src.db.deps import get_session
 from src.db.models import Base
 from src.settings import settings
+from tests.utils.users import user_factory, user_fake, user_fake_raw, user_repository
 
 
 @pytest.fixture(scope="session")
-def anyio_backend():
+def anyio_backend() -> Literal["asyncio"]:
     return "asyncio"
 
 
 @pytest.fixture(scope="session")
-def event_loop():
+def event_loop() -> Iterator[asyncio.AbstractEventLoop]:
     loop = asyncio.new_event_loop()
 
     yield loop

@@ -1,4 +1,5 @@
 -r dev.txt
 
+faker==37.4.0
 httpx==0.28.1
 pytest==8.3.5

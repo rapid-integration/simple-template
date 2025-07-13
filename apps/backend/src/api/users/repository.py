@@ -28,7 +28,7 @@ class UserRepository:
         res = await self.session.execute(stmt)
         return res.scalar_one_or_none()
 
-    async def get_by_id(self, id: UUID) -> User | None:
+    async def get_by_id(self, id: str | UUID) -> User | None:
         stmt = select(User).where(User.id == id)
         res = await self.session.execute(stmt)
         return res.scalar_one_or_none()
