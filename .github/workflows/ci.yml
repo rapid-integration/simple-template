@@ -6,23 +6,23 @@ on:
 
 jobs:
   lint-backend:
-    uses: ./lint-backend.yml
+    uses: ./lint-backend.yml@v1
 
   lint-frontend:
-    uses: ./lint-frontend.yml
+    uses: ./lint-frontend.yml@v1
 
 #  unit-tests:
 #    needs: [ lint-backend ]
-#    uses: ./unit-tests.yml
+#    uses: ./unit-tests.yml@v1
 
 #  e2e-tests:
 #    needs: [ unit-tests ]
-#    uses: ./e2e-tests.yml
+#    uses: ./e2e-tests.yml@v1
 #
   build-backend:
     needs: [ lint-backend ]
-    uses: ./build-backend.yml
+    uses: ./build-backend.yml@v1
 
   build-frontend:
     needs: [ lint-frontend ]
-    uses: ./build-frontend.yml
+    uses: ./build-frontend.yml@v1
