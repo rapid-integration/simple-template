@@ -18,8 +18,10 @@ async def get_current_user(session: SessionDepends, raw: PasswordBearerDepends) 
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Failed to verify credentials") from None
 
     user = await session.get(User, data.sub)
+
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
     return user
 
 

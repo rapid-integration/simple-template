@@ -12,17 +12,18 @@ class UserService:
     def __init__(self, repository: UserRepositoryDepends) -> None:
         self.repository = repository
 
-    async def get_user_by_username(self, username: str) -> User | None:
-        return await self.repository.get_by_username(username)
-
     async def get_user_by_id(self, id: str | UUID) -> User | None:
         return await self.repository.get_by_id(id)
+
+    async def get_user_by_username(self, username: str) -> User | None:
+        return await self.repository.get_by_username(username)
 
     async def get_users(self, search_params: SearchParams = SearchParams()) -> Sequence[User]:
         return await self.repository.get_all(search_params)
 
     async def create_user(self, args: UserRegistrationRequest) -> User:
         hashed_password = await get_password_hash(args.password)
+
         user = User(
             username=args.username,
             password=hashed_password,

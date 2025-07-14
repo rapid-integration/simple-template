@@ -13,7 +13,6 @@ class CurrentUserService:
         await self.repository.update(user)
 
     async def update_password(self, user: User, new_password: str) -> None:
-        hashed_password = await get_password_hash(password=new_password)
-        user.password = hashed_password
+        user.password = await get_password_hash(password=new_password)
 
         await self.repository.update(user)
