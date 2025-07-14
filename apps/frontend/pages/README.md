@@ -1,2 +1,1 @@
-This folder exists to prevent Next.js from treating `src/pages` as the Pages Router.
-`src/pages` is used as the Pages layer in [Feature-Sliced Design](https://feature-sliced.design)
+Эта папка существует для того, чтобы Next.js не воспринимал `src/pages` как маршрутизатор страниц. Вместо этого `src/pages` используется в качестве слоя страниц в [Feature-Sliced Design](https://feature-sliced.design).

@@ -32,7 +32,7 @@
 - [Prettier](https://github.com/python/mypy) — форматтер.
 - [ESLint](https://github.com/astral-sh/ruff) — линтер кода.
 - [Steiger](https://github.com/feature-sliced/steiger) — линтер архитектуры.
-- [pnpm](https://pnpm.io) — управление зависимостями.
+- [pnpm](https://pnpm.io) 10+ — управление зависимостями.
 
 Чтобы более подробно ознакомиться с зависимостями, изучите файл [package.json](./package.json).
 
