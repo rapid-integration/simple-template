@@ -4,7 +4,7 @@
 
 [![Python Version](https://img.shields.io/badge/3.13-007EC6?label=python&logo=python)](https://www.python.org)
 [![FastAPI](https://img.shields.io/badge/FastAPI-1F5082?label=%20&logo=fastapi&labelColor=gray&color=009485)](https://fastapi.tiangolo.com)
-[![mypy](https://img.shields.io/badge/type_checker-mypy-2A6DB2)](https://github.com/python/mypy)
+[![Mypy](https://img.shields.io/badge/Mypy-2A6DB2?logo=python&labelColor=gray)](https://github.com/python/mypy)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![pycodestyle](https://img.shields.io/badge/pycodestyle-000000?label=style)](https://pycodestyle.pycqa.org)
 
