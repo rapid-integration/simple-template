@@ -20,8 +20,8 @@
    pnpm install
    ```
 
-   > [!NOTE]
-   > Вместе с этой командой также установятся pre-commit git хуки. Чтобы избежать `pre-commit` при `git commit` можно с помщью аргумента [--no-verify](https://git-scm.com/docs/githooks#_pre_commit).
+> [!NOTE]
+> Вместе с этой командой также установятся pre-commit git хуки. Чтобы избежать `pre-commit` при `git commit` можно с помщью аргумента [--no-verify](https://git-scm.com/docs/githooks#_pre_commit).
 
 ## Управление сервисами и общие команды
 
@@ -102,5 +102,5 @@ pnpm lint:steiger
 
    Типы будут сохранены в [`src/shared/api/types.ts`](../src/shared/api/types.ts)
 
-   > [!NOTE]
-   > Типы обязательно должны находится под контролем git чтобы работал CI.
+> [!NOTE]
+> Типы обязательно должны находится под контролем git чтобы работал CI.
