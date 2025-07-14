@@ -23,8 +23,12 @@ jobs:
 
       - name: Run Next.js lint
         working-directory: apps/frontend
-        run: pnpm run lint
+        run: pnpm run lint:next
 
-      - name: Run Steiger lint
+      - name: Run Steiger architecture lint
         working-directory: apps/frontend
         run: pnpm run lint:steiger
+
+      - name: Run Prettier format check
+        working-directory: apps/frontend
+        run: pnpm run format:prettier:check
