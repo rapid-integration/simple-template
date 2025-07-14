@@ -11,3 +11,35 @@
 [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&labelColor=gray)](https://eslint.org)
 
 # Фронтенд
+
+Приложение на React и Next.js.
+
+## Технические детали
+
+### Основные технологии
+
+- [Node.js](https://nodejs.org) 22+
+- [TypeScript](https://www.typescriptlang.org) (строгая типизация)
+- [React](https://react.dev) 19+ (библиотека рендеринга)
+- [Next.js](https://nextjs.org) 15.4+ (App Router, SSR/SSG/ISR, node middleware)
+- [TailwindCSS](https://tailwindcss.com) 4.0 (стилизация)
+- [Motion](https://motion.dev) (ранее Framer Motion)
+- [shadcn](https://ui.shadcn.com) (регистр UI компонентов)
+- [Docker](https://www.docker.com/) и [Docker Compose](https://docs.docker.com/compose/) (контейнеризация).
+
+### Инструменты разработки
+
+- [Prettier](https://github.com/python/mypy) — форматтер.
+- [ESLint](https://github.com/astral-sh/ruff) — линтер кода.
+- [Steiger](https://github.com/feature-sliced/steiger) — линтер архитектуры.
+- [pnpm](https://pnpm.io) — управление зависимостями.
+
+Чтобы более подробно ознакомиться с зависимостями, изучите файл [package.json](./package.json).
+
+## Архитектура
+
+Для детального обзора архитектуры этого сервиса ознакомьтесь с [ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+
+## Участие в разработке
+
+Если вы хотите сделать свой вклад в развитие этого сервиса, то ознакомьтесь с [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
