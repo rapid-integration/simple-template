@@ -15,7 +15,7 @@ from tests.utils.users.generator import generate_user, generate_username
 
 @pytest.mark.anyio
 class TestGetUser:
-    async def test_get_user(self, user: User, client: AsyncClient):
+    async def test_get_user(self, user: User, client: AsyncClient) -> None:
         response = await client.get(f"/api/users/{user.username}")
 
         assert response.status_code == status.HTTP_200_OK, response.json()
@@ -27,12 +27,12 @@ class TestGetUser:
         assert response_user.updated_at == user.updated_at
         assert response_user.created_at == user.created_at
 
-    async def test_get_user_404(self, client: AsyncClient):
+    async def test_get_user_404(self, client: AsyncClient) -> None:
         response = await client.get(f"/api/users/{generate_username()}")
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
-    async def test_get_user_422(self, client: AsyncClient):
+    async def test_get_user_422(self, client: AsyncClient) -> None:
         response = await client.get("/api/users/Ну это точно не юзернейм как бы эм")
 
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
@@ -91,7 +91,7 @@ class TestGetUsers:
         user_repository: UserRepository,
         params: dict[str, Any],
         expected_slice: slice,
-    ):
+    ) -> None:
         users = [generate_user(username=f"user{i}") for i in range(10)]
 
         for user in users:

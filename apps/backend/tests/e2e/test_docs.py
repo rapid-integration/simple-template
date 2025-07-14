@@ -11,7 +11,7 @@ async def test_get_docs(client: AsyncClient) -> None:
 
 
 @pytest.mark.anyio
-async def test_get_docs_openapi_json(client: AsyncClient):
+async def test_get_docs_openapi_json(client: AsyncClient) -> None:
     response = await client.get("/api/docs/openapi.json")
 
     assert response.headers["Content-Type"] == "application/json"

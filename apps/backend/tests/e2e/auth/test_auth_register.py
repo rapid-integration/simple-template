@@ -9,7 +9,7 @@ from tests.utils.users import generate_password, generate_username
 
 @pytest.mark.anyio
 class TestAuthRegister:
-    async def test_auth_register(self, client: AsyncClient):
+    async def test_auth_register(self, client: AsyncClient) -> None:
         response = await client.post(
             "/api/auth/register",
             json={
@@ -31,7 +31,7 @@ class TestAuthRegister:
             ({"password": "Weak", "username": "john@doe.com"}, status.HTTP_422_UNPROCESSABLE_ENTITY),
         ],
     )
-    async def test_auth_register_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int):
+    async def test_auth_register_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int) -> None:
         response = await client.post(
             "/api/auth/register",
             json={
@@ -42,7 +42,7 @@ class TestAuthRegister:
 
         assert response.status_code == status_code
 
-    async def test_auth_register_conflict(self, client: AsyncClient):
+    async def test_auth_register_conflict(self, client: AsyncClient) -> None:
         username = generate_username()
         password = generate_password()
         json = {"username": username, "password": password}

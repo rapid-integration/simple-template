@@ -9,7 +9,7 @@ from tests.utils.users import generate_password, generate_username
 
 @pytest.mark.anyio
 class TestAuthLogin:
-    async def test_auth_login(self, client: AsyncClient):
+    async def test_auth_login(self, client: AsyncClient) -> None:
         json = {"username": generate_username(), "password": generate_password()}
 
         response = await client.post("/api/auth/register", json=json)
@@ -29,7 +29,7 @@ class TestAuthLogin:
             ({"password": "Incorrect", "username": "Incorrect"}, status.HTTP_401_UNAUTHORIZED),
         ],
     )
-    async def test_auth_login_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int):
+    async def test_auth_login_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int) -> None:
         response = await client.post("/api/auth/login", data=data)
 
         assert response.status_code == status_code

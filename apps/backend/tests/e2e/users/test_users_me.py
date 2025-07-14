@@ -32,7 +32,7 @@ class TestGetUsersMe:
         response = await client.get("/api/users/me", headers=headers)
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
-    async def test_patch_users_me_username(self, client: AsyncClient):
+    async def test_patch_users_me_username(self, client: AsyncClient) -> None:
         username1 = generate_username()
         password1 = generate_password()
         data1 = {"username": username1, "password": password1}
@@ -68,7 +68,7 @@ class TestGetUsersMe:
         response = await client.patch("/api/users/me/username", headers=headers, json=body)
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-    async def test_patch_users_me_password(self, client: AsyncClient):
+    async def test_patch_users_me_password(self, client: AsyncClient) -> None:
         username1 = generate_username()
         password1 = generate_password()
         data1 = {"username": username1, "password": password1}
