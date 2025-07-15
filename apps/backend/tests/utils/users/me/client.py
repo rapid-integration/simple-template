@@ -5,7 +5,7 @@ class CurrentUserClient:
     def __init__(self, *, client: AsyncClient) -> None:
         self.client = client
 
-    async def get_current_user(self, *, token: str | None = None):
+    async def get_current_user(self, *, token: str | None = None) -> Response:
         return await self.client.get(
             "/users/me",
             headers=dict(authorization=f"Bearer {token}") if token else None,
