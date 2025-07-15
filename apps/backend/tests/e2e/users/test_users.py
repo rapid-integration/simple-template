@@ -3,128 +3,113 @@ from typing import Any
 
 import pytest
 from fastapi import status
-from httpx import AsyncClient
 from pydantic import TypeAdapter
 
 from src.api.users.models import User
-from src.api.users.repository import UserRepository
 from src.api.users.schemas import UserResponse
+from tests.utils.auth import AuthClient
 from tests.utils.operators import icontains
-from tests.utils.users.generator import generate_user, generate_username
+from tests.utils.users import UsersClient, generate_user, generate_username
 
 
 @pytest.mark.anyio
-class TestGetUser:
-    async def test_get_user(self, user: User, client: AsyncClient) -> None:
-        response = await client.get(f"/api/users/{user.username}")
+class TestUsers:
+    @pytest.fixture(scope="function", autouse=True)
+    async def setup(self, auth_client: AuthClient, users_client: UsersClient) -> None:
+        self.auth_client = auth_client
+        self.users_client = users_client
 
-        assert response.status_code == status.HTTP_200_OK, response.json()
+    async def test_get_user_ok(self, user: User) -> None:
+        response = await self.users_client.get_user(user.username)
+        assert response.status_code == status.HTTP_200_OK
 
-        response_user = TypeAdapter(UserResponse).validate_python(response.json())
+        user_response = UserResponse(**response.json())
+        assert user_response.id == user.id
+        assert user_response.username == user.username
+        assert user_response.updated_at == user.updated_at
+        assert user_response.created_at == user.created_at
 
-        assert response_user.id == user.id
-        assert response_user.username == user.username
-        assert response_user.updated_at == user.updated_at
-        assert response_user.created_at == user.created_at
-
-    async def test_get_user_404(self, client: AsyncClient) -> None:
-        response = await client.get(f"/api/users/{generate_username()}")
-
+    async def test_get_user_not_found(self) -> None:
+        response = await self.users_client.get_user(generate_username())
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
-    async def test_get_user_422(self, client: AsyncClient) -> None:
-        response = await client.get("/api/users/Ну это точно не юзернейм как бы эм")
-
+    async def test_get_user_unprocessable_entity(self) -> None:
+        response = await self.users_client.get_user("user@example.com")
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-
-@pytest.mark.anyio
-class TestGetUsers:
-    async def test_get_users_empty(self, client: AsyncClient) -> None:
-        response = await client.get("/api/users")
-
-        assert response.status_code == status.HTTP_404_NOT_FOUND
-
-    async def test_get_users_with_users(self, client: AsyncClient, user_repository: UserRepository) -> None:
+    async def test_get_users_ok(self) -> None:
         users = [generate_user() for _ in range(3)]
 
         for user in users:
-            await user_repository.create(user)
+            await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await client.get("/api/users")
+        response = await self.users_client.get_users()
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
         response_usernames = {user.username for user in response_users}
         expected_usernames = {user.username for user in users}
-
         assert response_usernames.issubset(expected_usernames)
 
-    async def test_get_users_q(self, client: AsyncClient, user_repository: UserRepository) -> None:
+    async def test_get_users_not_found(self) -> None:
+        response = await self.users_client.get_users()
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    async def test_get_users_params_q_ok(self) -> None:
         users = [generate_user() for _ in range(5)]
         random_user = random.choice(users)
 
         for user in users:
-            await user_repository.create(user)
+            await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await client.get("/api/users", params={"q": random_user.username})
+        response = await self.users_client.get_users(params=dict(q=random_user.username))
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
         response_usernames = {user.username for user in response_users}
         filtered_users = [user for user in users if icontains(user.username, random_user.username)]
         expected_usernames = {user.username for user in filtered_users}
-
         assert response_usernames.issubset(expected_usernames)
 
     @pytest.mark.parametrize(
-        "params, expected_slice",
+        ("params", "expected_slice"),
         [
-            ({"limit": 5}, slice(None, 5)),
-            ({"offset": 5}, slice(5, None)),
-            ({"limit": 2, "offset": 5}, slice(5, 7)),
+            (dict(limit=5), slice(None, 5)),
+            (dict(offset=5), slice(5, None)),
+            (dict(limit=2, offset=5), slice(5, 7)),
         ],
     )
-    async def test_get_users_limit_offset(
-        self,
-        client: AsyncClient,
-        user_repository: UserRepository,
-        params: dict[str, Any],
-        expected_slice: slice,
-    ) -> None:
+    async def test_get_users_params_limit_offset_ok(self, params: dict[str, Any], expected_slice: slice) -> None:
         users = [generate_user(username=f"user{i}") for i in range(10)]
 
         for user in users:
-            await user_repository.create(user)
+            await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await client.get("/api/users", params=params)
+        response = await self.users_client.get_users(params=params)
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
         response_usernames = {user.username for user in response_users}
         expected_users = users[expected_slice]
         expected_usernames = {user.username for user in expected_users}
-
         assert response_usernames.issubset(expected_usernames)
 
-    async def test_get_users_q_limit_offset(self, client: AsyncClient, user_repository: UserRepository) -> None:
+    async def test_get_users_params_q_limit_offset_ok(self) -> None:
         users = [generate_user(username=f"user{i}") for i in range(3)]
         random_user = random.choice(users)
 
         for user in users:
-            await user_repository.create(user)
+            await self.auth_client.register(username=user.username, password=user.password)
 
         limit = 2
         offset = 0
-        params = {"q": random_user.username, "limit": str(limit), "offset": str(offset)}
-
-        response = await client.get("/api/users", params=params)
+        params = dict(q=random_user.username, limit=str(limit), offset=str(offset))
+        response = await self.users_client.get_users(params=params)
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
         response_usernames = {user.username for user in response_users}
-        filtered_usernames = [user for user in users if icontains(user.username, random_user.username)]
-        expected_users = filtered_usernames[:limit]
+        filtered_users = [user for user in users if icontains(user.username, random_user.username)]
+        expected_users = filtered_users[:limit]
         expected_usernames = {user.username for user in expected_users}
-
         assert response_usernames.issubset(expected_usernames)

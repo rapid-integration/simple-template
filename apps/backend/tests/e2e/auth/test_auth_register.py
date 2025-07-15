@@ -1,53 +1,41 @@
-from typing import Any
-
 import pytest
 from fastapi import status
-from httpx import AsyncClient
 
+from tests.utils.auth.args import AuthRegisterDict
+from tests.utils.auth.client import AuthClient
 from tests.utils.users import generate_password, generate_username
 
 
 @pytest.mark.anyio
 class TestAuthRegister:
-    async def test_auth_register(self, client: AsyncClient) -> None:
-        response = await client.post(
-            "/api/auth/register",
-            json={
-                "username": generate_username(),
-                "password": generate_password(),
-            },
-        )
+    @pytest.fixture(scope="function", autouse=True)
+    async def setup(self, auth_client: AuthClient) -> None:
+        self.auth_client = auth_client
 
+    async def test_register_created(self) -> None:
+        response = await self.auth_client.register(username=generate_username(), password=generate_password())
         assert response.status_code == status.HTTP_201_CREATED
 
-    @pytest.mark.parametrize(
-        "data, status_code",
-        [
-            ({}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": generate_password()}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"username": generate_username()}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": "short", "username": generate_username()}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": generate_password(), "username": "j"}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": "Weak", "username": "john@doe.com"}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-        ],
-    )
-    async def test_auth_register_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int) -> None:
-        response = await client.post(
-            "/api/auth/register",
-            json={
-                "username": data.get("username", ""),
-                "password": data.get("password", ""),
-            },
-        )
+    async def test_register_conflict(self) -> None:
+        json = dict(username=generate_username(), password=generate_password())
 
-        assert response.status_code == status_code
+        response = await self.auth_client.register(**json)
+        assert response.status_code == status.HTTP_201_CREATED
 
-    async def test_auth_register_conflict(self, client: AsyncClient) -> None:
-        username = generate_username()
-        password = generate_password()
-        json = {"username": username, "password": password}
-
-        response = await client.post("/api/auth/register", json=json)
-        response = await client.post("/api/auth/register", json=json)
-
+        response = await self.auth_client.register(**json)
         assert response.status_code == status.HTTP_409_CONFLICT
+
+    @pytest.mark.parametrize(
+        ("json", "status_code"),
+        (
+            ({}, status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(password=generate_password()), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username=generate_username()), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username=generate_username(), password="short"), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username="@@", password=generate_password()), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username="user@example.com", password="short"), status.HTTP_422_UNPROCESSABLE_ENTITY),
+        ),
+    )
+    async def test_register_unprocessable_entity(self, json: AuthRegisterDict, status_code: int) -> None:
+        response = await self.auth_client.register(**json)
+        assert response.status_code == status_code

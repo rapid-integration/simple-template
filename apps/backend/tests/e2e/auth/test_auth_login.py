@@ -1,35 +1,35 @@
-from typing import Any
-
 import pytest
 from fastapi import status
-from httpx import AsyncClient
 
+from tests.utils.auth import AuthClient
+from tests.utils.auth.args import AuthLoginDict
 from tests.utils.users import generate_password, generate_username
 
 
 @pytest.mark.anyio
 class TestAuthLogin:
-    async def test_auth_login(self, client: AsyncClient) -> None:
-        json = {"username": generate_username(), "password": generate_password()}
+    @pytest.fixture(scope="function", autouse=True)
+    async def setup(self, auth_client: AuthClient) -> None:
+        self.auth_client = auth_client
 
-        response = await client.post("/api/auth/register", json=json)
+    async def test_login_ok(self) -> None:
+        data = dict(username=generate_username(), password=generate_password())
+
+        response = await self.auth_client.register(**data)
         assert response.status_code == status.HTTP_201_CREATED
 
-        response = await client.post("/api/auth/login", data=json)
+        response = await self.auth_client.login(**data)
         assert response.status_code == status.HTTP_200_OK
 
     @pytest.mark.parametrize(
-        "data, status_code",
-        [
+        ("data", "status_code"),
+        (
             ({}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": generate_password()}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"username": generate_username()}, status.HTTP_422_UNPROCESSABLE_ENTITY),
-            ({"password": "Incorrect", "username": generate_username()}, status.HTTP_401_UNAUTHORIZED),
-            ({"password": generate_password(), "username": "Incorrect"}, status.HTTP_401_UNAUTHORIZED),
-            ({"password": "Incorrect", "username": "Incorrect"}, status.HTTP_401_UNAUTHORIZED),
-        ],
+            (dict(password=generate_password()), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username=generate_username()), status.HTTP_422_UNPROCESSABLE_ENTITY),
+            (dict(username=generate_username(), password=generate_password()), status.HTTP_401_UNAUTHORIZED),
+        ),
     )
-    async def test_auth_login_validation(self, client: AsyncClient, data: dict[str, Any], status_code: int) -> None:
-        response = await client.post("/api/auth/login", data=data)
-
+    async def test_auth_login_unprocessable_entity_unauthorized(self, data: AuthLoginDict, status_code: int) -> None:
+        response = await self.auth_client.login(**data)
         assert response.status_code == status_code

@@ -1,8 +1,11 @@
 __all__ = [
+    "auth_client",
+    "current_user_client",
     "current_user_service",
     "user_repository",
     "user_service",
     "user",
+    "users_client",
 ]
 
 import asyncio
@@ -17,7 +20,9 @@ from src.app import app
 from src.db.deps import get_session
 from src.db.models import Base
 from src.settings import settings
-from tests.utils.users import current_user_service, user, user_repository, user_service
+from tests.utils.auth import auth_client
+from tests.utils.users import user, user_repository, user_service, users_client
+from tests.utils.users.me import current_user_client, current_user_service
 
 
 @pytest.fixture(scope="session")
