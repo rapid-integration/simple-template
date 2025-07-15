@@ -52,7 +52,7 @@ services:
       dockerfile: Dockerfile.test
     restart: no
     command: |
-      pytest tests
+      pytest --cov=src --cov-report=term-missing tests
     env_file:
       - path: .env
         required: true
@@ -75,7 +75,7 @@ services:
       dockerfile: Dockerfile.test
     restart: no
     command: |
-      pytest tests/e2e
+      pytest --cov=src --cov-report=term-missing tests/e2e
     env_file:
       - path: .env
         required: true
@@ -98,7 +98,7 @@ services:
       dockerfile: Dockerfile.test
     restart: no
     command: |
-      pytest tests/unit
+      pytest --cov=src --cov-report=term-missing tests/unit
     env_file:
       - path: .env
         required: true
