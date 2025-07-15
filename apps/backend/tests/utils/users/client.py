@@ -3,7 +3,7 @@ from typing import Any
 from httpx import AsyncClient, Response
 
 
-class UsersClient:
+class UserClient:
     def __init__(self, *, client: AsyncClient) -> None:
         self.client = client
 

@@ -9,18 +9,18 @@ from src.api.users.models import User
 from src.api.users.schemas import UserResponse
 from tests.utils.auth import AuthClient
 from tests.utils.operators import icontains
-from tests.utils.users import UsersClient, generate_user, generate_username
+from tests.utils.users import UserClient, generate_user, generate_username
 
 
 @pytest.mark.anyio
 class TestUsers:
     @pytest.fixture(scope="function", autouse=True)
-    async def setup(self, auth_client: AuthClient, users_client: UsersClient) -> None:
+    async def setup(self, auth_client: AuthClient, user_client: UserClient) -> None:
         self.auth_client = auth_client
-        self.users_client = users_client
+        self.user_client = user_client
 
     async def test_get_user_ok(self, user: User) -> None:
-        response = await self.users_client.get_user(user.username)
+        response = await self.user_client.get_user(user.username)
         assert response.status_code == status.HTTP_200_OK
 
         user_response = UserResponse(**response.json())
@@ -30,11 +30,11 @@ class TestUsers:
         assert user_response.created_at == user.created_at
 
     async def test_get_user_not_found(self) -> None:
-        response = await self.users_client.get_user(generate_username())
+        response = await self.user_client.get_user(generate_username())
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
     async def test_get_user_unprocessable_entity(self) -> None:
-        response = await self.users_client.get_user("user@example.com")
+        response = await self.user_client.get_user("user@example.com")
         assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
     async def test_get_users_ok(self) -> None:
@@ -43,7 +43,7 @@ class TestUsers:
         for user in users:
             await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await self.users_client.get_users()
+        response = await self.user_client.get_users()
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
@@ -52,7 +52,7 @@ class TestUsers:
         assert response_usernames.issubset(expected_usernames)
 
     async def test_get_users_not_found(self) -> None:
-        response = await self.users_client.get_users()
+        response = await self.user_client.get_users()
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
     async def test_get_users_params_q_ok(self) -> None:
@@ -62,7 +62,7 @@ class TestUsers:
         for user in users:
             await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await self.users_client.get_users(params=dict(q=random_user.username))
+        response = await self.user_client.get_users(params=dict(q=random_user.username))
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
@@ -85,7 +85,7 @@ class TestUsers:
         for user in users:
             await self.auth_client.register(username=user.username, password=user.password)
 
-        response = await self.users_client.get_users(params=params)
+        response = await self.user_client.get_users(params=params)
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
@@ -104,7 +104,7 @@ class TestUsers:
         limit = 2
         offset = 0
         params = dict(q=random_user.username, limit=str(limit), offset=str(offset))
-        response = await self.users_client.get_users(params=params)
+        response = await self.user_client.get_users(params=params)
         assert response.status_code == status.HTTP_200_OK
 
         response_users = TypeAdapter(list[UserResponse]).validate_python(response.json())
