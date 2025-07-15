@@ -12,13 +12,17 @@ from tests.utils.users.generator import generate_password, generate_user, genera
 
 @pytest.mark.anyio
 class TestUserService:
-    async def test_create_user(self, user_service: UserService) -> None:
+    @pytest.fixture(scope="function", autouse=True)
+    async def setup(self, user_service: UserService) -> None:
+        self.user_service = user_service
+
+    async def test_create_user(self) -> None:
         args = UserRegistrationRequest(
             username=generate_username(),
             password=generate_password(),
         )
 
-        user = await user_service.create_user(args)
+        user = await self.user_service.create_user(args)
 
         assert user.id is not None
         assert user.created_at is not None
@@ -26,37 +30,37 @@ class TestUserService:
         assert user.username == args.username
         assert user.password != args.password  # Ensure the password is hashed
 
-    async def test_get_user_by_id_existing(self, user: User, user_service: UserService) -> None:
-        result = await user_service.get_user_by_id(user.id)
+    async def test_get_user_by_id_existing(self, user: User) -> None:
+        result = await self.user_service.get_user_by_id(user.id)
 
         assert result == user
 
-    async def test_get_user_by_id_non_existing(self, user_service: UserService) -> None:
-        result = await user_service.get_user_by_id(uuid4())
+    async def test_get_user_by_id_non_existing(self) -> None:
+        result = await self.user_service.get_user_by_id(uuid4())
 
         assert result is None
 
-    async def test_get_user_by_username_existing(self, user: User, user_service: UserService) -> None:
-        result = await user_service.get_user_by_username(user.username)
+    async def test_get_user_by_username_existing(self, user: User) -> None:
+        result = await self.user_service.get_user_by_username(user.username)
 
         assert result == user
 
-    async def test_get_user_by_username_non_existing(self, user_service: UserService) -> None:
-        result = await user_service.get_user_by_username(generate_username())
+    async def test_get_user_by_username_non_existing(self) -> None:
+        result = await self.user_service.get_user_by_username(generate_username())
 
         assert result is None
 
-    async def test_get_users_empty(self, user_service: UserService) -> None:
-        users = await user_service.get_users()
+    async def test_get_users_empty(self) -> None:
+        users = await self.user_service.get_users()
 
         assert len(users) == 0
 
-    async def test_get_users_with_users(self, user_repository: UserRepository, user_service: UserService) -> None:
+    async def test_get_users_with_users(self, user_repository: UserRepository) -> None:
         count = 3
 
         for _ in range(count):
             await user_repository.create(generate_user())
 
-        users = await user_service.get_users(SearchParams())
+        users = await self.user_service.get_users(SearchParams())
 
         assert len(users) == count
