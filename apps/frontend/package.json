@@ -10,7 +10,7 @@
     "format:prettier:check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",
     "format:prettier:write": "prettier !pnpm-lock.yaml --check --write --ignore-path .gitignore .",
     "generate:api-types": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
-    "lint": "pnpm lint:next && pnpm lint:steiger",
+    "lint": "pnpm lint:steiger && pnpm lint:next",
     "lint:next": "next lint . --max-warnings=0",
     "lint:steiger": "steiger ./src",
     "prepare": "cd ./../.. && husky ./apps/frontend/.husky",
