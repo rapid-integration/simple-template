@@ -14,12 +14,12 @@ router = APIRouter(prefix="/auth", tags=[Tag.AUTH])
     "/register",
     status_code=status.HTTP_201_CREATED,
     responses={
-        status.HTTP_201_CREATED: {
-            "description": "Registraton was successful",
-        },
-        status.HTTP_409_CONFLICT: {
-            "description": "Username already registered",
-        },
+        status.HTTP_201_CREATED: dict(
+            description="Registraton was successful",
+        ),
+        status.HTTP_409_CONFLICT: dict(
+            description="Username already registered",
+        ),
     },
 )
 async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
@@ -35,12 +35,12 @@ async def register(args: UserRegistrationRequest, service: UserServiceDepends) -
     "/login",
     status_code=status.HTTP_200_OK,
     responses={
-        status.HTTP_200_OK: {
-            "description": "Login was successful",
-        },
-        status.HTTP_401_UNAUTHORIZED: {
-            "description": "Incorrect username or password",
-        },
+        status.HTTP_200_OK: dict(
+            description="Login was successful",
+        ),
+        status.HTTP_401_UNAUTHORIZED: dict(
+            description="Incorrect username or password",
+        ),
     },
 )
 async def login(form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:

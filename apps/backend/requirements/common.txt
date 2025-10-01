@@ -13,5 +13,5 @@ PyJWT==2.10.1
 python-dotenv==1.1.1
 python-multipart==0.0.20
 SQLAlchemy==2.0.41
-textcase==0.4.3
+textcase==0.4.4
 uvicorn==0.34.2

@@ -19,9 +19,9 @@ router.include_router(me.router)
     status_code=status.HTTP_200_OK,
     response_model=list[UserResponse],
     responses={
-        status.HTTP_404_NOT_FOUND: {
-            "description": "No users found matching the provided search parameters",
-        },
+        status.HTTP_404_NOT_FOUND: dict(
+            description="No users found matching the provided search parameters",
+        ),
     },
 )
 async def get_users(search_params: SearchParamsDepends, service: UserServiceDepends) -> Sequence[User]:
@@ -38,9 +38,9 @@ async def get_users(search_params: SearchParamsDepends, service: UserServiceDepe
     status_code=status.HTTP_200_OK,
     response_model=UserResponse,
     responses={
-        status.HTTP_404_NOT_FOUND: {
-            "description": "No user found with the provided username",
-        },
+        status.HTTP_404_NOT_FOUND: dict(
+            description="No user found with the provided username",
+        ),
     },
 )
 async def get_user(username: Username, service: UserServiceDepends) -> User:

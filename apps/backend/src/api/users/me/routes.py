@@ -15,12 +15,12 @@ router = APIRouter(prefix="/me")
     response_model=CurrentUserResponse,
     status_code=status.HTTP_200_OK,
     responses={
-        status.HTTP_403_FORBIDDEN: {
-            "description": "Failed to verify credentials",
-        },
-        status.HTTP_404_NOT_FOUND: {
-            "description": "User not found",
-        },
+        status.HTTP_403_FORBIDDEN: dict(
+            description="Failed to verify credentials",
+        ),
+        status.HTTP_404_NOT_FOUND: dict(
+            description="User not found",
+        ),
     },
 )
 async def get_current_user(current_user: CurrentUserDepends) -> User:
@@ -31,18 +31,18 @@ async def get_current_user(current_user: CurrentUserDepends) -> User:
     "/username",
     status_code=status.HTTP_204_NO_CONTENT,
     responses={
-        status.HTTP_204_NO_CONTENT: {
-            "description": "Username successfully updated",
-        },
-        status.HTTP_403_FORBIDDEN: {
-            "description": "Failed to verify credentials",
-        },
-        status.HTTP_404_NOT_FOUND: {
-            "description": "User not found",
-        },
-        status.HTTP_409_CONFLICT: {
-            "description": "Username already registered",
-        },
+        status.HTTP_204_NO_CONTENT: dict(
+            description="Username successfully updated",
+        ),
+        status.HTTP_403_FORBIDDEN: dict(
+            description="Failed to verify credentials",
+        ),
+        status.HTTP_404_NOT_FOUND: dict(
+            description="User not found",
+        ),
+        status.HTTP_409_CONFLICT: dict(
+            description="Username already registered",
+        ),
     },
 )
 async def update_current_user_username(
@@ -65,15 +65,15 @@ async def update_current_user_username(
     "/password",
     status_code=status.HTTP_204_NO_CONTENT,
     responses={
-        status.HTTP_204_NO_CONTENT: {
-            "description": "Password successfully updated",
-        },
-        status.HTTP_403_FORBIDDEN: {
-            "description": "Failed to verify credentials or incorrect password",
-        },
-        status.HTTP_404_NOT_FOUND: {
-            "description": "User not found",
-        },
+        status.HTTP_204_NO_CONTENT: dict(
+            description="Password successfully updated",
+        ),
+        status.HTTP_403_FORBIDDEN: dict(
+            description="Failed to verify credentials or incorrect password",
+        ),
+        status.HTTP_404_NOT_FOUND: dict(
+            description="User not found",
+        ),
     },
 )
 async def update_current_user_password(
