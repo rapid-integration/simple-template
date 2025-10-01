@@ -16,7 +16,6 @@ export function NavMain({
     icon: LucideIcon;
   }[];
 }) {
-  
   const pathname = usePathname();
 
   return (

@@ -14,7 +14,9 @@ type RegisterPageProps = {
   searchParams?: unknown;
 };
 
-export default async function RegisterPage({ searchParams }: RegisterPageProps) {
+export default async function RegisterPage({
+  searchParams,
+}: RegisterPageProps) {
   const { next } = routes.register.$parseSearchParams(await searchParams);
 
   return (
