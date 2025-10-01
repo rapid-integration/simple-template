@@ -1,2 +1,2 @@
-export { default as UserUpdatePasswordDataListItem } from "./ui/UserUpdatePasswordDataListItem";
+export { default as UserUpdatePasswordCell } from "./ui/UserUpdatePasswordCell";
 export { default as UserUpdatePasswordForm } from "./ui/UserUpdatePasswordForm";

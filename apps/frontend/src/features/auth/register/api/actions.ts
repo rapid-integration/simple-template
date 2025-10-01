@@ -4,7 +4,8 @@ import { revalidateTag } from "next/cache";
 
 import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
 import { client, setSession, UserRegistrationRequest } from "@/shared/api";
-import { redirectToNextUrl } from "@/shared/lib/server/redirect";
+import { routes } from "@/shared/config/navigation";
+import { redirectToNextURL } from "@/shared/lib/navigation";
 
 export async function register(body: UserRegistrationRequest) {
   const { response, data, error } = await client.POST("/auth/register", {
@@ -21,5 +22,5 @@ export async function register(body: UserRegistrationRequest) {
   revalidateTag(USER_CACHE_USERS_ME_TAG);
 
   await setSession(data);
-  await redirectToNextUrl();
+  await redirectToNextURL({ fallbackUrl: routes.home() });
 }

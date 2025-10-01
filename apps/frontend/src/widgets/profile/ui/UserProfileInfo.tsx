@@ -2,13 +2,11 @@
 
 import { FunctionComponent } from "react";
 
-import {
-  UserCreatedAtDataListItem,
-  UserIdDataListItem,
-  UserUsernameDataListItem,
-} from "@/entities/user";
-import CopyButton from "@/shared/ui/copy-button";
-import DataList from "@/shared/ui/data-list";
+import { UserCreatedAtCell, UserIdCell } from "@/entities/user";
+import { LogoutButton } from "@/features/auth/logout";
+import { UserUpdatePasswordCell } from "@/features/user/update-password";
+import { UserUpdateUsernameCell } from "@/features/user/update-username";
+import Group from "@/shared/ui/Group";
 
 interface UserProfileInfoProps {
   username: string;
@@ -19,54 +17,17 @@ interface UserProfileInfoProps {
 const UserProfileInfo: FunctionComponent<UserProfileInfoProps> = (props) => {
   return (
     <section className="flex flex-col gap-4">
-      <DataList orientation="horizontal">
-        <UserUsernameDataListItem
-          value={props.username}
-          action={
-            <CopyButton
-              value={props.username}
-              messages={{
-                copy: "Скопировать имя пользователя",
-                success: "Имя пользователя скопировано!",
-                error:
-                  "Не удалось скопировать имя пользователя: окно браузера используется в небезопасном контексте.",
-              }}
-            />
-          }
-        />
-      </DataList>
+      <Group>
+        <UserUpdateUsernameCell value={props.username} />
+        <UserUpdatePasswordCell />
+      </Group>
 
-      <DataList orientation="horizontal">
-        <UserCreatedAtDataListItem
-          value={props.created_at}
-          action={(value) => (
-            <CopyButton
-              value={value}
-              messages={{
-                copy: "Скопировать дату регистрации",
-                success: "Дата регистрации скопирована!",
-                error:
-                  "Не удалось скопировать дату регистрации: окно браузера используется в небезопасном контексте.",
-              }}
-            />
-          )}
-        />
+      <Group>
+        <UserCreatedAtCell value={props.created_at} />
+        <UserIdCell value={props.id} />
+      </Group>
 
-        <UserIdDataListItem
-          value={props.id}
-          action={
-            <CopyButton
-              value={props.id}
-              messages={{
-                copy: "Скопировать идентификатор",
-                success: "Идентификатор скопирован!",
-                error:
-                  "Не удалось скопировать идентификатор: окно браузера используется в небезопасном контексте.",
-              }}
-            />
-          }
-        />
-      </DataList>
+      <LogoutButton />
     </section>
   );
 };

@@ -2,27 +2,26 @@
 
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
-import { PanelLeftIcon } from "lucide-react";
+import { MenuIcon, PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react";
 import * as React from "react";
 
 import { useIsMobile } from "@/shared/hooks/use-mobile";
 import { cn } from "@/shared/lib/utils";
 import Button from "@/shared/ui/button";
+import Drawer from "@/shared/ui/drawer";
+import IconButton from "@/shared/ui/IconButton";
 import Input from "@/shared/ui/input";
 import Separator from "@/shared/ui/separator";
-import Sheet from "@/shared/ui/sheet";
-import Shortcut from "@/shared/ui/shortcut";
 import Skeleton from "@/shared/ui/skeleton";
 import Tooltip from "@/shared/ui/tooltip";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "16rem";
-const SIDEBAR_WIDTH_MOBILE = "18rem";
+const SIDEBAR_WIDTH = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
-type SidebarContextProps = {
+interface SidebarContextProps {
   state: "expanded" | "collapsed";
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -30,7 +29,7 @@ type SidebarContextProps = {
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
   toggleSidebar: () => void;
-};
+}
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null);
 
@@ -142,14 +141,14 @@ function SidebarProvider({
 }
 
 function SidebarRoot({
-  side = "left",
+  direction = "left",
   variant = "sidebar",
   collapsible = "offcanvas",
   className,
   children,
   ...props
 }: React.ComponentProps<"div"> & {
-  side?: "left" | "right";
+  direction?: "left" | "right";
   variant?: "sidebar" | "floating" | "inset";
   collapsible?: "offcanvas" | "icon" | "none";
 }) {
@@ -172,28 +171,28 @@ function SidebarRoot({
 
   if (isMobile) {
     return (
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-        <Sheet.Content
+      <Drawer
+        open={openMobile}
+        onOpenChange={setOpenMobile}
+        direction={direction}
+        shouldScaleBackground={false}
+        autoFocus
+      >
+        <Drawer.Content
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="w-(--sidebar-width) bg-sidebar p-0 text-sidebar-foreground [&>button]:hidden"
-          style={
-            {
-              "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
-          }
-          side={side}
+          className="top-2 bottom-2 left-2 bg-sidebar text-sidebar-foreground"
         >
-          <Sheet.Header className="sr-only">
-            <Sheet.Title>Боковое меню</Sheet.Title>
-            <Sheet.Description>
+          <Drawer.Header className="sr-only">
+            <Drawer.Title>Боковое меню</Drawer.Title>
+            <Drawer.Description>
               Показывает мобильное боковое меню.
-            </Sheet.Description>
-          </Sheet.Header>
+            </Drawer.Description>
+          </Drawer.Header>
           <div className="flex h-full w-full flex-col">{children}</div>
-        </Sheet.Content>
-      </Sheet>
+        </Drawer.Content>
+      </Drawer>
     );
   }
 
@@ -203,14 +202,14 @@ function SidebarRoot({
       data-state={state}
       data-collapsible={state === "collapsed" ? collapsible : ""}
       data-variant={variant}
-      data-side={side}
+      data-side={direction}
       data-slot="sidebar"
     >
       {/* This is what handles the sidebar gap on desktop */}
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
+          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-500 ease-[cubic-bezier(0.32,_0.72,_0,_1)]",
           "group-data-[collapsible=offcanvas]:w-0",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"
@@ -221,8 +220,8 @@ function SidebarRoot({
       <div
         data-slot="sidebar-container"
         className={cn(
-          "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
-          side === "left"
+          "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-500 ease-[cubic-bezier(0.32,_0.72,_0,_1)] md:flex",
+          direction === "left"
             ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
             : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
           // Adjust the padding for floating and inset variants.
@@ -247,43 +246,31 @@ function SidebarRoot({
 
 function SidebarTrigger({
   onClick,
-  ...props
+  ...otherProps
 }: React.ComponentProps<typeof Button>) {
   const { toggleSidebar, open, openMobile, isMobile } = useSidebar();
 
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+    onClick?.(event);
+    toggleSidebar();
+  };
+
   return (
-    <Tooltip>
-      <Tooltip.Trigger asChild>
-        <Button
-          data-sidebar="trigger"
-          data-slot="sidebar-trigger"
-          variant="ghost"
-          size="icon"
-          onClick={(event) => {
-            onClick?.(event);
-            toggleSidebar();
-          }}
-          {...props}
-        >
-          <PanelLeftIcon />
-          <span className="sr-only">
-            {(isMobile ? openMobile : open) ? "Закрыть" : "Открыть"} боковую
-            панель (⌘
-            {SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()})
-          </span>
-        </Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content side="right">
-        <span>
-          {(isMobile ? openMobile : open) ? "Закрыть" : "Открыть"} боковую
-          панель
-        </span>
-        <Shortcut
-          sequence={["⌘", SIDEBAR_KEYBOARD_SHORTCUT.toUpperCase()]}
-          className="ms-1"
-        />
-      </Tooltip.Content>
-    </Tooltip>
+    <IconButton
+      side={open ? "right" : "bottom"}
+      title={`${(isMobile ? openMobile : open) ? "Закрыть" : "Открыть"} боковую панель`}
+      variant="ghost"
+      onClick={handleClick}
+      {...otherProps}
+    >
+      {isMobile ? (
+        <MenuIcon className="size-6" />
+      ) : open ? (
+        <PanelLeftCloseIcon />
+      ) : (
+        <PanelLeftOpenIcon />
+      )}
+    </IconButton>
   );
 }
 
@@ -374,7 +361,7 @@ function SidebarSeparator({
     <Separator
       data-slot="sidebar-separator"
       data-sidebar="separator"
-      className={cn("mx-2 w-auto bg-sidebar-border", className)}
+      className={cn("my-2 !w-auto border-dotted", className)}
       {...props}
     />
   );
@@ -430,7 +417,7 @@ function SidebarGroupAction({
   className,
   asChild = false,
   ...props
-}: React.ComponentProps<"button"> & { asChild?: boolean }) {
+}: React.ComponentProps<"button"> & { asChild?: boolean; value?: string }) {
   const Comp = asChild ? Slot : "button";
 
   return (
@@ -438,7 +425,7 @@ function SidebarGroupAction({
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
-        "absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "absolute top-3.5 right-3.5 flex aspect-square w-5 items-center justify-center rounded-sm p-0 text-sidebar-foreground ring-sidebar-ring outline-hidden transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         // Increases the hit area of the button on mobile.
         "after:absolute after:-inset-2 md:after:hidden",
         "group-data-[collapsible=icon]:hidden",
@@ -486,7 +473,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
 }
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full cursor-pointer items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -518,6 +505,7 @@ function SidebarMenuButton({
 }: React.ComponentProps<"button"> & {
   asChild?: boolean;
   isActive?: boolean;
+  value?: string;
   tooltip?: string | React.ComponentProps<typeof Tooltip.Content>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : "button";
@@ -565,6 +553,7 @@ function SidebarMenuAction({
 }: React.ComponentProps<"button"> & {
   asChild?: boolean;
   showOnHover?: boolean;
+  value?: string;
 }) {
   const Comp = asChild ? Slot : "button";
 
@@ -736,7 +725,6 @@ export {
   SidebarTrigger,
   useSidebar,
 };
-
 const Sidebar = Object.assign(SidebarRoot, {
   Content: SidebarContent,
   Footer: SidebarFooter,

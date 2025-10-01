@@ -5,40 +5,25 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 import { CurrentUserResponse } from "@/shared/api";
+import { routes } from "@/shared/config/navigation";
 import Sidebar from "@/shared/ui/sidebar";
 
 import { NavMain } from "./nav-main";
-import { NavProjects } from "./nav-projects";
 import { NavUser } from "./nav-user";
 
-const data = {
-  navMain: [
-    {
-      title: "Главная",
-      url: "/",
-      icon: HomeIcon,
-    },
-  ],
-  projects: [
-    {
-      name: "Дизайн",
-      url: "/projects/1",
-    },
-    {
-      name: "Маркетинг",
-      url: "/projects/2",
-    },
-    {
-      name: "Путешествия",
-      url: "/projects/3",
-    },
-  ],
+const items = [
+  {
+    title: "Главная",
+    href: routes.home(),
+    icon: HomeIcon,
+  },
+];
+
+type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  user?: CurrentUserResponse;
 };
 
-export function AppSidebar({
-  user,
-  ...props
-}: React.ComponentProps<typeof Sidebar> & { user?: CurrentUserResponse }) {
+export const AppSidebar: React.FC<AppSidebarProps> = ({ user, ...props }) => {
   const pathname = usePathname();
   const sidebar = Sidebar.useContext();
 
@@ -49,16 +34,17 @@ export function AppSidebar({
   }, [pathname]);
 
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar {...props}>
       <Sidebar.Header>
-        <Sidebar.Trigger />
+        {!sidebar.isMobile && <Sidebar.Trigger />}
+        <h1 className="px-2 pt-2 text-xl font-semibold text-accent-foreground md:text-2xl">
+          Template
+        </h1>
       </Sidebar.Header>
       <Sidebar.Content>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
+        <NavMain items={items} />
       </Sidebar.Content>
       <Sidebar.Footer>{user && <NavUser user={user} />}</Sidebar.Footer>
-      <Sidebar.Rail />
     </Sidebar>
   );
-}
+};

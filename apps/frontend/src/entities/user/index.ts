@@ -10,7 +10,8 @@ export {
 } from "./config";
 export { parseInitials } from "./lib/parseInitials";
 export { UserPasswordSchema, UserUsernameSchema } from "./model/schema";
-export { default as UserCreatedAtDataListItem } from "./ui/UserCreatedAtDataListItem";
-export { default as UserIdDataListItem } from "./ui/UserIdDataListItem";
-export { default as UserPasswordDataListItem } from "./ui/UserPasswordDataListItem";
-export { default as UserUsernameDataListItem } from "./ui/UserUsernameDataListItem";
+export { default as UserCreatedAtCell } from "./ui/cells/UserCreatedAtCell";
+export { default as UserIdCell } from "./ui/cells/UserIdCell";
+export { default as UserPasswordCell } from "./ui/cells/UserPasswordCell";
+export { default as UserUsernameCell } from "./ui/cells/UserUsernameCell";
+export { default as UserAvatar } from "./ui/UserAvatar";

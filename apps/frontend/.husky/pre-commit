@@ -2,4 +2,4 @@
 
 cd ./apps/frontend
 
-pnpm lint-staged --relative
+pnpm lint-staged

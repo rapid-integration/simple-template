@@ -1,19 +1,26 @@
 "use client";
 
-import { ru } from "date-fns/locale";
-import { format } from "date-fns-tz";
-
-import useTimeZone from "./use-time-zone";
+import { useEffect, useState } from "react";
 
 interface UseDateTimeFormatProps {
-  date: Date | string | number;
-  format: string;
+  value: Date | number | string;
+  locales?: Intl.LocalesArgument;
+  options?: Intl.DateTimeFormatOptions;
 }
 
-export default function useDateTimeFormat(props: UseDateTimeFormatProps) {
-  const timeZone = useTimeZone();
+export default function useDateTimeFormat({
+  value,
+  locales,
+  options,
+}: UseDateTimeFormatProps): string {
+  const [format, setFormat] = useState("");
 
-  if (timeZone) {
-    return format(props.date, props.format, { locale: ru, timeZone });
-  }
+  const date = typeof value === "string" ? Date.parse(value) : value;
+  const formatter = Intl.DateTimeFormat(locales, options);
+
+  useEffect(() => {
+    setFormat(formatter.format(date));
+  }, []);
+
+  return format;
 }

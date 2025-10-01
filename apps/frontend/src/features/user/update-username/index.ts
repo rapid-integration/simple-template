@@ -1,2 +1,2 @@
-export { default as UserUpdateUsernameDataListItem } from "./ui/UserUpdateUsernameDataListItem";
+export { default as UserUpdateUsernameCell } from "./ui/UserUpdateUsernameCell";
 export { default as UserUpdateUsernameForm } from "./ui/UserUpdateUsernameForm";

@@ -1,2 +1,2 @@
 export { logout } from "./api/actions";
-export { default as UserProfileLogoutButton } from "./ui/UserProfileLogoutButton";
+export { default as LogoutButton } from "./ui/button/LogoutButton";

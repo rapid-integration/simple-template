@@ -2,6 +2,7 @@ import { ArrowLeftIcon, TrafficConeIcon } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
+import { routes } from "@/shared/config/navigation";
 import Button from "@/shared/ui/button";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function NotFound() {
         </p>
       </hgroup>
       <Button asChild size="lg">
-        <Link href="/">
+        <Link href={routes.home()}>
           <ArrowLeftIcon />
           <span>На главную</span>
         </Link>

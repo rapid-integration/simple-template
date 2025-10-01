@@ -1,24 +1,23 @@
 "use client";
 
-import { LoaderIcon } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
+import { routes } from "@/shared/config/navigation";
 import { cn } from "@/shared/lib/utils";
 import Button from "@/shared/ui/button";
 import Card from "@/shared/ui/card";
 import Form from "@/shared/ui/form";
 import Input from "@/shared/ui/input";
+import Spinner from "@/shared/ui/spinner";
 
 import { useRegisterForm } from "../model/form";
 
 export function RegisterForm({
+  next,
   className,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & { next?: string | undefined }) {
   const [form, submit, pending] = useRegisterForm();
-  const searchParams = useSearchParams();
-  const next = searchParams?.get("next");
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -105,7 +104,7 @@ export function RegisterForm({
                 >
                   {pending ? (
                     <>
-                      <LoaderIcon className="animate-spin" />
+                      <Spinner />
                       <span>Выполняется регистрация…</span>
                     </>
                   ) : (
@@ -113,13 +112,7 @@ export function RegisterForm({
                   )}
                 </Button>
                 <Button asChild variant="outline">
-                  <Link
-                    href={
-                      next
-                        ? `/login?next=${encodeURIComponent(next)}`
-                        : "/login"
-                    }
-                  >
+                  <Link href={routes.login({ search: { next } })}>
                     К форме входа
                   </Link>
                 </Button>

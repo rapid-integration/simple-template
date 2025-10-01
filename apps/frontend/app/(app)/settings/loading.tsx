@@ -16,11 +16,12 @@ export default function Loading() {
       <Page.Content size="xl" className="gap-8">
         <div className="space-y-3">
           <Skeleton className="mx-auto size-24 rounded-full" />
-          <Skeleton className="mx-auto h-8 w-1/2" />
+          <Skeleton className="mx-auto h-8 w-1/2 max-md:h-9" />
         </div>
         <div className="flex flex-col gap-4">
-          <Skeleton className="h-17.5 w-full" />
           <Skeleton className="h-34.75 w-full" />
+          <Skeleton className="h-34.75 w-full" />
+          <Skeleton className="h-10 w-full" />
         </div>
       </Page.Content>
     </Page>

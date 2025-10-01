@@ -10,7 +10,7 @@ export default async function AppAppLayout({ children }: FragmentProps) {
   return (
     <SidebarProvider>
       <AppSidebar user={currentUser} />
-      <SidebarInset data-vaul-drawer-wrapper>{children}</SidebarInset>
+      <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 }
