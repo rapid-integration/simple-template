@@ -54,7 +54,10 @@
 *.xhtml                text diff=html
 
 # Docker
-Dockerfile*            text linguist-language=Docker
+Dockerfile.*           text linguist-language=Docker
+
+# Nginx
+**/nginx/*.conf        linguist-language=NGINX-Conf
 
 # Documentation
 *.ipynb                text eol=lf
