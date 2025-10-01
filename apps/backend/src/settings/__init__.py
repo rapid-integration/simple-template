@@ -9,9 +9,9 @@ __all__ = [
     "SwaggerSettings",
 ]
 
-from typing import Any
-
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings_logging import LoggingSettings
 
 from src.settings.api import ApiSettings
 from src.settings.app import AppSettings
@@ -23,55 +23,23 @@ from src.settings.swagger import SwaggerSettings
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
+        str_strip_whitespace=True,
+        ignored_types=(LoggingSettings,),
         env_nested_delimiter="_",
         env_nested_max_split=1,
         env_prefix="BACKEND_",
         extra="ignore",
     )
 
-    app: AppSettings
-    api: ApiSettings
-    cors: CORSSettings
-    postgres: PostgresSettings
-    postgres_test: PostgresSettings
-    security: SecuritySettings
-    swagger: SwaggerSettings
+    app: AppSettings = Field(init=False)
+    api: ApiSettings = Field(init=False)
+    cors: CORSSettings = Field(init=False)
+    postgres: PostgresSettings = Field(init=False)
+    postgres_test: PostgresSettings = Field(init=False)
+    security: SecuritySettings = Field(init=False)
+    swagger: SwaggerSettings = Field(init=False)
 
-    logging: dict[str, Any] = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            "basic": {
-                "class": "uvicorn.logging.ColourizedFormatter",
-                "format": "%(levelprefix)s %(message)s",
-            },
-            "verbose": {
-                "format": "%(asctime)s %(pathname)s:%(lineno)d %(levelname)s %(message)s",
-                "datefmt": "%d.%m.%Y %H:%M:%S",
-            },
-        },
-        "handlers": {
-            "console": {
-                "class": "logging.StreamHandler",
-                "formatter": "basic",
-                "stream": "ext://sys.stdout",
-            },
-        },
-        "loggers": {
-            "root": {
-                "level": "INFO",
-                "handlers": ["console"],
-            },
-            "app": {
-                "level": "DEBUG",
-                "handlers": ["console"],
-            },
-            "sqlalchemy.engine": {
-                "level": "WARNING",
-                "handlers": ["console"],
-            },
-        },
-    }
+    logging = LoggingSettings()
 
 
-settings = Settings()  # type: ignore[call-arg]
+settings = Settings()

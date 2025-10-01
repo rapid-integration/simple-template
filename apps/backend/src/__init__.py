@@ -2,9 +2,9 @@ __all__ = [
     "User",
 ]
 
-from logging.config import dictConfig
+import logging.config
 
 from src.api.users.models import User
 from src.settings import settings
 
-dictConfig(settings.logging)
+logging.config.dictConfig(settings.logging.model_dump())
