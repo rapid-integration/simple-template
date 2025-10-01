@@ -24,8 +24,8 @@ router.include_router(me.router)
         ),
     },
 )
-async def get_users(search_params: SearchParamsDepends, service: UserServiceDepends) -> Sequence[User]:
-    users = await service.get_users(search_params)
+async def get_users(search_params: SearchParamsDepends, user_service: UserServiceDepends) -> Sequence[User]:
+    users = await user_service.get_users(search_params)
 
     if not users:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "No users found matching the provided search parameters.")
@@ -43,8 +43,8 @@ async def get_users(search_params: SearchParamsDepends, service: UserServiceDepe
         ),
     },
 )
-async def get_user(username: Username, service: UserServiceDepends) -> User:
-    user = await service.get_user_by_username(username)
+async def get_user(username: Username, user_service: UserServiceDepends) -> User:
+    user = await user_service.get_user_by_username(username)
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, f"No user found with the username '{username}'.")

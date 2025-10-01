@@ -78,12 +78,12 @@ async def update_current_user_username(
 )
 async def update_current_user_password(
     args: UserUpdatePasswordRequest,
-    service: CurrentUserServiceDepends,
+    current_user_service: CurrentUserServiceDepends,
     current_user: CurrentUserDepends,
 ) -> Response:
     if not is_valid_password(args.old_password, current_user.password):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Incorrect password.")
 
-    await service.update_password(current_user, args.new_password)
+    await current_user_service.update_password(current_user, args.new_password)
 
     return Response(status_code=status.HTTP_204_NO_CONTENT)

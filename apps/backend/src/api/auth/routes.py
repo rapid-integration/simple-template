@@ -22,11 +22,11 @@ router = APIRouter(prefix="/auth", tags=[Tag.AUTH])
         ),
     },
 )
-async def register(args: UserRegistrationRequest, service: UserServiceDepends) -> AccessTokenResponse:
-    if await service.get_user_by_username(args.username):
+async def register(args: UserRegistrationRequest, user_service: UserServiceDepends) -> AccessTokenResponse:
+    if await user_service.get_user_by_username(args.username):
         raise HTTPException(status.HTTP_409_CONFLICT, "Username already registered.")
 
-    user = await service.create_user(args)
+    user = await user_service.create_user(args)
 
     return create_access_token(user.id)
 
@@ -43,8 +43,8 @@ async def register(args: UserRegistrationRequest, service: UserServiceDepends) -
         ),
     },
 )
-async def login(form: PasswordRequestFormDepends, service: UserServiceDepends) -> AccessTokenResponse:
-    user = await service.get_user_by_username(form.username)
+async def login(form: PasswordRequestFormDepends, user_service: UserServiceDepends) -> AccessTokenResponse:
+    user = await user_service.get_user_by_username(form.username)
 
     if not user or not is_valid_password(form.password, user.password):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Incorrect username or password.")
