@@ -5,6 +5,5 @@
   "files.associations": {
     ".env*": "properties",
     ".prettierrc": "jsonc",
-    "*.css": "tailwindcss"
   }
 }
