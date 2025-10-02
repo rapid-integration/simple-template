@@ -1,4 +1,4 @@
-import { ActionIcon, CopyButton } from "@mantine/core";
+import { ActionIcon, CopyButton, ThemeIcon, Tooltip } from "@mantine/core";
 import { TbCheck, TbCopy, TbHash } from "react-icons/tb";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
@@ -13,20 +13,35 @@ export const UserIdCell: React.FC<UserIdCellProps> = ({
 }) => {
   return (
     <Cell
-      leftSection={<TbHash size={24} />}
+      leftSection={
+        <ThemeIcon color="blue" variant="transparent">
+          <TbHash size={24} />
+        </ThemeIcon>
+      }
       label="Идентификатор"
       value={value}
       rightSection={
         <CopyButton value={value}>
           {({ copied, copy }) => (
-            <ActionIcon
-              size="input-sm"
-              variant="subtle"
-              color={copied ? "teal" : "gray"}
-              onClick={copy}
+            <Tooltip
+              label={
+                copied
+                  ? "Идентификатор скопирован"
+                  : "Скопировать идентификатор"
+              }
+              position="left"
+              withArrow
+              arrowSize={8}
             >
-              {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
-            </ActionIcon>
+              <ActionIcon
+                size="input-sm"
+                style={{ color: "var(--mantine-color-gray-text)" }}
+                variant="default"
+                onClick={copy}
+              >
+                {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+              </ActionIcon>
+            </Tooltip>
           )}
         </CopyButton>
       }

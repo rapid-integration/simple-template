@@ -5,10 +5,11 @@ import {
   Drawer,
   Flex,
   Modal,
+  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { TbPencil } from "react-icons/tb";
+import { TbEdit } from "react-icons/tb";
 
 import { UserUsernameCell, UserUsernameCellProps } from "@/entities/user";
 
@@ -31,14 +32,21 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
       <UserUsernameCell
         value={username}
         rightSection={
-          <ActionIcon
-            size="input-sm"
-            color="gray"
-            variant="subtle"
-            onClick={open}
+          <Tooltip
+            label="Изменить имя пользователя"
+            position="left"
+            withArrow
+            arrowSize={8}
           >
-            <TbPencil size={24} />
-          </ActionIcon>
+            <ActionIcon
+              size="input-sm"
+              style={{ color: "var(--mantine-color-gray-text)" }}
+              variant="default"
+              onClick={open}
+            >
+              <TbEdit size={24} />
+            </ActionIcon>
+          </Tooltip>
         }
         {...props}
       />
@@ -53,9 +61,7 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
         <Popup.Content display="flex">
           <Flex flex={1} direction="column">
             <Popup.Header>
-              <Popup.Title fw={500}>
-                Редактирование имени пользователя
-              </Popup.Title>
+              <Popup.Title fw={500}>Изменение имени пользователя</Popup.Title>
               <Popup.CloseButton aria-label="Закрыть" />
             </Popup.Header>
             <Popup.Body display="flex" flex={1}>

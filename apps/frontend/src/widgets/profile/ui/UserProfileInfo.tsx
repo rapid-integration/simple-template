@@ -2,7 +2,11 @@
 
 import { Card, Divider, Stack } from "@mantine/core";
 
-import { UserCreatedAtCell, UserIdCell } from "@/entities/user";
+import {
+  UserColorSchemeCell,
+  UserCreatedAtCell,
+  UserIdCell,
+} from "@/entities/user";
 import { LogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordCell } from "@/features/user/update-password";
 import { UserUpdateUsernameCell } from "@/features/user/update-username";
@@ -26,6 +30,10 @@ export const UserProfileInfo: React.FC<UserProfileInfoProps> = (props) => {
         <UserCreatedAtCell value={props.created_at} />
         <Divider />
         <UserIdCell value={props.id} />
+      </Card>
+
+      <Card p={0} withBorder>
+        <UserColorSchemeCell />
       </Card>
 
       <LogoutButton />

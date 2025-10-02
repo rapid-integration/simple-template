@@ -14,6 +14,10 @@ export {
 } from "./config";
 export { UserPasswordSchema, UserUsernameSchema } from "./model/schema";
 export {
+  UserColorSchemeCell,
+  type UserColorSchemeCellProps,
+} from "./ui/UserColorSchemeCell";
+export {
   UserCreatedAtCell,
   type UserCreatedAtCellProps,
 } from "./ui/UserCreatedAtCell";

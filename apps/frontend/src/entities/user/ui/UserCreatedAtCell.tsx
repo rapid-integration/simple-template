@@ -1,9 +1,15 @@
 "use client";
 
-import { ActionIcon, CopyButton, Skeleton } from "@mantine/core";
+import {
+  ActionIcon,
+  CopyButton,
+  Skeleton,
+  ThemeIcon,
+  Tooltip,
+} from "@mantine/core";
 import { TbCalendarPlus, TbCheck, TbCopy } from "react-icons/tb";
 
-import useDateTimeFormat from "@/shared/hooks/use-date-time-format";
+import useDateTimeFormat from "@/shared/hooks/useDateTimeFormat";
 import { Cell, CellProps } from "@/shared/ui/Cell";
 
 export type UserCreatedAtCellProps = CellProps & {
@@ -29,21 +35,36 @@ export const UserCreatedAtCell: React.FC<UserCreatedAtCellProps> = ({
 
   return (
     <Cell
-      leftSection={<TbCalendarPlus size={24} />}
+      leftSection={
+        <ThemeIcon color="blue" variant="transparent">
+          <TbCalendarPlus size={24} />
+        </ThemeIcon>
+      }
       label="Дата регистрации"
-      value={displayDate !== "" ? displayDate : <Skeleton w={192} h={24} />}
+      value={displayDate !== "" ? displayDate : <Skeleton w={192} h={24.8} />}
       rightSection={
         displayDate ? (
           <CopyButton value={displayDate}>
             {({ copied, copy }) => (
-              <ActionIcon
-                size="input-sm"
-                variant="subtle"
-                color={copied ? "teal" : "gray"}
-                onClick={copy}
+              <Tooltip
+                label={
+                  copied
+                    ? "Дата регистрации скопирована"
+                    : "Скопировать дату регистрации"
+                }
+                position="left"
+                withArrow
+                arrowSize={8}
               >
-                {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
-              </ActionIcon>
+                <ActionIcon
+                  size="input-sm"
+                  style={{ color: "var(--mantine-color-gray-text)" }}
+                  variant="default"
+                  onClick={copy}
+                >
+                  {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+                </ActionIcon>
+              </Tooltip>
             )}
           </CopyButton>
         ) : (

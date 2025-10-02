@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod/v4";
 
 import { UserPasswordSchema, UserUsernameSchema } from "@/entities/user";
 
@@ -9,6 +9,6 @@ export const RegisterFormSchema = z
     password2: UserPasswordSchema,
   })
   .refine((data) => data.password1 === data.password2, {
-    message: "Подтверждение нового пароля не совпадает с новым паролем.",
+    message: "Пароли не совпадают.",
     path: ["password2"],
   });

@@ -5,10 +5,11 @@ import {
   Drawer,
   Flex,
   Modal,
+  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
-import { TbPencil } from "react-icons/tb";
+import { TbEdit } from "react-icons/tb";
 
 import { UserPasswordCell, UserPasswordCellProps } from "@/entities/user";
 
@@ -29,14 +30,21 @@ export const UserUpdatePasswordCell: React.FC<UserUpdatePasswordCellProps> = (
     <>
       <UserPasswordCell
         rightSection={
-          <ActionIcon
-            size="input-sm"
-            color="gray"
-            variant="subtle"
-            onClick={open}
+          <Tooltip
+            label="Изменить пароль"
+            position="left"
+            withArrow
+            arrowSize={8}
           >
-            <TbPencil size={24} />
-          </ActionIcon>
+            <ActionIcon
+              size="input-sm"
+              style={{ color: "var(--mantine-color-gray-text)" }}
+              variant="default"
+              onClick={open}
+            >
+              <TbEdit size={24} />
+            </ActionIcon>
+          </Tooltip>
         }
         {...props}
       />

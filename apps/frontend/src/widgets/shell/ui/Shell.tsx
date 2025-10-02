@@ -57,10 +57,9 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
         breakpoint: "sm",
         collapsed: { desktop: true, mobile: !open },
       }}
-      p="md"
     >
       <AppShell.Header>
-        <Group h="100%" px={isMobile ? "md" : undefined} maw="48rem" mx="auto">
+        <Group h="100%" px="md" maw="48rem" mx="auto">
           <Burger
             opened={open}
             onClick={toggle}
@@ -70,7 +69,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
           />
           <Group justify="space-between" style={{ flex: 1 }}>
             <Group gap="xs">
-              <Image src="/favicon.ico" alt="" width={24} height={24} />
+              <Image src="/favicon.ico" alt="Логотип" width={24} height={24} />
               <Text fw={600}>Template</Text>
             </Group>
 
@@ -85,6 +84,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                       component={Link}
                       href={item.href}
                       variant={active ? "light" : "subtle"}
+                      style={{ color: "var(--mantine-color-text)" }}
                       color="gray"
                       px="xs"
                     >
@@ -118,6 +118,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                   leftSection={<item.icon size={24} />}
                   href={item.href}
                   variant={active ? "light" : "subtle"}
+                  style={{ color: "var(--mantine-color-text)" }}
                   color="gray"
                   justify="start"
                   px={8}
@@ -130,8 +131,8 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
         </AppShell.Navbar>
       )}
 
-      <AppShell.Main maw="48rem" mx="auto">
-        {children}
+      <AppShell.Main px="md" maw="48rem" mx="auto">
+        <Stack py="md">{children}</Stack>
       </AppShell.Main>
     </AppShell>
   );

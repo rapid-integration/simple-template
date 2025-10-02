@@ -1,4 +1,5 @@
-import { useForm, UseFormInput, zodResolver } from "@mantine/form";
+import { useForm, UseFormInput } from "@mantine/form";
+import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { UserUpdateUsernameFormSchema } from "./schema";
 import { UserUpdateUsernameFormValues } from "./types";
@@ -10,14 +11,16 @@ export type UseUserUpdateUsernameFormProps =
   };
 
 export const useUserUpdateUsernameForm = ({
+  mode = "uncontrolled",
   initialValues = { username: "" },
   validateInputOnChange = true,
   onSuccess,
   ...props
 }: UseUserUpdateUsernameFormProps = {}) => {
   const form = useForm<UserUpdateUsernameFormValues>({
+    mode,
     initialValues,
-    validate: zodResolver(UserUpdateUsernameFormSchema),
+    validate: zod4Resolver(UserUpdateUsernameFormSchema),
     validateInputOnChange,
     ...props,
   });
@@ -25,20 +28,21 @@ export const useUserUpdateUsernameForm = ({
   const submit = form.onSubmit(async (values) => {
     const response = await updateCurrentUserUsername(values);
 
-    if (!response) {
-      return;
-    }
-    if (response.ok) {
+    if (response?.ok) {
       return onSuccess?.();
     }
 
-    switch (response.status) {
-      case 409:
-        return form.setFieldError(
-          "username",
-          "Это имя пользователя уже занято.",
-          // { shouldFocus: true },
-        );
+    if (response?.status === 409) {
+      form.setFieldError("username", "Это имя пользователя уже занято.");
+
+      const node = form.getInputNode("username");
+
+      if (node instanceof HTMLInputElement) {
+        node.focus();
+        node.select();
+      }
+
+      return;
     }
   });
 

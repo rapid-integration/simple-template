@@ -1,4 +1,6 @@
-import { useForm, UseFormInput, zodResolver } from "@mantine/form";
+import { useForm, UseFormInput } from "@mantine/form";
+import { zod4Resolver } from "mantine-form-zod-resolver";
+import { useEffect } from "react";
 
 import { UserUpdatePasswordFormSchema } from "./schema";
 import { UserUpdatePasswordFormValues } from "./types";
@@ -17,7 +19,7 @@ export const useUserUpdatePasswordForm = ({
 }: UseUserUpdatePasswordFormProps = {}) => {
   const form = useForm<UserUpdatePasswordFormValues>({
     initialValues,
-    validate: zodResolver(UserUpdatePasswordFormSchema),
+    validate: zod4Resolver(UserUpdatePasswordFormSchema),
     validateInputOnChange,
     ...props,
   });
@@ -28,23 +30,26 @@ export const useUserUpdatePasswordForm = ({
       new_password: values.newPassword1,
     });
 
-    if (!response) {
-      return;
-    }
-    if (response.ok) {
+    if (response?.ok) {
       return onSuccess?.();
     }
 
-    switch (response.status) {
-      case 403:
-        return form.setFieldError(
-          "oldPassword",
-          "Старый пароль введён неверно.",
-
-          // { shouldFocus: true },
-        );
+    if (response?.status === 403) {
+      return form.setFieldError("oldPassword", "Старый пароль введён неверно.");
     }
   });
+
+  useEffect(() => {
+    if (form.isDirty("newPassword2")) {
+      form.validateField("newPassword2");
+    }
+  }, [form.values.newPassword1]);
+
+  useEffect(() => {
+    if (form.isDirty("newPassword1")) {
+      form.validateField("newPassword1");
+    }
+  }, [form.values.newPassword2]);
 
   return [form, submit] as const;
 };

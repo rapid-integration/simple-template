@@ -1,6 +1,8 @@
 "use client";
 
-import { useForm, UseFormInput, zodResolver } from "@mantine/form";
+import { useForm, UseFormInput } from "@mantine/form";
+import { zod4Resolver } from "mantine-form-zod-resolver";
+import { useEffect } from "react";
 
 import { RegisterFormSchema } from "./schema";
 import { RegisterFormValues } from "./types";
@@ -13,9 +15,9 @@ export const useRegisterForm = ({
   validateInputOnChange = true,
   ...props
 }: UseRegisterFormProps = {}) => {
-  const form = useForm({
+  const form = useForm<RegisterFormValues>({
     initialValues,
-    validate: zodResolver(RegisterFormSchema),
+    validate: zod4Resolver(RegisterFormSchema),
     validateInputOnChange,
     ...props,
   });
@@ -29,14 +31,28 @@ export const useRegisterForm = ({
     if (response?.status === 409) {
       form.setFieldError("username", "Это имя пользователя уже занято.");
 
-      const input = form.getInputNode("username");
+      const node = form.getInputNode("username");
 
-      if (input instanceof HTMLInputElement) {
-        input.focus();
-        input.select();
+      if (node instanceof HTMLInputElement) {
+        node.focus();
+        node.select();
       }
+
+      return;
     }
   });
+
+  useEffect(() => {
+    if (form.isDirty("password2")) {
+      form.validateField("password2");
+    }
+  }, [form.values.password1]);
+
+  useEffect(() => {
+    if (form.isDirty("password1")) {
+      form.validateField("password1");
+    }
+  }, [form.values.password2]);
 
   return [form, submit] as const;
 };

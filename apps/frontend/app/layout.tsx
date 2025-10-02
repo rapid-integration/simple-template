@@ -4,11 +4,12 @@ import "@mantine/notifications/styles.css";
 import {
   ColorSchemeScript,
   MantineProvider,
-  createTheme,
   mantineHtmlProps,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { Metadata, Viewport } from "next";
+
+import theme from "@/shared/theme";
 
 export const metadata: Metadata = {
   title: "Template",
@@ -33,10 +34,7 @@ export default function AppLayout({ children }: React.PropsWithChildren) {
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body>
-        <MantineProvider
-          theme={createTheme({ defaultRadius: "md" })}
-          defaultColorScheme="light"
-        >
+        <MantineProvider theme={theme} defaultColorScheme="light">
           <Notifications />
           {children}
         </MantineProvider>

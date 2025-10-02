@@ -1,7 +1,8 @@
 "use client";
 
-import { useForm, UseFormInput, zodResolver } from "@mantine/form";
+import { useForm, UseFormInput } from "@mantine/form";
 import { notifications } from "@mantine/notifications";
+import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { LoginFormSchema } from "./schema";
 import { LoginFormValues } from "./types";
@@ -10,13 +11,15 @@ import { login } from "../api/actions";
 export type UseLoginFormProps = UseFormInput<LoginFormValues>;
 
 export const useLoginForm = ({
+  mode = "uncontrolled",
   initialValues = { username: "", password: "" },
   validateInputOnChange = true,
   ...props
 }: UseLoginFormProps = {}) => {
   const form = useForm<LoginFormValues>({
+    mode,
     initialValues,
-    validate: zodResolver(LoginFormSchema),
+    validate: zod4Resolver(LoginFormSchema),
     validateInputOnChange,
     ...props,
   });
@@ -30,12 +33,14 @@ export const useLoginForm = ({
         message: "Введено неверное имя пользователя или пароль!",
       });
 
-      const input = form.getInputNode("username");
+      const node = form.getInputNode("username");
 
-      if (input instanceof HTMLInputElement) {
-        input.focus();
-        input.select();
+      if (node instanceof HTMLInputElement) {
+        node.focus();
+        node.select();
       }
+
+      return;
     }
   });
 
