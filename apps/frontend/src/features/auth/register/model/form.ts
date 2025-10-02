@@ -1,46 +1,42 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+"use client";
+
+import { useForm, UseFormInput, zodResolver } from "@mantine/form";
 
 import { RegisterFormSchema } from "./schema";
-import { RegisterFormFieldValues } from "./types";
+import { RegisterFormValues } from "./types";
 import { register } from "../api/actions";
 
-export const useRegisterForm = (
-  defaultValues: RegisterFormFieldValues = {
-    username: "",
-    password1: "",
-    password2: "",
-  },
-) => {
+export type UseRegisterFormProps = UseFormInput<RegisterFormValues>;
+
+export const useRegisterForm = ({
+  initialValues = { username: "", password1: "", password2: "" },
+  validateInputOnChange = true,
+  ...props
+}: UseRegisterFormProps = {}) => {
   const form = useForm({
-    mode: "onChange",
-    resolver: zodResolver(RegisterFormSchema),
-    defaultValues,
+    initialValues,
+    validate: zodResolver(RegisterFormSchema),
+    validateInputOnChange,
+    ...props,
   });
 
-  const username = form.watch("username");
-  const password = form.watch("password1");
+  const submit = form.onSubmit(async (values) => {
+    const response = await register({
+      username: values.username,
+      password: values.password1,
+    });
 
-  const [response, dispatch, pending] = useActionState(
-    register.bind(null, { username, password }),
-    undefined,
-  );
+    if (response?.status === 409) {
+      form.setFieldError("username", "Это имя пользователя уже занято.");
 
-  const submit = form.handleSubmit(() => startTransition(dispatch));
+      const input = form.getInputNode("username");
 
-  useEffect(() => {
-    switch (response?.status) {
-      case 409:
-        return form.setError(
-          "username",
-          {
-            message: "Это имя пользователя уже занято.",
-          },
-          { shouldFocus: true },
-        );
+      if (input instanceof HTMLInputElement) {
+        input.focus();
+        input.select();
+      }
     }
-  }, [response]);
+  });
 
-  return [form, submit, pending] as const;
+  return [form, submit] as const;
 };

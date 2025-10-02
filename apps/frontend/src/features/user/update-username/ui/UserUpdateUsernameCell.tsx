@@ -1,72 +1,72 @@
 "use client";
 
-import { EditIcon } from "lucide-react";
-import { useState } from "react";
+import {
+  ActionIcon,
+  Drawer,
+  Flex,
+  Modal,
+  useMantineTheme,
+} from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { TbPencil } from "react-icons/tb";
 
-import { UserUsernameCell } from "@/entities/user";
-import { useIsMobile } from "@/shared/hooks/use-mobile";
-import Button from "@/shared/ui/button";
-import Dialog from "@/shared/ui/dialog";
-import Drawer from "@/shared/ui/drawer";
-import IconButton from "@/shared/ui/IconButton";
+import { UserUsernameCell, UserUsernameCellProps } from "@/entities/user";
 
-import UserUpdateUsernameForm from "./UserUpdateUsernameForm";
+import { UserUpdateUsernameForm } from "./UserUpdateUsernameForm";
 
-interface UserUpdateUsernameCellProps
-  extends React.ComponentProps<typeof UserUsernameCell> {}
+export type UserUpdateUsernameCellProps = UserUsernameCellProps;
 
-const UserUpdateUsernameCell: React.FunctionComponent<
-  UserUpdateUsernameCellProps
-> = ({ value: username, ...otherProps }) => {
-  const isMobile = useIsMobile();
-  const [open, setOpen] = useState(false);
+export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
+  value: username,
+  ...props
+}) => {
+  const [opened, { open, close }] = useDisclosure(false);
 
-  const Root = isMobile ? Drawer : Dialog;
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const Popup = isMobile ? Drawer : Modal;
 
   return (
-    <UserUsernameCell
-      value={username}
-      after={
-        <Root open={open} onOpenChange={setOpen} autoFocus={isMobile}>
-          <IconButton
-            asChild
-            side="left"
-            title="Редактировать имя пользователя"
+    <>
+      <UserUsernameCell
+        value={username}
+        rightSection={
+          <ActionIcon
+            size="input-sm"
+            color="gray"
+            variant="subtle"
+            onClick={open}
           >
-            <Root.Trigger>
-              <EditIcon />
-            </Root.Trigger>
-          </IconButton>
+            <TbPencil size={24} />
+          </ActionIcon>
+        }
+        {...props}
+      />
 
-          <Root.Content>
-            <Root.Header>
-              <Root.Title>Редактирование имени пользователя</Root.Title>
-              <Root.Description>
-                Вы можете установить публичное имя пользователя.
-              </Root.Description>
-            </Root.Header>
-            <UserUpdateUsernameForm
-              defaultValues={{ username }}
-              onSuccess={() => setOpen(false)}
-              className={isMobile ? "px-4" : undefined}
-            />
-            <Root.Footer className="pt-2">
-              <Root.Close asChild>
-                <Button
-                  variant="outline"
-                  stretched
-                  className={isMobile ? undefined : "-mt-4"}
-                >
-                  Закрыть
-                </Button>
-              </Root.Close>
-            </Root.Footer>
-          </Root.Content>
-        </Root>
-      }
-      {...otherProps}
-    />
+      <Popup.Root
+        position="bottom"
+        opened={opened}
+        onClose={close}
+        centered={isMobile ? undefined : true}
+      >
+        <Popup.Overlay />
+        <Popup.Content display="flex">
+          <Flex flex={1} direction="column">
+            <Popup.Header>
+              <Popup.Title fw={500}>
+                Редактирование имени пользователя
+              </Popup.Title>
+              <Popup.CloseButton aria-label="Закрыть" />
+            </Popup.Header>
+            <Popup.Body display="flex" flex={1}>
+              <UserUpdateUsernameForm
+                initialValues={{ username }}
+                onSuccess={close}
+              />
+            </Popup.Body>
+          </Flex>
+        </Popup.Content>
+      </Popup.Root>
+    </>
   );
 };
-
-export default UserUpdateUsernameCell;

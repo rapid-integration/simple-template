@@ -1,25 +1,22 @@
 "use client";
 
-import { FunctionComponent } from "react";
+import { Avatar, Stack, Title } from "@mantine/core";
 
-import { UserAvatar } from "@/entities/user";
 import { UserResponse } from "@/shared/api";
 
-interface UserProfileSectionProps {
+export type UserProfileSectionProps = {
   user: UserResponse;
-}
+};
 
-const UserProfileSection: FunctionComponent<UserProfileSectionProps> = ({
+export const UserProfileSection: React.FC<UserProfileSectionProps> = ({
   user,
 }) => {
   return (
-    <div className="space-y-3">
-      <UserAvatar className="mx-auto size-24 text-4xl" user={user} />
-      <hgroup className="text-center">
-        <h2 className="text-3xl font-semibold md:text-2xl">{user.username}</h2>
-      </hgroup>
-    </div>
+    <Stack gap="xs">
+      <Avatar name={user.username} color="initials" size="xl" mx="auto" />
+      <Title order={2} ta="center">
+        {user.username}
+      </Title>
+    </Stack>
   );
 };
-
-export default UserProfileSection;

@@ -1,9 +1,9 @@
-import { ArrowLeftIcon, TrafficConeIcon } from "lucide-react";
+import { Button, Center, Stack, Text, ThemeIcon, Title } from "@mantine/core";
 import { Metadata } from "next";
 import Link from "next/link";
+import { LuArrowLeft, LuTrafficCone } from "react-icons/lu";
 
 import { routes } from "@/shared/config/navigation";
-import Button from "@/shared/ui/button";
 
 export const metadata: Metadata = {
   title: "Страница не найдена",
@@ -11,20 +11,28 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="flex grow flex-col items-center justify-center gap-4">
-      <TrafficConeIcon className="size-24" />
-      <hgroup className="space-y-1.5 text-center">
-        <h1 className="text-3xl font-semibold">Страница не найдена</h1>
-        <p className="text-lg text-muted-foreground">
-          Этой страницы не существует
-        </p>
-      </hgroup>
-      <Button asChild size="lg">
-        <Link href={routes.home()}>
-          <ArrowLeftIcon />
-          <span>На главную</span>
-        </Link>
-      </Button>
-    </main>
+    <Center component="main" h="100dvh" w="100dvw">
+      <Stack>
+        <ThemeIcon w={96} h={96} variant="transparent" mx="auto">
+          <LuTrafficCone width={96} height={96} />
+        </ThemeIcon>
+
+        <Stack component="hgroup">
+          <Title order={1} ta="center">
+            Страница не найдена
+          </Title>
+          <Text ta="center">Этой страницы не существует</Text>
+        </Stack>
+
+        <Button
+          component={Link}
+          href={routes.home()}
+          size="lg"
+          leftSection={<LuArrowLeft />}
+        >
+          На главную
+        </Button>
+      </Stack>
+    </Center>
   );
 }

@@ -1,67 +1,65 @@
 "use client";
 
-import { EditIcon } from "lucide-react";
-import { useState } from "react";
+import {
+  ActionIcon,
+  Drawer,
+  Flex,
+  Modal,
+  useMantineTheme,
+} from "@mantine/core";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { TbPencil } from "react-icons/tb";
 
-import { UserPasswordCell } from "@/entities/user";
-import { useIsMobile } from "@/shared/hooks/use-mobile";
-import Button from "@/shared/ui/button";
-import Dialog from "@/shared/ui/dialog";
-import Drawer from "@/shared/ui/drawer";
-import IconButton from "@/shared/ui/IconButton";
+import { UserPasswordCell, UserPasswordCellProps } from "@/entities/user";
 
-import UserUpdatePasswordForm from "./UserUpdatePasswordForm";
+import { UserUpdatePasswordForm } from "./UserUpdatePasswordForm";
 
-interface UserUpdatePasswordCellProps
-  extends React.ComponentProps<typeof UserPasswordCell> {}
+export type UserUpdatePasswordCellProps = UserPasswordCellProps;
 
-const UserUpdatePasswordCell: React.FunctionComponent<
-  UserUpdatePasswordCellProps
-> = (props) => {
-  const isMobile = useIsMobile();
-  const [open, setOpen] = useState(false);
+export const UserUpdatePasswordCell: React.FC<UserUpdatePasswordCellProps> = (
+  props,
+) => {
+  const [opened, { open, close }] = useDisclosure(false);
 
-  const Root = isMobile ? Drawer : Dialog;
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
+  const Popup = isMobile ? Drawer : Modal;
 
   return (
-    <UserPasswordCell
-      after={
-        <Root open={open} onOpenChange={setOpen} autoFocus={isMobile}>
-          <IconButton asChild side="left" title="Редактировать пароль">
-            <Root.Trigger>
-              <EditIcon />
-            </Root.Trigger>
-          </IconButton>
+    <>
+      <UserPasswordCell
+        rightSection={
+          <ActionIcon
+            size="input-sm"
+            color="gray"
+            variant="subtle"
+            onClick={open}
+          >
+            <TbPencil size={24} />
+          </ActionIcon>
+        }
+        {...props}
+      />
 
-          <Root.Content>
-            <Root.Header>
-              <Root.Title>Редактирование пароля</Root.Title>
-              <Root.Description>
-                Вы можете изменить пароль для своей учётной записи. Это действие
-                не сбросит сеансы на других устройствах.
-              </Root.Description>
-            </Root.Header>
-            <UserUpdatePasswordForm
-              onSuccess={() => setOpen(false)}
-              className={isMobile ? "px-4" : undefined}
-            />
-            <Root.Footer className="pt-2">
-              <Root.Close asChild>
-                <Button
-                  variant="outline"
-                  stretched
-                  className={isMobile ? undefined : "-mt-4"}
-                >
-                  Закрыть
-                </Button>
-              </Root.Close>
-            </Root.Footer>
-          </Root.Content>
-        </Root>
-      }
-      {...props}
-    />
+      <Popup.Root
+        position="bottom"
+        opened={opened}
+        onClose={close}
+        centered={isMobile ? undefined : true}
+      >
+        <Popup.Overlay />
+        <Popup.Content display="flex">
+          <Flex flex={1} direction="column">
+            <Popup.Header>
+              <Popup.Title fw={500}>Изменение пароля</Popup.Title>
+              <Popup.CloseButton aria-label="Закрыть" />
+            </Popup.Header>
+            <Popup.Body display="flex" flex={1}>
+              <UserUpdatePasswordForm onSuccess={close} />
+            </Popup.Body>
+          </Flex>
+        </Popup.Content>
+      </Popup.Root>
+    </>
   );
 };
-
-export default UserUpdatePasswordCell;

@@ -1,2 +1,8 @@
-export { default as UserUpdatePasswordCell } from "./ui/UserUpdatePasswordCell";
-export { default as UserUpdatePasswordForm } from "./ui/UserUpdatePasswordForm";
+export {
+  UserUpdatePasswordCell,
+  type UserUpdatePasswordCellProps,
+} from "./ui/UserUpdatePasswordCell";
+export {
+  UserUpdatePasswordForm,
+  type UserUpdatePasswordFormProps,
+} from "./ui/UserUpdatePasswordForm";

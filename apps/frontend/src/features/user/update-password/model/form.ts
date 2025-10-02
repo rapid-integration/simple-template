@@ -1,36 +1,33 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormInput, zodResolver } from "@mantine/form";
 
 import { UserUpdatePasswordFormSchema } from "./schema";
-import { UserUpdatePasswordFormFieldValues } from "./types";
+import { UserUpdatePasswordFormValues } from "./types";
 import { updateCurrentUserPassword } from "../api/actions";
 
-export const useUserUpdatePasswordForm = ({
-  defaultValues = { oldPassword: "", newPassword1: "", newPassword2: "" },
-  onSuccess,
-}: {
-  defaultValues?: UserUpdatePasswordFormFieldValues;
+export type UseUserUpdatePasswordFormProps =
+  UseFormInput<UserUpdatePasswordFormValues> & {
+    onSuccess?: VoidFunction;
+  };
 
-  onSuccess?: VoidFunction;
-}) => {
-  const form = useForm<UserUpdatePasswordFormFieldValues>({
-    mode: "onChange",
-    resolver: zodResolver(UserUpdatePasswordFormSchema),
-    defaultValues,
+export const useUserUpdatePasswordForm = ({
+  initialValues = { oldPassword: "", newPassword1: "", newPassword2: "" },
+  validateInputOnChange = true,
+  onSuccess,
+  ...props
+}: UseUserUpdatePasswordFormProps = {}) => {
+  const form = useForm<UserUpdatePasswordFormValues>({
+    initialValues,
+    validate: zodResolver(UserUpdatePasswordFormSchema),
+    validateInputOnChange,
+    ...props,
   });
 
-  const old_password = form.watch("oldPassword");
-  const new_password = form.watch("newPassword1");
+  const submit = form.onSubmit(async (values) => {
+    const response = await updateCurrentUserPassword({
+      old_password: values.oldPassword,
+      new_password: values.newPassword1,
+    });
 
-  const [response, dispatch, pending] = useActionState(
-    updateCurrentUserPassword.bind(null, { old_password, new_password }),
-    undefined,
-  );
-
-  const submit = form.handleSubmit(() => startTransition(dispatch));
-
-  useEffect(() => {
     if (!response) {
       return;
     }
@@ -40,15 +37,14 @@ export const useUserUpdatePasswordForm = ({
 
     switch (response.status) {
       case 403:
-        return form.setError(
+        return form.setFieldError(
           "oldPassword",
-          {
-            message: "Старый пароль введён неверно.",
-          },
-          { shouldFocus: true },
+          "Старый пароль введён неверно.",
+
+          // { shouldFocus: true },
         );
     }
-  }, [response]);
+  });
 
-  return [form, submit, pending] as const;
+  return [form, submit] as const;
 };

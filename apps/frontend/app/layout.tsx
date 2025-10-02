@@ -1,22 +1,14 @@
-import { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import { ReactNode } from "react";
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 
-import { cn } from "@/shared/lib/utils";
-import { Toaster } from "@/shared/ui/sonner";
-
-import "@/app/styles";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
-  subsets: ["latin"],
-});
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  createTheme,
+  mantineHtmlProps,
+} from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
+import { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = {
   title: "Template",
@@ -25,22 +17,29 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AppLayout({ children }: { children: ReactNode }) {
+export const viewport: Viewport = {
+  width: "device-width",
+  height: "device-height",
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
+export default function AppLayout({ children }: React.PropsWithChildren) {
   return (
-    <html
-      lang="en"
-      className={cn(inter.variable, firaCode.variable)}
-      suppressHydrationWarning
-    >
+    <html lang="ru" {...mantineHtmlProps}>
+      <head>
+        <ColorSchemeScript defaultColorScheme="light" />
+      </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          disableTransitionOnChange
+        <MantineProvider
+          theme={createTheme({ defaultRadius: "md" })}
+          defaultColorScheme="light"
         >
+          <Notifications />
           {children}
-          <Toaster />
-        </ThemeProvider>
+        </MantineProvider>
       </body>
     </html>
   );

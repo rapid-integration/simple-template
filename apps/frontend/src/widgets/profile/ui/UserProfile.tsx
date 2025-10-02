@@ -1,25 +1,23 @@
-import { FunctionComponent } from "react";
+import { Stack } from "@mantine/core";
 
 import { UserResponse } from "@/shared/api";
 
-import UserProfileInfo from "./UserProfileInfo";
-import UserProfileSection from "./UserProfileSection";
+import { UserProfileInfo } from "./UserProfileInfo";
+import { UserProfileSection } from "./UserProfileSection";
 
-interface UserProfileProps {
+export type UserProfileProps = {
   user: UserResponse;
-}
+};
 
-const UserProfile: FunctionComponent<UserProfileProps> = ({ user }) => {
+export const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   return (
-    <div className="flex flex-col gap-8">
+    <Stack>
       <UserProfileSection user={user} />
       <UserProfileInfo
         username={user.username}
         created_at={user.created_at}
         id={user.id}
       />
-    </div>
+    </Stack>
   );
 };
-
-export default UserProfile;

@@ -2,6 +2,6 @@ import z from "zod";
 
 import { UserUpdateUsernameFormSchema } from "./schema";
 
-export type UserUpdateUsernameFormFieldValues = z.infer<
+export type UserUpdateUsernameFormValues = z.infer<
   typeof UserUpdateUsernameFormSchema
 >;

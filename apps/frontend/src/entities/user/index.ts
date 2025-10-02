@@ -1,4 +1,8 @@
-export { getCurrentUser, getCurrentUserOrUndefined } from "./api/cache";
+export {
+  getCurrentUser,
+  getCurrentUserOrUndefined,
+  type GetCurrentUserOptions,
+} from "./api/cache";
 export { USER_CACHE_USERS_ME_TAG } from "./api/tags";
 export {
   USER_PASSWORD_MAX_LENGTH,
@@ -8,10 +12,17 @@ export {
   USER_USERNAME_MIN_LENGTH,
   USER_USERNAME_PATTERN,
 } from "./config";
-export { parseInitials } from "./lib/parseInitials";
 export { UserPasswordSchema, UserUsernameSchema } from "./model/schema";
-export { default as UserCreatedAtCell } from "./ui/cells/UserCreatedAtCell";
-export { default as UserIdCell } from "./ui/cells/UserIdCell";
-export { default as UserPasswordCell } from "./ui/cells/UserPasswordCell";
-export { default as UserUsernameCell } from "./ui/cells/UserUsernameCell";
-export { default as UserAvatar } from "./ui/UserAvatar";
+export {
+  UserCreatedAtCell,
+  type UserCreatedAtCellProps,
+} from "./ui/UserCreatedAtCell";
+export { UserIdCell, type UserIdCellProps } from "./ui/UserIdCell";
+export {
+  UserPasswordCell,
+  type UserPasswordCellProps,
+} from "./ui/UserPasswordCell";
+export {
+  UserUsernameCell,
+  type UserUsernameCellProps,
+} from "./ui/UserUsernameCell";

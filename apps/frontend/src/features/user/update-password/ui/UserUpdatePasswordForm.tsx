@@ -1,119 +1,79 @@
 "use client";
 
-import { ComponentProps, FunctionComponent } from "react";
-import { toast } from "sonner";
+import { Button, Flex, Group, PasswordInput, Stack } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
 
-import { cn } from "@/shared/lib/utils";
-import Button from "@/shared/ui/button";
-import Form from "@/shared/ui/form";
-import Input from "@/shared/ui/input";
-import Spinner from "@/shared/ui/spinner";
+import {
+  useUserUpdatePasswordForm,
+  UseUserUpdatePasswordFormProps,
+} from "../model/form";
 
-import { useUserUpdatePasswordForm } from "../model/form";
-import { UserUpdatePasswordFormFieldValues } from "../model/types";
+export type UserUpdatePasswordFormProps = UseUserUpdatePasswordFormProps;
 
-interface UserUpdatePasswordFormProps
-  extends Omit<ComponentProps<"form">, "onSubmit"> {
-  defaultValues?: UserUpdatePasswordFormFieldValues;
-  onSuccess?: VoidFunction;
-}
-
-const UserUpdatePasswordForm: FunctionComponent<
-  UserUpdatePasswordFormProps
-> = ({ defaultValues, onSuccess, className, ...otherProps }) => {
-  const [form, submit, pending] = useUserUpdatePasswordForm({
-    defaultValues,
+export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
+  onSuccess,
+  ...props
+}) => {
+  const [form, submit] = useUserUpdatePasswordForm({
     onSuccess: () => {
       onSuccess?.();
-      toast.success("Пароль был успешно обновлён!");
+      notifications.show({
+        color: "green",
+        message: "Пароль был успешно обновлён!",
+      });
     },
+    ...props,
   });
 
+  const [showOldPasswords, { toggle: toggleShowOldPasswords }] =
+    useDisclosure();
+
   return (
-    <Form {...form}>
-      <form
-        onSubmit={submit}
-        className={cn("flex w-full grow flex-col", className)}
-        {...otherProps}
-      >
-        <Form.Field
-          control={form.control}
-          name="oldPassword"
-          render={({ field }) => (
-            <Form.Item className="mb-6">
-              <Form.Label>Старый пароль</Form.Label>
-              <Form.Control>
-                <Input
-                  placeholder="Введите ваш старый пароль…"
-                  type="password"
-                  autoComplete="password"
-                  {...field}
-                />
-              </Form.Control>
-              <Form.Message />
-            </Form.Item>
-          )}
+    <Flex
+      component="form"
+      flex={1}
+      direction="column"
+      onSubmit={(event) =>
+        submit(event as unknown as React.FormEvent<HTMLFormElement>)
+      }
+    >
+      <Stack gap="xs" mb="auto">
+        <PasswordInput
+          {...form.getInputProps("oldPassword")}
+          key={form.key("oldPassword")}
+          label="Старый пароль"
+          placeholder="Введите старый пароль…"
+          autoComplete="password"
+          data-autofocus
         />
 
-        <Form.Field
-          control={form.control}
-          name="newPassword1"
-          render={({ field }) => (
-            <Form.Item className="mb-6">
-              <Form.Label>Новый пароль</Form.Label>
-              <Form.Control>
-                <Input
-                  placeholder="Введите новый пароль…"
-                  type="password"
-                  autoComplete="new-password"
-                  {...field}
-                />
-              </Form.Control>
-              <Form.Message />
-            </Form.Item>
-          )}
+        <PasswordInput
+          {...form.getInputProps("newPassword1")}
+          key={form.key("newPassword1")}
+          label="Новый пароль"
+          placeholder="Введите новый пароль…"
+          autoComplete="new-password"
+          visible={showOldPasswords}
+          onVisibilityChange={toggleShowOldPasswords}
         />
 
-        <Form.Field
-          control={form.control}
-          name="newPassword2"
-          render={({ field }) => (
-            <Form.Item>
-              <Form.Label>Подтверждение нового пароля</Form.Label>
-              <Form.Control>
-                <Input
-                  placeholder="Введите новый пароль ещё раз…"
-                  type="password"
-                  autoComplete="new-password"
-                  {...field}
-                />
-              </Form.Control>
-              <Form.Message />
-            </Form.Item>
-          )}
+        <PasswordInput
+          {...form.getInputProps("newPassword2")}
+          key={form.key("newPassword2")}
+          label="Подтверждение нового пароля"
+          placeholder="Введите новый пароль ещё раз…"
+          autoComplete="new-password"
+          visible={showOldPasswords}
+          onVisibilityChange={toggleShowOldPasswords}
         />
+      </Stack>
 
-        <Form.Response />
-
-        <Button
-          type="submit"
-          className="mt-6"
-          disabled={
-            !form.formState.isDirty || !form.formState.isValid || pending
-          }
-        >
-          {pending ? (
-            <>
-              <Spinner />
-              <span>Сохранение…</span>
-            </>
-          ) : (
-            <>Сохранить</>
-          )}
+      <Group mt="md">
+        <Button type="submit" loading={form.submitting} fullWidth>
+          Сохранить
         </Button>
-      </form>
-    </Form>
+      </Group>
+    </Flex>
   );
 };
-
-export default UserUpdatePasswordForm;

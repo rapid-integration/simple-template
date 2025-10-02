@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-interface UseDateTimeFormatProps {
+export type UseDateTimeFormatProps = {
   value: Date | number | string;
   locales?: Intl.LocalesArgument;
   options?: Intl.DateTimeFormatOptions;
-}
+};
 
 export default function useDateTimeFormat({
   value,

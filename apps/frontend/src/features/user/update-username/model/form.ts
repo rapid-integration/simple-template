@@ -1,34 +1,30 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormInput, zodResolver } from "@mantine/form";
 
 import { UserUpdateUsernameFormSchema } from "./schema";
-import { UserUpdateUsernameFormFieldValues } from "./types";
+import { UserUpdateUsernameFormValues } from "./types";
 import { updateCurrentUserUsername } from "../api/actions";
 
+export type UseUserUpdateUsernameFormProps =
+  UseFormInput<UserUpdateUsernameFormValues> & {
+    onSuccess?: VoidFunction;
+  };
+
 export const useUserUpdateUsernameForm = ({
-  defaultValues = { username: "" },
+  initialValues = { username: "" },
+  validateInputOnChange = true,
   onSuccess,
-}: {
-  defaultValues?: UserUpdateUsernameFormFieldValues;
-  onSuccess?: VoidFunction;
-}) => {
-  const form = useForm<UserUpdateUsernameFormFieldValues>({
-    mode: "onChange",
-    resolver: zodResolver(UserUpdateUsernameFormSchema),
-    defaultValues,
+  ...props
+}: UseUserUpdateUsernameFormProps = {}) => {
+  const form = useForm<UserUpdateUsernameFormValues>({
+    initialValues,
+    validate: zodResolver(UserUpdateUsernameFormSchema),
+    validateInputOnChange,
+    ...props,
   });
 
-  const username = form.watch("username");
+  const submit = form.onSubmit(async (values) => {
+    const response = await updateCurrentUserUsername(values);
 
-  const [response, dispatch, pending] = useActionState(
-    updateCurrentUserUsername.bind(null, { username }),
-    undefined,
-  );
-
-  const submit = form.handleSubmit(() => startTransition(dispatch));
-
-  useEffect(() => {
     if (!response) {
       return;
     }
@@ -38,15 +34,13 @@ export const useUserUpdateUsernameForm = ({
 
     switch (response.status) {
       case 409:
-        return form.setError(
+        return form.setFieldError(
           "username",
-          {
-            message: "Это имя пользователя уже занято.",
-          },
-          { shouldFocus: true },
+          "Это имя пользователя уже занято.",
+          // { shouldFocus: true },
         );
     }
-  }, [response]);
+  });
 
-  return [form, submit, pending] as const;
+  return [form, submit] as const;
 };

@@ -19,5 +19,6 @@ export default {
     staleTimes: {
       dynamic: 30,
     },
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
 } as const satisfies NextConfig;

@@ -19,9 +19,9 @@ export const getCurrentUserOrUndefined = cache(async () => {
   return data;
 });
 
-export interface GetCurrentUserOptions {
+export type GetCurrentUserOptions = {
   unauthorizedRedirectUrl?: string;
-}
+};
 
 export const getCurrentUser = cache(
   async ({
