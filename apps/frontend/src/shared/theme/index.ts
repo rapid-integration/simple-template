@@ -3,12 +3,17 @@ import { createTheme } from "@mantine/core";
 export default createTheme({
   defaultRadius: "md",
   components: {
+    Modal: {
+      defaultProps: {
+        transitionProps: {
+          duration: 150,
+          transition: "pop",
+        },
+      },
+    },
     ModalRoot: {
       defaultProps: {
         centered: true,
-        transitionProps: {
-          transition: "pop",
-        },
       },
     },
     ModalTitle: {
