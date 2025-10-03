@@ -13,6 +13,7 @@ export function LoginForm() {
         <TextInput
           {...form.getInputProps("username")}
           key={form.key("username")}
+          id="login-form-username-input"
           label="Имя пользователя"
           placeholder="Введите имя пользователя…"
           autoComplete="username"
@@ -21,6 +22,7 @@ export function LoginForm() {
         <PasswordInput
           {...form.getInputProps("password")}
           key={form.key("password")}
+          id="login-form-password-input"
           label="Пароль"
           placeholder="Введите пароль…"
           autoComplete="password"

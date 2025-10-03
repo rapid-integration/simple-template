@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getCurrentUserOrUndefined } from "@/entities/user";
 import { routes } from "@/shared/config/navigation";
 import { redirectToNextURL } from "@/shared/lib/navigation";
-import { AuthTypeSegmentedControl } from "@/widgets/auth";
+import { AuthSegmentedControl } from "@/widgets/auth";
 
 export default async function AuthLayout({
   children,
@@ -31,7 +31,7 @@ export default async function AuthLayout({
           </Text>
         </Stack>
 
-        <AuthTypeSegmentedControl />
+        <AuthSegmentedControl />
 
         {children}
       </Stack>

@@ -42,6 +42,7 @@ export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
         <PasswordInput
           {...form.getInputProps("oldPassword")}
           key={form.key("oldPassword")}
+          id="user-update-password-form-old-password-input"
           label="Старый пароль"
           placeholder="Введите старый пароль…"
           autoComplete="password"
@@ -51,6 +52,7 @@ export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
         <PasswordInput
           {...form.getInputProps("newPassword1")}
           key={form.key("newPassword1")}
+          id="user-update-password-form-new-password1-input"
           label="Новый пароль"
           placeholder="Введите новый пароль…"
           autoComplete="new-password"
@@ -61,6 +63,7 @@ export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
         <PasswordInput
           {...form.getInputProps("newPassword2")}
           key={form.key("newPassword2")}
+          id="user-update-password-form-new-password2-input"
           label="Подтверждение нового пароля"
           placeholder="Введите новый пароль ещё раз…"
           autoComplete="new-password"

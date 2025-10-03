@@ -38,6 +38,7 @@ export const UserUpdateUsernameForm: React.FC<UserUpdateUsernameFormProps> = ({
         <TextInput
           key={form.key("username")}
           {...form.getInputProps("username")}
+          id="user-update-username-form-username-input"
           label="Новое имя пользователя"
           placeholder="Введите новое имя пользователя…"
           autoComplete="username"

@@ -1,1 +1,1 @@
-export { AuthTypeSegmentedControl } from "./ui/AuthSegmentedControl";
+export { AuthSegmentedControl } from "./ui/AuthSegmentedControl";

@@ -15,6 +15,7 @@ export function RegisterForm() {
         <TextInput
           {...form.getInputProps("username")}
           key={form.key("username")}
+          id="register-form-username-input"
           label="Имя пользователя"
           placeholder="Введите имя пользователя…"
           autoComplete="username"
@@ -23,6 +24,7 @@ export function RegisterForm() {
         <PasswordInput
           {...form.getInputProps("password1")}
           key={form.key("password1")}
+          id="register-form-password1-input"
           label="Пароль"
           placeholder="Введите пароль…"
           autoComplete="new-password"
@@ -33,6 +35,7 @@ export function RegisterForm() {
         <PasswordInput
           {...form.getInputProps("password2")}
           key={form.key("password2")}
+          id="register-form-password2-input"
           label="Подтверждение пароля"
           placeholder="Введите пароль ещё раз…"
           autoComplete="new-password"
