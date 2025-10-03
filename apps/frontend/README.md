@@ -6,7 +6,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&labelColor=gray)](https://www.typescriptlang.org)
 [![React](https://img.shields.io/badge/React-087EA4?logo=react&labelColor=gray)](https://react.dev)
 [![Next.js](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&labelColor=gray)](https://nextjs.org)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-030712?logo=tailwindcss&labelColor=gray)](https://tailwindcss.com)
+[![Mantine](https://img.shields.io/badge/Mantine-339af0?logo=mantine&labelColor=gray)](https://mantine.dev)
 [![Prettier](https://img.shields.io/badge/Prettier-1A2B34?logo=prettier&labelColor=gray)](https://prettier.io)
 [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&labelColor=gray)](https://eslint.org)
 
@@ -21,10 +21,6 @@
 - [Node.js](https://nodejs.org) 22+
 - [TypeScript](https://www.typescriptlang.org) (строгая типизация)
 - [React](https://react.dev) 19+ (библиотека рендеринга)
-- [Next.js](https://nextjs.org) 15.4+ (App Router, SSR/SSG/ISR, node middleware)
-- [TailwindCSS](https://tailwindcss.com) 4.0 (стилизация)
-- [Motion](https://motion.dev) (ранее Framer Motion)
-- [shadcn](https://ui.shadcn.com) (регистр UI компонентов)
 - [Docker](https://www.docker.com/) и [Docker Compose](https://docs.docker.com/compose/) (контейнеризация).
 
 ### Инструменты разработки
