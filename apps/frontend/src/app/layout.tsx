@@ -13,6 +13,9 @@ import theme from "@/shared/theme";
 
 export const metadata: Metadata = {
   title: "Template",
+  icons: {
+    shortcut: "/favicon.svg",
+  },
   other: {
     google: "notranslate",
   },

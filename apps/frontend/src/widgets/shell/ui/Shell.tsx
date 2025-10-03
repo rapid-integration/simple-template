@@ -70,7 +70,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
           <Group gap="lg" justify="space-between" style={{ flex: 1 }}>
             <Group gap="xs">
               <Image
-                src="/favicon.ico"
+                src="/favicon.svg"
                 alt="Логотип"
                 width={24}
                 height={24}
