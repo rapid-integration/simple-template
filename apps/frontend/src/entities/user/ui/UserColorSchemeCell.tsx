@@ -30,6 +30,8 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
         mounted ? (
           <Select
             w="10rem"
+            size="md"
+            styles={{ wrapper: { padding: 0 } }}
             variant="default"
             placeholder="Выберите тему…"
             data={[

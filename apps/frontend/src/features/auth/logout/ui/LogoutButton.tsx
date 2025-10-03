@@ -17,6 +17,7 @@ export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
 
   return (
     <Button
+      size="md"
       color="red"
       variant="default"
       leftSection={<TbLogout size={20} />}

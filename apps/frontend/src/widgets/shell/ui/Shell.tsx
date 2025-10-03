@@ -92,6 +92,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                         color: "var(--mantine-body-color)",
                         borderRadius: "var(--mantine-radius-md)",
                       }}
+                      fw={500}
                       color="gray"
                       active={pathname === item.href}
                       w="fit-content"
@@ -121,6 +122,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
               leftSection={<item.icon size={28} strokeWidth={1.5} />}
               label={item.name}
               href={item.href}
+              fw={500}
               active={pathname === item.href}
               px="md"
             />
