@@ -1,3 +1,5 @@
+"use client";
+
 import { ActionIcon, CopyButton, ThemeIcon, Tooltip } from "@mantine/core";
 import { TbCheck, TbCopy, TbHash } from "react-icons/tb";
 

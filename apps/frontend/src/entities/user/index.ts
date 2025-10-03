@@ -1,6 +1,8 @@
 export {
   getCurrentUser,
   getCurrentUserOrUndefined,
+  getUser,
+  getUsers,
   type GetCurrentUserOptions,
 } from "./api/cache";
 export { USER_CACHE_USERS_ME_TAG } from "./api/tags";
@@ -30,3 +32,4 @@ export {
   UserUsernameCell,
   type UserUsernameCellProps,
 } from "./ui/UserUsernameCell";
+export { UserCard, type UserCardProps } from "./ui/UserCard";

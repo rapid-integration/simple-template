@@ -3,7 +3,7 @@
 import { RedirectType } from "next/navigation";
 import { cache } from "react";
 
-import { client } from "@/shared/api";
+import { client, operations } from "@/shared/api";
 import { redirectWithNextURL } from "@/shared/lib/navigation";
 
 import { USER_CACHE_USERS_ME_TAG } from "./tags";
@@ -37,5 +37,23 @@ export const getCurrentUser = cache(
     }
 
     return currentUser;
+  },
+);
+
+export const getUsers = cache(
+  async (query?: operations["get_users_users_get"]["parameters"]["query"]) => {
+    const { data } = await client.GET("/users", { params: { query } });
+
+    return data ?? [];
+  },
+);
+
+export const getUser = cache(
+  async (params: operations["get_user_users__username__get"]["parameters"]) => {
+    const { data } = await client.GET("/users/{username}", {
+      params,
+    });
+
+    return data;
   },
 );

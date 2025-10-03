@@ -1,3 +1,5 @@
+"use client";
+
 import { ThemeIcon } from "@mantine/core";
 import { TbKey } from "react-icons/tb";
 

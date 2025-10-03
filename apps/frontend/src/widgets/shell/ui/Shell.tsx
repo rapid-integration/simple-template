@@ -17,7 +17,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { TbHome, TbSettings } from "react-icons/tb";
+import { TbHome, TbSettings, TbUsers } from "react-icons/tb";
 
 import { CurrentUserResponse } from "@/shared/api";
 import { routes } from "@/shared/config/navigation";
@@ -25,12 +25,17 @@ import { routes } from "@/shared/config/navigation";
 const data = [
   {
     icon: TbHome,
-    href: "/",
+    href: routes.home(),
     label: "Главная",
   },
   {
+    icon: TbUsers,
+    href: routes.users(),
+    label: "Пользователи",
+  },
+  {
     icon: TbSettings,
-    href: "/settings",
+    href: routes.settings(),
     label: "Настройки",
   },
 ];
@@ -41,9 +46,11 @@ export type ShellProps = React.PropsWithChildren<{
 
 export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
   const pathname = usePathname();
+
+  const [open, { toggle, close }] = useDisclosure();
+
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-  const [open, { toggle, close }] = useDisclosure();
 
   useEffect(() => {
     if (open) {
