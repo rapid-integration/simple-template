@@ -387,6 +387,29 @@ services:
         condition: service_started
     profiles:
       - dev
+  
+  cloudpub-dev:
+    container_name: template-cloudpub-dev
+    image: cloudpub/cloudpub:latest
+    restart: unless-stopped
+    command: run
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      - cloudpub-dev-data:/home/cloudpub
+    networks:
+      - template-network
+    environment:
+      - TOKEN=${CLOUDPUB_TOKEN}
+      - HTTP=nginx-dev:80
+    depends_on:
+      nginx-dev:
+        restart: false
+        required: true
+        condition: service_started
+    profiles:
+      - dev
 
 volumes:
   node-exporter-data:
@@ -397,6 +420,8 @@ volumes:
     name: template-postgres-data
   postgres-test-data:
     name: template-postgres-test-data
+  cloudpub-dev-data:
+    name: template-cloudpub-dev-data
 
 networks:
   template-network:

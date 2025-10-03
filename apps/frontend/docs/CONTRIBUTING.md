@@ -27,7 +27,7 @@
 
 ### Запуск проекта в режиме разработки:
 
-Команда ниже запустит только контейнеры `backend-dev`, `frontend-dev`, `postgres` и `nginx-dev`:
+Команда ниже запустит только контейнеры `backend-dev`, `frontend-dev`, `postgres`, `nginx-dev` и `cloudpub-dev`:
 
 ```sh
 docker compose --profile dev up --build
