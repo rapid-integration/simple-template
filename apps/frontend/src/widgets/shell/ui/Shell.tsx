@@ -67,6 +67,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
             onClick={toggle}
             hiddenFrom="sm"
             size="sm"
+            lineSize={2}
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
           />
           <Group gap="lg" justify="space-between" style={{ flex: 1 }}>
