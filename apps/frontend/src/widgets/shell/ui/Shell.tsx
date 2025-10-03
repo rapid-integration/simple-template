@@ -4,8 +4,8 @@ import {
   AppShell,
   Avatar,
   Burger,
-  Button,
   Group,
+  NavLink,
   Stack,
   Text,
   useMantineTheme,
@@ -59,7 +59,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
       }}
     >
       <AppShell.Header>
-        <Group h="100%" px="md" maw="48rem" mx="auto">
+        <Group h="100%" px="md" maw="48rem" mx="auto" gap="xs">
           <Burger
             opened={open}
             onClick={toggle}
@@ -67,29 +67,36 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
             size="sm"
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
           />
-          <Group justify="space-between" style={{ flex: 1 }}>
+          <Group gap="lg" justify="space-between" style={{ flex: 1 }}>
             <Group gap="xs">
-              <Image src="/favicon.ico" alt="Логотип" width={24} height={24} />
+              <Image
+                src="/favicon.ico"
+                alt="Логотип"
+                width={24}
+                height={24}
+                draggable={false}
+              />
               <Text fw={600}>Template</Text>
             </Group>
 
             {!isMobile && (
-              <Group ms="xs" me="auto" gap="xs" visibleFrom="sm">
+              <Group me="auto" gap="xs" visibleFrom="sm">
                 {data.map((item) => {
-                  const active = pathname === item.href;
-
                   return (
-                    <Button
+                    <NavLink
                       key={item.href}
                       component={Link}
                       href={item.href}
-                      variant={active ? "light" : "subtle"}
-                      style={{ color: "var(--mantine-color-text)" }}
+                      label={item.name}
+                      style={{
+                        color: "var(--mantine-body-color)",
+                        borderRadius: "var(--mantine-radius-md)",
+                      }}
                       color="gray"
-                      px="xs"
-                    >
-                      {item.name}
-                    </Button>
+                      active={pathname === item.href}
+                      w="fit-content"
+                      py={6}
+                    />
                   );
                 })}
               </Group>
@@ -106,28 +113,18 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
       </AppShell.Header>
 
       {isMobile && (
-        <AppShell.Navbar py="xs" px="xs">
-          <Stack gap={4}>
-            {data.map((item) => {
-              const active = pathname === item.href;
-
-              return (
-                <Button
-                  key={item.href}
-                  component={Link}
-                  leftSection={<item.icon size={24} />}
-                  href={item.href}
-                  variant={active ? "light" : "subtle"}
-                  style={{ color: "var(--mantine-color-text)" }}
-                  color="gray"
-                  justify="start"
-                  px={8}
-                >
-                  {item.name}
-                </Button>
-              );
-            })}
-          </Stack>
+        <AppShell.Navbar py="xs">
+          {data.map((item) => (
+            <NavLink
+              key={item.href}
+              component={Link}
+              leftSection={<item.icon size={28} strokeWidth={1.5} />}
+              label={item.name}
+              href={item.href}
+              active={pathname === item.href}
+              px="md"
+            />
+          ))}
         </AppShell.Navbar>
       )}
 

@@ -31,11 +31,12 @@ export default function AppLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="ru" {...mantineHtmlProps}>
       <head>
-        <ColorSchemeScript defaultColorScheme="light" />
+        <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
-        <MantineProvider theme={theme} defaultColorScheme="light">
+        <MantineProvider theme={theme} defaultColorScheme="auto">
           <Notifications />
+
           {children}
         </MantineProvider>
       </body>

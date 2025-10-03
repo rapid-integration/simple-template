@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  ActionIcon,
-  Drawer,
-  Flex,
-  Modal,
-  Tooltip,
-  useMantineTheme,
-} from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { ActionIcon, Tooltip } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { TbEdit } from "react-icons/tb";
 
 import { UserUsernameCell, UserUsernameCellProps } from "@/entities/user";
+import { Popup } from "@/shared/ui/Popup";
 
 import { UserUpdateUsernameForm } from "./UserUpdateUsernameForm";
 
@@ -22,10 +16,6 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
   ...props
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
-
-  const theme = useMantineTheme();
-  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-  const Popup = isMobile ? Drawer : Modal;
 
   return (
     <>
@@ -51,28 +41,16 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
         {...props}
       />
 
-      <Popup.Root
-        position="bottom"
+      <Popup
         opened={opened}
         onClose={close}
-        centered={isMobile ? undefined : true}
+        title="Изменение имени пользователя"
       >
-        <Popup.Overlay />
-        <Popup.Content display="flex">
-          <Flex flex={1} direction="column">
-            <Popup.Header>
-              <Popup.Title fw={500}>Изменение имени пользователя</Popup.Title>
-              <Popup.CloseButton aria-label="Закрыть" />
-            </Popup.Header>
-            <Popup.Body display="flex" flex={1}>
-              <UserUpdateUsernameForm
-                initialValues={{ username }}
-                onSuccess={close}
-              />
-            </Popup.Body>
-          </Flex>
-        </Popup.Content>
-      </Popup.Root>
+        <UserUpdateUsernameForm
+          initialValues={{ username }}
+          onSuccess={close}
+        />
+      </Popup>
     </>
   );
 };

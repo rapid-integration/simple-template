@@ -23,7 +23,13 @@ export default async function AuthLayout({
     <Center h="100dvh" w="100dvw">
       <Stack maw="26rem" p="md" w="100%">
         <Center>
-          <Image src="/favicon.ico" alt="Логотип" width={56} height={56} />
+          <Image
+            src="/favicon.ico"
+            alt="Логотип"
+            width={56}
+            height={56}
+            draggable={false}
+          />
         </Center>
 
         <Stack component="hgroup" gap="xs">
