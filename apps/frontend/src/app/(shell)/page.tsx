@@ -1,4 +1,4 @@
-import { Stack, Text, Title } from "@mantine/core";
+import { Grid, GridCol, Skeleton, Stack, Title } from "@mantine/core";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,24 @@ export default function Home() {
   return (
     <Stack component="hgroup">
       <Title order={1}>Главная</Title>
-      <Text>Тут пока что пусто</Text>
+
+      <Grid grow>
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Skeleton flex={1} h={196} animate={false} />
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Skeleton flex={1} h={196} animate={false} />
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Skeleton flex={1} h={196} animate={false} />
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Skeleton flex={1} h={196} animate={false} />
+        </GridCol>
+        <GridCol span={{ base: 12, sm: 4 }}>
+          <Skeleton flex={1} h={196} animate={false} />
+        </GridCol>
+      </Grid>
     </Stack>
   );
 }

@@ -27,7 +27,7 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export default function AppLayout({ children }: React.PropsWithChildren) {
+export default function Layout({ children }: React.PropsWithChildren) {
   return (
     <html lang="ru" {...mantineHtmlProps}>
       <head>
