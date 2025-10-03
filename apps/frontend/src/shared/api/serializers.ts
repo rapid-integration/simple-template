@@ -1,9 +1,15 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function serializeFormData(body: any): FormData {
+export function serializeFormData<
+  T extends Record<string, string | Blob | File | null | undefined>,
+>(body: T): FormData {
   const data = new FormData();
+
   for (const name in body) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    data.append(name, body[name]);
+    const value = body[name];
+
+    if (value != null) {
+      data.append(name, value);
+    }
   }
+
   return data;
 }
