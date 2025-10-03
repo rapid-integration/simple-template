@@ -1,9 +1,11 @@
 "use client";
 
 import {
+  ActionIcon,
   AppShell,
   Avatar,
   Burger,
+  Button,
   Group,
   NavLink,
   Stack,
@@ -23,13 +25,13 @@ import { routes } from "@/shared/config/navigation";
 const data = [
   {
     icon: TbHome,
-    name: "Главная",
     href: "/",
+    label: "Главная",
   },
   {
     icon: TbSettings,
-    name: "Настройки",
     href: "/settings",
+    label: "Настройки",
   },
 ];
 
@@ -83,32 +85,33 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
               <Group me="auto" gap="xs" visibleFrom="sm">
                 {data.map((item) => {
                   return (
-                    <NavLink
+                    <Button
                       key={item.href}
                       component={Link}
                       href={item.href}
-                      label={item.name}
+                      color="gray"
+                      variant={pathname === item.href ? "light" : "subtle"}
                       style={{
                         color: "var(--mantine-body-color)",
-                        borderRadius: "var(--mantine-radius-md)",
                       }}
-                      fw={500}
-                      color="gray"
-                      active={pathname === item.href}
-                      w="fit-content"
-                      py={6}
-                    />
+                      px="sm"
+                    >
+                      {item.label}
+                    </Button>
                   );
                 })}
               </Group>
             )}
-            <Avatar
+            <ActionIcon
+              size="xl"
+              radius="xl"
+              variant="transparent"
               component={Link}
               href={routes.settings()}
-              name={currentUser.username}
-              color="initials"
               aria-label="Настройки"
-            />
+            >
+              <Avatar name={currentUser.username} color="initials" />
+            </ActionIcon>
           </Group>
         </Group>
       </AppShell.Header>
@@ -120,7 +123,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
               key={item.href}
               component={Link}
               leftSection={<item.icon size={28} strokeWidth={1.5} />}
-              label={item.name}
+              label={item.label}
               href={item.href}
               fw={500}
               active={pathname === item.href}
