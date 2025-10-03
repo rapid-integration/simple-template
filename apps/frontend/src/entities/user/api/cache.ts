@@ -30,10 +30,10 @@ export const getCurrentUser = cache(
     const currentUser = await getCurrentUserOrUndefined();
 
     if (currentUser === undefined) {
-      return await redirectWithNextURL(
-        unauthorizedRedirectUrl,
-        RedirectType.replace,
-      );
+      return await redirectWithNextURL({
+        url: unauthorizedRedirectUrl,
+        type: RedirectType.replace,
+      });
     }
 
     return currentUser;

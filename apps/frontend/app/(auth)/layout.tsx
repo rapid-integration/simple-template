@@ -1,5 +1,6 @@
 import { Center, Stack, Text, Title } from "@mantine/core";
 import Image from "next/image";
+import { RedirectType } from "next/navigation";
 
 import { getCurrentUserOrUndefined } from "@/entities/user";
 import { routes } from "@/shared/config/navigation";
@@ -12,7 +13,10 @@ export default async function AuthLayout({
   const currentUser = await getCurrentUserOrUndefined();
 
   if (currentUser !== undefined) {
-    return await redirectToNextURL({ fallbackUrl: routes.home() });
+    return await redirectToNextURL({
+      fallbackUrl: routes.home(),
+      type: RedirectType.replace,
+    });
   }
 
   return (

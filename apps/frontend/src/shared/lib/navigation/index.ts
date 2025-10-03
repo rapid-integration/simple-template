@@ -5,11 +5,15 @@ import { redirect, RedirectType } from "next/navigation";
 
 import { getURLPath, isRelativeURL } from "./utils";
 
+export type RedirectToNextURLOptions = {
+  fallbackUrl: string;
+  type?: RedirectType;
+};
+
 export async function redirectToNextURL({
   fallbackUrl,
-}: {
-  fallbackUrl: string;
-}): Promise<never> {
+  type,
+}: RedirectToNextURLOptions): Promise<never> {
   const headersList = await headers();
 
   const referer = headersList.get("referer");
@@ -24,17 +28,22 @@ export async function redirectToNextURL({
     const decodedNextUrl = decodeURIComponent(encodedNextUrl);
 
     if (isRelativeURL(decodedNextUrl)) {
-      redirect(decodedNextUrl);
+      redirect(decodedNextUrl, type);
     }
   }
 
   redirect(fallbackUrl);
 }
 
-export async function redirectWithNextURL(
-  url: string,
-  type?: RedirectType,
-): Promise<never> {
+export type RedirectWithNextURLOptions = {
+  url: string;
+  type?: RedirectType;
+};
+
+export async function redirectWithNextURL({
+  url,
+  type,
+}: RedirectWithNextURLOptions): Promise<never> {
   const headersList = await headers();
 
   const referer = headersList.get("referer");
