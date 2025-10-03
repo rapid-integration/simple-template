@@ -30,7 +30,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
   }, [q]);
 
   return (
-    <Stack gap="sm" {...props}>
+    <Stack gap={4} {...props}>
       <Paper
         py="xs"
         radius={0}
