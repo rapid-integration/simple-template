@@ -27,9 +27,9 @@ jobs:
         working-directory: apps/frontend
         run: pnpm install
 
-      - name: Run Next.js lint
+      - name: Run ESLint
         working-directory: apps/frontend
-        run: pnpm run lint:next
+        run: pnpm run lint:eslint
 
       - name: Run Steiger architecture lint
         working-directory: apps/frontend

@@ -70,10 +70,10 @@ docker compose --profile dev down -v
 
 ## Линтинг
 
-Для проверки кода используется строгий линтинг ESLint и Next.js:
+Для проверки кода используется строгий линтинг ESLint:
 
 ```sh
-pnpm lint:next
+pnpm lint:eslint
 ```
 
 ## Архитектура проекта

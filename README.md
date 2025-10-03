@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Быстрый старт вашего веб-приложения на FastAPI и React (Next.js).
+  Быстрый старт вашего веб-приложения на FastAPI и React (Next.js + Mantine).
 </p>
 
 <p align="center">
