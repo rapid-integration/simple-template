@@ -162,9 +162,6 @@ services:
         source: ./apps/frontend/.next
         target: /app/.next
       - type: bind
-        source: ./apps/frontend/app
-        target: /app/app
-      - type: bind
         source: ./apps/frontend/pages
         target: /app/pages
       - type: bind
