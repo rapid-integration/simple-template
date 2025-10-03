@@ -83,23 +83,21 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
 
             {!isMobile && (
               <Group me="auto" gap="xs" visibleFrom="sm">
-                {data.map((item) => {
-                  return (
-                    <Button
-                      key={item.href}
-                      component={Link}
-                      href={item.href}
-                      color="gray"
-                      variant={pathname === item.href ? "light" : "subtle"}
-                      style={{
-                        color: "var(--mantine-body-color)",
-                      }}
-                      px="sm"
-                    >
-                      {item.label}
-                    </Button>
-                  );
-                })}
+                {data.map((item) => (
+                  <Button
+                    key={item.href}
+                    component={Link}
+                    href={item.href}
+                    color="gray"
+                    variant={pathname === item.href ? "light" : "subtle"}
+                    style={{
+                      color: "var(--mantine-body-color)",
+                    }}
+                    px="sm"
+                  >
+                    {item.label}
+                  </Button>
+                ))}
               </Group>
             )}
             <ActionIcon
