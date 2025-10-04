@@ -20,11 +20,17 @@ import { routes } from "@/shared/config";
 import { Empty } from "@/shared/ui/Empty";
 
 export type UserPageProps = {
-  params: unknown;
+  params?: Promise<unknown>;
+  searchParams?: Promise<unknown>;
 };
 
-export const UserPage: React.FC<UserPageProps> = async ({ params }) => {
+export const UserPage: React.FC<UserPageProps> = async ({
+  params,
+  searchParams,
+}) => {
   const { username } = routes.user.$parseParams(await params);
+  const parsedSearchParams = routes.user.$parseSearchParams(await searchParams);
+
   const user = await getUser({ path: { username } });
 
   if (user === undefined) {
@@ -41,7 +47,7 @@ export const UserPage: React.FC<UserPageProps> = async ({ params }) => {
         bottomSection={
           <Button
             component={Link}
-            href={routes.users()}
+            href={parsedSearchParams?.back ?? routes.users()}
             size="md"
             mx="auto"
             variant="light"
@@ -58,7 +64,7 @@ export const UserPage: React.FC<UserPageProps> = async ({ params }) => {
     <Stack flex={1} display="flex">
       <Button
         component={Link}
-        href={routes.users()}
+        href={parsedSearchParams?.back ?? routes.users()}
         variant="subtle"
         leftSection={<TbArrowLeft size={24} />}
         w="fit-content"

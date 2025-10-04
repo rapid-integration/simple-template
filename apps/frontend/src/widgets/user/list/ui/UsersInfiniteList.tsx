@@ -3,6 +3,7 @@
 import { Loader, Paper, Stack, StackProps, ThemeIcon } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 import Link from "next/link";
+import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { TbUserCancel } from "react-icons/tb";
 
@@ -18,7 +19,8 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
   limit,
   ...props
 }) => {
-  const [q, setDebounchedQuery] = useDebouncedState("", 300);
+  const [debouncedQuery, setDebouncedQuery] = useDebouncedState("", 300);
+  const [q, setQ] = useQueryState("q");
 
   const { items, loading, ref, reset } = useInfiniteQuery({
     limit,
@@ -27,7 +29,12 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
 
   useEffect(() => {
     reset();
+    setDebouncedQuery(q ?? "");
   }, [q]);
+
+  useEffect(() => {
+    setQ(debouncedQuery || null);
+  }, [debouncedQuery]);
 
   return (
     <Stack gap={4} {...props}>
@@ -45,7 +52,8 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           name="users-infinite-list-search-text-input"
           size="md"
           loading={loading && items !== null}
-          onValueChange={setDebounchedQuery}
+          value={q ?? undefined}
+          onValueChange={setDebouncedQuery}
           placeholder="Поиск пользователей…"
         />
       </Paper>
@@ -70,7 +78,10 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           <UserCard
             key={user.id}
             component={Link}
-            href={routes.user({ username: user.username })}
+            href={routes.user({
+              username: user.username,
+              search: q ? { back: routes.users({ search: { q } }) } : {},
+            })}
             user={user}
           />
         ))}

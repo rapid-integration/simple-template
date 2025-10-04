@@ -9,6 +9,7 @@ export const generateMetadata = async ({
   params,
 }: UserPageProps): Promise<Metadata> => {
   const { username } = routes.user.$parseParams(await params);
+
   const user = await getUser({ path: { username } });
 
   return {

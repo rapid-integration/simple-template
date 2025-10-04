@@ -4,6 +4,7 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import theme from "@/shared/theme";
 
@@ -16,11 +17,13 @@ export const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
       <body>
-        <MantineProvider theme={theme} defaultColorScheme="auto">
-          <Notifications />
+        <NuqsAdapter>
+          <MantineProvider theme={theme} defaultColorScheme="auto">
+            <Notifications />
 
-          {children}
-        </MantineProvider>
+            {children}
+          </MantineProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

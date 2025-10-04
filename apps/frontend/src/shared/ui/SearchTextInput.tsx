@@ -10,11 +10,19 @@ export type SearchTextInputProps = TextInputProps & {
 };
 
 export const SearchTextInput: React.FC<SearchTextInputProps> = ({
+  value,
+  defaultValue,
   loading,
   onValueChange,
   ...props
 }) => {
-  const [searchInputValue, setSearchInputValue] = useState<string>("");
+  const [searchInputValue, setSearchInputValue] = useState<string>(
+    typeof value === "string"
+      ? value
+      : typeof defaultValue === "string"
+        ? defaultValue
+        : "",
+  );
 
   const handleSearchInput = (event: React.InputEvent<HTMLInputElement>) => {
     setSearchInputValue(event.currentTarget.value);
@@ -25,8 +33,12 @@ export const SearchTextInput: React.FC<SearchTextInputProps> = ({
   };
 
   useEffect(() => {
+    setSearchInputValue(typeof value === "string" ? value : "");
+  }, [value]);
+
+  useEffect(() => {
     onValueChange?.(searchInputValue);
-  });
+  }, [searchInputValue]);
 
   return (
     <TextInput

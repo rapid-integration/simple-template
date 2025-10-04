@@ -19,6 +19,17 @@ export const { routes, useSafeParams, useSafeSearchParams } =
       params: z.object({
         username: z.string().check(z.trim()),
       }),
+      search: z.optional(
+        z.object({
+          back: z.optional(z.string().check(z.trim())),
+        }),
+      ),
     }),
-    users: defineRoute("/users"),
+    users: defineRoute("/users", {
+      search: z.optional(
+        z.object({
+          q: z.optional(z.nullable(z.string().check(z.trim()))),
+        }),
+      ),
+    }),
   }));
