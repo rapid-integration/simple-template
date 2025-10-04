@@ -22,6 +22,12 @@ services:
     build:
       context: ./apps/backend
       dockerfile: Dockerfile.dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.template-backend-dev.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.template-backend-dev.entrypoints=web"
+      - "traefik.http.routers.template-backend-dev.service=template-backend-dev"
+      - "traefik.http.services.template-backend-dev.loadbalancer.server.port=8000"
     restart: unless-stopped
     env_file:
       - path: .env
@@ -142,6 +148,14 @@ services:
     build:
       context: ./apps/frontend
       dockerfile: Dockerfile.dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.template-frontend-dev.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.template-frontend-dev.entrypoints=web"
+      - "traefik.http.routers.template-frontend-dev-hmr.rule=Path(`/_next/webpack-hmr`)"
+      - "traefik.http.routers.template-frontend-dev-hmr.entrypoints=web"
+      - "traefik.http.routers.template-frontend-dev-hmr.service=template-frontend-dev-service"
+      - "traefik.http.services.template-frontend-dev-service.loadbalancer.server.port=3000"
     restart: unless-stopped
     env_file:
       - path: .env
@@ -349,8 +363,8 @@ services:
       - path: .env
         required: true
     ports:
-      - 443:443
       - 80:80
+      - 443:443
     networks:
       - template-network
     configs:
@@ -368,29 +382,40 @@ services:
     profiles:
       - prod
 
-  nginx-dev:
-    container_name: template-nginx-dev
-    image: nginx:1.28.0-alpine
-    restart: unless-stopped
-    env_file:
-      - path: .env
-        required: true
+  traefik-dev:
+    container_name: template-traefik-dev
+    image: traefik:v3.5.3
+    command:
+      - --log.level=WARN
+      - --api.insecure=false
+      - --api.dashboard=true
+      - --api.basePath=/traefik
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dashboard.rule=PathPrefix(`/traefik`) || HeaderRegexp(`Referer`, `/traefik`)
+      - traefik.http.routers.dashboard.service=api@internal
+      - traefik.http.services.dashboard.loadbalancer.server.port=8080
     ports:
-      - 443:443
       - 80:80
-    networks:
-      - template-network
-    configs:
-      - source: nginx-dev-config
-        target: /etc/nginx/conf.d/default.conf
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       backend-dev:
         restart: false
         required: true
         condition: service_started
+      frontend-dev:
+        restart: false
+        required: true
+        condition: service_started
+    networks:
+      - template-network
     profiles:
       - dev
-  
+
   cloudpub-dev:
     container_name: template-cloudpub-dev
     image: cloudpub/cloudpub:latest
@@ -405,9 +430,14 @@ services:
       - template-network
     environment:
       - TOKEN=${CLOUDPUB_TOKEN}
-      - HTTP=nginx-dev:80
+      - HTTP=traefik-dev:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.template-cloudpub-dev-router.entrypoints=web"
+      - "traefik.http.routers.template-cloudpub-dev-router.service=template-cloudpub-dev-service"
+      - "traefik.http.services.template-cloudpub-dev-service.loadbalancer.server.port=80"
     depends_on:
-      nginx-dev:
+      traefik-dev:
         restart: false
         required: true
         condition: service_started
@@ -441,6 +471,3 @@ configs:
   nginx-config:
     name: template-nginx-config
     file: ./etc/nginx/conf.d/default.prod.conf
-  nginx-dev-config:
-    name: template-nginx-dev-config
-    file: ./etc/nginx/conf.d/default.dev.conf
