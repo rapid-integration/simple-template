@@ -1,4 +1,3 @@
-import "@mantine/core/styles.css";
-import "@mantine/notifications/styles.css";
+import "@/app/styles";
 
 export { SiteLayout as default, metadata, viewport } from "@/app/layouts/site";
