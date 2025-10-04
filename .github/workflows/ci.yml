@@ -24,6 +24,7 @@ jobs:
   build-backend:
     needs:
       - e2e-tests
+    if: github.ref_name == 'main'
     uses: ./.github/workflows/build-backend.yml
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -33,6 +34,7 @@ jobs:
   build-frontend:
     needs:
       - lint-frontend
+    if: github.ref_name == 'main'
     uses: ./.github/workflows/build-frontend.yml
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
