@@ -9,11 +9,9 @@ export default defineConfig([
     },
   },
   {
-    files: ["./src/shared/**"],
+    files: ["./src/app/**"],
     rules: {
-      "fsd/no-public-api-sidestep": "off",
-      "fsd/public-api": "off",
-      "fsd/segments-by-purpose": "off",
+      "fsd/no-reserved-folder-names": "off",
     },
   },
 ]);

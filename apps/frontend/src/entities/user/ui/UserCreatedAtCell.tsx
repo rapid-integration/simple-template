@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { TbCalendarPlus, TbCheck, TbCopy } from "react-icons/tb";
 
-import useDateTimeFormat from "@/shared/hooks/useDateTimeFormat";
+import { useDateTimeFormat } from "@/shared/lib/datetime";
 import { Cell, CellProps } from "@/shared/ui/Cell";
 
 export type UserCreatedAtCellProps = CellProps & {

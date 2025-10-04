@@ -4,7 +4,7 @@ import { revalidateTag } from "next/cache";
 
 import { USER_CACHE_USERS_ME_TAG } from "@/entities/user";
 import { client, setSession, UserRegistrationRequest } from "@/shared/api";
-import { routes } from "@/shared/config/navigation";
+import { routes } from "@/shared/config";
 import { redirectToNextURL } from "@/shared/lib/navigation";
 
 export async function register(body: UserRegistrationRequest) {

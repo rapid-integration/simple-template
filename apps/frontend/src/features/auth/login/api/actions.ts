@@ -9,7 +9,7 @@ import {
   serializeFormData,
   setSession,
 } from "@/shared/api";
-import { routes } from "@/shared/config/navigation";
+import { routes } from "@/shared/config";
 import { redirectToNextURL } from "@/shared/lib/navigation";
 
 export async function login(body: BodyLoginAuthLoginPost) {

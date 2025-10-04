@@ -1,3 +1,5 @@
+"use client";
+
 import { Group, Text, GroupProps, Stack } from "@mantine/core";
 
 export type CellProps = GroupProps & {
