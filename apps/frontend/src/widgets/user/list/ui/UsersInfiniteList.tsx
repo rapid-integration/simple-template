@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { TbUserCancel } from "react-icons/tb";
+import { WindowVirtualizer } from "virtua";
 
 import { getUsers, UserCard } from "@/entities/user";
 import { routes } from "@/shared/config";
@@ -58,7 +59,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
         />
       </Paper>
 
-      <Stack gap="xs">
+      <Stack gap={0}>
         {items === null && <Loader size="lg" my="xl" mx="auto" />}
 
         {items?.length === 0 && (
@@ -74,17 +75,20 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           />
         )}
 
-        {items?.map((user) => (
-          <UserCard
-            key={user.id}
-            component={Link}
-            href={routes.user({
-              username: user.username,
-              search: q ? { back: routes.users({ search: { q } }) } : {},
-            })}
-            user={user}
-          />
-        ))}
+        <WindowVirtualizer count={limit} overscan={Math.ceil(limit / 5)}>
+          {items?.map((user, index) => (
+            <UserCard
+              key={user.id}
+              component={Link}
+              href={routes.user({
+                username: user.username,
+                search: q ? { back: routes.users({ search: { q } }) } : {},
+              })}
+              user={user}
+              mb={index !== items.length - 1 ? "xs" : undefined}
+            />
+          ))}
+        </WindowVirtualizer>
 
         <div ref={ref} />
       </Stack>

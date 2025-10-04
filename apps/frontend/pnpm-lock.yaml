@@ -53,6 +53,9 @@ importers:
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.2.0)
+      virtua:
+        specifier: ^0.44.2
+        version: 0.44.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       zod:
         specifier: ^4.1.11
         version: 4.1.11
@@ -2642,6 +2645,26 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  virtua@0.44.2:
+    resolution: {integrity: sha512-YCzmduVzt3/V0i/fZpbOmucsyHAN8CNMqmHlRQt+q9Wd1dtNrgAJpSWi3jVywu7A6t5qf+q+5kOSMMC6iwpWcw==}
+    peerDependencies:
+      react: '>=16.14.0'
+      react-dom: '>=16.14.0'
+      solid-js: '>=1.0'
+      svelte: '>=5.0'
+      vue: '>=3.2'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -5554,6 +5577,11 @@ snapshots:
       '@types/react': 19.2.0
 
   util-deprecate@1.0.2: {}
+
+  virtua@0.44.2(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    optionalDependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   which-boxed-primitive@1.1.1:
     dependencies:
