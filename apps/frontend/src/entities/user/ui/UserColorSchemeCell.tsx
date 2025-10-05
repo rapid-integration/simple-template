@@ -32,9 +32,6 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
         mounted ? (
           <Select
             w="10rem"
-            styles={{ wrapper: { padding: 0 } }}
-            variant="default"
-            placeholder="Выберите тему…"
             data={[
               {
                 label: "Светлая",
@@ -52,9 +49,10 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
             value={colorScheme}
             onChange={(value) => setColorScheme(value as MantineColorScheme)}
             allowDeselect={false}
+            aria-label="Тема"
           />
         ) : (
-          <Skeleton width={160} height={36} />
+          <Skeleton width="10rem" height={36} />
         )
       }
       {...props}

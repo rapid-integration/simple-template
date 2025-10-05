@@ -14,7 +14,7 @@ export const SettingsPage: React.FC = async () => {
   const currentUser = await getCurrentUser();
 
   return (
-    <Stack>
+    <Stack mt="md">
       <Stack gap="xs" mb="xs">
         <Avatar
           name={currentUser.username}

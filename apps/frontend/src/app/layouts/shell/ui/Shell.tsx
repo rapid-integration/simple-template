@@ -6,10 +6,13 @@ import {
   Avatar,
   Burger,
   Button,
+  DefaultMantineColor,
   Group,
+  Indicator,
   NavLink,
   Stack,
   Text,
+  Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
@@ -17,12 +20,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { IconType } from "react-icons/lib";
 import { TbHome, TbSettings, TbUsers } from "react-icons/tb";
 
 import { CurrentUserResponse } from "@/shared/api";
 import { routes } from "@/shared/config";
 
-const data = [
+const data: {
+  icon: IconType;
+  href: string;
+  label: React.ReactNode;
+  indicator?: {
+    label: React.ReactNode;
+    color?: DefaultMantineColor;
+  };
+}[] = [
   {
     icon: TbHome,
     href: routes.home(),
@@ -60,9 +72,9 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
 
   return (
     <AppShell
-      header={{ height: 60 }}
+      header={{ height: 56 }}
       navbar={{
-        width: 300,
+        width: 320,
         breakpoint: "sm",
         collapsed: { desktop: true, mobile: !open },
       }}
@@ -78,19 +90,29 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
           />
           <Group gap="lg" justify="space-between" style={{ flex: 1 }}>
-            <Group gap="xs">
-              <Image
-                src="/favicon.svg"
-                alt="Логотип"
-                width={24}
-                height={24}
-                draggable={false}
-              />
-              <Text fw={600}>Template</Text>
-            </Group>
+            <Button
+              component={Link}
+              href={routes.home()}
+              variant="transparent"
+              style={{
+                color: "var(--mantine-body-color)",
+              }}
+              p={0}
+            >
+              <Group gap="xs">
+                <Image
+                  src="/favicon.svg"
+                  alt="Логотип"
+                  width={24}
+                  height={24}
+                  draggable={false}
+                />
+                <Text fw={600}>Template</Text>
+              </Group>
+            </Button>
 
             {!isMobile && (
-              <Group me="auto" gap="xs" visibleFrom="sm">
+              <Group mx="auto" gap={6} visibleFrom="sm">
                 {data.map((item) => (
                   <Button
                     key={item.href}
@@ -98,9 +120,27 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                     href={item.href}
                     color="gray"
                     variant={pathname === item.href ? "light" : "subtle"}
-                    style={{
-                      color: "var(--mantine-body-color)",
+                    styles={{
+                      root: {
+                        color: "var(--mantine-body-color)",
+                      },
+                      section: {
+                        marginRight: 6,
+                      },
                     }}
+                    leftSection={
+                      <Indicator
+                        inline
+                        label={item.indicator?.label}
+                        color={item.indicator?.color}
+                        disabled={!item.indicator}
+                        size={16}
+                        radius="xl"
+                        styles={{ indicator: { top: 4 } }}
+                      >
+                        <item.icon size={24} />
+                      </Indicator>
+                    }
                     px="sm"
                   >
                     {item.label}
@@ -108,16 +148,24 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                 ))}
               </Group>
             )}
-            <ActionIcon
-              size="xl"
-              radius="xl"
-              variant="transparent"
-              component={Link}
-              href={routes.settings()}
-              aria-label="Настройки"
+            <Tooltip
+              label="Настройки"
+              position="bottom"
+              withArrow
+              arrowSize={8}
+              events={{ focus: true, hover: false, touch: false }}
             >
-              <Avatar name={currentUser.username} color="initials" />
-            </ActionIcon>
+              <ActionIcon
+                size="lg"
+                radius="xl"
+                variant="transparent"
+                component={Link}
+                href={routes.settings()}
+                aria-label="Настройки"
+              >
+                <Avatar name={currentUser.username} color="initials" />
+              </ActionIcon>
+            </Tooltip>
           </Group>
         </Group>
       </AppShell.Header>
@@ -128,7 +176,20 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
             <NavLink
               key={item.href}
               component={Link}
-              leftSection={<item.icon size={28} strokeWidth={1.5} />}
+              leftSection={
+                <Indicator
+                  inline
+                  label={item.indicator?.label}
+                  color={item.indicator?.color}
+                  disabled={!item.indicator}
+                  size={16}
+                  radius="xl"
+                  display="flex"
+                  styles={{ indicator: { top: 4 } }}
+                >
+                  <item.icon size={28} />
+                </Indicator>
+              }
               label={item.label}
               href={item.href}
               fw={500}

@@ -56,6 +56,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           value={q ?? undefined}
           onValueChange={setDebouncedQuery}
           placeholder="Поиск пользователей…"
+          aria-label="Поиск пользователей"
         />
       </Paper>
 

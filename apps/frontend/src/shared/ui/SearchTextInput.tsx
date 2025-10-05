@@ -53,6 +53,7 @@ export const SearchTextInput: React.FC<SearchTextInputProps> = ({
             onClick={clearSearch}
             variant="subtle"
             color="gray"
+            tabIndex={-1}
           >
             <TbX size={20} />
           </ActionIcon>

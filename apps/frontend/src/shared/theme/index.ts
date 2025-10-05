@@ -3,6 +3,11 @@ import { createTheme } from "@mantine/core";
 export default createTheme({
   defaultRadius: "md",
   components: {
+    Tooltip: {
+      defaultProps: {
+        events: { hover: true, focus: true, touch: false },
+      },
+    },
     Modal: {
       defaultProps: {
         transitionProps: {
