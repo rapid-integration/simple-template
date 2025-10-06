@@ -8,7 +8,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { useMounted } from "@mantine/hooks";
-import { TbBrush } from "react-icons/tb";
+import { TbPalette } from "react-icons/tb";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
 
@@ -24,7 +24,7 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
     <Cell
       leftSection={
         <ThemeIcon color="blue" variant="transparent">
-          <TbBrush size={24} />
+          <TbPalette size={24} />
         </ThemeIcon>
       }
       label="Тема"
