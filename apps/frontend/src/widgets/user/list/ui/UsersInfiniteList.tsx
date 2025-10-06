@@ -9,7 +9,6 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
-import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { TbUserCancel } from "react-icons/tb";
@@ -67,7 +66,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
         />
       </Paper>
 
-      <Stack gap={0}>
+      <Stack gap={0} pt={2}>
         {items === null && <Loader size="lg" my="xl" mx="auto" />}
 
         {items?.length === 0 && (
@@ -87,12 +86,8 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           {items?.map((user) => (
             <UserCard
               key={user.id}
-              component={Link}
-              href={routes.user({
-                username: user.username,
-                search: q ? { back: routes.users({ search: { q } }) } : {},
-              })}
               user={user}
+              back={q ? routes.users({ search: { q } }) : undefined}
             />
           ))}
         </SimpleGrid>

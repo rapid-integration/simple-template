@@ -54,6 +54,7 @@ export const SettingsPage: React.FC = async () => {
                 color="var(--mantine-color-gray-light)"
                 style={{
                   color: "var(--mantine-body-color)",
+                  border: "1px solid var(--mantine-color-default-border)",
                 }}
                 styles={{
                   tabSection: {
@@ -62,7 +63,7 @@ export const SettingsPage: React.FC = async () => {
                 }}
                 fw={500}
                 py={8}
-                px="sm"
+                px="xs"
               >
                 {tab.label}
               </TabsTab>

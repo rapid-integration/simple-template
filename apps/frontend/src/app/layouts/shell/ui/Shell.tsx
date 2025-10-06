@@ -119,7 +119,6 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                     component={Link}
                     href={item.href}
                     color="gray"
-                    radius="xl"
                     variant={pathname === item.href ? "light" : "subtle"}
                     styles={{
                       root: {
@@ -142,7 +141,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                         <item.icon size={24} />
                       </Indicator>
                     }
-                    px="sm"
+                    px="xs"
                   >
                     {item.label}
                   </Button>
