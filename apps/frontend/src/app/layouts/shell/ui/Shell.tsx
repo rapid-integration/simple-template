@@ -201,7 +201,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
       )}
 
       <AppShell.Main px="md" maw="48rem" mx="auto">
-        <Stack py="md">{children}</Stack>
+        <Stack py="lg">{children}</Stack>
       </AppShell.Main>
     </AppShell>
   );

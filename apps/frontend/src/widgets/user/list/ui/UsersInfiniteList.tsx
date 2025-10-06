@@ -1,12 +1,18 @@
 "use client";
 
-import { Loader, Paper, Stack, StackProps, ThemeIcon } from "@mantine/core";
+import {
+  Loader,
+  Paper,
+  SimpleGrid,
+  Stack,
+  StackProps,
+  ThemeIcon,
+} from "@mantine/core";
 import { useDebouncedState } from "@mantine/hooks";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { TbUserCancel } from "react-icons/tb";
-import { WindowVirtualizer } from "virtua";
 
 import { getUsers, UserCard } from "@/entities/user";
 import { routes } from "@/shared/config";
@@ -34,6 +40,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
   }, [q]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setQ(debouncedQuery || null);
   }, [debouncedQuery]);
 
@@ -76,8 +83,8 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           />
         )}
 
-        <WindowVirtualizer count={limit} overscan={Math.ceil(limit / 5)}>
-          {items?.map((user, index) => (
+        <SimpleGrid cols={{ base: 1, sm: 3 }}>
+          {items?.map((user) => (
             <UserCard
               key={user.id}
               component={Link}
@@ -86,12 +93,11 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
                 search: q ? { back: routes.users({ search: { q } }) } : {},
               })}
               user={user}
-              mb={index !== items.length - 1 ? "xs" : undefined}
             />
           ))}
-        </WindowVirtualizer>
+        </SimpleGrid>
 
-        <div ref={ref} />
+        <div id="users-infinite-list-load-trigger" ref={ref} />
       </Stack>
     </Stack>
   );
