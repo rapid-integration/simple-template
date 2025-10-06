@@ -83,7 +83,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           />
         )}
 
-        <SimpleGrid cols={{ base: 1, sm: 3 }}>
+        <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xs">
           {items?.map((user) => (
             <UserCard
               key={user.id}
