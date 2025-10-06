@@ -51,7 +51,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
         radius={0}
         style={{
           position: "sticky",
-          top: "calc(var(--app-shell-header-height))",
+          top: "var(--app-shell-header-height)",
           zIndex: 100,
         }}
       >
