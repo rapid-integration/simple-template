@@ -1,8 +1,8 @@
 import nextPlugin from "@next/eslint-plugin-next";
+import { defineConfig } from "eslint/config";
 import pluginImport from "eslint-plugin-import-x";
 import reactPlugin from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
-import { defineConfig } from "eslint/config";
 import typescript from "typescript-eslint";
 
 export default defineConfig([

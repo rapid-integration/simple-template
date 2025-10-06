@@ -53,13 +53,13 @@ docker compose --profile dev down -v
 - Проверка форматирования без изменений:
 
   ```sh
-  pnpm format:prettier:check
+  pnpm format-prettier-check
   ```
 
 - Автоматическое исправление форматирования:
 
   ```sh
-  pnpm format:prettier:write
+  pnpm format-prettier-write
   ```
 
 - Сортировка и форматирование [package.json](../package.json):
@@ -73,7 +73,7 @@ docker compose --profile dev down -v
 Для проверки кода используется строгий линтинг ESLint:
 
 ```sh
-pnpm lint:eslint
+pnpm lint-eslint
 ```
 
 ## Архитектура проекта
@@ -83,7 +83,7 @@ pnpm lint:eslint
 Для проверки на соответствие архитектуре используйте:
 
 ```sh
-pnpm lint:steiger
+pnpm lint-steiger
 ```
 
 ## Генерация типов API
@@ -97,7 +97,7 @@ pnpm lint:steiger
 1. Выполните:
 
    ```sh
-   pnpm generate:api-types
+   pnpm generate-api-types
    ```
 
    Типы будут сохранены в [`src/shared/api/types.ts`](../src/shared/api/types.ts)

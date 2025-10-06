@@ -3,18 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev --turbopack",
-    "format": "pnpm format:package && pnpm format:prettier:write",
-    "format:package": "sort-package-json",
-    "format:prettier:check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",
-    "format:prettier:write": "prettier !pnpm-lock.yaml --check --write --ignore-path .gitignore .",
-    "generate:api-types": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
-    "lint": "pnpm lint:steiger && pnpm lint:eslint",
-    "lint:eslint": "eslint --max-warnings=0 .",
-    "lint:steiger": "steiger ./src",
-    "prepare": "git config core.hooksPath ./apps/frontend/.husky",
-    "start": "next start"
+    "build": "next build",
+    "start": "next start",
+    "lint": "pnpm lint-steiger && pnpm lint-eslint",
+    "lint-eslint": "pnpm --node-options='--experimental-strip-types' eslint --max-warnings=0 .",
+    "lint-steiger": "steiger ./src",
+    "format": "pnpm format-prettier-write",
+    "format-prettier-check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",
+    "format-prettier-write": "prettier !pnpm-lock.yaml --check --write --ignore-path .gitignore .",
+    "generate": "pnpm generate-api-types",
+    "generate-api-types": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
+    "prepare": "git config core.hooksPath ./apps/frontend/.husky"
   },
   "dependencies": {
     "@mantine/core": "^8.3.2",
@@ -50,9 +50,31 @@
     "eslint-plugin-react-hooks": "^6.1.0",
     "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
-    "sort-package-json": "^3.4.0",
     "steiger": "^0.5.11",
     "typescript": "^5.8.9",
     "typescript-eslint": "^8.45.0"
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-preset-mantine": {}
+    }
+  },
+  "prettier": {
+    "endOfLine": "lf",
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
+  },
+  "lint-staged": {
+    "*.{mjs,ts,tsx}": [
+      "pnpm lint"
+    ],
+    "*.{mjs,ts,tsx,css,json,md}": [
+      "pnpm format"
+    ]
   }
 }

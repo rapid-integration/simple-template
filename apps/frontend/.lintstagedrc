@@ -1,5 +1,0 @@
-{
-  "*.{js,jsx,ts,tsx}": ["pnpm lint"],
-  "*.{js,jsx,ts,tsx,css,scss,less,html,json,md}": ["pnpm format"],
-  "package.json": ["pnpm format:package"]
-}
