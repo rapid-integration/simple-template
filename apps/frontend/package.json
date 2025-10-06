@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "pnpm lint-steiger && pnpm lint-eslint",
-    "lint-eslint": "pnpm --node-options='--experimental-strip-types' eslint --max-warnings=0 .",
+    "lint-eslint": "eslint --max-warnings=0 .",
     "lint-steiger": "steiger ./src",
     "format": "pnpm format-prettier-write",
     "format-prettier-check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",

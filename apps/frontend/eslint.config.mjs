@@ -26,6 +26,7 @@ export default defineConfig([
       ...nextPlugin.configs["core-web-vitals"].rules,
 
       "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "off",
 
       "import-x/no-named-as-default-member": "off",
       "import-x/no-named-as-default": "off",
