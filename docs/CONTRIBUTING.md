@@ -10,7 +10,7 @@
 
 ## Начало работы
 
-0. Убедитесь, что у вас установлен [docker](https://www.docker.com/) c [docker compose](https://docs.docker.com/compose/) и вы находитесь на одной из поддерживаемых ОС для разработки этого проекта:
+0. Убедитесь, что у вас установлен [Docker](https://www.docker.com/) и вы находитесь на одной из поддерживаемых ОС для разработки этого проекта:
 
    - **Windows** с настроенным [WSL](https://learn.microsoft.com/ru-ru/windows/wsl/install) (Windows Subsystem for Linux).
    - **macOS**

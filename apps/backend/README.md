@@ -2,39 +2,34 @@
 [![Docker Image Size](https://img.shields.io/docker/image-size/tanaxxt/simple-template-backend/latest?logo=docker)](https://hub.docker.com/r/tanaxxt/simple-template-backend)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tanaxxt/simple-template-backend?logo=docker)](https://hub.docker.com/r/tanaxxt/simple-template-backend)
 
-[![Python Version](https://img.shields.io/badge/3.13-007EC6?label=python&logo=python)](https://www.python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-1F5082?label=%20&logo=fastapi&labelColor=gray&color=009485)](https://fastapi.tiangolo.com)
-[![mypy](https://img.shields.io/badge/mypy-2A6DB2?logo=python&labelColor=gray)](https://github.com/python/mypy)
-[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![pycodestyle](https://img.shields.io/badge/pycodestyle-000000?label=style)](https://pycodestyle.pycqa.org)
-
 # Бэкенд
 
 FastAPI-сервис, реализованный как модульный монолит.
 
-## Технические детали
+## 🛠️ Технические детали
+
+Чтобы ознакомиться с зависимостями, изучите директорию [`requirements`](./requirements/).
 
 ### Основные технологии
 
-- [Python](https://www.python.org) 3.13+
-- [FastAPI](https://fastapi.tiangolo.com) (веб-фреймворк).
-- [Pydantic](https://pydantic.dev) v2 (валидация данных) + [Pydantic Settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/) (конфигурация).
-- [PostgreSQL](https://www.postgresql.org) (через [SQLAlchemy](https://www.sqlalchemy.org) 2.0 + [asyncpg](https://magicstack.github.io/asyncpg)).
-- [Docker](https://www.docker.com/) и [Docker Compose](https://docs.docker.com/compose/) (контейнеризация).
+[![Python Version](https://img.shields.io/badge/python%203.13-3776AB?logo=python&labelColor=gray)](https://www.python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&labelColor=gray)](https://fastapi.tiangolo.com)
+[![Pydantic](https://img.shields.io/badge/Pydantic%202.0-E92063?logo=pydantic&labelColor=gray)](https://docs.pydantic.dev)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&labelColor=gray)](https://www.postgresql.org/)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy%202.0-D71F00?logo=sqlalchemy&labelColor=gray)](https://www.sqlalchemy.org/)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&labelColor=gray)](https://docker.com)
 
 ### Инструменты разработки
 
-- [mypy](https://github.com/python/mypy) — строгая статическая типизация.
-- [ruff](https://github.com/astral-sh/ruff) — линтер и форматтер.
-- [pytest](https://pytest.org) — тестирование.
-- [pip](https://github.com/pypa/pip) — управление зависимостями.
+[![pip](https://img.shields.io/badge/pip-3775A9?logo=pypi&labelColor=gray)](https://pypi.org/project/pip/)
+[![mypy](https://img.shields.io/badge/mypy-3776AB?logo=python&labelColor=gray)](https://github.com/python/mypy)
+[![pytest](https://img.shields.io/badge/pytest-0A9EDC?logo=pytest&labelColor=gray)](https://docs.pytest.org)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-Чтобы более подробно ознакомиться с зависимостями, изучите директорию [requirements](./requirements/).
+## 🏗️ Архитектура
 
-## Архитектура
+Для детального обзора архитектуры этого сервиса ознакомьтесь с [`ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
 
-Для детального обзора архитектуры этого сервиса ознакомьтесь с [ARCHITECTURE.md](./docs/ARCHITECTURE.md).
+## 🤝 Участие в разработке
 
-## Участие в разработке
-
-Если вы хотите сделать свой вклад в развитие этого сервиса, то ознакомьтесь с [CONTRIBUTING.md](./docs/CONTRIBUTING.md).
+Если вы хотите сделать свой вклад в развитие этого сервиса, то ознакомьтесь с [`CONTRIBUTING.md`](./docs/CONTRIBUTING.md).

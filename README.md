@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  Быстрый старт вашего веб-приложения на FastAPI и React (Next.js + Mantine).
+  Быстрый старт вашего веб-приложения на <a href="https://fastapi.tiangolo.com/">FastAPI</a> и <a href="https://react.dev">React</a> (<a href="https://nextjs.org">Next.js</a> и <a href="https://mantine.dev">Mantine</a>).
 </p>
 
 <p align="center">
@@ -12,9 +12,6 @@
   </a>
   <a href="https://github.com/rapid-integration/simple-template/actions/workflows/cd.yml" target="_blank">
     <img src="https://github.com/rapid-integration/simple-template/actions/workflows/cd.yml/badge.svg?branch=main" alt="CD Pipeline"/>
-  </a>
-  <a href="https://www.conventionalcommits.org" target="_blank">
-    <img src="https://img.shields.io/badge/conventional-FE5196?label=commits" alt="Conventional Commits"/>
   </a>
 </p>
 

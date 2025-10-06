@@ -6,7 +6,7 @@
 
 ## Начало работы
 
-0. Убедитесь, что у вас установлены Node.js 22+ и pnpm 10+.
+0. Убедитесь, что у вас установлены [Node.js](https://nextjs.org) и [pnpm](https://pnpm.io) последних версий.
 
 1. Перейдите в директорию [apps/frontend](../).
 
@@ -44,7 +44,7 @@ docker compose --profile dev down -v
 
 ## Форматирование
 
-- Форматирование всего проекта (Prettier + сортировка package.json):
+- Форматирование всего проекта:
 
   ```sh
   pnpm format
@@ -62,15 +62,9 @@ docker compose --profile dev down -v
   pnpm format-prettier-write
   ```
 
-- Сортировка и форматирование [package.json](../package.json):
-
-  ```sh
-  pnpm format:package
-  ```
-
 ## Линтинг
 
-Для проверки кода используется строгий линтинг ESLint:
+Для проверки кода используется ESLint:
 
 ```sh
 pnpm lint-eslint
