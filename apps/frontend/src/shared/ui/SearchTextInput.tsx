@@ -44,6 +44,7 @@ export const SearchTextInput: React.FC<SearchTextInputProps> = ({
     <TextInput
       value={searchInputValue}
       onInput={handleSearchInput}
+      inputMode="search"
       leftSection={loading ? <Loader size="sm" /> : <TbSearch size={24} />}
       rightSection={
         searchInputValue && (
