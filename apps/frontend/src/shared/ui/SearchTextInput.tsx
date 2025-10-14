@@ -42,15 +42,19 @@ export const SearchTextInput: React.FC<SearchTextInputProps> = ({
 
   return (
     <TextInput
+      inputMode="text"
+      enterKeyHint="search"
+      spellCheck={false}
+      autoCapitalize="off"
+      autoCorrect="off"
       value={searchInputValue}
       onInput={handleSearchInput}
-      inputMode="search"
       leftSection={loading ? <Loader size="sm" /> : <TbSearch size={24} />}
       rightSection={
         searchInputValue && (
           <ActionIcon
             size="md"
-            aria-label="Clear search"
+            aria-label="Очистить"
             onClick={clearSearch}
             variant="subtle"
             color="gray"
