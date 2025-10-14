@@ -10,10 +10,7 @@ export default createTheme({
     },
     Modal: {
       defaultProps: {
-        transitionProps: {
-          duration: 150,
-          transition: "pop",
-        },
+        radius: "lg",
       },
     },
     ModalRoot: {
