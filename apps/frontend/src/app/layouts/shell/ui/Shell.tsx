@@ -171,32 +171,39 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
       </AppShell.Header>
 
       {isMobile && (
-        <AppShell.Navbar py="xs">
-          {data.map((item) => (
-            <NavLink
-              key={item.href}
-              component={Link}
-              leftSection={
-                <Indicator
-                  inline
-                  label={item.indicator?.label}
-                  color={item.indicator?.color}
-                  disabled={!item.indicator}
-                  size={16}
-                  radius="xl"
-                  display="flex"
-                  styles={{ indicator: { top: 4 } }}
-                >
-                  <item.icon size={28} />
-                </Indicator>
-              }
-              label={item.label}
-              href={item.href}
-              fw={500}
-              active={pathname === item.href}
-              px="md"
-            />
-          ))}
+        <AppShell.Navbar py="xs" px={8}>
+          <Stack gap={4}>
+            {data.map((item) => (
+              <NavLink
+                key={item.href}
+                component={Link}
+                leftSection={
+                  <Indicator
+                    inline
+                    label={item.indicator?.label}
+                    color={item.indicator?.color}
+                    disabled={!item.indicator}
+                    size={16}
+                    radius="xl"
+                    ms={2}
+                    display="flex"
+                    styles={{ indicator: { top: 4 } }}
+                  >
+                    <item.icon size={24} strokeWidth={1.75} />
+                  </Indicator>
+                }
+                label={item.label}
+                href={item.href}
+                fw={500}
+                active={pathname === item.href}
+                styles={{
+                  root: { borderRadius: "var(--mantine-radius-md)" },
+                  section: { marginRight: 8 },
+                }}
+                px={8}
+              />
+            ))}
+          </Stack>
         </AppShell.Navbar>
       )}
 
