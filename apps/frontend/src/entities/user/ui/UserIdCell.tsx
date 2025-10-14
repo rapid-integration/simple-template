@@ -37,7 +37,9 @@ export const UserIdCell: React.FC<UserIdCellProps> = ({
             >
               <ActionIcon
                 size="input-sm"
-                style={{ color: "var(--mantine-color-gray-text)" }}
+                style={{
+                  color: `var(--mantine-color-${copied ? "green" : "gray"}-text)`,
+                }}
                 variant="default"
                 onClick={copy}
               >
