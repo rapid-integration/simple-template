@@ -15,6 +15,7 @@ export default {
   typescript: {
     ignoreBuildErrors: true,
   },
+  allowedDevOrigins: ["*.cloudpub.ru"],
   experimental: {
     staleTimes: {
       dynamic: 30,
