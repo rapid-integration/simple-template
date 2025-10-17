@@ -2,8 +2,8 @@
 
 import { ActionIcon, CopyButton, ThemeIcon, Tooltip } from "@mantine/core";
 import {
-  HiClipboardDocument,
-  HiClipboardDocumentCheck,
+  HiOutlineClipboardDocument,
+  HiOutlineClipboardDocumentCheck,
   HiMiniAtSymbol,
 } from "react-icons/hi2";
 
@@ -40,12 +40,12 @@ export const UserUsernameCell: React.FC<UserUsernameCellProps> = ({
             >
               <ActionIcon size="input-sm" variant="default" onClick={copy}>
                 {copied ? (
-                  <HiClipboardDocumentCheck
+                  <HiOutlineClipboardDocumentCheck
                     size={24}
                     color="var(--mantine-color-green-text)"
                   />
                 ) : (
-                  <HiClipboardDocument size={24} />
+                  <HiOutlineClipboardDocument size={24} />
                 )}
               </ActionIcon>
             </Tooltip>

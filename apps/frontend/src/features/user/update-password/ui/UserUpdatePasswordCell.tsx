@@ -1,8 +1,8 @@
 "use client";
 
-import { ActionIcon, Tooltip, Text } from "@mantine/core";
+import { ActionIcon, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { HiMiniPencilSquare } from "react-icons/hi2";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 import { UserPasswordCell, UserPasswordCellProps } from "@/entities/user";
 import { Popup } from "@/shared/ui/Popup";
@@ -22,7 +22,7 @@ export const UserUpdatePasswordCell: React.FC<UserUpdatePasswordCellProps> = (
         rightSection={
           <Tooltip label="Изменить пароль" position="left" arrowSize={8}>
             <ActionIcon size="input-sm" variant="default" onClick={open}>
-              <HiMiniPencilSquare size={24} />
+              <HiOutlinePencilSquare size={24} />
             </ActionIcon>
           </Tooltip>
         }
