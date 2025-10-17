@@ -1,0 +1,6 @@
+.control {
+  &::before {
+    top: 6px !important;
+    bottom: 6px !important;
+  }
+}
