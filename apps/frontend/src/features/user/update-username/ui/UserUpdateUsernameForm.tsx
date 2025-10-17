@@ -1,6 +1,7 @@
 "use client";
 
 import { Avatar, Button, Flex, Stack, TextInput, Tooltip } from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { HiMiniCheck, HiMiniUser } from "react-icons/hi2";
 
@@ -30,6 +31,8 @@ export const UserUpdateUsernameForm: React.FC<UserUpdateUsernameFormProps> = ({
     },
   });
 
+  const [debouncedUsername] = useDebouncedValue(form.values.username, 300);
+
   return (
     <Flex
       component="form"
@@ -56,11 +59,11 @@ export const UserUpdateUsernameForm: React.FC<UserUpdateUsernameFormProps> = ({
               <Avatar
                 size="sm"
                 lh={0.5}
-                name={form.values.username}
-                color={form.values.username ? "initials" : undefined}
+                name={debouncedUsername}
+                color={debouncedUsername ? "initials" : undefined}
                 variant="filled"
               >
-                {!form.values.username && <HiMiniUser size={16} />}
+                {!debouncedUsername && <HiMiniUser size={16} />}
               </Avatar>
             </Tooltip>
           }
