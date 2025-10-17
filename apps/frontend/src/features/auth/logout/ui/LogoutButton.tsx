@@ -20,7 +20,7 @@ export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
       size="md"
       color="red"
       variant="default"
-      leftSection={<TbLogout size={20} />}
+      leftSection={<TbLogout size={24} />}
       style={{ color: "var(--mantine-color-red-text)" }}
       loading={pending}
       onClick={startLogout}

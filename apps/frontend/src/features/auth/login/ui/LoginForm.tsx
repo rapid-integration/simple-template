@@ -1,10 +1,10 @@
 "use client";
 
-import { PasswordInput, TextInput, Button, Group, Stack } from "@mantine/core";
+import { Button, Group, PasswordInput, Stack, TextInput } from "@mantine/core";
 
 import { useLoginForm } from "../model/form";
 
-export function LoginForm() {
+export const LoginForm: React.FC = () => {
   const [form, submit] = useLoginForm();
 
   return (
@@ -36,4 +36,4 @@ export function LoginForm() {
       </Group>
     </form>
   );
-}
+};

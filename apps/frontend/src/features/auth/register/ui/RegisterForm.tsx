@@ -5,7 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 
 import { useRegisterForm } from "../model/form";
 
-export function RegisterForm() {
+export const RegisterForm: React.FC = () => {
   const [form, submit] = useRegisterForm();
   const [showPasswords, { toggle: toggleShowPasswords }] = useDisclosure();
 
@@ -46,9 +46,9 @@ export function RegisterForm() {
 
       <Group mt="md">
         <Button type="submit" loading={form.submitting} fullWidth>
-          Создать аккаунт
+          Зарегистрироваться
         </Button>
       </Group>
     </form>
   );
-}
+};

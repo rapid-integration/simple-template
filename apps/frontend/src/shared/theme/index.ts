@@ -1,13 +1,14 @@
-import { createTheme } from "@mantine/core";
+import { createTheme, DEFAULT_THEME } from "@mantine/core";
 
 export default createTheme({
+  fontFamily: `var(--font-inter), ${DEFAULT_THEME.fontFamily}`,
+  fontFamilyMonospace: DEFAULT_THEME.fontFamilyMonospace,
+  headings: {
+    fontFamily: `var(--font-inter), ${DEFAULT_THEME.headings.fontFamily}`,
+  },
   defaultRadius: "md",
+  respectReducedMotion: true,
   components: {
-    Tooltip: {
-      defaultProps: {
-        events: { hover: true, focus: true, touch: false },
-      },
-    },
     Modal: {
       defaultProps: {
         radius: "lg",
@@ -23,19 +24,14 @@ export default createTheme({
         fw: 500,
       },
     },
-    ModalCloseButton: {
-      defaultProps: {
-        "aria-label": "Закрыть",
-      },
-    },
     DrawerTitle: {
       defaultProps: {
         fw: 500,
       },
     },
-    DrawerCloseButton: {
+    Tooltip: {
       defaultProps: {
-        "aria-label": "Закрыть",
+        events: { hover: true, focus: true, touch: false },
       },
     },
   },

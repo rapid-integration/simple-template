@@ -44,40 +44,50 @@ docker compose --profile dev down -v
 
 ## Форматирование
 
-- Форматирование всего проекта:
+- Форматирование исходного кода:
 
   ```sh
   pnpm format
   ```
 
-- Проверка форматирования без изменений:
+- Проверка форматирования исходного кода:
 
   ```sh
-  pnpm format-prettier-check
+  pnpm format:check
   ```
 
-- Автоматическое исправление форматирования:
+- Форматирование и сортировка [`package.json`](../package.json):
 
   ```sh
-  pnpm format-prettier-write
+  pnpm format:package
   ```
 
 ## Линтинг
 
-Для проверки кода используется ESLint:
+- Проверка стиля кода:
+
+  ```sh
+  pnpm lint
+  ```
+
+- Проверка архитектуры на соответствие методологии [Feature-Sliced Design](./ARCHITECTURE.md):
+
+  ```sh
+  pnpm lint:fsd
+  ```
+
+- Проверка типизации:
+
+  ```sh
+  pnpm lint:tsc
+  ```
+
+## Качество кода
+
+Проверка изменений на качество:
 
 ```sh
-pnpm lint-eslint
-```
-
-## Архитектура проекта
-
-Проект использует методологию [Feature-Sliced Design](./ARCHITECTURE.md).
-
-Для проверки на соответствие архитектуре используйте:
-
-```sh
-pnpm lint-steiger
+pnpm lint-staged
 ```
 
 ## Генерация типов API
@@ -91,7 +101,7 @@ pnpm lint-steiger
 1. Выполните:
 
    ```sh
-   pnpm generate-api-types
+   pnpm openapi
    ```
 
    Типы будут сохранены в [`src/shared/api/types.ts`](../src/shared/api/types.ts)

@@ -29,12 +29,16 @@ jobs:
 
       - name: Run ESLint
         working-directory: apps/frontend
-        run: pnpm run lint-eslint
+        run: pnpm run lint
 
       - name: Run Steiger architecture lint
         working-directory: apps/frontend
-        run: pnpm run lint-steiger
+        run: pnpm run lint:fsd
+
+      - name: Run TypeScript lint
+        working-directory: apps/frontend
+        run: pnpm run lint:tsc
 
       - name: Run Prettier format check
         working-directory: apps/frontend
-        run: pnpm run format-prettier-check
+        run: pnpm run format:check

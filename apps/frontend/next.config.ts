@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 export default {
-  output: "standalone",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   reactStrictMode: true,
   logging: {
     fetches: {
@@ -9,17 +14,12 @@ export default {
       hmrRefreshes: true,
     },
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  output: "standalone",
   allowedDevOrigins: ["*.cloudpub.ru"],
   experimental: {
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     staleTimes: {
       dynamic: 30,
     },
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
 } as const satisfies NextConfig;

@@ -3,18 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "pnpm lint-steiger && pnpm lint-eslint",
-    "lint-eslint": "eslint --max-warnings=0 .",
-    "lint-steiger": "steiger ./src",
-    "format": "pnpm format-prettier-write",
-    "format-prettier-check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",
-    "format-prettier-write": "prettier !pnpm-lock.yaml --check --write --ignore-path .gitignore .",
-    "generate": "pnpm generate-api-types",
-    "generate-api-types": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
-    "prepare": "git config core.hooksPath ./apps/frontend/.husky"
+    "dev": "next dev --turbopack",
+    "format": "prettier !pnpm-lock.yaml --write --ignore-path .gitignore .",
+    "format:check": "prettier !pnpm-lock.yaml --check --ignore-path .gitignore .",
+    "format:package": "sort-package-json",
+    "lint": "eslint .",
+    "lint:fsd": "steiger ./src",
+    "lint:tsc": "tsc",
+    "openapi": "openapi-typescript http://localhost/api/docs/openapi.json -o ./src/shared/api/types.ts --root-types --root-types-no-schema-prefix",
+    "prepare": "git config core.hooksPath ./apps/frontend/.husky",
+    "start": "next start"
   },
   "dependencies": {
     "@mantine/core": "^8.3.3",
@@ -31,6 +30,7 @@
     "openapi-fetch": "^0.14.1",
     "openapi-typescript": "^7.9.1",
     "postcss": "^8.5.6",
+    "postcss-load-config": "^6.0.1",
     "postcss-preset-mantine": "^1.18.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -47,33 +47,15 @@
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-dom": "^2.2.2",
     "eslint-plugin-react-hooks": "^6.1.1",
+    "eslint-plugin-react-naming-convention": "^2.2.2",
+    "eslint-plugin-react-web-api": "^2.2.2",
+    "eslint-plugin-react-x": "^2.2.2",
     "lint-staged": "^16.2.3",
     "prettier": "^3.6.2",
+    "sort-package-json": "^3.4.0",
     "steiger": "^0.5.11",
     "typescript-eslint": "^8.45.0"
-  },
-  "postcss": {
-    "plugins": {
-      "postcss-preset-mantine": {}
-    }
-  },
-  "prettier": {
-    "endOfLine": "lf",
-    "jsxSingleQuote": false,
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": false,
-    "tabWidth": 2,
-    "trailingComma": "all",
-    "useTabs": false
-  },
-  "lint-staged": {
-    "*.{mjs,ts,tsx}": [
-      "pnpm lint"
-    ],
-    "*.{mjs,ts,tsx,css,json,md}": [
-      "pnpm format"
-    ]
   }
 }
