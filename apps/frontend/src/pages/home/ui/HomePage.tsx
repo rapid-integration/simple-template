@@ -6,7 +6,7 @@ import { Empty } from "@/shared/ui/Empty";
 export const HomePage: React.FC = () => {
   return (
     <Stack>
-      <Title order={1} size="h2">
+      <Title order={1} size="h3">
         Главная
       </Title>
 
@@ -18,7 +18,7 @@ export const HomePage: React.FC = () => {
           </ThemeIcon>
         }
         label="Тут пусто"
-        description="Фантазия закончилась"
+        description="Фантазия закончилась."
       />
     </Stack>
   );

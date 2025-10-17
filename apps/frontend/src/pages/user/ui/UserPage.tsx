@@ -8,7 +8,8 @@ import {
   Title,
 } from "@mantine/core";
 import Link from "next/link";
-import { TbArrowLeft, TbUserCancel } from "react-icons/tb";
+import { HiMiniArrowLeft } from "react-icons/hi2";
+import { TbUserCancel } from "react-icons/tb";
 
 import {
   getUser,
@@ -43,15 +44,13 @@ export const UserPage: React.FC<UserPageProps> = async ({
           </ThemeIcon>
         }
         label="Пользователь не найден"
-        description="Такого пользователя не существует"
+        description="Такого пользователя не существует."
         bottomSection={
           <Button
             component={Link}
             href={parsedSearchParams?.back ?? routes.users()}
-            size="md"
             mx="auto"
-            variant="light"
-            leftSection={<TbArrowLeft size={24} />}
+            leftSection={<HiMiniArrowLeft size={24} />}
           >
             Назад
           </Button>
@@ -67,13 +66,19 @@ export const UserPage: React.FC<UserPageProps> = async ({
         w="fit-content"
         href={parsedSearchParams?.back ?? routes.users()}
         variant="subtle"
-        leftSection={<TbArrowLeft size={24} />}
+        leftSection={<HiMiniArrowLeft size={24} />}
       >
         Назад
       </Button>
 
       <Stack gap="xs" mb="xs">
-        <Avatar mx="auto" size="xl" name={user.username} color="initials" />
+        <Avatar
+          mx="auto"
+          size="xl"
+          name={user.username}
+          color="initials"
+          variant="filled"
+        />
         <Title order={1} ta="center">
           {user.username}
         </Title>

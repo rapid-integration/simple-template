@@ -5,7 +5,7 @@ import { UsersInfiniteList } from "@/widgets/user/list";
 export const UsersPage: React.FC = () => {
   return (
     <Stack gap={0}>
-      <Title order={1} size="h2">
+      <Title order={1} size="h3">
         Пользователи
       </Title>
 

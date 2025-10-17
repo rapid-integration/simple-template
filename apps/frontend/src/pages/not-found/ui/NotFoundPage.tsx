@@ -1,7 +1,6 @@
 import { Button, Center, ThemeIcon } from "@mantine/core";
 import Link from "next/link";
-import { LuTrafficCone } from "react-icons/lu";
-import { TbArrowLeft } from "react-icons/tb";
+import { HiMiniArrowLeft, HiMiniNoSymbol } from "react-icons/hi2";
 
 import { routes } from "@/shared/config";
 import { Empty } from "@/shared/ui/Empty";
@@ -12,18 +11,17 @@ export const NotFoundPage: React.FC = () => {
       <Empty
         topSection={
           <ThemeIcon size={96} variant="transparent" mx="auto">
-            <LuTrafficCone size={96} />
+            <HiMiniNoSymbol size={96} />
           </ThemeIcon>
         }
         label="Страница не найдена"
-        description="Этой страницы не существует"
+        description="Этой страницы не существует."
         bottomSection={
           <Button
             component={Link}
             href={routes.home()}
-            size="md"
             mx="auto"
-            leftSection={<TbArrowLeft size={24} />}
+            leftSection={<HiMiniArrowLeft size={24} />}
           >
             На главную
           </Button>

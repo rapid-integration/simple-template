@@ -11,7 +11,7 @@ export type UseUserUpdateUsernameFormProps =
   };
 
 export const useUserUpdateUsernameForm = ({
-  mode = "uncontrolled",
+  mode,
   initialValues = { username: "" },
   validateInputOnChange = true,
   onSuccess,

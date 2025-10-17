@@ -7,7 +7,11 @@ import {
   ThemeIcon,
   Tooltip,
 } from "@mantine/core";
-import { TbCalendarPlus, TbCheck, TbCopy } from "react-icons/tb";
+import {
+  HiClipboardDocument,
+  HiClipboardDocumentCheck,
+  HiMiniCalendarDays,
+} from "react-icons/hi2";
 
 import { useDateTimeFormat } from "@/shared/lib/datetime";
 import { Cell, CellProps } from "@/shared/ui/Cell";
@@ -36,8 +40,8 @@ export const UserCreatedAtCell: React.FC<UserCreatedAtCellProps> = ({
   return (
     <Cell
       leftSection={
-        <ThemeIcon color="blue" variant="transparent">
-          <TbCalendarPlus size={24} />
+        <ThemeIcon variant="transparent">
+          <HiMiniCalendarDays size={24} />
         </ThemeIcon>
       }
       label="Дата регистрации"
@@ -53,18 +57,17 @@ export const UserCreatedAtCell: React.FC<UserCreatedAtCellProps> = ({
                     : "Скопировать дату регистрации"
                 }
                 position="left"
-                withArrow
                 arrowSize={8}
               >
-                <ActionIcon
-                  size="input-sm"
-                  style={{
-                    color: `var(--mantine-color-${copied ? "green" : "gray"}-text)`,
-                  }}
-                  variant="default"
-                  onClick={copy}
-                >
-                  {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+                <ActionIcon size="input-sm" variant="default" onClick={copy}>
+                  {copied ? (
+                    <HiClipboardDocumentCheck
+                      size={24}
+                      color="var(--mantine-color-green-text)"
+                    />
+                  ) : (
+                    <HiClipboardDocument size={24} />
+                  )}
                 </ActionIcon>
               </Tooltip>
             )}

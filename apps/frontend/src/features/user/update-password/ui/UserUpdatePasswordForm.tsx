@@ -1,26 +1,31 @@
 "use client";
 
-import { Button, Flex, Group, PasswordInput, Stack } from "@mantine/core";
+import { Button, Flex, PasswordInput, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
+import { HiMiniCheck } from "react-icons/hi2";
 
 import {
   useUserUpdatePasswordForm,
   UseUserUpdatePasswordFormProps,
 } from "../model/form";
 
-export type UserUpdatePasswordFormProps = UseUserUpdatePasswordFormProps;
+export type UserUpdatePasswordFormProps = UseUserUpdatePasswordFormProps & {
+  onCancel?: VoidFunction;
+};
 
 export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
   onSuccess,
+  onCancel,
   ...props
 }) => {
   const [form, submit] = useUserUpdatePasswordForm({
     onSuccess: () => {
       onSuccess?.();
       notifications.show({
+        icon: <HiMiniCheck size={20} strokeWidth={1} />,
         color: "green",
-        message: "Пароль был успешно обновлён!",
+        message: "Пароль обновлён!",
       });
     },
     ...props,
@@ -72,11 +77,19 @@ export const UserUpdatePasswordForm: React.FC<UserUpdatePasswordFormProps> = ({
         />
       </Stack>
 
-      <Group mt="md">
+      <Flex gap="xs" direction={{ base: "column", sm: "row-reverse" }} mt="md">
         <Button type="submit" loading={form.submitting} fullWidth>
           Сохранить
         </Button>
-      </Group>
+        <Button
+          variant="default"
+          disabled={form.submitting}
+          onClick={onCancel}
+          fullWidth
+        >
+          Отмена
+        </Button>
+      </Flex>
     </Flex>
   );
 };

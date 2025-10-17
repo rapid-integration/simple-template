@@ -31,7 +31,7 @@ export const UserCard = createPolymorphicComponent<"div", UserCardProps>(
         {...props}
       >
         <Group>
-          <Avatar name={user.username} color="initials" />
+          <Avatar name={user.username} color="initials" variant="filled" />
           <Text>{user.username}</Text>
         </Group>
       </Card>

@@ -27,8 +27,10 @@ export const Popup: React.FC<PopupProps> = (props) => {
         body: {
           flex: 1,
           display: "flex",
+          flexDirection: "column",
         },
       }}
+      size="75%"
       position="bottom"
       {...props}
     />

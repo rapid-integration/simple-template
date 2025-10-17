@@ -27,8 +27,8 @@ export const SettingsPage: React.FC = async () => {
   const currentUser = await getCurrentUser();
 
   return (
-    <Stack>
-      <Title order={1} size="h2">
+    <Stack gap="xs">
+      <Title order={1} size="h3">
         Настройки
       </Title>
 
@@ -59,6 +59,7 @@ export const SettingsPage: React.FC = async () => {
                 size="xl"
                 name={currentUser.username}
                 color="initials"
+                variant="filled"
               />
               <Title order={2} ta="center">
                 {currentUser.username}

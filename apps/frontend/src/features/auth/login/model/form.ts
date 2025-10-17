@@ -1,19 +1,21 @@
 "use client";
 
 import { useForm, UseFormInput } from "@mantine/form";
-import { notifications } from "@mantine/notifications";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { LoginFormSchema } from "./schema";
 import { LoginFormValues } from "./types";
 import { login } from "../api/actions";
 
-export type UseLoginFormProps = UseFormInput<LoginFormValues>;
+export type UseLoginFormProps = UseFormInput<LoginFormValues> & {
+  onUnauthorized?: VoidFunction;
+};
 
 export const useLoginForm = ({
   mode = "uncontrolled",
   initialValues = { username: "", password: "" },
   validateInputOnChange = true,
+  onUnauthorized,
   ...props
 }: UseLoginFormProps = {}) => {
   const form = useForm<LoginFormValues>({
@@ -28,10 +30,7 @@ export const useLoginForm = ({
     const response = await login({ ...values, scope: "" });
 
     if (response?.status === 401) {
-      notifications.show({
-        color: "red",
-        message: "Введено неверное имя пользователя или пароль!",
-      });
+      onUnauthorized?.();
 
       const node = form.getInputNode("username");
 

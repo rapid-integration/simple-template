@@ -2,6 +2,7 @@
 
 import {
   Button,
+  Text,
   ButtonProps,
   Flex,
   Modal,
@@ -10,7 +11,7 @@ import {
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTransition } from "react";
-import { TbLogout } from "react-icons/tb";
+import { HiMiniArrowRightStartOnRectangle } from "react-icons/hi2";
 
 import { logout } from "../api/actions";
 
@@ -43,12 +44,18 @@ export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
                   color="red"
                   variant="transparent"
                 >
-                  <TbLogout size={72} />
+                  <HiMiniArrowRightStartOnRectangle size={72} />
                 </ThemeIcon>
 
-                <Modal.Title ta="center" fz="h4">
-                  Вы действительно хотите выйти?
-                </Modal.Title>
+                <Stack>
+                  <Modal.Title ta="center" fz="h4">
+                    Вы действительно хотите выйти?
+                  </Modal.Title>
+                  <Text c="dimmed" fz="sm" mb="xs" ta="center">
+                    Вы сможете войти снова в любое время только с помощью своего
+                    пароля.
+                  </Text>
+                </Stack>
               </Stack>
 
               <Flex gap="xs" direction={{ base: "column", sm: "row-reverse" }}>

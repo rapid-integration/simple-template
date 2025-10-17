@@ -1,8 +1,8 @@
 "use client";
 
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon, Tooltip, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { TbEdit } from "react-icons/tb";
+import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { UserPasswordCell, UserPasswordCellProps } from "@/entities/user";
 import { Popup } from "@/shared/ui/Popup";
@@ -20,19 +20,9 @@ export const UserUpdatePasswordCell: React.FC<UserUpdatePasswordCellProps> = (
     <>
       <UserPasswordCell
         rightSection={
-          <Tooltip
-            label="Изменить пароль"
-            position="left"
-            withArrow
-            arrowSize={8}
-          >
-            <ActionIcon
-              size="input-sm"
-              style={{ color: "var(--mantine-color-gray-text)" }}
-              variant="default"
-              onClick={open}
-            >
-              <TbEdit size={24} />
+          <Tooltip label="Изменить пароль" position="left" arrowSize={8}>
+            <ActionIcon size="input-sm" variant="default" onClick={open}>
+              <HiMiniPencilSquare size={24} />
             </ActionIcon>
           </Tooltip>
         }
@@ -40,7 +30,12 @@ export const UserUpdatePasswordCell: React.FC<UserUpdatePasswordCellProps> = (
       />
 
       <Popup opened={opened} onClose={close} title="Изменение пароля">
-        <UserUpdatePasswordForm onSuccess={close} />
+        <Text c="dimmed" fz="sm" mb="xs">
+          Вы можете изменить пароль от своего аккаунта. Изменение пароля не
+          затронет сессии на других устройствах.
+        </Text>
+
+        <UserUpdatePasswordForm onSuccess={close} onCancel={close} />
       </Popup>
     </>
   );

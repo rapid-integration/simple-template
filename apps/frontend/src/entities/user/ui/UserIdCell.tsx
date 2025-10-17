@@ -1,7 +1,11 @@
 "use client";
 
 import { ActionIcon, CopyButton, ThemeIcon, Tooltip } from "@mantine/core";
-import { TbCheck, TbCopy, TbHash } from "react-icons/tb";
+import {
+  HiClipboardDocument,
+  HiClipboardDocumentCheck,
+  HiMiniHashtag,
+} from "react-icons/hi2";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
 
@@ -16,8 +20,8 @@ export const UserIdCell: React.FC<UserIdCellProps> = ({
   return (
     <Cell
       leftSection={
-        <ThemeIcon color="blue" variant="transparent">
-          <TbHash size={24} />
+        <ThemeIcon variant="transparent">
+          <HiMiniHashtag size={24} />
         </ThemeIcon>
       }
       label="Идентификатор"
@@ -32,18 +36,17 @@ export const UserIdCell: React.FC<UserIdCellProps> = ({
                   : "Скопировать идентификатор"
               }
               position="left"
-              withArrow
               arrowSize={8}
             >
-              <ActionIcon
-                size="input-sm"
-                style={{
-                  color: `var(--mantine-color-${copied ? "green" : "gray"}-text)`,
-                }}
-                variant="default"
-                onClick={copy}
-              >
-                {copied ? <TbCheck size={24} /> : <TbCopy size={24} />}
+              <ActionIcon size="input-sm" variant="default" onClick={copy}>
+                {copied ? (
+                  <HiClipboardDocumentCheck
+                    size={24}
+                    color="var(--mantine-color-green-text)"
+                  />
+                ) : (
+                  <HiClipboardDocument size={24} />
+                )}
               </ActionIcon>
             </Tooltip>
           )}

@@ -13,7 +13,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { FaSpider } from "react-icons/fa6";
-import { MdFilterListOff } from "react-icons/md";
+import { HiMiniArrowUturnLeft } from "react-icons/hi2";
 
 import { getUsers, UserCard } from "@/entities/user";
 import { routes } from "@/shared/config";
@@ -46,7 +46,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
   }, [debouncedQuery]);
 
   return (
-    <Stack gap={4} {...props}>
+    <Stack gap={0} {...props}>
       <Paper
         py="xs"
         radius={0}
@@ -59,7 +59,6 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
         <SearchTextInput
           id="users-infinite-list-search-text-input"
           name="users-infinite-list-search-text-input"
-          size="md"
           loading={loading && items !== null}
           value={q ?? undefined}
           onValueChange={setDebouncedQuery}
@@ -69,7 +68,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
       </Paper>
 
       <Stack gap={0} pt={2}>
-        {items === null && <Loader size="lg" my="xl" mx="auto" />}
+        {items === null && <Loader type="dots" size="lg" my="xl" mx="auto" />}
 
         {items?.length === 0 && (
           <Empty
@@ -80,7 +79,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
               </ThemeIcon>
             }
             label="Ничего не найдено"
-            description="Попробуйте другие критерии поиска"
+            description="Попробуйте другие настройки поиска."
             bottomSection={
               <Button
                 mx="auto"
@@ -88,7 +87,7 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
                 onClick={() => {
                   setQ("");
                 }}
-                leftSection={<MdFilterListOff size={24} />}
+                leftSection={<HiMiniArrowUturnLeft size={20} />}
               >
                 Сбросить фильтры
               </Button>

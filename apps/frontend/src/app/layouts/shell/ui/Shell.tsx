@@ -20,8 +20,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { HiCog6Tooth, HiMiniHome, HiMiniUsers } from "react-icons/hi2";
 import { IconType } from "react-icons/lib";
-import { TbHome, TbSettings, TbUsers } from "react-icons/tb";
 
 import { CurrentUserResponse } from "@/shared/api";
 import { routes } from "@/shared/config";
@@ -36,17 +36,17 @@ const data: {
   };
 }[] = [
   {
-    icon: TbHome,
+    icon: HiMiniHome,
     href: routes.home(),
     label: "Главная",
   },
   {
-    icon: TbUsers,
+    icon: HiMiniUsers,
     href: routes.users(),
     label: "Пользователи",
   },
   {
-    icon: TbSettings,
+    icon: HiCog6Tooth,
     href: routes.settings(),
     label: "Настройки",
   },
@@ -78,6 +78,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
         breakpoint: "sm",
         collapsed: { desktop: true, mobile: !open },
       }}
+      transitionDuration={isMobile ? undefined : 0}
     >
       <AppShell.Header>
         <Group h="100%" px="md" maw="48rem" mx="auto" gap="xs">
@@ -147,9 +148,8 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
             <Tooltip
               label="Настройки"
               position="bottom"
-              withArrow
-              arrowSize={8}
               events={{ focus: true, hover: false, touch: false }}
+              arrowSize={8}
             >
               <ActionIcon
                 size="lg"
@@ -159,7 +159,11 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                 href={routes.settings()}
                 aria-label="Настройки"
               >
-                <Avatar name={currentUser.username} color="initials" />
+                <Avatar
+                  name={currentUser.username}
+                  color="initials"
+                  variant="filled"
+                />
               </ActionIcon>
             </Tooltip>
           </Group>
@@ -185,7 +189,7 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                     display="flex"
                     styles={{ indicator: { top: 4 } }}
                   >
-                    <item.icon size={24} strokeWidth={1.75} />
+                    <item.icon size={24} />
                   </Indicator>
                 }
                 label={item.label}

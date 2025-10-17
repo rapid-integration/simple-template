@@ -1,16 +1,53 @@
 "use client";
 
 import {
+  Center,
   MantineColorScheme,
-  Select,
+  SegmentedControl,
   Skeleton,
   ThemeIcon,
   useMantineColorScheme,
+  VisuallyHidden,
 } from "@mantine/core";
 import { useMounted } from "@mantine/hooks";
-import { TbPalette } from "react-icons/tb";
+import {
+  HiMiniComputerDesktop,
+  HiMiniMoon,
+  HiMiniSun,
+  HiMiniSwatch,
+} from "react-icons/hi2";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
+
+const data = [
+  {
+    value: "light",
+    label: (
+      <Center>
+        <HiMiniSun size={24} />
+        <VisuallyHidden>Светлая</VisuallyHidden>
+      </Center>
+    ),
+  },
+  {
+    value: "dark",
+    label: (
+      <Center>
+        <HiMiniMoon size={24} />
+        <VisuallyHidden>Тёмная</VisuallyHidden>
+      </Center>
+    ),
+  },
+  {
+    value: "auto",
+    label: (
+      <Center>
+        <HiMiniComputerDesktop size={24} />
+        <VisuallyHidden>Автоматически</VisuallyHidden>
+      </Center>
+    ),
+  },
+];
 
 export type UserColorSchemeCellProps = CellProps;
 
@@ -23,36 +60,21 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
   return (
     <Cell
       leftSection={
-        <ThemeIcon color="blue" variant="transparent">
-          <TbPalette size={24} />
+        <ThemeIcon variant="transparent">
+          <HiMiniSwatch size={24} />
         </ThemeIcon>
       }
       label="Тема"
       rightSection={
         mounted ? (
-          <Select
-            w="10rem"
-            data={[
-              {
-                label: "Светлая",
-                value: "light",
-              },
-              {
-                label: "Тёмная",
-                value: "dark",
-              },
-              {
-                label: "Как в системе",
-                value: "auto",
-              },
-            ]}
+          <SegmentedControl
+            data={data}
             value={colorScheme}
             onChange={(value) => setColorScheme(value as MantineColorScheme)}
-            allowDeselect={false}
-            aria-label="Тема"
+            withItemsBorders={false}
           />
         ) : (
-          <Skeleton width="10rem" height={36} />
+          <Skeleton width={140} height={38} />
         )
       }
       {...props}

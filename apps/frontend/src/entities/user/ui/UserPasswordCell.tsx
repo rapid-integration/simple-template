@@ -1,7 +1,7 @@
 "use client";
 
 import { ThemeIcon } from "@mantine/core";
-import { TbKey } from "react-icons/tb";
+import { HiMiniKey } from "react-icons/hi2";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
 
@@ -11,8 +11,8 @@ export const UserPasswordCell: React.FC<UserPasswordCellProps> = (props) => {
   return (
     <Cell
       leftSection={
-        <ThemeIcon color="blue" variant="transparent">
-          <TbKey size={24} />
+        <ThemeIcon variant="transparent">
+          <HiMiniKey size={24} />
         </ThemeIcon>
       }
       label="Пароль"

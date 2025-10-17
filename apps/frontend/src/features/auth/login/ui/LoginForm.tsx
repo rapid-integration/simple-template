@@ -1,11 +1,21 @@
 "use client";
 
 import { Button, Group, PasswordInput, Stack, TextInput } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { HiMiniXMark } from "react-icons/hi2";
 
 import { useLoginForm } from "../model/form";
 
 export const LoginForm: React.FC = () => {
-  const [form, submit] = useLoginForm();
+  const [form, submit] = useLoginForm({
+    onUnauthorized: () => {
+      notifications.show({
+        icon: <HiMiniXMark size={20} strokeWidth={1} />,
+        color: "red",
+        message: "Неверное имя пользователя или пароль!",
+      });
+    },
+  });
 
   return (
     <form onSubmit={submit}>

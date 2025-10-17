@@ -20,7 +20,7 @@ export const Cell: React.FC<CellProps> = ({
     <Group px="md" py="xs" {...props}>
       {leftSection && <Group gap="xs">{leftSection}</Group>}
       <Stack gap={0} miw={0} flex={1}>
-        <Text component="div" fw={500}>
+        <Text component="div" fw={600}>
           {label}
         </Text>
         <Text component="div" truncate>

@@ -1,8 +1,8 @@
 "use client";
 
-import { ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { TbEdit } from "react-icons/tb";
+import { HiMiniPencilSquare } from "react-icons/hi2";
 
 import { UserUsernameCell, UserUsernameCellProps } from "@/entities/user";
 import { Popup } from "@/shared/ui/Popup";
@@ -25,16 +25,10 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
           <Tooltip
             label="Изменить имя пользователя"
             position="left"
-            withArrow
             arrowSize={8}
           >
-            <ActionIcon
-              size="input-sm"
-              style={{ color: "var(--mantine-color-gray-text)" }}
-              variant="default"
-              onClick={open}
-            >
-              <TbEdit size={24} />
+            <ActionIcon size="input-sm" variant="default" onClick={open}>
+              <HiMiniPencilSquare size={24} />
             </ActionIcon>
           </Tooltip>
         }
@@ -46,9 +40,15 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
         onClose={close}
         title="Изменение имени пользователя"
       >
+        <Text c="dimmed" fz="sm" mb="xs">
+          Вы можете выбрать публичное имя пользователя. Другие пользователи
+          смогут найти Вас по такому имени.
+        </Text>
+
         <UserUpdateUsernameForm
           initialValues={{ username }}
           onSuccess={close}
+          onCancel={close}
         />
       </Popup>
     </>
