@@ -11,7 +11,7 @@ export const NotFoundPage: React.FC = () => {
     <Center w="100dvw" h="100dvh" my="auto">
       <Empty
         topSection={
-          <ThemeIcon w={96} h={96} variant="transparent" mx="auto">
+          <ThemeIcon size={96} variant="transparent" mx="auto">
             <LuTrafficCone size={96} />
           </ThemeIcon>
         }

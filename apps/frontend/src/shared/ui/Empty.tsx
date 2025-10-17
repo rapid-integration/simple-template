@@ -21,7 +21,7 @@ export const Empty: React.FC<EmptyProps> = ({
       {topSection && <Group>{topSection}</Group>}
 
       <Stack component="hgroup" gap="xs">
-        <Title order={1} size="h2" ta="center">
+        <Title size="h2" ta="center">
           {label}
         </Title>
         <Text ta="center">{description}</Text>

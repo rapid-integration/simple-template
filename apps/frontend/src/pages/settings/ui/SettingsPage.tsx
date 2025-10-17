@@ -2,7 +2,6 @@ import {
   Avatar,
   Card,
   Divider,
-  Paper,
   Stack,
   Tabs,
   TabsList,
@@ -10,7 +9,6 @@ import {
   TabsTab,
   Title,
 } from "@mantine/core";
-import { TbBrush, TbUser } from "react-icons/tb";
 
 import {
   getCurrentUser,
@@ -22,76 +20,58 @@ import { LogoutButton } from "@/features/auth/logout";
 import { UserUpdatePasswordCell } from "@/features/user/update-password";
 import { UserUpdateUsernameCell } from "@/features/user/update-username";
 
+import classNames from "./SettingsPage.module.css";
+import { SETTINGS_PAGE_TABS } from "../config/tabs";
+
 export const SettingsPage: React.FC = async () => {
   const currentUser = await getCurrentUser();
 
   return (
-    <Stack gap={0}>
+    <Stack>
       <Title order={1} size="h2">
         Настройки
       </Title>
 
-      <Tabs variant="pills" radius="xl" defaultValue="account">
-        <Paper
-          py="md"
-          radius={0}
-          style={{
-            position: "sticky",
-            top: "var(--app-shell-header-height)",
-            zIndex: 100,
-          }}
-        >
-          <TabsList>
-            {[
-              { label: "Аккаунт", value: "account", icon: TbUser },
-              { label: "Внешний вид", value: "appearance", icon: TbBrush },
-            ].map((tab) => (
-              <TabsTab
-                key={tab.value}
-                id={`settings-page-tab-${tab.value}`}
-                value={tab.value}
-                leftSection={<tab.icon size={20} />}
-                color="var(--mantine-color-gray-light)"
-                style={{
-                  color: "var(--mantine-body-color)",
-                  border: "1px solid var(--mantine-color-default-border)",
-                }}
-                styles={{
-                  tabSection: {
-                    marginRight: 6,
-                  },
-                }}
-                fw={500}
-                py={8}
-                px="xs"
-              >
-                {tab.label}
-              </TabsTab>
-            ))}
-          </TabsList>
-        </Paper>
+      <Tabs
+        id="settings-page-tabs"
+        variant="pills"
+        radius="xl"
+        defaultValue="account"
+      >
+        <TabsList pb="md">
+          {SETTINGS_PAGE_TABS.map((tab) => (
+            <TabsTab
+              key={tab.value}
+              value={tab.value}
+              leftSection={<tab.icon size={20} />}
+              classNames={classNames}
+            >
+              {tab.label}
+            </TabsTab>
+          ))}
+        </TabsList>
 
         <TabsPanel value="account">
           <Stack mt="md">
             <Stack gap="xs" mb="xs">
               <Avatar
+                mx="auto"
+                size="xl"
                 name={currentUser.username}
                 color="initials"
-                size="xl"
-                mx="auto"
               />
               <Title order={2} ta="center">
                 {currentUser.username}
               </Title>
             </Stack>
 
-            <Card p={0} withBorder>
+            <Card p={0}>
               <UserUpdateUsernameCell value={currentUser.username} />
               <Divider />
               <UserUpdatePasswordCell />
             </Card>
 
-            <Card p={0} withBorder>
+            <Card p={0}>
               <UserCreatedAtCell value={currentUser.created_at} />
               <Divider />
               <UserIdCell value={currentUser.id} />
@@ -102,7 +82,7 @@ export const SettingsPage: React.FC = async () => {
         </TabsPanel>
 
         <TabsPanel value="appearance">
-          <Card p={0} withBorder>
+          <Card p={0}>
             <UserColorSchemeCell />
           </Card>
         </TabsPanel>

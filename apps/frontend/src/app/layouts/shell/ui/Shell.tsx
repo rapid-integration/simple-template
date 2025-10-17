@@ -120,14 +120,6 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                     href={item.href}
                     color="gray"
                     variant={pathname === item.href ? "light" : "subtle"}
-                    styles={{
-                      root: {
-                        color: "var(--mantine-body-color)",
-                      },
-                      section: {
-                        marginRight: 6,
-                      },
-                    }}
                     leftSection={
                       <Indicator
                         inline
@@ -141,7 +133,11 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
                         <item.icon size={24} />
                       </Indicator>
                     }
-                    px="xs"
+                    styles={{
+                      root: {
+                        color: "var(--mantine-body-color)",
+                      },
+                    }}
                   >
                     {item.label}
                   </Button>

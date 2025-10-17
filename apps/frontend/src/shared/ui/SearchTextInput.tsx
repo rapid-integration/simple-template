@@ -2,7 +2,8 @@
 
 import { ActionIcon, Loader, TextInput, TextInputProps } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { TbSearch, TbX } from "react-icons/tb";
+import { LuSearch } from "react-icons/lu";
+import { TbX } from "react-icons/tb";
 
 export type SearchTextInputProps = TextInputProps & {
   loading?: boolean | undefined;
@@ -49,7 +50,7 @@ export const SearchTextInput: React.FC<SearchTextInputProps> = ({
       autoCorrect="off"
       value={searchInputValue}
       onInput={handleSearchInput}
-      leftSection={loading ? <Loader size="sm" /> : <TbSearch size={24} />}
+      leftSection={loading ? <Loader size="sm" /> : <LuSearch size={24} />}
       rightSection={
         searchInputValue && (
           <ActionIcon

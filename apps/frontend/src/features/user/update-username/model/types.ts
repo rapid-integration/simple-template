@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod";
 
 import { UserUpdateUsernameFormSchema } from "./schema";
 

@@ -27,8 +27,7 @@ export const UserCard = createPolymorphicComponent<"div", UserCardProps>(
           username: user.username,
           search: back ? { back } : undefined,
         })}
-        classNames={{ root: classNames.root }}
-        withBorder
+        classNames={classNames}
         {...props}
       >
         <Group>

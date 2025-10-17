@@ -64,26 +64,26 @@ export const UserPage: React.FC<UserPageProps> = async ({
     <Stack flex={1} display="flex">
       <Button
         component={Link}
+        w="fit-content"
         href={parsedSearchParams?.back ?? routes.users()}
         variant="subtle"
         leftSection={<TbArrowLeft size={24} />}
-        w="fit-content"
       >
         Назад
       </Button>
 
       <Stack gap="xs" mb="xs">
-        <Avatar name={user.username} color="initials" size="xl" mx="auto" />
+        <Avatar mx="auto" size="xl" name={user.username} color="initials" />
         <Title order={1} ta="center">
           {user.username}
         </Title>
       </Stack>
 
-      <Card p={0} withBorder>
+      <Card p={0}>
         <UserUsernameCell value={user.username} />
       </Card>
 
-      <Card p={0} withBorder>
+      <Card p={0}>
         <UserCreatedAtCell value={user.created_at} />
         <Divider />
         <UserIdCell value={user.id} />

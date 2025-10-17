@@ -1,0 +1,21 @@
+.tab {
+  color: var(--mantine-body-color);
+  border: 1px solid var(--mantine-color-default-border);
+  padding-block: calc(var(--mantine-spacing-xs) / 1.25);
+  padding-inline: var(--mantine-spacing-xs);
+  font-weight: 600;
+
+  &:where([data-active="true"]) {
+    background: var(--mantine-color-gray-light);
+  }
+}
+
+.tabSection {
+  &:where([data-position="left"]) {
+    margin-inline-end: calc(var(--mantine-spacing-xs) / 2);
+  }
+
+  &:where([data-position="right"]) {
+    margin-inline-start: calc(var(--mantine-spacing-xs) / 2);
+  }
+}

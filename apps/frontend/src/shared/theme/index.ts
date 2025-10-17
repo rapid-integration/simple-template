@@ -5,11 +5,22 @@ export default createTheme({
   fontFamilyMonospace: DEFAULT_THEME.fontFamilyMonospace,
   headings: {
     fontFamily: `var(--font-inter), ${DEFAULT_THEME.headings.fontFamily}`,
+    textWrap: "balance",
   },
   defaultRadius: "md",
   respectReducedMotion: true,
   components: {
+    Card: {
+      defaultProps: {
+        withBorder: true,
+      },
+    },
     Modal: {
+      defaultProps: {
+        radius: "lg",
+      },
+    },
+    ModalContent: {
       defaultProps: {
         radius: "lg",
       },

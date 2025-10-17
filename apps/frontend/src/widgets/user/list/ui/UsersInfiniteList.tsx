@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Button,
   Loader,
   Paper,
   SimpleGrid,
@@ -11,7 +12,8 @@ import {
 import { useDebouncedState } from "@mantine/hooks";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
-import { TbUserCancel } from "react-icons/tb";
+import { FaSpider } from "react-icons/fa6";
+import { MdFilterListOff } from "react-icons/md";
 
 import { getUsers, UserCard } from "@/entities/user";
 import { routes } from "@/shared/config";
@@ -61,8 +63,8 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           loading={loading && items !== null}
           value={q ?? undefined}
           onValueChange={setDebouncedQuery}
-          placeholder="Поиск пользователей…"
-          aria-label="Поиск пользователей"
+          placeholder="Поиск"
+          aria-label="Поиск"
         />
       </Paper>
 
@@ -74,23 +76,37 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
             my="xl"
             topSection={
               <ThemeIcon w={64} h={64} variant="transparent" mx="auto">
-                <TbUserCancel size={64} />
+                <FaSpider size={64} />
               </ThemeIcon>
             }
-            label="Пользователи не найдены"
-            description="Пользователи с такими параметрами не найдены"
+            label="Ничего не найдено"
+            description="Попробуйте другие критерии поиска"
+            bottomSection={
+              <Button
+                mx="auto"
+                variant="default"
+                onClick={() => {
+                  setQ("");
+                }}
+                leftSection={<MdFilterListOff size={24} />}
+              >
+                Сбросить фильтры
+              </Button>
+            }
           />
         )}
 
-        <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xs">
-          {items?.map((user) => (
-            <UserCard
-              key={user.id}
-              user={user}
-              back={q ? routes.users({ search: { q } }) : undefined}
-            />
-          ))}
-        </SimpleGrid>
+        {!!items?.length && (
+          <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="xs">
+            {items?.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user}
+                back={q ? routes.users({ search: { q } }) : undefined}
+              />
+            ))}
+          </SimpleGrid>
+        )}
 
         <div id="users-infinite-list-load-trigger" ref={ref} />
       </Stack>
