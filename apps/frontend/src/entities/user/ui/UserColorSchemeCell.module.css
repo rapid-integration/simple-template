@@ -4,3 +4,7 @@
     bottom: 6px !important;
   }
 }
+
+.label {
+  padding-inline: calc(var(--mantine-spacing-xs) / 1.5);
+}

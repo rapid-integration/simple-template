@@ -3,6 +3,7 @@
 import {
   Box,
   Center,
+  MantineColor,
   MantineColorScheme,
   SegmentedControl,
   Skeleton,
@@ -28,6 +29,7 @@ type Item = {
   icon: IconType;
   value: MantineColorScheme;
   label: React.ReactNode;
+  color: MantineColor;
 };
 
 const data: Item[] = [
@@ -35,16 +37,19 @@ const data: Item[] = [
     icon: HiMiniSun,
     value: "light",
     label: "Светлая",
+    color: "yellow",
   },
   {
     icon: HiMiniMoon,
     value: "dark",
     label: "Тёмная",
+    color: "cyan",
   },
   {
     icon: HiMiniComputerDesktop,
     value: "auto",
     label: "Автоматически",
+    color: "currentColor",
   },
 ];
 
@@ -73,7 +78,9 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
               value: item.value,
               label: (
                 <Center>
-                  <item.icon size={22} />
+                  <ThemeIcon size={22} color={item.color} variant="transparent">
+                    <item.icon size={22} />
+                  </ThemeIcon>
                   {isMobile ? (
                     <VisuallyHidden>{item.label}</VisuallyHidden>
                   ) : (

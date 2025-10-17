@@ -6,9 +6,9 @@ import {
   Avatar,
   Burger,
   Button,
-  DefaultMantineColor,
   Group,
   Indicator,
+  MantineColor,
   NavLink,
   Stack,
   Text,
@@ -32,7 +32,7 @@ const data: {
   label: React.ReactNode;
   indicator?: {
     label: React.ReactNode;
-    color?: DefaultMantineColor;
+    color?: MantineColor;
   };
 }[] = [
   {
