@@ -2,7 +2,7 @@ import { createTheme, DEFAULT_THEME } from "@mantine/core";
 
 export default createTheme({
   fontFamily: `var(--font-inter), ${DEFAULT_THEME.fontFamily}`,
-  fontFamilyMonospace: DEFAULT_THEME.fontFamilyMonospace,
+  fontFamilyMonospace: `var(--font-mono), ${DEFAULT_THEME.fontFamilyMonospace}`,
   headings: {
     fontFamily: `var(--font-inter), ${DEFAULT_THEME.headings.fontFamily}`,
     textWrap: "balance",

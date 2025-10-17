@@ -4,21 +4,29 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import { Inter } from "next/font/google";
+import { Inconsolata, Inter } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import theme from "@/shared/theme";
+import { Hotkeys } from "@/widgets/hotkeys";
 
 const inter = Inter({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   variable: "--font-inter",
 });
+
+const inconsolata = Inconsolata({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
+const fontClassNames = `${inter.variable} ${inconsolata.variable}`;
 
 export type SiteLayoutProps = React.PropsWithChildren;
 
 export const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
   return (
-    <html lang="ru" className={inter.variable} {...mantineHtmlProps}>
+    <html lang="ru" className={fontClassNames} {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript defaultColorScheme="auto" />
       </head>
@@ -26,6 +34,7 @@ export const SiteLayout: React.FC<SiteLayoutProps> = ({ children }) => {
         <NuqsAdapter>
           <MantineProvider theme={theme} defaultColorScheme="auto">
             <Notifications limit={3} position="bottom-center" />
+            <Hotkeys />
 
             {children}
           </MantineProvider>
