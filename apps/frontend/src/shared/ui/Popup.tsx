@@ -17,6 +17,19 @@ export const Popup: React.FC<PopupProps> = (props) => {
 
   return isMobile ? (
     <Drawer
+      size="75%"
+      position="bottom"
+      opacity={100}
+      transitionProps={{
+        duration: 500,
+        transition: {
+          in: { transform: "translateY(0)" },
+          out: { transform: "translateY(100%)" },
+          common: { transformOrigin: "bottom" },
+          transitionProperty: "transform",
+        },
+        timingFunction: "cubic-bezier(0.32, 0.72, 0, 1)",
+      }}
       styles={{
         content: {
           display: "flex",
@@ -30,8 +43,6 @@ export const Popup: React.FC<PopupProps> = (props) => {
           flexDirection: "column",
         },
       }}
-      size="75%"
-      position="bottom"
       {...props}
     />
   ) : (

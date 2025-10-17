@@ -78,7 +78,8 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
         breakpoint: "sm",
         collapsed: { desktop: true, mobile: !open },
       }}
-      transitionDuration={isMobile ? undefined : 0}
+      transitionDuration={isMobile ? 500 : 0}
+      transitionTimingFunction="cubic-bezier(0.32, 0.72, 0, 1)"
     >
       <AppShell.Header>
         <Group h="100%" px="md" maw="48rem" mx="auto" gap="xs">
