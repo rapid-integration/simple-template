@@ -1,5 +1,5 @@
 import { Stack, ThemeIcon, Title } from "@mantine/core";
-import { FaSpider } from "react-icons/fa6";
+import { HiNoSymbol } from "react-icons/hi2";
 
 import { Empty } from "@/shared/ui/Empty";
 
@@ -13,12 +13,12 @@ export const HomePage: React.FC = () => {
       <Empty
         my="xl"
         topSection={
-          <ThemeIcon w={64} h={64} variant="transparent" mx="auto">
-            <FaSpider size={64} />
+          <ThemeIcon size="xl" variant="default">
+            <HiNoSymbol size={24} />
           </ThemeIcon>
         }
         label="Тут пусто"
-        description="Фантазия закончилась."
+        description="Это можно на что-то заменить."
       />
     </Stack>
   );

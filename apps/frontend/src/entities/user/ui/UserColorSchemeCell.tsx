@@ -22,6 +22,7 @@ import {
 import { IconType } from "react-icons/lib";
 
 import { Cell, CellProps } from "@/shared/ui/Cell";
+import { Kbds } from "@/shared/ui/Kbds";
 
 import classNames from "./UserColorSchemeCell.module.css";
 
@@ -66,11 +67,16 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
   return (
     <Cell
       leftSection={
-        <ThemeIcon variant="transparent">
+        <ThemeIcon
+          size="lg"
+          variant="gradient"
+          gradient={{ from: theme.colors.pink[6], to: theme.colors.pink[4] }}
+        >
           <HiMiniSwatch size={24} />
         </ThemeIcon>
       }
       label="Тема"
+      value={!isMobile && <Kbds keys={["mod", "J"]} />}
       rightSection={
         mounted ? (
           <SegmentedControl
@@ -94,7 +100,7 @@ export const UserColorSchemeCell: React.FC<UserColorSchemeCellProps> = (
             classNames={classNames}
           />
         ) : (
-          <Skeleton width={140} height={36} />
+          <Skeleton width={isMobile ? 158 : 386.22} height={36} />
         )
       }
       {...props}

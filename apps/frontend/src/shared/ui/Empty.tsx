@@ -17,8 +17,8 @@ export const Empty: React.FC<EmptyProps> = ({
   ...props
 }) => {
   return (
-    <Stack gap="lg" {...props}>
-      {topSection && <Group>{topSection}</Group>}
+    <Stack {...props}>
+      {topSection && <Group justify="center">{topSection}</Group>}
 
       <Stack component="hgroup" gap={4}>
         <Title size="h3" ta="center">
@@ -29,7 +29,11 @@ export const Empty: React.FC<EmptyProps> = ({
         </Text>
       </Stack>
 
-      {bottomSection && <Group>{bottomSection}</Group>}
+      {bottomSection && (
+        <Group mt="xs" justify="center">
+          {bottomSection}
+        </Group>
+      )}
     </Stack>
   );
 };

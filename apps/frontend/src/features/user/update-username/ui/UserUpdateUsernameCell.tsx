@@ -2,7 +2,7 @@
 
 import { ActionIcon, Text, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { HiOutlinePencilSquare } from "react-icons/hi2";
+import { HiPencilSquare } from "react-icons/hi2";
 
 import { UserUsernameCell, UserUsernameCellProps } from "@/entities/user";
 import { Popup } from "@/shared/ui/Popup";
@@ -28,7 +28,7 @@ export const UserUpdateUsernameCell: React.FC<UserUpdateUsernameCellProps> = ({
             arrowSize={8}
           >
             <ActionIcon size="input-sm" variant="default" onClick={open}>
-              <HiOutlinePencilSquare size={24} />
+              <HiPencilSquare size={24} />
             </ActionIcon>
           </Tooltip>
         }

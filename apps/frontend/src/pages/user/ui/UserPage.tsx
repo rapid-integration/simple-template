@@ -39,7 +39,7 @@ export const UserPage: React.FC<UserPageProps> = async ({
       <Empty
         my="xl"
         topSection={
-          <ThemeIcon w={64} h={64} variant="transparent" mx="auto">
+          <ThemeIcon w={64} h={64} variant="transparent">
             <TbUserCancel size={64} />
           </ThemeIcon>
         }
@@ -49,7 +49,6 @@ export const UserPage: React.FC<UserPageProps> = async ({
           <Button
             component={Link}
             href={parsedSearchParams?.back ?? routes.users()}
-            mx="auto"
             leftSection={<HiMiniArrowLeft size={24} />}
           >
             Назад
@@ -65,6 +64,7 @@ export const UserPage: React.FC<UserPageProps> = async ({
         component={Link}
         w="fit-content"
         href={parsedSearchParams?.back ?? routes.users()}
+        color="blue"
         variant="subtle"
         leftSection={<HiMiniArrowLeft size={24} />}
       >

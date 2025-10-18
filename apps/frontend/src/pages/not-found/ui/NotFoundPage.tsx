@@ -10,7 +10,7 @@ export const NotFoundPage: React.FC = () => {
     <Center w="100dvw" h="100dvh" my="auto">
       <Empty
         topSection={
-          <ThemeIcon size={96} variant="transparent" mx="auto">
+          <ThemeIcon size={96} variant="transparent">
             <HiMiniNoSymbol size={96} />
           </ThemeIcon>
         }
@@ -20,7 +20,6 @@ export const NotFoundPage: React.FC = () => {
           <Button
             component={Link}
             href={routes.home()}
-            mx="auto"
             leftSection={<HiMiniArrowLeft size={24} />}
           >
             На главную

@@ -1,10 +1,10 @@
+.root {
+  --sc-padding: var(--sc-padding-md);
+}
+
 .control {
   &::before {
     top: 6px !important;
     bottom: 6px !important;
   }
-}
-
-.label {
-  padding-inline: calc(var(--mantine-spacing-xs) / 1.5);
 }

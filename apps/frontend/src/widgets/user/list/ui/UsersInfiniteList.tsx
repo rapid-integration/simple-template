@@ -12,8 +12,7 @@ import {
 import { useDebouncedState } from "@mantine/hooks";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
-import { FaSpider } from "react-icons/fa6";
-import { HiMiniArrowUturnLeft } from "react-icons/hi2";
+import { HiMiniArrowUturnLeft, HiNoSymbol } from "react-icons/hi2";
 
 import { getUsers, UserCard } from "@/entities/user";
 import { routes } from "@/shared/config";
@@ -74,15 +73,14 @@ export const UsersInfiniteList: React.FC<UsersInfiniteListProps> = ({
           <Empty
             my="xl"
             topSection={
-              <ThemeIcon w={64} h={64} variant="transparent" mx="auto">
-                <FaSpider size={64} />
+              <ThemeIcon size="xl" variant="default">
+                <HiNoSymbol size={24} />
               </ThemeIcon>
             }
-            label="Ничего не найдено"
+            label="Пользователи не найдены"
             description="Попробуйте другие настройки поиска."
             bottomSection={
               <Button
-                mx="auto"
                 variant="default"
                 onClick={() => {
                   setQ("");

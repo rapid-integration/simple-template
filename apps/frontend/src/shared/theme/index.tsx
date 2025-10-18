@@ -1,6 +1,18 @@
 "use client";
 
-import { createTheme, DEFAULT_THEME } from "@mantine/core";
+import {
+  Card,
+  CloseButton,
+  createTheme,
+  DEFAULT_THEME,
+  Drawer,
+  Input,
+  Modal,
+  Notification,
+  PasswordInput,
+  TextInput,
+  Tooltip,
+} from "@mantine/core";
 import { HiMiniXMark } from "react-icons/hi2";
 
 import { VisibilityToggleIcon } from "../ui/VisibilityToggleIcon";
@@ -16,7 +28,23 @@ export default createTheme({
   defaultRadius: "md",
   respectReducedMotion: true,
   components: {
-    Notification: {
+    Card: Card.extend({
+      defaultProps: {
+        withBorder: true,
+      },
+    }),
+    Tooltip: Tooltip.extend({
+      defaultProps: {
+        events: { hover: true, focus: true, touch: false },
+        withArrow: true,
+      },
+    }),
+    CloseButton: CloseButton.extend({
+      defaultProps: {
+        icon: <HiMiniXMark size={24} />,
+      },
+    }),
+    Notification: Notification.extend({
       defaultProps: {
         ps: "sm",
         fw: 500,
@@ -28,65 +56,44 @@ export default createTheme({
         withBorder: true,
         withCloseButton: false,
       },
-    },
-    Card: {
-      defaultProps: {
-        withBorder: true,
-      },
-    },
-    Modal: {
-      defaultProps: {
-        radius: "lg",
-      },
-    },
-    ModalContent: {
-      defaultProps: {
-        radius: "lg",
-      },
-    },
-    ModalRoot: {
-      defaultProps: {
-        centered: true,
-      },
-    },
-    ModalTitle: {
-      defaultProps: {
-        fw: 600,
-        fz: "lg",
-      },
-    },
-    DrawerTitle: {
-      defaultProps: {
-        fw: 600,
-        fz: "lg",
-      },
-    },
-    Tooltip: {
-      defaultProps: {
-        events: { hover: true, focus: true, touch: false },
-        withArrow: true,
-      },
-    },
-    TextInput: {
-      defaultProps: {
-        inputWrapperOrder: ["label", "input", "description", "error"],
-      },
-    },
-    InputError: {
+    }),
+    InputError: Input.Error.extend({
       defaultProps: {
         fw: 500,
         mt: 4,
       },
-    },
-    CloseButton: {
+    }),
+    TextInput: TextInput.extend({
       defaultProps: {
-        icon: <HiMiniXMark size={24} />,
+        inputWrapperOrder: ["label", "input", "description", "error"],
       },
-    },
-    PasswordInput: {
+    }),
+    PasswordInput: PasswordInput.extend({
       defaultProps: {
         visibilityToggleIcon: VisibilityToggleIcon,
       },
-    },
+    }),
+    ModalRoot: Modal.Root.extend({
+      defaultProps: {
+        centered: true,
+      },
+    }),
+    ModalContent: Modal.Content.extend({
+      defaultProps: {
+        radius: "lg",
+      },
+    }),
+    ModalTitle: Modal.Title.extend({
+      defaultProps: {
+        fw: 600,
+        fz: "lg",
+      },
+    }),
+    DrawerTitle: Drawer.Title.extend({
+      defaultProps: {
+        fw: 600,
+        fz: "lg",
+      },
+    }),
   },
 });

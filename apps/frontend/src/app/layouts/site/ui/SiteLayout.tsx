@@ -4,7 +4,7 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import { Inconsolata, Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import theme from "@/shared/theme";
@@ -15,12 +15,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const inconsolata = Inconsolata({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 });
 
-const fontClassNames = `${inter.variable} ${inconsolata.variable}`;
+const fontClassNames = `${inter.variable} ${jetBrainsMono.variable}`;
 
 export type SiteLayoutProps = React.PropsWithChildren;
 

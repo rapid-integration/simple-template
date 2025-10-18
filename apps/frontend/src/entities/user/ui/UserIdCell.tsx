@@ -1,6 +1,12 @@
 "use client";
 
-import { ActionIcon, CopyButton, ThemeIcon, Tooltip } from "@mantine/core";
+import {
+  ActionIcon,
+  CopyButton,
+  ThemeIcon,
+  Tooltip,
+  useMantineTheme,
+} from "@mantine/core";
 import {
   HiOutlineClipboardDocument,
   HiOutlineClipboardDocumentCheck,
@@ -17,10 +23,19 @@ export const UserIdCell: React.FC<UserIdCellProps> = ({
   value,
   ...otherProps
 }) => {
+  const theme = useMantineTheme();
+
   return (
     <Cell
       leftSection={
-        <ThemeIcon variant="transparent">
+        <ThemeIcon
+          size="lg"
+          variant="gradient"
+          gradient={{
+            from: theme.colors.orange[6],
+            to: theme.colors.orange[4],
+          }}
+        >
           <HiMiniHashtag size={24} />
         </ThemeIcon>
       }

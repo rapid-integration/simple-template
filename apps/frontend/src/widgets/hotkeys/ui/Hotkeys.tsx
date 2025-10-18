@@ -2,38 +2,25 @@
 
 import {
   Card,
-  Group,
   Kbd,
   Modal,
-  rem,
   Stack,
   Table,
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
-import { useDisclosure, useHotkeys, useOs } from "@mantine/hooks";
+import { useDisclosure, useHotkeys } from "@mantine/hooks";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 import { routes } from "@/shared/config";
+import { Kbds } from "@/shared/ui/Kbds";
 
-export const Hotkeys = () => {
-  const os = useOs();
-  const apple = os === "ios" || os === "macos";
+export const Hotkeys: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [opened, { open, close }] = useDisclosure();
   const { toggleColorScheme } = useMantineColorScheme();
-
-  const symbolMap: Record<string, string> = {
-    mod: apple ? "⌘" : "CTRL",
-    Slash: "/",
-    Comma: ",",
-  };
-
-  const getKeySymbol = (key: string) => {
-    return symbolMap[key] || key;
-  };
 
   const hotkeys = [
     {
@@ -96,13 +83,7 @@ export const Hotkeys = () => {
                 <Table.Tr key={shortcut.id}>
                   <Table.Td>{shortcut.description}</Table.Td>
                   <Table.Td>
-                    <Group justify="flex-end" gap={4}>
-                      {shortcut.keys.map((key) => (
-                        <Kbd key={key} miw={rem(10)}>
-                          {getKeySymbol(key)}
-                        </Kbd>
-                      ))}
-                    </Group>
+                    <Kbds justify="flex-end" keys={shortcut.keys} />
                   </Table.Td>
                 </Table.Tr>
               ))}
@@ -111,7 +92,7 @@ export const Hotkeys = () => {
         </Card>
 
         <Text size="xs" c="dimmed" ta="center">
-          Нажмите <Kbd>ESC</Kbd> чтобы закрыть это окно
+          Нажмите <Kbd lh={1}>ESC</Kbd> чтобы закрыть это окно
         </Text>
       </Stack>
     </Modal>

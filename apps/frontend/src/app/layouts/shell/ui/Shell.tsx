@@ -86,8 +86,8 @@ export const Shell: React.FC<ShellProps> = ({ children, currentUser }) => {
           <Burger
             opened={open}
             onClick={toggle}
-            hiddenFrom="sm"
             size="sm"
+            hiddenFrom="sm"
             lineSize={2}
             aria-label={open ? "Закрыть меню" : "Открыть меню"}
           />

@@ -8,6 +8,7 @@ import {
   Modal,
   Stack,
   ThemeIcon,
+  useMantineTheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useTransition } from "react";
@@ -18,6 +19,7 @@ import { logout } from "../api/actions";
 export type LogoutButtonProps = ButtonProps;
 
 export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
+  const theme = useMantineTheme();
   const [opened, { open, close }] = useDisclosure(false);
   const [pending, startTransition] = useTransition();
 
@@ -40,11 +42,15 @@ export const LogoutButton: React.FC<LogoutButtonProps> = (props) => {
               <Stack pt="md">
                 <ThemeIcon
                   mx="auto"
-                  size={72}
-                  color="red"
-                  variant="transparent"
+                  size={64}
+                  radius="lg"
+                  variant="gradient"
+                  gradient={{
+                    from: theme.colors.red[7],
+                    to: theme.colors.red[5],
+                  }}
                 >
-                  <HiMiniArrowRightStartOnRectangle size={72} />
+                  <HiMiniArrowRightStartOnRectangle size={48} />
                 </ThemeIcon>
 
                 <Stack>

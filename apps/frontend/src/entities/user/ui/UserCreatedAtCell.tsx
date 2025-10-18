@@ -6,6 +6,7 @@ import {
   Skeleton,
   ThemeIcon,
   Tooltip,
+  useMantineTheme,
 } from "@mantine/core";
 import {
   HiOutlineClipboardDocument,
@@ -37,10 +38,19 @@ export const UserCreatedAtCell: React.FC<UserCreatedAtCellProps> = ({
     },
   });
 
+  const theme = useMantineTheme();
+
   return (
     <Cell
       leftSection={
-        <ThemeIcon variant="transparent">
+        <ThemeIcon
+          size="lg"
+          variant="gradient"
+          gradient={{
+            from: theme.colors.green[6],
+            to: theme.colors.green[4],
+          }}
+        >
           <HiMiniCalendarDays size={24} />
         </ThemeIcon>
       }
